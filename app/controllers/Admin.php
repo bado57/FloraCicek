@@ -349,6 +349,96 @@ class Admin extends Controller {
         $this->load->view("Template_BackEnd/footer", $languagedeger);
     }
 
+    function Kampanya(){
+      //model bağlantısı
+        $Panel_Model = $this->load->model("panel_model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();  
+        
+        
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger);
+        $this->load->view("Template_BackEnd/kampanya", $languagedeger);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
+    
+    function Siparis(){
+      //model bağlantısı
+        $Panel_Model = $this->load->model("panel_model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();  
+        
+        
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger);
+        $this->load->view("Template_BackEnd/siparis", $languagedeger);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
+    
+    function Banka(){
+      //model bağlantısı
+        $Panel_Model = $this->load->model("panel_model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();  
+        
+        
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger);
+        $this->load->view("Template_BackEnd/banka", $languagedeger);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
+    
+    function Kargo(){
+      //model bağlantısı
+        $Panel_Model = $this->load->model("panel_model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();  
+        
+        
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger);
+        $this->load->view("Template_BackEnd/kargo", $languagedeger);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
+    
+    function Gonderimyeri(){
+      //model bağlantısı
+        $Panel_Model = $this->load->model("panel_model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();  
+        
+        
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger);
+        $this->load->view("Template_BackEnd/gonderimyer", $languagedeger);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
+    
+    function Gonderimnedeni(){
+      //model bağlantısı
+        $Panel_Model = $this->load->model("panel_model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();  
+        
+        
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger);
+        $this->load->view("Template_BackEnd/gonderimneden", $languagedeger);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
+    
+    function Ililce(){
+      //model bağlantısı
+        $Panel_Model = $this->load->model("panel_model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();  
+        
+        
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger);
+        $this->load->view("Template_BackEnd/ililce", $languagedeger);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
 }
 
 ?>

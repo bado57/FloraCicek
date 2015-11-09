@@ -20,8 +20,8 @@
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-clock-o"></i> <span>Bekleyen Siparişler</span> <small class="label pull-right bg-green">12</small>
+                <a href="<?php echo SITE_URL; ?>/Admin/Siparis">
+                    <i class="fa fa-clock-o"></i> <span>Bekleyen Siparişler</span> <small class="label pull-right bg-red">1</small>
                 </a>
             </li>
             <li class=" treeview">
@@ -29,24 +29,16 @@
                     <i class="fa fa-shopping-cart"></i> <span>Sipariş İşlemleri</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-clock-o"></i> <span>Bekleyen Siparişler</span> <small class="label pull-right bg-green">12</small></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Tüm Siparişler</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Banka Bilgileri</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Kargo Bilgileri</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Gönderim Yerleri</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Gönderim Nedenleri</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> İller & İlçeler</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/Admin/Siparis"><i class="fa fa-clock-o"></i> <span>Siparişler</span> <small class="label pull-right bg-red">1</small></a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/Admin/Banka"><i class="fa fa-circle-o"></i> Banka Hesapları</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/Admin/Kargo"><i class="fa fa-circle-o"></i> Kargo Firmaları</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/Admin/Gonderimyeri"><i class="fa fa-circle-o"></i> Gönderim Yerleri</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/Admin/Gonderimnedeni"><i class="fa fa-circle-o"></i> Gönderim Nedenleri</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/Admin/Ililce"><i class="fa fa-circle-o"></i> İller & İlçeler</a></li>
                 </ul>
             </li>
-            <li class=" treeview">
-                <a href="#">
-                    <i class="fa fa-gift"></i> <span>Kampanya İşlemleri</span> <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> <span>Devam Eden</span> <small class="label pull-right bg-green">2</small></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Tüm Kampanyalar</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Raporlar</a></li>
-                </ul>
+            <li>
+                <a href="<?php echo SITE_URL; ?>/Admin/Kampanya"><i class="fa fa-gift"></i> <span>Kampanya İşlemleri</span> <small class="label pull-right bg-green">2</small></a>
             </li>
             <li class=" treeview">
                 <a href="#">
