@@ -31,17 +31,14 @@
                                             <script src="<?php echo SITE_JS ?>/jquery-ui.js" type="text/javascript"></script>
                                             <script src="<?php echo SITE_JS; ?>/alertify.js" type="text/javascript"></script>
                                             <script src="<?php echo SITE_PLUGINS; ?>/select2/select2.full.min.js"></script>
-                                            <!-- DataTables -->
                                             <script src="<?php echo SITE_PLUGINS; ?>/datatables/jquery.dataTables.js"></script>
                                             <script src="<?php echo SITE_PLUGINS; ?>/datatables/dataTables.bootstrap.min.js"></script>
                                             <script src="<?php echo SITE_JS; ?>/panel.js" type="text/javascript"></script>
-                                            <!-- SlimScroll -->
                                             <script src="<?php echo SITE_PLUGINS; ?>/slimScroll/jquery.slimscroll.min.js"></script>
-                                            <!-- FastClick -->
                                             <script src="<?php echo SITE_PLUGINS; ?>/fastclick/fastclick.min.js"></script>
-                                            <!-- AdminLTE App -->
                                             <script src="<?php echo SITE_DIST ?>/js/app.js"></script>
-
+                                            <script src="<?php echo SITE_PLUGINS; ?>/ckeditor/ckeditor.js"></script>
+                                            <script src="<?php echo SITE_PLUGINS; ?>/ckfinder/ckfinder.js"></script>
                                             <script src="<?php echo SITE_PLUGINS; ?>/iCheck/icheck.min.js"></script>
                                             <script type="text/javascript" src="<?php echo SITE_PLUGINS; ?>/treegrid/jquery.treegrid.js"></script>
                                             <script type="text/javascript" src="<?php echo SITE_PLUGINS; ?>/treegrid/jquery.treegrid.bootstrap3.js"></script>
