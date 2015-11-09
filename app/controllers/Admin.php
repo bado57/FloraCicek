@@ -17,7 +17,7 @@ class Admin extends Controller {
     //daha önce login oldu ise
     function Panel() {
         //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
@@ -90,7 +90,7 @@ class Admin extends Controller {
     function UrunKategori() {
         $form = $this->load->otherClasses('Form');
         //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
@@ -143,7 +143,7 @@ class Admin extends Controller {
 
     function Urun() {
         //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
@@ -200,7 +200,7 @@ class Admin extends Controller {
 
     function Etiket() {
         //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
@@ -223,7 +223,7 @@ class Admin extends Controller {
 
     function Vitrin() {
         //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
@@ -246,7 +246,7 @@ class Admin extends Controller {
 
     function SabitIcerik() {
         //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
@@ -277,7 +277,7 @@ class Admin extends Controller {
 
     function BlogYazi() {
         //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
@@ -302,7 +302,7 @@ class Admin extends Controller {
 
     function SabitSayfa() {
         //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
@@ -351,7 +351,7 @@ class Admin extends Controller {
 
     function Kampanya(){
       //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();  
         
@@ -364,7 +364,7 @@ class Admin extends Controller {
     
     function Siparis(){
       //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();  
         
@@ -377,7 +377,7 @@ class Admin extends Controller {
     
     function Banka(){
       //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();  
         
@@ -390,7 +390,7 @@ class Admin extends Controller {
     
     function Kargo(){
       //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();  
         
@@ -403,7 +403,7 @@ class Admin extends Controller {
     
     function Gonderimyeri(){
       //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();  
         
@@ -416,7 +416,7 @@ class Admin extends Controller {
     
     function Gonderimnedeni(){
       //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();  
         
@@ -429,7 +429,7 @@ class Admin extends Controller {
     
     function Ililce(){
       //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();  
         

@@ -257,7 +257,7 @@ class Home extends Controller {
         if (Session::get("KID") > 0) {
             header("Refresh:0; url=" . SITE_URL);
         } else {
-            $Panel_Model = $this->load->model("panel_model");
+            $Panel_Model = $this->load->model("Panel_Model");
             $formlanguage = $this->load->multilanguage("tr");
             $languagedeger = $formlanguage->multilanguage();
 
@@ -286,7 +286,7 @@ class Home extends Controller {
             header("Refresh:0; url=" . SITE_URL);
         } else {
             //model bağlantısı
-            $Panel_Model = $this->load->model("panel_model");
+            $Panel_Model = $this->load->model("Panel_Model");
             $formlanguage = $this->load->multilanguage("tr");
             $languagedeger = $formlanguage->multilanguage();
 
@@ -322,7 +322,7 @@ class Home extends Controller {
         } else {
             $form = $this->load->otherClasses('Form');
             //model bağlantısı
-            $Panel_Model = $this->load->model("panel_model");
+            $Panel_Model = $this->load->model("Panel_Model");
             $formlanguage = $this->load->multilanguage("tr");
             $languagedeger = $formlanguage->multilanguage();
 
@@ -353,7 +353,7 @@ class Home extends Controller {
 
     //daha önce login oldu ise
     function Contact() {
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 

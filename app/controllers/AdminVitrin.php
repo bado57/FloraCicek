@@ -17,7 +17,7 @@ class AdminVitrin extends Controller {
         if ($_POST && $_SERVER["HTTP_X_REQUESTED_WITH"] == "XMLHttpRequest") {
             $sonuc = array();
             //model bağlantısı
-            $Panel_Model = $this->load->model("panel_model");
+            $Panel_Model = $this->load->model("Panel_Model");
 
             $form->post("tip", true);
             $tip = $form->values['tip'];
