@@ -1,0 +1,238 @@
+php_flag display_errors on
+php_value error_reporting 9999
+
+RewriteEngine On
+<FilesMatch "\.(ttf|otf|eot|woff|php|css|js)$">
+  <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+  </IfModule>
+</FilesMatch>
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+##RewriteCond %{HTTP_HOST} !^www.turkiyefloracicek.com
+##RewriteCond %{HTTP_HOST} ^([^.]+).turkiyefloracicek.com
+
+RewriteRule ^([0-9a-zA-Z-_/]+)$ index.php?url=$1 [QSA,L]
+#app dosyası yönlendirme
+RewriteRule ^([^/]+)/$ http://localhost/floracicek/app/$1 [R=301,L]
+#Hata Yönlendirmeler
+# Error Pages
+ErrorDocument 400 http://localhost/floracicek/index.html
+ErrorDocument 401 http://localhost/floracicek/index.html
+ErrorDocument 402 http://localhost/floracicek/index.html
+ErrorDocument 403 http://localhost/floracicek/index.html
+ErrorDocument 404 http://localhost/floracicek/index.html
+ErrorDocument 405 http://localhost/floracicek/index.html
+ErrorDocument 406 http://localhost/floracicek/index.html
+ErrorDocument 407 http://localhost/floracicek/index.html
+ErrorDocument 408 http://localhost/floracicek/index.html
+ErrorDocument 409 http://localhost/floracicek/index.html
+ErrorDocument 410 http://localhost/floracicek/index.html
+ErrorDocument 411 http://localhost/floracicek/index.html
+ErrorDocument 412 http://localhost/floracicek/index.html
+ErrorDocument 413 http://localhost/floracicek/index.html
+ErrorDocument 414 http://localhost/floracicek/index.html
+ErrorDocument 500 http://localhost/floracicek/index.html
+ErrorDocument 501 http://localhost/floracicek/index.html
+ErrorDocument 502 http://localhost/floracicek/index.html
+ErrorDocument 503 http://localhost/floracicek/index.html
+ErrorDocument 504 http://localhost/floracicek/index.html
+ErrorDocument 505 http://localhost/floracicek/index.html
+
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://([-a-z0-9]+\.)?phpr\.org[NC]
+RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [OR]
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR] 
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) 
+RewriteRule ^(.*)$ index.php [F,L] 
+# Options +FollowSymlinks
+RewriteCond %{HTTP_REFERER} framesite\.com [NC]
+RewriteRule .* – [F]
+RewriteCond %{HTTP_USER_AGENT} ^BlackWidow [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Bot\ mailto:craftbot@yahoo.com [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ChinaClaw [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Custo [OR]
+RewriteCond %{HTTP_USER_AGENT} ^DISCo [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Download\ Demon [OR]
+RewriteCond %{HTTP_USER_AGENT} ^eCatch [OR]
+RewriteCond %{HTTP_USER_AGENT} ^EirGrabber [OR]
+RewriteCond %{HTTP_USER_AGENT} ^EmailSiphon [OR]
+RewriteCond %{HTTP_USER_AGENT} ^EmailWolf [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Express\ WebPictures [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ExtractorPro [OR]
+RewriteCond %{HTTP_USER_AGENT} ^EyeNetIE [OR]
+RewriteCond %{HTTP_USER_AGENT} ^FlashGet [OR]
+RewriteCond %{HTTP_USER_AGENT} ^GetRight [OR]
+RewriteCond %{HTTP_USER_AGENT} ^GetWeb! [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Go!Zilla [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Go-Ahead-Got-It [OR]
+RewriteCond %{HTTP_USER_AGENT} ^GrabNet [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Grafula [OR]
+RewriteCond %{HTTP_USER_AGENT} ^HMView [OR]
+RewriteCond %{HTTP_USER_AGENT} HTTrack [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^Image\ Stripper [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Image\ Sucker [OR]
+RewriteCond %{HTTP_USER_AGENT} Indy\ Library [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^InterGET [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Internet\ Ninja [OR]
+RewriteCond %{HTTP_USER_AGENT} ^JetCar [OR]
+RewriteCond %{HTTP_USER_AGENT} ^JOC\ Web\ Spider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^larbin [OR]
+RewriteCond %{HTTP_USER_AGENT} ^LeechFTP [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mass\ Downloader [OR]
+RewriteCond %{HTTP_USER_AGENT} ^MIDown\ tool [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mister\ PiX [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Navroad [OR]
+RewriteCond %{HTTP_USER_AGENT} ^NearSite [OR]
+RewriteCond %{HTTP_USER_AGENT} ^NetAnts [OR]
+RewriteCond %{HTTP_USER_AGENT} ^NetSpider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Net\ Vampire [OR]
+RewriteCond %{HTTP_USER_AGENT} ^NetZIP [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Octopus [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Offline\ Explorer [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Offline\ Navigator [OR]
+RewriteCond %{HTTP_USER_AGENT} ^PageGrabber [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Papa\ Foto [OR]
+RewriteCond %{HTTP_USER_AGENT} ^pavuk [OR]
+RewriteCond %{HTTP_USER_AGENT} ^pcBrowser [OR]
+RewriteCond %{HTTP_USER_AGENT} ^RealDownload [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ReGet [OR]
+RewriteCond %{HTTP_USER_AGENT} ^SiteSnagger [OR]
+RewriteCond %{HTTP_USER_AGENT} ^SmartDownload [OR]
+RewriteCond %{HTTP_USER_AGENT} ^SuperBot [OR]
+RewriteCond %{HTTP_USER_AGENT} ^SuperHTTP [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Surfbot [OR]
+RewriteCond %{HTTP_USER_AGENT} ^tAkeOut [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Teleport\ Pro [OR]
+RewriteCond %{HTTP_USER_AGENT} ^VoidEYE [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Web\ Image\ Collector [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Web\ Sucker [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebAuto [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebCopier [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebFetch [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebGo\ IS [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebLeacher [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebReaper [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebSauger [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Website\ eXtractor [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Website\ Quester [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebStripper [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebWhacker [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebZIP [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Widow [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WWWOFFLE [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus
+
+##spamlı siteler engelleme
+RewriteCond %{HTTP_REFERER} .*adf.ly.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*tinyurl.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*bit.ly.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*bc.vc.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*tik.tl.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*tr5.in.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*1tk.us.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*tr6.in.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*hitleap.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*spam.tamkafadan.net.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*lienscash.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*semalt.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*4webmasters.org.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*buttons-for-website.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*darodar.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*priceg.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*makemoneyonline.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*blackhatworth.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*hulfingtonpost.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*bestwebsitesawards.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*o-o-6-o-o.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*ilovevitaly.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*simple-share-buttons.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*social-buttons.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*econom.co.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*ilovevitaly.co.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*ilovevitaly.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*ilovevitaly.co.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*ranksonic.org.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*see-your-website-here.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*cenokos.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*bestwebsitesawards.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*hulfingtonpost.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*s.click.aliexpress.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*blackhatworth.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*forum20.smailik.org.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*lomb.co.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*lombia.co.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*lumb.co.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*kambasoft.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*savetubevideo.info.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*search.smilebox.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*search.gboxapp.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*search.genieo.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*search.earthlink.net.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*search.1and1.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*search.netzero.net.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*7makemoneyonline.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*prodvigator.ua.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*resellerclub.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*screentoolkit.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*socialseet.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*superiends.org.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*vodkoved.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*o-o-8-o-o.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*iskalko.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*luxup.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*myftpupload.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*websocial.me.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*ykecwqlixx.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*slftsdybbg.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*seoexperimenty.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*edakgfvwql.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*adcash.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*adviceforum.info.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*europages.com.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*gobongo.info.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*cenoval.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*cityadspix.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*cenokos.ru.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*ranksonic.info.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*srecorder.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*76brighton.co.uk.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*paparazzistudios.com.au.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*powitania.pl.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*sharebutton.net.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*tasteidea.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*descargar-musica-gratis.net.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*torontoplumbinggroup.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*cyprusbuyproperties.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*anticrawler.org.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*livefixer.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*adspart.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*wmasterLead.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*coderstate.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*seopub.net.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*gca.sh.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*repla.cr.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*googlsucks.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*ilovevitaly.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*best-seo-offer.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*best-seo-solution.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*buttons-for-your-website.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*humanorightswatch.org.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*free-share-buttons.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*buy-cheap-online.info.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*generalporn.org.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*torture.ml.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*domination.ml.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*pornhub-forum.ga.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*youporn-forum.ga.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*rapidgator-porn.ga.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*depositfiles-porn.ga.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*pornhubforum.tk.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*pornhub-forum.uni.me.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*iframe-toloka.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*howtostopreferralspam.eu.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} .*sitevaluation.org.*$ [NC]
+RewriteRule .* - [F]
