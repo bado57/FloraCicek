@@ -908,8 +908,185 @@ class AdminGenel extends Controller {
                         if ($urunKod == "") {
                             $sonuc["hata"] = "Lütfen Ürün Kodunu Giriniz.";
                         } else {
-                            if ($urunKatVal == 0) {
-                                $sonuc["hata"] = "Lütfen Ürün Kategorisini Giriniz.";
+                            if ($explodeOzellikArray[1] <= 0) {
+                                if ($urunKatVal == 0) {
+                                    $sonuc["hata"] = "Lütfen Ürün Kategorisini Giriniz.";
+                                } else {
+                                    if ($urunFiyat <= 0) {
+                                        $sonuc["hata"] = "Lütfen Ürün Fiyatını Giriniz.";
+                                    } else {
+                                        if ($sira <= 0) {
+                                            $sonuc["hata"] = "Lütfen Sırayı Giriniz.";
+                                        } else {
+                                            $benzersizSayi = $form->benzersiz_Sayi(5);
+                                            $benzersizListe = $Panel_Model->urunBenzersizKontrol($benzersizSayi);
+                                            foreach ($benzersizListe as $benzersizListee) {
+                                                $benzersiz['ID'] = $benzersizListee['urun_ID'];
+                                            }
+                                            if ($benzersiz['ID'] > 0) {
+                                                $sonuc["hata"] = "Benzersiz Kod Oluşturulamadı Tekrar Deneyiniz.";
+                                            } else {
+                                                $yeniurun = $form->turkce_kucult_tr($urunAdi);
+                                                $realName = $_FILES['file']['name'];
+                                                if ($realName == "") {
+                                                    $sonuc["hata"] = "Lütfen Resim Seçiniz";
+                                                } else {
+                                                    $image = new Upload($_FILES['file']);
+                                                    //oranlama
+                                                    $width = $image->image_src_x;
+                                                    $height = $image->image_src_y;
+                                                    /*
+                                                      $oran = $width / $height;
+                                                      if ($oran < 1) {
+                                                      $newheight = 600;
+                                                      $newwidth = round($height * $oran);
+                                                      } else if ($oran == 1) {
+                                                      $newheight = 600;
+                                                      $newwidth = 600;
+                                                      } else {
+                                                      $newheight = round($width / $oran);
+                                                      $newwidth = 600;
+                                                      }
+                                                     * 
+                                                     */
+                                                    if ($image->uploaded) {
+                                                        // sadece resim formatları yüklensin
+                                                        $image->allowed = array('image/*');
+                                                        $image->image_min_height = 250;
+                                                        $image->image_min_width = 250;
+                                                        $image->image_max_height = 2000;
+                                                        $image->image_max_width = 2000;
+                                                        $image->file_new_name_body = $form->benzersiz_Sayi_Harf(60);
+                                                        $image->file_name_body_pre = 'flora_';
+                                                        $image->image_resize = true;
+                                                        $image->image_ratio_crop = false;
+                                                        $image->image_x = $width;
+                                                        $image->image_y = $height;
+                                                        $image->image_watermark = 'images/watermark.png';
+                                                        $image->image_watermark_position = 'B';
+
+                                                        $image->Process("products");
+                                                        if ($image->processed) {
+                                                            if ($explodeOzellikArray[2] > 0) {
+                                                                if ($form->submit()) {
+                                                                    $dataUrunHafta = array(
+                                                                        'urun_hafta' => 0
+                                                                    );
+                                                                }
+                                                                $urunHaftaUpdate = $Panel_Model->urunHaftaUpdate($dataUrunHafta);
+                                                            }
+                                                            if ($siraolanurun > 0) {//girilen ürüne ait başka sıra vardır
+                                                                if ($form->submit()) {
+                                                                    $dataUrun = array(
+                                                                        'urun_sira' => $maxSira + 1
+                                                                    );
+                                                                }
+                                                                $urunUpdate = $Panel_Model->urunSiraUpdate($dataUrun, $degisecekurunid);
+                                                                if ($urunUpdate) {
+                                                                    if ($form->submit()) {
+                                                                        $dataUrun = array(
+                                                                            'urun_kategoriID' => $urunKatVal,
+                                                                            'urun_kategoriAd' => $urunKatText,
+                                                                            'urun_kodu' => $urunKod,
+                                                                            'urun_benzersizkod' => $benzersizSayi,
+                                                                            'urun_aciklama' => $urunYazi,
+                                                                            'urun_fiyat' => $urunFiyat,
+                                                                            'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
+                                                                            'urun_aktiflik' => $durum,
+                                                                            'urun_sira' => $sira,
+                                                                            'urun_yeniurun' => $explodeOzellikArray[0],
+                                                                            'urun_ekurun' => 0,
+                                                                            'urun_adi' => $urunAdi,
+                                                                            'urun_benzad' => $yeniurun,
+                                                                            'urun_kmpnyaid' => 0,
+                                                                            'urun_hafta' => $explodeOzellikArray[2],
+                                                                            'urun_anaresim' => $image->file_dst_name,
+                                                                            'urun_anaresimreal' => $realName,
+                                                                            'urun_coksatan' => $explodeOzellikArray[3]
+                                                                        );
+                                                                    }
+                                                                    $result = $Panel_Model->panelUrunEkle($dataUrun);
+                                                                    if ($result) {
+                                                                        $etiketArray = count($explodeEtiketArray);
+                                                                        if ($etiketArray > 0) {
+                                                                            for ($e = 0; $e < $etiketArray; $e++) {
+                                                                                $etiketdata[$e] = array(
+                                                                                    'urunetiket_UrunID' => $result,
+                                                                                    'urunetiket_EtiketID' => $explodeEtiketArray[$e]
+                                                                                );
+                                                                            }
+                                                                            $resultEtiket = $Panel_Model->panelMultiUrunEtiket($etiketdata);
+                                                                            if ($resultEtiket) {
+                                                                                $sonuc["result"] = "1";
+                                                                            } else {
+                                                                                $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                            }
+                                                                        } else {
+                                                                            $sonuc["result"] = "1";
+                                                                        }
+                                                                    } else {
+                                                                        $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                    }
+                                                                } else {
+                                                                    $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                }
+                                                            } else {
+                                                                if ($form->submit()) {
+                                                                    $dataUrun = array(
+                                                                        'urun_kategoriID' => $urunKatVal,
+                                                                        'urun_kategoriAd' => $urunKatText,
+                                                                        'urun_kodu' => $urunKod,
+                                                                        'urun_benzersizkod' => $benzersizSayi,
+                                                                        'urun_aciklama' => $urunYazi,
+                                                                        'urun_fiyat' => $urunFiyat,
+                                                                        'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
+                                                                        'urun_aktiflik' => $durum,
+                                                                        'urun_sira' => $sira,
+                                                                        'urun_yeniurun' => $explodeOzellikArray[0],
+                                                                        'urun_ekurun' => 0,
+                                                                        'urun_adi' => $urunAdi,
+                                                                        'urun_benzad' => $yeniurun,
+                                                                        'urun_kmpnyaid' => 0,
+                                                                        'urun_hafta' => $explodeOzellikArray[2],
+                                                                        'urun_anaresim' => $image->file_dst_name,
+                                                                        'urun_anaresimreal' => $realName,
+                                                                        'urun_coksatan' => $explodeOzellikArray[3]
+                                                                    );
+                                                                }
+                                                                $result = $Panel_Model->panelUrunEkle($dataUrun);
+                                                                if ($result) {
+                                                                    $etiketArray = count($explodeEtiketArray);
+                                                                    if ($etiketArray > 0) {
+                                                                        for ($e = 0; $e < $etiketArray; $e++) {
+                                                                            $etiketdata[$e] = array(
+                                                                                'urunetiket_UrunID' => $result,
+                                                                                'urunetiket_EtiketID' => $explodeEtiketArray[$e]
+                                                                            );
+                                                                        }
+                                                                        $resultEtiket = $Panel_Model->panelMultiUrunEtiket($etiketdata);
+                                                                        if ($resultEtiket) {
+                                                                            $sonuc["result"] = "1";
+                                                                        } else {
+                                                                            $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                        }
+                                                                    } else {
+                                                                        $sonuc["result"] = "1";
+                                                                    }
+                                                                } else {
+                                                                    $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                }
+                                                            }
+                                                        } else {
+                                                            $sonuc["hata"] = $image->error;
+                                                        }
+                                                    } else {
+                                                        $sonuc["hata"] = $image->error;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             } else {
                                 if ($urunFiyat <= 0) {
                                     $sonuc["hata"] = "Lütfen Ürün Fiyatını Giriniz.";
@@ -989,8 +1166,8 @@ class AdminGenel extends Controller {
                                                                         'urun_kodu' => $urunKod,
                                                                         'urun_benzersizkod' => $benzersizSayi,
                                                                         'urun_aciklama' => $urunYazi,
-                                                                        'urun_fiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
-                                                                        'urun_normalfiyat' => $urunFiyat,
+                                                                        'urun_fiyat' => $urunFiyat,
+                                                                        'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
                                                                         'urun_aktiflik' => $durum,
                                                                         'urun_sira' => $sira,
                                                                         'urun_yeniurun' => $explodeOzellikArray[0],
@@ -1037,8 +1214,8 @@ class AdminGenel extends Controller {
                                                                     'urun_kodu' => $urunKod,
                                                                     'urun_benzersizkod' => $benzersizSayi,
                                                                     'urun_aciklama' => $urunYazi,
-                                                                    'urun_fiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
-                                                                    'urun_normalfiyat' => $urunFiyat,
+                                                                    'urun_fiyat' => $urunFiyat,
+                                                                    'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
                                                                     'urun_aktiflik' => $durum,
                                                                     'urun_sira' => $sira,
                                                                     'urun_yeniurun' => $explodeOzellikArray[0],
@@ -1179,8 +1356,276 @@ class AdminGenel extends Controller {
                         if ($urunKod == "") {
                             $sonuc["hata"] = "Lütfen Ürün Kodunu Giriniz.";
                         } else {
-                            if ($urunKatVal == 0) {
-                                $sonuc["hata"] = "Lütfen Ürün Kategorisini Giriniz.";
+                            if ($explodeOzellikArray[1] <= 0) {
+                                if ($urunKatVal == 0) {
+                                    $sonuc["hata"] = "Lütfen Ürün Kategorisini Giriniz.";
+                                } else {
+                                    if ($urunFiyat <= 0) {
+                                        $sonuc["hata"] = "Lütfen Ürün Fiyatını Giriniz.";
+                                    } else {
+                                        if ($sira <= 0) {
+                                            $sonuc["hata"] = "Lütfen Sırayı Giriniz.";
+                                        } else {
+                                            if ($resimKontrol == 0) {
+                                                $sonuc["hata"] = "Lütfen Ürün Resmi Giriniz.";
+                                            } else {
+                                                if ($explodeOzellikArray[2] > 0) {
+                                                    if ($form->submit()) {
+                                                        $dataUrunHafta = array(
+                                                            'urun_hafta' => 0
+                                                        );
+                                                    }
+                                                    $urunHaftaUpdate = $Panel_Model->urunHaftaUpdate($dataUrunHafta);
+                                                }
+                                                $yeniurun = $form->turkce_kucult_tr($urunAdi);
+                                                if ($newImage == 0) {//yeni resim eklenmemiş
+                                                    if ($siraolanurun > 0) {//girilen ürüne ait başka sıra vardır
+                                                        if ($form->submit()) {
+                                                            $dataUrun = array(
+                                                                'urun_sira' => $normalSira
+                                                            );
+                                                        }
+                                                        $urunUpdate = $Panel_Model->urunSiraUpdate($dataUrun, $degisecekurunid);
+                                                        if ($urunUpdate) {
+                                                            if ($form->submit()) {
+                                                                $dataUrun = array(
+                                                                    'urun_kategoriID' => $urunKatVal,
+                                                                    'urun_kategoriAd' => $urunKatText,
+                                                                    'urun_kodu' => $urunKod,
+                                                                    'urun_aciklama' => $urunYazi,
+                                                                    'urun_fiyat' => $urunFiyat,
+                                                                    'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
+                                                                    'urun_aktiflik' => $durum,
+                                                                    'urun_sira' => $sira,
+                                                                    'urun_yeniurun' => $explodeOzellikArray[0],
+                                                                    'urun_ekurun' => 0,
+                                                                    'urun_adi' => $urunAdi,
+                                                                    'urun_benzad' => $yeniurun,
+                                                                    'urun_kmpnyaid' => 0,
+                                                                    'urun_hafta' => $explodeOzellikArray[2],
+                                                                    'urun_coksatan' => $explodeOzellikArray[3]
+                                                                );
+                                                            }
+                                                            $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
+                                                            if ($result) {
+                                                                $deleteEt = $Panel_Model->urunEtiketDelete($urunID);
+                                                                $etiketArray = count($explodeEtiketArray);
+                                                                if ($etiketArray > 0) {
+                                                                    for ($e = 0; $e < $etiketArray; $e++) {
+                                                                        $etiketdata[$e] = array(
+                                                                            'urunetiket_UrunID' => $urunID,
+                                                                            'urunetiket_EtiketID' => $explodeEtiketArray[$e]
+                                                                        );
+                                                                    }
+                                                                    $resultEtiket = $Panel_Model->panelMultiUrunEtiket($etiketdata);
+                                                                    if ($resultEtiket) {
+                                                                        $sonuc["result"] = "1";
+                                                                    } else {
+                                                                        $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                    }
+                                                                } else {
+                                                                    $sonuc["result"] = "1";
+                                                                }
+                                                            } else {
+                                                                $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                            }
+                                                        } else {
+                                                            $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                        }
+                                                    } else {
+                                                        if ($form->submit()) {
+                                                            $dataUrun = array(
+                                                                'urun_kategoriID' => $urunKatVal,
+                                                                'urun_kategoriAd' => $urunKatText,
+                                                                'urun_kodu' => $urunKod,
+                                                                'urun_aciklama' => $urunYazi,
+                                                                'urun_fiyat' => $urunFiyat,
+                                                                'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
+                                                                'urun_aktiflik' => $durum,
+                                                                'urun_sira' => $sira,
+                                                                'urun_yeniurun' => $explodeOzellikArray[0],
+                                                                'urun_ekurun' => 0,
+                                                                'urun_adi' => $urunAdi,
+                                                                'urun_benzad' => $yeniurun,
+                                                                'urun_kmpnyaid' => 0,
+                                                                'urun_hafta' => $explodeOzellikArray[2],
+                                                                'urun_coksatan' => $explodeOzellikArray[3]
+                                                            );
+                                                        }
+                                                        $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
+                                                        if ($result) {
+                                                            $deleteEt = $Panel_Model->urunEtiketDelete($urunID);
+                                                            $etiketArray = count($explodeEtiketArray);
+                                                            if ($etiketArray > 0) {
+                                                                for ($e = 0; $e < $etiketArray; $e++) {
+                                                                    $etiketdata[$e] = array(
+                                                                        'urunetiket_UrunID' => $urunID,
+                                                                        'urunetiket_EtiketID' => $explodeEtiketArray[$e]
+                                                                    );
+                                                                }
+                                                                $resultEtiket = $Panel_Model->panelMultiUrunEtiket($etiketdata);
+                                                                if ($resultEtiket) {
+                                                                    $sonuc["result"] = "1";
+                                                                } else {
+                                                                    $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                }
+                                                            } else {
+                                                                $sonuc["result"] = "1";
+                                                            }
+                                                        } else {
+                                                            $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                        }
+                                                    }
+                                                } else {//yeni resim eklenmiş
+                                                    $realName = $_FILES['file']['name'];
+                                                    $image = new Upload($_FILES['file']);
+                                                    //oranlama
+                                                    $width = $image->image_src_x;
+                                                    $height = $image->image_src_y;
+                                                    /*
+                                                      $oran = $width / $height;
+                                                      if ($oran < 1) {
+                                                      $newheight = 600;
+                                                      $newwidth = round($height * $oran);
+                                                      } else if ($oran == 1) {
+                                                      $newheight = 600;
+                                                      $newwidth = 600;
+                                                      } else {
+                                                      $newheight = round($width / $oran);
+                                                      $newwidth = 600;
+                                                      }
+                                                     * 
+                                                     */
+                                                    if ($image->uploaded) {
+                                                        // sadece resim formatları yüklensin
+                                                        $image->allowed = array('image/*');
+                                                        $image->image_min_height = 200;
+                                                        $image->image_min_width = 200;
+                                                        $image->image_max_height = 2000;
+                                                        $image->image_max_width = 2000;
+                                                        $image->file_new_name_body = $form->benzersiz_Sayi_Harf(60);
+                                                        $image->file_name_body_pre = 'flora_';
+                                                        $image->image_resize = true;
+                                                        $image->image_ratio_crop = false;
+                                                        $image->image_x = $width;
+                                                        $image->image_y = $height;
+                                                        $image->image_watermark = 'images/watermark.png';
+                                                        $image->image_watermark_position = 'B';
+
+                                                        $image->Process("products");
+                                                        if ($image->processed) {
+                                                            if ($siraolanurun > 0) {//girilen ürüne ait başka sıra vardır
+                                                                if ($form->submit()) {
+                                                                    $dataUrun = array(
+                                                                        'urun_sira' => $normalSira
+                                                                    );
+                                                                }
+                                                                $urunUpdate = $Panel_Model->urunSiraUpdate($dataUrun, $degisecekurunid);
+                                                                if ($urunUpdate) {
+                                                                    if ($form->submit()) {
+                                                                        $dataUrun = array(
+                                                                            'urun_kategoriID' => $urunKatVal,
+                                                                            'urun_kategoriAd' => $urunKatText,
+                                                                            'urun_kodu' => $urunKod,
+                                                                            'urun_aciklama' => $urunYazi,
+                                                                            'urun_fiyat' => $urunFiyat,
+                                                                            'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
+                                                                            'urun_aktiflik' => $durum,
+                                                                            'urun_sira' => $sira,
+                                                                            'urun_yeniurun' => $explodeOzellikArray[0],
+                                                                            'urun_ekurun' => 0,
+                                                                            'urun_adi' => $urunAdi,
+                                                                            'urun_benzad' => $yeniurun,
+                                                                            'urun_kmpnyaid' => 0,
+                                                                            'urun_hafta' => $explodeOzellikArray[2],
+                                                                            'urun_anaresim' => $image->file_dst_name,
+                                                                            'urun_anaresimreal' => $realName,
+                                                                            'urun_coksatan' => $explodeOzellikArray[3]
+                                                                        );
+                                                                    }
+                                                                    $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
+                                                                    if ($result) {
+                                                                        $deleteEt = $Panel_Model->urunEtiketDelete($urunID);
+                                                                        $etiketArray = count($explodeEtiketArray);
+                                                                        if ($etiketArray > 0) {
+                                                                            for ($e = 0; $e < $etiketArray; $e++) {
+                                                                                $etiketdata[$e] = array(
+                                                                                    'urunetiket_UrunID' => $urunID,
+                                                                                    'urunetiket_EtiketID' => $explodeEtiketArray[$e]
+                                                                                );
+                                                                            }
+                                                                            $resultEtiket = $Panel_Model->panelMultiUrunEtiket($etiketdata);
+                                                                            if ($resultEtiket) {
+                                                                                $sonuc["result"] = "1";
+                                                                            } else {
+                                                                                $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                            }
+                                                                        } else {
+                                                                            $sonuc["result"] = "1";
+                                                                        }
+                                                                    } else {
+                                                                        $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                    }
+                                                                } else {
+                                                                    $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                }
+                                                            } else {
+                                                                if ($form->submit()) {
+                                                                    $dataUrun = array(
+                                                                        'urun_kategoriID' => $urunKatVal,
+                                                                        'urun_kategoriAd' => $urunKatText,
+                                                                        'urun_kodu' => $urunKod,
+                                                                        'urun_aciklama' => $urunYazi,
+                                                                        'urun_fiyat' => $urunFiyat,
+                                                                        'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
+                                                                        'urun_aktiflik' => $durum,
+                                                                        'urun_sira' => $sira,
+                                                                        'urun_yeniurun' => $explodeOzellikArray[0],
+                                                                        'urun_ekurun' => 0,
+                                                                        'urun_adi' => $urunAdi,
+                                                                        'urun_benzad' => $yeniurun,
+                                                                        'urun_kmpnyaid' => 0,
+                                                                        'urun_hafta' => $explodeOzellikArray[2],
+                                                                        'urun_anaresim' => $image->file_dst_name,
+                                                                        'urun_anaresimreal' => $realName,
+                                                                        'urun_coksatan' => $explodeOzellikArray[3]
+                                                                    );
+                                                                }
+                                                                $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
+                                                                if ($result) {
+                                                                    $deleteEt = $Panel_Model->urunEtiketDelete($urunID);
+                                                                    $etiketArray = count($explodeEtiketArray);
+                                                                    if ($etiketArray > 0) {
+                                                                        for ($e = 0; $e < $etiketArray; $e++) {
+                                                                            $etiketdata[$e] = array(
+                                                                                'urunetiket_UrunID' => $urunID,
+                                                                                'urunetiket_EtiketID' => $explodeEtiketArray[$e]
+                                                                            );
+                                                                        }
+                                                                        $resultEtiket = $Panel_Model->panelMultiUrunEtiket($etiketdata);
+                                                                        if ($resultEtiket) {
+                                                                            $sonuc["result"] = "1";
+                                                                        } else {
+                                                                            $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                        }
+                                                                    } else {
+                                                                        $sonuc["result"] = "1";
+                                                                    }
+                                                                } else {
+                                                                    $sonuc["hata"] = "Tekrar Deneyiniz";
+                                                                }
+                                                            }
+                                                        } else {
+                                                            $sonuc["hata"] = $image->error;
+                                                        }
+                                                    } else {
+                                                        $sonuc["hata"] = $image->error;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             } else {
                                 if ($urunFiyat <= 0) {
                                     $sonuc["hata"] = "Lütfen Ürün Fiyatını Giriniz.";
@@ -1212,11 +1657,10 @@ class AdminGenel extends Controller {
                                                         if ($form->submit()) {
                                                             $dataUrun = array(
                                                                 'urun_kategoriID' => $urunKatVal,
-                                                                'urun_kategoriAd' => $urunKatText,
-                                                                'urun_kodu' => $urunKod,
+                                                                'urun_kategoriAd' => $urunKatText, 'urun_kodu' => $urunKod,
                                                                 'urun_aciklama' => $urunYazi,
-                                                                'urun_fiyat' => round(($urunFiyat * 18) / 100),
-                                                                'urun_normalfiyat' => $urunFiyat,
+                                                                'urun_fiyat' => $urunFiyat,
+                                                                'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
                                                                 'urun_aktiflik' => $durum,
                                                                 'urun_sira' => $sira,
                                                                 'urun_yeniurun' => $explodeOzellikArray[0],
@@ -1256,13 +1700,12 @@ class AdminGenel extends Controller {
                                                     }
                                                 } else {
                                                     if ($form->submit()) {
-                                                        $dataUrun = array(
-                                                            'urun_kategoriID' => $urunKatVal,
+                                                        $dataUrun = array('urun_kategoriID' => $urunKatVal,
                                                             'urun_kategoriAd' => $urunKatText,
                                                             'urun_kodu' => $urunKod,
                                                             'urun_aciklama' => $urunYazi,
-                                                            'urun_fiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
-                                                            'urun_normalfiyat' => $urunFiyat,
+                                                            'urun_fiyat' => $urunFiyat,
+                                                            'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
                                                             'urun_aktiflik' => $durum,
                                                             'urun_sira' => $sira,
                                                             'urun_yeniurun' => $explodeOzellikArray[0],
@@ -1338,29 +1781,24 @@ class AdminGenel extends Controller {
                                                     if ($image->processed) {
                                                         if ($siraolanurun > 0) {//girilen ürüne ait başka sıra vardır
                                                             if ($form->submit()) {
-                                                                $dataUrun = array(
-                                                                    'urun_sira' => $normalSira
+                                                                $dataUrun = array('urun_sira' => $normalSira
                                                                 );
                                                             }
                                                             $urunUpdate = $Panel_Model->urunSiraUpdate($dataUrun, $degisecekurunid);
                                                             if ($urunUpdate) {
                                                                 if ($form->submit()) {
-                                                                    $dataUrun = array(
-                                                                        'urun_kategoriID' => $urunKatVal,
+                                                                    $dataUrun = array('urun_kategoriID' => $urunKatVal,
                                                                         'urun_kategoriAd' => $urunKatText,
                                                                         'urun_kodu' => $urunKod,
                                                                         'urun_aciklama' => $urunYazi,
-                                                                        'urun_fiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
-                                                                        'urun_normalfiyat' => $urunFiyat,
+                                                                        'urun_fiyat' => $urunFiyat,
+                                                                        'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
                                                                         'urun_aktiflik' => $durum,
                                                                         'urun_sira' => $sira,
-                                                                        'urun_yeniurun' => $explodeOzellikArray[0],
-                                                                        'urun_ekurun' => $explodeOzellikArray[1],
-                                                                        'urun_adi' => $urunAdi,
+                                                                        'urun_yeniurun' => $explodeOzellikArray[0], 'urun_ekurun' => $explodeOzellikArray[1], 'urun_adi' => $urunAdi,
                                                                         'urun_benzad' => $yeniurun,
                                                                         'urun_kmpnyaid' => 0,
-                                                                        'urun_hafta' => $explodeOzellikArray[2],
-                                                                        'urun_anaresim' => $image->file_dst_name,
+                                                                        'urun_hafta' => $explodeOzellikArray[2], 'urun_anaresim' => $image->file_dst_name,
                                                                         'urun_anaresimreal' => $realName,
                                                                         'urun_coksatan' => $explodeOzellikArray[3]
                                                                     );
@@ -1398,8 +1836,8 @@ class AdminGenel extends Controller {
                                                                     'urun_kategoriAd' => $urunKatText,
                                                                     'urun_kodu' => $urunKod,
                                                                     'urun_aciklama' => $urunYazi,
-                                                                    'urun_fiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
-                                                                    'urun_normalfiyat' => $urunFiyat,
+                                                                    'urun_fiyat' => $urunFiyat,
+                                                                    'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
                                                                     'urun_aktiflik' => $durum,
                                                                     'urun_sira' => $sira,
                                                                     'urun_yeniurun' => $explodeOzellikArray[0],

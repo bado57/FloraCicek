@@ -269,13 +269,13 @@ class Panel_Model extends Model {
 
     //gönderim yeri
     public function gonderimYeri() {
-        $sql = "SELECT gonderimyeri_ID,gonderimyeri_adi FROM flora_gonderimyeri";
+        $sql = "SELECT gonderimyeri_ID,gonderimyeri_adi FROM flora_gonderimyeri WHERE gonderimyeri_aktif=1 ORDER BY gonderimyeri_adi ASC";
         return $this->db->select($sql);
     }
 
     //gönderim nedeni
     public function gonderimNeden() {
-        $sql = "SELECT gonderimnedeni_ID,gonderimnedeni_adi FROM flora_gonderimnedeni";
+        $sql = "SELECT gonderimnedeni_ID,gonderimnedeni_adi FROM flora_gonderimnedeni WHERE gonderimnedeni_aktif=1 ORDER BY gonderimnedeni_adi ASC";
         return $this->db->select($sql);
     }
 
@@ -615,6 +615,146 @@ class Panel_Model extends Model {
 
     public function sayfaUpdate($data, $gelenid) {
         return ($this->db->update("flora_sabitsayfa", $data, "sabitsayfaid=$gelenid"));
+    }
+
+    public function kargoListele() {
+        $sql = "SELECT kargofirma_id,kargofirma_adi,kargofirma_aktiflik,kargofirma_aciklama FROM flora_kargofirma ORDER BY kargofirma_adi ASC";
+        return $this->db->select($sql);
+    }
+
+    public function kargoDelete($gelenid) {
+        return ($this->db->delete("flora_kargofirma", "kargofirma_id=$gelenid"));
+    }
+
+    public function kargoekle($data) {
+        return ($this->db->insert("flora_kargofirma", $data));
+    }
+
+    public function kargoUpdate($data, $gelenid) {
+        return ($this->db->update("flora_kargofirma", $data, "kargofirma_id=$gelenid"));
+    }
+
+    public function bankaListele() {
+        $sql = "SELECT banka_ID,banka_adi,banka_aktif,banka_sube,banka_hesapno,banka_ibanno,banka_alici FROM flora_banka ORDER BY banka_adi ASC";
+        return $this->db->select($sql);
+    }
+
+    public function bankaDelete($gelenid) {
+        return ($this->db->delete("flora_banka", "banka_ID=$gelenid"));
+    }
+
+    public function bankaekle($data) {
+        return ($this->db->insert("flora_banka", $data));
+    }
+
+    public function bankaUpdate($data, $gelenid) {
+        return ($this->db->update("flora_banka", $data, "banka_ID=$gelenid"));
+    }
+
+    public function yerListele() {
+        $sql = "SELECT gonderimyeri_ID,gonderimyeri_adi,gonderimyeri_aktif FROM flora_gonderimyeri ORDER BY gonderimyeri_adi ASC";
+        return $this->db->select($sql);
+    }
+
+    public function yerDelete($gelenid) {
+        return ($this->db->delete("flora_gonderimyeri", "gonderimyeri_ID=$gelenid"));
+    }
+
+    public function yerekle($data) {
+        return ($this->db->insert("flora_gonderimyeri", $data));
+    }
+
+    public function yerUpdate($data, $gelenid) {
+        return ($this->db->update("flora_gonderimyeri", $data, "gonderimyeri_ID=$gelenid"));
+    }
+
+    public function nedenListele() {
+        $sql = "SELECT gonderimnedeni_ID,gonderimnedeni_adi,gonderimnedeni_aktif FROM flora_gonderimnedeni ORDER BY gonderimnedeni_adi ASC";
+        return $this->db->select($sql);
+    }
+
+    public function nedenDelete($gelenid) {
+        return ($this->db->delete("flora_gonderimnedeni", "gonderimnedeni_ID=$gelenid"));
+    }
+
+    public function nedenekle($data) {
+        return ($this->db->insert("flora_gonderimnedeni", $data));
+    }
+
+    public function nedenUpdate($data, $gelenid) {
+        return ($this->db->update("flora_gonderimnedeni", $data, "gonderimnedeni_ID=$gelenid"));
+    }
+
+    public function adminIllistele() {
+        $sql = "SELECT sehir_id,sehir_adi,sehir_aktiflik FROM  flora_sehir WHERE sehir_id=47 ORDER BY sehir_adi ASC";
+        return $this->db->select($sql);
+    }
+
+    public function adminIlcelistele() {
+        $sql = "SELECT ilce_id,ilce_sehirid,ilce_adi,ilce_aktiflik,ilce_ekucret FROM flora_ilce WHERE ilce_sehirid=47 ORDER BY ilce_adi ASC";
+        return $this->db->select($sql);
+    }
+
+    public function ilUpdate($data, $gelenid) {
+        return ($this->db->update("flora_sehir", $data, "sehir_id=$gelenid"));
+    }
+
+    public function ilceUpdate($data, $gelenid) {
+        return ($this->db->update("flora_ilce", $data, "ilce_id=$gelenid"));
+    }
+
+    public function siparisListele() {
+        $sql = "SELECT siparis_ID,siparis_No,siparis_gonderenAdSoyad,siparis_gonderenkur,siparis_girilmetarih,siparis_durum FROM flora_siparis ORDER BY siparis_ID ASC";
+        return $this->db->select($sql);
+    }
+
+    public function siparisBekleyenListele() {
+        $sql = "SELECT siparis_ID,siparis_No,siparis_gonderenAdSoyad,siparis_gonderenkur,siparis_girilmetarih,siparis_durum FROM flora_siparis WHERE siparis_durum=0 ORDER BY siparis_ID ASC";
+        return $this->db->select($sql);
+    }
+
+    public function siparisDetaylistele($id) {
+        $sql = "SELECT * from flora_siparis WHERE siparis_ID=$id";
+        return $this->db->select($sql);
+    }
+
+    public function siparisUrunDetaylistele($id) {
+        $sql = "SELECT siparisurun_ID,siparisurun_siparisID,siparisurun_urunID,siparisurun_ad,siparisurun_kod,siparisurun_miktar,siparisurun_tutar from flora_siparisurun WHERE siparisurun_siparisID=$id";
+        return $this->db->select($sql);
+    }
+
+    public function siparisUpdate($data, $gelenid) {
+        return ($this->db->update("flora_siparis", $data, "siparis_ID=$gelenid"));
+    }
+
+    public function sipariskargoListele() {
+        $sql = "SELECT kargofirma_id,kargofirma_adi FROM flora_kargofirma WHERE kargofirma_aktiflik=1 ORDER BY kargofirma_adi ASC";
+        return $this->db->select($sql);
+    }
+
+    public function siparisCountListele() {
+        $sql = "SELECT siparis_ID,siparis_durum FROM flora_siparis";
+        return $this->db->select($sql);
+    }
+
+    //kampanya listeleme
+    public function adminkampanyalistele() {
+        $sql = "SELECT kampanya_ID,kampanya_baslik,kampanya_aktiflik,kampanya_indirimyuzde FROM flora_kampanya";
+        return $this->db->select($sql);
+    }
+
+    public function kampanyaDelete($gelenid) {
+        return ($this->db->delete(" flora_kampanya", "kampanya_ID=$gelenid"));
+    }
+
+    public function kampanyaUrunUpdate($data, $gelenid) {
+        return ($this->db->update("flora_urun", $data, "urun_kmpnyaid=$gelenid"));
+    }
+
+    //vitrin değerler listeleme
+    public function panelKampanyaListe($id) {
+        $sql = "SELECT kampanya_ID,kampanya_baslik,kampanya_yazi,kampanya_baslamatarih,kampanya_bitistarihi,kampanya_aktiflik,kampanya_indirimyuzde FROM  flora_kampanya WHERE kampanya_ID=$id";
+        return $this->db->select($sql);
     }
 
 }

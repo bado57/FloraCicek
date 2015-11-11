@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    yardir();
     //table düzenle butonları
     $(document).on('click', 'a#KatDuzenle', function (e) {
         var ustID = $(this).parent().parent().attr('data-ust');
@@ -268,6 +268,7 @@ $(document).ready(function () {
                 var urunetiketlabel = $("#etiketozellik>label").length;
                 for (var e = 0; e < urunetiketlabel; e++) {
                     $("#etiketozellik>label:eq(" + e + ")>div").addClass("checked");
+                    $("#etiketozellik>label:eq(" + e + ")>div>input").prop("checked", true);
                 }
                 $("input[name=duzenleme]").val(0);
                 $("input[name=duzenlemeID]").val(-1);
@@ -353,7 +354,6 @@ $(document).ready(function () {
                     urunEtiketArray.push($("#etiketozellik>label:eq(" + e + ")>div>input").attr("id"));
                 }
             }
-
             formData.append('urunAdi', urunAdi);
             formData.append('urunKod', urunKod);
             formData.append('urunKatText', urunKatText);
@@ -368,6 +368,7 @@ $(document).ready(function () {
             formData.append('urunOzellikArray[]', urunOzellikArray);
             formData.append('urunEtiketArray[]', urunEtiketArray);
             formData.append('tip', "urunEkle");
+
             $.ajax({
                 type: "post",
                 url: SITE_URL + "/AdminGenel/ajaxCall",
@@ -457,7 +458,6 @@ $(document).ready(function () {
                     urunEtiketArray.push($("#etiketozellik>label:eq(" + e + ")>div>input").attr("id"));
                 }
             }
-
             formData.append('urunID', urunID);
             formData.append('urunAdi', urunAdi);
             formData.append('urunKod', urunKod);
@@ -472,6 +472,7 @@ $(document).ready(function () {
             formData.append('urunOzellikArray[]', urunOzellikArray);
             formData.append('urunEtiketArray[]', urunEtiketArray);
             formData.append('tip', "urunDuzenle");
+
             $.ajax({
                 type: "post",
                 url: SITE_URL + "/AdminGenel/ajaxCall",
@@ -596,6 +597,7 @@ $(document).ready(function () {
                                 for (var d = 0; d < urunetiketid; d++) {
                                     if (id == cevap.result[0][d].EtiketID) {
                                         $("#etiketozellik>label:eq(" + e + ")>div").addClass("checked");
+                                        $("#etiketozellik>label:eq(" + e + ")>div>input").prop("checked", true);
                                     }
                                 }
                             }
@@ -771,7 +773,7 @@ $(document).ready(function () {
 
     });
 });
-$(function () {
+function yardir() {
     $(".select2").select2();
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
@@ -823,4 +825,4 @@ $(function () {
         image_holder.empty();
         $("#formToggleEtiket").click();
     });
-});
+}

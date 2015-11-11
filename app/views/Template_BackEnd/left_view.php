@@ -20,8 +20,8 @@
                 </a>
             </li>
             <li>
-                <a href="<?php echo SITE_URL; ?>/Admin/Siparis">
-                    <i class="fa fa-clock-o"></i> <span>Bekleyen Siparişler</span> <small class="label pull-right bg-red">1</small>
+                <a href="<?php echo SITE_URL; ?>/Admin/BekleyenSiparis">
+                    <i class="fa fa-clock-o"></i> <span>Bekleyen Siparişler</span> <small class="label pull-right bg-red"><?php echo $model[0]; ?></small>
                 </a>
             </li>
             <li class=" treeview">
@@ -29,7 +29,7 @@
                     <i class="fa fa-shopping-cart"></i> <span>Sipariş İşlemleri</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo SITE_URL; ?>/Admin/Siparis"><i class="fa fa-clock-o"></i> <span>Siparişler</span> <small class="label pull-right bg-red">1</small></a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/Admin/Siparis"><i class="fa fa-clock-o"></i> <span>Siparişler</span> <small class="label pull-right bg-red"><?php echo $model[1]; ?></small></a></li>
                     <li><a href="<?php echo SITE_URL; ?>/Admin/Banka"><i class="fa fa-circle-o"></i> Banka Hesapları</a></li>
                     <li><a href="<?php echo SITE_URL; ?>/Admin/Kargo"><i class="fa fa-circle-o"></i> Kargo Firmaları</a></li>
                     <li><a href="<?php echo SITE_URL; ?>/Admin/Gonderimyeri"><i class="fa fa-circle-o"></i> Gönderim Yerleri</a></li>
@@ -48,7 +48,6 @@
                     <li><a href="<?php echo SITE_URL; ?>/Admin/UrunKategori"><i class="fa fa-circle-o"></i> Kategoriler</a></li>
                     <li><a href="<?php echo SITE_URL; ?>/Admin/Etiket"><i class="fa fa-circle-o"></i> Etiketler</a></li>
                     <li><a href="<?php echo SITE_URL; ?>/Admin/Urun"><i class="fa fa-circle-o"></i> Ürünler</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Ek Ürünler</a></li>
                 </ul>
             </li>
             <li class=" treeview">

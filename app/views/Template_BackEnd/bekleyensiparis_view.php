@@ -267,13 +267,7 @@
                                                 </thead>
                                                 <tbody class="">
                                                     <?php for ($siparis = 0; $siparis < count($model[0]); $siparis++) { ?>
-                                                        <?php if ($model[0][$siparis]["Durum"] == 0) { ?>
-                                                            <tr id="<?php echo $model[0][$siparis]['ID']; ?>" data-durum="<?php echo $model[0][$siparis]["Durum"]; ?>" class="text-red">
-                                                            <?php } else if ($model[0][$siparis]["Durum"] == 1) { ?>
-                                                            <tr id="<?php echo $model[0][$siparis]['ID']; ?>" data-durum="<?php echo $model[0][$siparis]["Durum"]; ?>" class="text-orange">
-                                                            <?php } else { ?>
-                                                            <tr id="<?php echo $model[0][$siparis]['ID']; ?>" data-durum="<?php echo $model[0][$siparis]["Durum"]; ?>" class="text-green">
-                                                            <?php } ?>
+                                                        <tr id="<?php echo $model[0][$siparis]['ID']; ?>" data-durum="<?php echo $model[0][$siparis]["Durum"]; ?>" class="text-red">
                                                             <td><?php echo $model[0][$siparis]["No"]; ?></td>
                                                             <td><?php echo $model[0][$siparis]["Tarih"]; ?></td>
                                                             <?php if ($model[0][$siparis]["Tip"] == 0) { ?>
