@@ -101,10 +101,10 @@
                         </form>
                         <div class="social-icons">
                             <ul class="nav navbar-nav">
-                                <li><a href="<?php echo $model[8]["face"]; ?>" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="<?php echo $model[8]["twit"]; ?>" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="<?php echo $model[8]["gplus"]; ?>" title="Google+"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="<?php echo $model[8]["instag"]; ?>" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="<?php echo $model[8]["face"]; ?>" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="<?php echo $model[8]["twit"]; ?>" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="<?php echo $model[8]["gplus"]; ?>" title="Google+" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="<?php echo $model[8]["instag"]; ?>" title="Instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -113,3 +113,9 @@
             </div>
         </div>
     </div>
+    
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $("[data-mask]").inputmask();
+        });
+    </script>

@@ -42,7 +42,7 @@ class tr {
             "Ilerle" => "İlerle",
             "SifreUnut" => "Şifremi unuttum!",
             "Giris" => "Giriş",
-            "UyeGiris" => "Uye Girişi",
+            "UyeGiris" => "Üye Girişi",
             "BirUye" => "Bireysel Üyelik",
             "KurUye" => "Kurumsal Üyelik",
             "BeniHatirla" => "Beni Hatırla",
@@ -81,12 +81,15 @@ class tr {
             "SonKullanma" => "Son Kullanma Tarihi",
             "KartNum" => "Kart Numarası",
             "MesafeliSatis" => "Mesafeli Satış Sözleşmesi ve Teslimat Şartları",
-            "AdSoyad" => "Adınız Soyadınız",
+            "AdSoyad" => "Ad Soyad",
+            "AdinSoyadin" => "Adınız Soyadınız",
             "KayıtOl" => "Kayıt Ol",
             "UyelikSoz" => "Üyelik sözleşmesini",
-            "OkuKabul" => "okudum, kabul ediyorum",
+            "OkuKabul" => "Okudum, Kabul ediyorum",
             "Iletisim" => "İletişim",
             "Copyright" => "Türkiye Flora Çiçek. Tüm hakları saklıdır.",
+            "Blog" => "Blog",
+            "SonYayinlar" => "Son Yayınlar",
         );
         return $trdil;
     }

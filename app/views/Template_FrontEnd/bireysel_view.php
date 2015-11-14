@@ -1,6 +1,6 @@
-<script src="<?php echo SITE_FRONT_JS ?>/userform.js"></script>
-<script src="<?php echo SITE_FRONT_JS ?>/jquery.validate.js"></script>
-<link href="<?php echo SITE_FRONT_CSS ?>/bootstrap.vertical-tabs.css" rel="stylesheet" type="text/css"/>
+<script src="<?php echo SITE_JS ?>/userform.js"></script>
+<script src="<?php echo SITE_JS ?>/jquery.validate.js"></script>
+<link href="<?php echo SITE_CSS ?>/bootstrap.vertical-tabs.css" rel="stylesheet" type="text/css"/>
 <div class="body-content">
     <!--iç sayfa-->
     <section id="form">
@@ -9,20 +9,17 @@
             <div class="row">
                 <div class="col-sm-2">
                     <ul class="nav nav-tabs tabs-left">
-                        <li ><a href="<?php echo SITE_URL ?>/Home/login" data-icon="fa-sign-in" role="tab" ><?php echo $data["UyeGiris"]; ?></a></li>
+                        <li><a href="<?php echo SITE_URL ?>/Home/login" data-icon="fa-sign-in" role="tab" ><?php echo $data["UyeGiris"]; ?></a></li>
                         <li class="active"><a href="<?php echo SITE_URL ?>/Home/bireysel" data-icon="fa-user" role="tab" ><?php echo $data["BirUye"]; ?></a></li>
                         <li><a href="<?php echo SITE_URL ?>/Home/kurumsal" data-icon="fa-briefcase" role="tab" ><?php echo $data["KurUye"]; ?></a></li>
                         <li class="formicon text-center hidden-sm hidden-xs" style="padding-top:40px; text-indent:-10px;">
-                            <i class="fa fa-sign-in" style="font-size:70px; color:#808080;"></i>
+                            <i class="fa fa-user" style="font-size:70px; color:#808080;"></i>
                         </li>
                     </ul>
                 </div>
                 <div class="col-sm-10">
                     <div class="tab-content">
-                        <div class="tab-pane" id="uyegiris">
-                        </div>
                         <div class="tab-pane active" id="bireysel">
-                            <form id="formbiruye">
                                 <div class="col-sm-6">
                                     <div class="login-form">
                                         <!--login form-->
@@ -41,14 +38,10 @@
                                                 <input id="uyesoz-bireysel" name="birUyeSoz" type="checkbox" class="checkbox">
                                                     <a role="button" data-toggle="modal" data-target="#uyelikSozlesmesi" style="color:#FE980F;"><?php echo $data["UyelikSoz"]; ?></a> <?php echo $data["OkuKabul"]; ?>.
                                             </span>
-                                            <button type="button" id="biruyeol" class="btn btn-default"><?php echo $data["KayıtOl"]; ?></button>
+                                            <button type="input" id="biruyeol" class="btn btn-default"><?php echo $data["KayıtOl"]; ?></button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6"></div>
-                            </form>
-                        </div>
-                        <div class="tab-pane" id="kurumsal">
                         </div>
                     </div>
                 </div>

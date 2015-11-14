@@ -36,9 +36,9 @@
                                         <!--login form-->
                                         <h2><?php echo $data["GonBilgi"]; ?></h2>
                                         <div class="form" style="padding-bottom:30px;">
-                                            <input name="gndadsoyad" id="gndadsoyad" value="<?php echo (Session::get("KID") > 0) ? Session::get("KAdSoyad") : ''; ?>" type="text" placeholder="Adınız Soyadınız" />
+                                            <input name="gndadsoyad" id="gndadsoyad" value="<?php echo (Session::get("KID") > 0) ? Session::get("KAdSoyad") : ''; ?>" type="text" placeholder="<?php echo $data["AdinSoyadin"]; ?>" />
                                             <input name="gndmail" id="gndmail" type="email" value="<?php echo (Session::get("KID") > 0) ? Session::get("KEposta") : ''; ?>" placeholder="E-posta Adresiniz" />
-                                            <input name="gndTel" id="gndTel" type="text" value="" placeholder="<?php echo $data["TelNo"]; ?>" />
+                                            <input name="gndTel" id="gndTel" type="text" value="" data-inputmask='"mask": "(999) 999-9999"' data-mask placeholder="<?php echo $data["TelNo"]; ?>" />
                                             <select name="gonderimNedeni" id="gonderimNedeni" style="margin-bottom:20px;">
                                                 <option value="0"><?php echo $data["GonNeden"]; ?></option>
                                                 <?php foreach ($model[3] as $yerModel) { ?>
@@ -59,7 +59,7 @@
                                         <h2><?php echo $data["AliciBilgi"]; ?></h2>
                                         <div class="form" style="padding-bottom:30px;">
                                             <input id="aliciadsoyad" name="aliciadsoyad" type="text" placeholder="<?php echo $data["AdSoyad"]; ?>" required />
-                                            <input id="alicitel" name="alicitel" type="text" placeholder="<?php echo $data["TelNo"]; ?>" />
+                                            <input id="alicitel" name="alicitel" type="text" data-inputmask='"mask": "(999) 999-9999"' data-mask placeholder="<?php echo $data["TelNo"]; ?>" />
                                             <select id="gidecegiYer" name="gidecegiYer">
                                                 <option value="0"><?php echo $data["GitmeYeri"]; ?></option>
                                                 <?php foreach ($model[2] as $nedenModel) { ?>
@@ -89,7 +89,7 @@
                                         <div class="col-sm-6">
                                             <div class="login-form">
                                                 <div class="form" style="padding-bottom:30px;">
-                                                    <input id="tcno" name="tcno" type="text" placeholder="TC Kimlik No" />
+                                                    <input id="tcno" name="tcno" type="text"data-inputmask='"mask": "99999999999"' data-mask placeholder="TC Kimlik No" />
                                                     <textarea id="faturaadres" name="faturaadres" rows="4" placeholder="Fatura Adresi"><?php Session::get("KurFAdres"); ?></textarea>
                                                 </div>
                                             </div>
@@ -105,8 +105,9 @@
                                         <div class="col-sm-6">
                                             <div class="login-form">
                                                 <div class="form" style="padding-bottom:30px;">
-                                                    <textarea id="kartmesaji" name="kartmesaji" rows="4" placeholder="Kartın Mesajı"></textarea>
+                                                    <textarea id="kartmesaji" name="kartmesaji" rows="4" maxlength="160" placeholder="Kartın Mesajı"></textarea>
                                                     <input id="kartisim" name="kartisim" type="text" placeholder="Karta Yazılacak İsim" />
+                                                    <textarea id="siparisnotu" name="siparisnotu" rows="2" maxlength="140" placeholder="Varsa bize notunuz"></textarea>
                                                     <label class="checkbox-inline" style="margin-top:10px;"><input id="onayCheck" type="checkbox" name="onayCheck">Yazdıklarımı onaylıyorum</label>
                                                 </div>
                                             </div>

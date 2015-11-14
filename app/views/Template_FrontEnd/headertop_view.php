@@ -14,11 +14,11 @@
                     <link href="<?php echo SITE_CSS ?>/prettyPhoto.css" rel="stylesheet" />
                     <link href="<?php echo SITE_CSS ?>/price-range.css" rel="stylesheet" />
                     <link href="<?php echo SITE_CSS ?>/bootstrap-switch.css" rel="stylesheet" type="text/css"/>
-                    <link href="<?php echo SITE_CSS ?>/main.css" rel="stylesheet" />
                     <link href="<?php echo SITE_CSS ?>/responsive.css" rel="stylesheet" />
-                    <link href="<?php echo SITE_CSS ?>/jquery-ui.css" rel="stylesheet" type="text/css"/>
-                    <link rel="stylesheet" href="<?php echo SITE_PLUGINS; ?>/select2/select2.min.css"/>
-                    <link rel="stylesheet" href="<?php echo SITE_CSS; ?>/alertify.css" type="text/css"/>
+                    <link href="<?php echo SITE_CSS ?>/jquery-ui.css" rel="stylesheet" type="text/css" />
+                    <link href="<?php echo SITE_PLUGINS; ?>/select2/select2.min.css" rel="stylesheet" />
+                    <link href="<?php echo SITE_CSS; ?>/alertify.css" type="text/css" rel="stylesheet" />
+                    <link href="<?php echo SITE_CSS ?>/main.css" rel="stylesheet" />
 
                     <script src="<?php echo SITE_JS ?>/jquery.js"></script>
                     <script src="<?php echo SITE_JS ?>/urun_tab.js"></script>
@@ -33,6 +33,11 @@
 
                     <script src="<?php echo SITE_JS ?>/alertify.js" type="text/javascript"></script>
                     <script src="<?php echo SITE_PLUGINS; ?>/select2/select2.full.min.js"></script>
+                    <script src="<?php echo SITE_PLUGINS; ?>/input-mask/jquery.inputmask.js"></script>
+                    <script src="<?php echo SITE_PLUGINS; ?>/input-mask/jquery.inputmask.numeric.extensions.js"></script>
+                    <script src="<?php echo SITE_PLUGINS; ?>/input-mask/jquery.inputmask.phone.extensions.js"></script>
+                    <script src="<?php echo SITE_PLUGINS; ?>/input-mask/jquery.inputmask.extensions.js"></script>
+                    
                     <script>
                         var SITE_URL = "http://localhost/floracicek";
                         function reset() {
@@ -128,10 +133,10 @@
                                         <div class="col-sm-6">
                                             <div class="social-icons pull-right">
                                                 <ul class="nav navbar-nav">
-                                                    <li><a href="<?php echo $model[8]["face"]; ?>" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="<?php echo $model[8]["twit"]; ?>" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                                    <li><a href="<?php echo $model[8]["gplus"]; ?>" title="Google+"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a href="<?php echo $model[8]["instag"]; ?>" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+                                                    <li><a href="<?php echo $model[8]["face"]; ?>" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                                    <li><a href="<?php echo $model[8]["twit"]; ?>" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                                    <li><a href="<?php echo $model[8]["gplus"]; ?>" title="Google+" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                                    <li><a href="<?php echo $model[8]["instag"]; ?>" title="Instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>

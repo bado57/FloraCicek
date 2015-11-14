@@ -1,6 +1,6 @@
-<script src="<?php echo SITE_FRONT_JS ?>/userform.js"></script>
-<script src="<?php echo SITE_FRONT_JS ?>/jquery.validate.js"></script>
-<link href="<?php echo SITE_FRONT_CSS ?>/bootstrap.vertical-tabs.css" rel="stylesheet" type="text/css"/>
+<script src="<?php echo SITE_JS ?>/userform.js"></script>
+<script src="<?php echo SITE_JS ?>/jquery.validate.js"></script>
+<link href="<?php echo SITE_CSS ?>/bootstrap.vertical-tabs.css" rel="stylesheet" type="text/css"/>
 <div class="body-content">
     <!--iç sayfa-->
     <section id="form">
@@ -13,7 +13,7 @@
                         <li><a href="<?php echo SITE_URL ?>/Home/bireysel" data-icon="fa-user" role="tab" ><?php echo $data["BirUye"]; ?></a></li>
                         <li class="active"><a href="<?php echo SITE_URL ?>/Home/kurumsal" data-icon="fa-briefcase" role="tab" ><?php echo $data["KurUye"]; ?></a></li>
                         <li class="formicon text-center hidden-sm hidden-xs" style="padding-top:40px; text-indent:-10px;">
-                            <i class="fa fa-sign-in" style="font-size:70px; color:#808080;"></i>
+                            <i class="fa fa-briefcase" style="font-size:70px; color:#808080;"></i>
                         </li>
                     </ul>
                 </div>

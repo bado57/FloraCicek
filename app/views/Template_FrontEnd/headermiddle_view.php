@@ -48,7 +48,7 @@
                 <div class="pull-right">
                     <ul class="kurumsalMenu" style="padding-right:0;">
                         <li><a href="<?php echo SITE_URL; ?>"><?php echo $data["Anasayfa"]; ?></a></li>
-                        <li><a href="<?php echo SITE_URL . "/hakkimizda" ?>" id="sesso" data-url="StaticPager" data-method="index"><?php echo $data["Kurumsal"]; ?></a></li>
+                        <li><a href="<?php echo SITE_URL . "/sayfa-hakkimizda" ?>" id="sesso" data-url="StaticPager" data-method="index"><?php echo $data["Kurumsal"]; ?></a></li>
                         <li><a href="<?php echo SITE_URL . "/Home/Contact" ?>"><?php echo $data["Iletisim"]; ?></a></li>
                         <li><a href="#" style="font-size:26px; color:#b51e91;"><i class="fa fa-phone"></i> <?php echo $model[8]["telefon"]; ?></a></li>
                     </ul>

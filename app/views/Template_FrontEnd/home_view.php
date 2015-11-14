@@ -42,6 +42,11 @@
 <?php } ?>
 <section>
     <div class="container">
+        <style type="text/css">
+            h2.title, .left-sidebar h2{
+                color: #DE1414;
+            }
+        </style>
         <div class="row">
             <div class="col-sm-3 col-xs-12">
                 <div class="features_items">
@@ -117,7 +122,7 @@
                 <div class="features_items">
                     <!--features_items-->
                     <?php if (count($model[5][3]) > 0) { ?>
-                        <h2 class="title text-center"><?php echo $data["KmpnyUrun"]; ?></h2>
+                    <h2 class="title text-center kampanyaTitle"><?php echo $data["KmpnyUrun"]; ?> <a href="#" class="btn btn-primary btn-sm" style="margin-top:0;margin-left: 10px;">Tümünü Gör</a></h2>
                         <?php foreach ($model[5][3] as $kampanyaModel) { ?>
                             <div class="col-sm-3 col-xs-6">
                                 <div class="product-image-wrapper">

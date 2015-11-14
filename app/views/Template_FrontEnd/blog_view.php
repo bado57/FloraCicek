@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>YAYINLAR</h2>
+                    <h2><?php echo $data["Blog"]; ?></h2>
                     <div class="panel-group category-products" id="accordian"><!--category-productsr-->
                         <?php for ($i = 0; $i < count($model[1]); $i++) { ?>
                             <div class="panel panel-default">
@@ -31,7 +31,7 @@
             </div>
             <div class="col-sm-9">
                 <div class="blog-post-area">
-                    <h2 class="title text-center">Son Haberler</h2>
+                    <h2 class="title text-center"><?php echo $data["SonYayinlar"]; ?></h2>
                     <?php for ($h = 0; $h < count($model[0]); $h++) { ?>
                         <div class="single-blog-post col-sm-12">
                             <h3><?php echo $model[0][$h]['Baslik']; ?></h3>
@@ -41,16 +41,18 @@
                                     <li><i class="fa fa-clock-o"></i> <?php echo $model[0][$h]['Saat']; ?></li>
                                 </ul>
                             </div>
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-4 col-xs-12" style="padding-left:0;">
                                 <a href="<?php echo $model[0][$h]['Url']; ?>">
-                                    <img class="img-responsive" src="<?php echo SITE_BLOG ?>/<?php echo $model[0][$h]['Resim']; ?>" alt="" />
+                                    <img class="img-responsive" src="<?php echo SITE_BLOG ?>/<?php echo $model[0][$h]['Resim']; ?>" alt="<?php echo $model[0][$h]['Baslik']; ?>" />
                                 </a>
                             </div>
                             <div class="col-sm-8 col-xs-12">
                                 <p><?php echo strlen($model[0][$h]['Yazi']) > 335 ? substr($model[0][$h]['Yazi'], 0, 335) . "..." : $model[0][$h]['Yazi']; ?></p>
                                 <a  class="btn btn-primary" href="<?php echo $model[0][$h]['Url']; ?>">Devamını Oku</a>
                             </div>
+                            <hr/>
                         </div>
+                    
                     <?php } ?>
                     <div class="pagination-area">
                         <ul class="pagination">

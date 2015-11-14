@@ -50,10 +50,6 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane" id="bireysel">
-                        </div>
-                        <div class="tab-pane" id="kurumsal">
-                        </div>
                     </div>
                 </div>
             </div>

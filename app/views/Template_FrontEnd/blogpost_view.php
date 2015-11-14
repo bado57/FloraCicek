@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>YAYINLAR</h2>
+                    <h2><?php echo $data["Blog"]; ?></h2>
                     <div class="panel-group category-products" id="accordian"><!--category-productsr-->
                         <?php for ($i = 0; $i < count($model[1]); $i++) { ?>
                             <div class="panel panel-default">
@@ -31,9 +31,8 @@
             </div>
             <div class="col-sm-9">
                 <div class="blog-post-area">
-                    <h2 class="title text-center"><?php echo $model[0][0]['Baslik']; ?></h2>
                     <div class="single-blog-post col-sm-12">
-                        <h3><?php echo $model[0][0]['Baslik']; ?></h3>
+                        <h3><i class="fa fa-angle-right"></i> <?php echo $model[0][0]['Baslik']; ?></h3>
                         <div class="post-meta">
                             <ul>
                                 <li><i class="fa fa-calendar"></i> <?php echo $model[0][0]['Tarih']; ?></li>
@@ -41,6 +40,7 @@
                             </ul>
                         </div>
                         <img class="img-responsive" src="<?php echo SITE_BLOG ?>/<?php echo $model[0][0]['Resim']; ?>" alt="" />
+                        <br/>
                         <p><?php echo $model[0][0]['Yazi']; ?></p>
                     </div>
                 </div>

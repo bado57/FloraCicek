@@ -49,7 +49,7 @@
                                         <div class="login-form">
                                             <div class="form">
                                                 <p><?php echo $data["KartNum"]; ?></p>
-                                                <input id="kartno" type="text" placeholder="Kart Numarası" maxlength="16" />
+                                                <input id="kartno" type="text" placeholder="Kart Numarası" data-inputmask='"mask": "9999999999999999"' data-mask maxlength="16" />
                                                 <div class="row">
                                                     <p class="col-sm-12"><?php echo $data["SonKullanma"]; ?></p>
                                                     <div class="col-sm-6 padding-right">
@@ -60,6 +60,13 @@
                                                             <option value="03">03</option>
                                                             <option value="04">04</option>
                                                             <option value="05">05</option>
+                                                            <option value="06">06</option>
+                                                            <option value="07">07</option>
+                                                            <option value="08">08</option>
+                                                            <option value="09">09</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-6">
@@ -74,8 +81,8 @@
                                                     </div>
                                                 </div>
                                                 <p><span data-toggle="tooltip" data-placement="right" title="Kredi kartınızın arka yüzünde bulunan imza şeridinin üstündeki numaranın son üç rakamıdır.">CVV (Nedir?)</span></p>
-                                                <input id="cvv" type="text" placeholder="CVV" maxlength="3" />
-                                                <label class="checkbox-inline col-sm-12" style="margin-top:10px;"><input id="3dsecure" type="checkbox" name="3dsecure"><?php echo $data["3DSecure"]; ?></label>
+                                                <input id="cvv" type="text" data-inputmask='"mask": "999"' data-mask placeholder="CVV" maxlength="3" />
+                                                <!-- <label class="checkbox-inline col-sm-12" style="margin-top:10px;"><input id="3dsecure" type="checkbox" name="3dsecure"><?php echo $data["3DSecure"]; ?></label> -->
                                                 <span><input id="kartSatisSoz" type="checkbox" name="kartSatisSoz" style="margin-top:3px;"> <a role="button" data-toggle="modal" data-target="#satisSozlesmesi" style="color:#FE980F;"> Mesafeli satış sözleşmesini ve Teslimat Şartlarını</a> okudum, kabul ediyorum.</span>
                                                 <button class="btn btn-primary" id="spKartTamamla"><i class="fa fa-angle-right"></i> <?php echo $data["SiparisTamam"]; ?></button>
 
@@ -232,7 +239,7 @@
                                 </ul>
                             <?php } ?>
                             <hr />
-                            <p><button class="btn btn-primary nextBtn mt0" id="odemeIleri" type="input"><i class="fa fa-angle-right"></i> <?php echo $data["Ilerle"] ?></button><span class="pull-right" style="margin-top:7px; font-size:16px;">Toplam : <strong class="spTotal">45</strong> <strong>TL</strong></span></p>
+                            <p><span class="pull-right" style="font-size:16px;">Toplam : <strong class="spTotal">45</strong> <strong>TL</strong></span></p>
                         </div><!--/product-information-->
                     </div>
                 </div>

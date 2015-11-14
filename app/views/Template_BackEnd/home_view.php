@@ -76,10 +76,10 @@
         </div><!-- /.row -->
         <!-- Main row -->
         <div class="row">
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-shopping-cart"></i> Son Siparişler <span class="hidden-xs">| <small class="ml10 text-red"><i class="fa fa-square"></i> Beklemede</small> <small class="ml10 text-yellow"><i class="fa fa-square"></i> Hazırlanıyor</small> <small class="ml10 text-green"><i class="fa fa-square"></i> Gönderildi</small></span></h3>
+                        <h3 class="box-title"><i class="fa fa-shopping-cart"></i> Son Siparişler <small class="ml10 text-red"><i class="fa fa-square"></i> Beklemede</small> <small class="ml10 text-yellow"><i class="fa fa-square"></i> Hazırlanıyor</small> <small class="ml10 text-green"><i class="fa fa-square"></i> Gönderildi</small></h3>
                         <a href="#" class="btn btn-sm btn-success pull-right"><i class="fa fa-angle-right"></i> Tümünü Gör</a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
@@ -136,10 +136,10 @@
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col -->
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-user"></i> Son Üyeler <span class="hidden-xs">| <small class="ml10 text-aqua"><i class="fa fa-square"></i> kurumsal</small> <small class="ml10"><i class="fa fa-square"></i> Bireysel</small></span></h3>
+                        <h3 class="box-title"><i class="fa fa-user"></i> Son Üyeler <small class="ml10 text-aqua"><i class="fa fa-square"></i> Kurumsal</small> <small class="ml10"><i class="fa fa-square"></i> Bireysel</small></h3>
                         <a href="#" class="btn btn-sm btn-success pull-right"><i class="fa fa-angle-right"></i> Tümünü Gör</a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
