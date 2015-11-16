@@ -1160,7 +1160,7 @@ class Form {
 
     //smtp ile mail gönderme işlemi
     function sHatirlatMailGonder($email, $isim, $sifre) {
-        require_once('../../Plugins/PHPMailer/PHPMailerAutoload.php');
+        require "Plugins/PHPMailer/PHPMailerAutoload.php";
         $mail = new PHPMailer;
 
         //$mail->SMTPDebug = 2;                               // Enable verbose debug output
@@ -1180,8 +1180,8 @@ class Form {
         $mail->isHTML(true);                                  // Set email format to HTML
 
         $mail->Subject = 'Türkiye Flora Çiçek - Şifre Hatırlatma';
-        $mail->Body = 'Merhaba ' . $isim . '! Şifreniz=' . $sifre . ' Geri dönmek için aşağıdaki linke tıklayınız.';
-        $mail->AltBody = '<a href="https://www.turkiyefloracicek.com/Home/login">Türkiye Flora Çiçek</a>';
+        $mail->Body = 'Merhaba ' . $isim . '!<br/>Şifreniz=' . $sifre . ' Geri dönmek için aşağıdaki linke tıklayınız.'
+                . '<br/><br/><a href="https://www.turkiyefloracicek.com/Home/login">Türkiye Flora Çiçek</a>';
 
         if (!$mail->send()) {
             return 0;

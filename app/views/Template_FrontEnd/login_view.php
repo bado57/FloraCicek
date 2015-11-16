@@ -33,24 +33,23 @@
                                     </div>
                                 </div><!--/login form-->
                             </div>
-                            <form action="#">
-                                <div class="col-sm-6">
-                                    <div class="login-form sifreHatirlat" style="display:none;">
-                                        <!--login form12 + 5 = ?-->
-                                        <h2><?php echo $data["SifreHatirla"]; ?> <a role="button" class="sfrhtrKapat pull-right"><i class="fa fa-times-circle"></i></a></h2>
-                                        <div class="form">
-                                            <input id="unutemail" type="email" placeholder="<?php echo $data["EmailAdres"]; ?>" />
-                                            <?php
-                                            $value1 = rand(0, 50);
-                                            $value2 = rand(0, 50);
-                                            Session::set("guvenlikKod", $value1 + $value2);
-                                            ?>
-                                            <input id="randomsayi" type="text" placeholder="<?php echo $value1 . ' + ' . $value2 . ' =  ?'; ?>" />
-                                            <label style="margin-top:10px;">* <?php echo $data["EksiksizBilgi"]; ?></label>
-                                            <button type="input" id="btnHatirlat" class="btn btn-default"><?php echo $data["Hatirlat"]; ?></button>
-                                        </div>
-                                    </div><!--/login form-->
-                                </div>
+                            <div class="col-sm-6">
+                                <div class="login-form sifreHatirlat" style="display:none;">
+                                    <!--login form12 + 5 = ?-->
+                                    <h2><?php echo $data["SifreHatirla"]; ?> <a role="button" class="sfrhtrKapat pull-right"><i class="fa fa-times-circle"></i></a></h2>
+                                    <div class="form">
+                                        <input id="unutemail" type="email" placeholder="<?php echo $data["EmailAdres"]; ?>" />
+                                        <?php
+                                        $value1 = rand(0, 50);
+                                        $value2 = rand(0, 50);
+                                        Session::set("guvenlikKod", $value1 + $value2);
+                                        ?>
+                                        <input id="randomsayi" type="text" placeholder="<?php echo $value1 . ' + ' . $value2 . ' =  ?'; ?>" />
+                                        <label style="margin-top:10px;">* <?php echo $data["EksiksizBilgi"]; ?></label>
+                                        <button type="input" id="btnHatirlat" class="btn btn-default"><?php echo $data["Hatirlat"]; ?></button>
+                                    </div>
+                                </div><!--/login form-->
+                            </div>
                         </div>
                     </div>
                 </div>
