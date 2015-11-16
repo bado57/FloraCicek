@@ -94,12 +94,12 @@
                 <div class="col-sm-3 col-sm-offset-1">
                     <div class="single-widget">
                         <?php if (Session::get("EBulten") <= 0) { ?>
-                            <h2>E-Bülten</h2>
-                            <form class="searchform">
+                            <h2 id="h2ebulten">E-Bülten</h2>
+                            <div class="searchform" id="divebulten">
                                 <input id="inputebulten" type="email" required placeholder="E-mail adresiniz" />
                                 <button id="btnebulten" type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
                                 <p>E-mail adresinizle üye olun,<br />kampanya ve indirimlerden yararlanın! </p>
-                            </form>
+                            </div>
                         <?php } ?>
                         <div class="social-icons">
                             <ul class="nav navbar-nav">
@@ -111,7 +111,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
