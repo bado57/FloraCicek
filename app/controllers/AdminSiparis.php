@@ -35,11 +35,9 @@ class AdminSiparis extends Controller {
                     break;
 
                 case "kargoEkle":
-                    $form->post("ad", true);
-                    $form->post("aciklama", true);
                     $form->post("aktiflik", true);
-                    $ad = $form->values['ad'];
-                    $aciklama = $form->values['aciklama'];
+                    $ad = $_POST['ad'];
+                    $aciklama = $_POST['aciklama'];
                     $aktiflik = $form->values['aktiflik'];
 
                     if ($ad == "") {
@@ -64,12 +62,10 @@ class AdminSiparis extends Controller {
 
                 case "kargoDuzenle":
                     $form->post("ID", true);
-                    $form->post("ad", true);
-                    $form->post("aciklama", true);
                     $form->post("aktiflik", true);
                     $ID = $form->values['ID'];
-                    $ad = $form->values['ad'];
-                    $aciklama = $form->values['aciklama'];
+                    $ad = $_POST['ad'];
+                    $aciklama = $_POST['aciklama'];
                     $aktiflik = $form->values['aktiflik'];
 
                     if ($ad == "") {
@@ -103,17 +99,12 @@ class AdminSiparis extends Controller {
                     break;
 
                 case "bankaEkle":
-                    $form->post("bankAdi", true);
-                    $form->post("bankHesap", true);
-                    $form->post("bankAlici", true);
-                    $form->post("bankSube", true);
-                    $form->post("bankIban", true);
                     $form->post("aktiflik", true);
-                    $bankAdi = $form->values['bankAdi'];
-                    $bankHesap = $form->values['bankHesap'];
-                    $bankAlici = $form->values['bankAlici'];
-                    $bankSube = $form->values['bankSube'];
-                    $bankIban = $form->values['bankIban'];
+                    $bankAdi = $_POST['bankAdi'];
+                    $bankHesap = $_POST['bankHesap'];
+                    $bankAlici = $_POST['bankAlici'];
+                    $bankSube = $_POST['bankSube'];
+                    $bankIban = $_POST['bankIban'];
                     $aktiflik = $form->values['aktiflik'];
 
                     if ($bankAdi == "") {
@@ -157,18 +148,13 @@ class AdminSiparis extends Controller {
 
                 case "bankaDuzenle":
                     $form->post("ID", true);
-                    $form->post("bankAdi", true);
-                    $form->post("bankHesap", true);
-                    $form->post("bankAlici", true);
-                    $form->post("bankSube", true);
-                    $form->post("bankIban", true);
                     $form->post("aktiflik", true);
                     $ID = $form->values['ID'];
-                    $bankAdi = $form->values['bankAdi'];
-                    $bankHesap = $form->values['bankHesap'];
-                    $bankAlici = $form->values['bankAlici'];
-                    $bankSube = $form->values['bankSube'];
-                    $bankIban = $form->values['bankIban'];
+                    $bankAdi = $_POST['bankAdi'];
+                    $bankHesap = $_POST['bankHesap'];
+                    $bankAlici = $_POST['bankAlici'];
+                    $bankSube = $_POST['bankSube'];
+                    $bankIban = $_POST['bankIban'];
                     $aktiflik = $form->values['aktiflik'];
 
                     if ($bankAdi == "") {
@@ -221,9 +207,8 @@ class AdminSiparis extends Controller {
                     break;
 
                 case "yerEkle":
-                    $form->post("ad", true);
                     $form->post("aktiflik", true);
-                    $yerAdi = $form->values['ad'];
+                    $yerAdi = $_POST['ad'];
                     $aktiflik = $form->values['aktiflik'];
 
                     if ($yerAdi == "") {
@@ -247,10 +232,9 @@ class AdminSiparis extends Controller {
 
                 case "yerDuzenle":
                     $form->post("ID", true);
-                    $form->post("ad", true);
                     $form->post("aktiflik", true);
                     $ID = $form->values['ID'];
-                    $yerAdi = $form->values['ad'];
+                    $yerAdi = $_POST['ad'];
                     $aktiflik = $form->values['aktiflik'];
 
                     if ($yerAdi == "") {
@@ -283,9 +267,8 @@ class AdminSiparis extends Controller {
                     break;
 
                 case "nedenEkle":
-                    $form->post("ad", true);
                     $form->post("aktiflik", true);
-                    $nedenAdi = $form->values['ad'];
+                    $nedenAdi = $_POST['ad'];
                     $aktiflik = $form->values['aktiflik'];
 
                     if ($nedenAdi == "") {
@@ -309,10 +292,9 @@ class AdminSiparis extends Controller {
 
                 case "nedenDuzenle":
                     $form->post("ID", true);
-                    $form->post("ad", true);
                     $form->post("aktiflik", true);
                     $ID = $form->values['ID'];
-                    $nedenAdi = $form->values['ad'];
+                    $nedenAdi = $_POST['ad'];
                     $aktiflik = $form->values['aktiflik'];
 
                     if ($nedenAdi == "") {
@@ -445,14 +427,11 @@ class AdminSiparis extends Controller {
                 case "siparisDuzenle":
                     $form->post("ID", true);
                     $form->post("durum", true);
-                    $form->post("aciklama", true);
-                    $form->post("firma", true);
-                    $form->post("takipno", true);
                     $ID = $form->values['ID'];
                     $durum = $form->values['durum'];
-                    $aciklama = $form->values['aciklama'];
-                    $firma = $form->values['firma'];
-                    $takipno = $form->values['takipno'];
+                    $aciklama = $_POST['aciklama'];
+                    $firma = $_POST['firma'];
+                    $takipno = $_POST['takipno'];
 
                     if ($durum == -1) {
                         $sonuc["hata"] = "Lütfen Sipariş Durumunu Giriniz.";

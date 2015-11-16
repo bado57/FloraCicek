@@ -149,9 +149,3 @@
 
                                                 <!-- CK Editor (app.js'den sonra gelecek.) -->
                                                 <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-                                                <script type="text/javascript">
-                                                    CKEDITOR.replace('sayfayazisi', {
-                                                        height: 330,
-                                                        width: '100%'
-                                                    });
-                                                </script>

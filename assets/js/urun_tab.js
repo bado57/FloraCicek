@@ -78,6 +78,28 @@ $(document).ready(function () {
             }
         });
     });
+
+    $(document).on("click", "#btnebulten", function (e) {
+        var email = $("#inputebulten").val();
+        $.ajax({
+            type: "post",
+            url: SITE_URL + "/Genel/ajaxCall",
+            cache: false,
+            dataType: "json",
+            data: {"email": email, "tip": "ebulten"},
+            success: function (cevap) {
+                if (cevap.hata) {
+                    reset();
+                    alertify.alert(cevap.hata);
+                    return false;
+                } else {
+                    reset();
+                    alertify.alert(cevap.result);
+                    return false;
+                }
+            }
+        });
+    });
 });
 
 function resizeThumbs() {

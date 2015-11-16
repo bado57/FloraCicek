@@ -39,6 +39,7 @@
                         <form id="furunsiparis">
                             <div class="login-form">
                                 <div class="form">
+
                                     <input type="hidden" name="urunID" value="<?php echo $model[0]['urunID']; ?>" id="urunID" class="form-control">
                                         <div class="form-group">
                                             <select name="sehirSec" id="sehirSec" class="form-control select2">
@@ -50,68 +51,70 @@
                                                 <option value="0"><?php echo $data["IlceSec"] ?></option>
                                             </select>
                                         </div>
+                                        <!--
                                         <div class="form-group">
                                             <select name="semtSec" id="semtSec" class="form-control select2">
-                                                <option value="0"><?php echo $data["SemtSec"] ?></option>
+                                                <option value="0"><?php //echo $data["SemtSec"]       ?></option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <select name="mahalleSec" id="mahalleSec" class="form-control select2">
-                                                <option value="0"><?php echo $data["MahalleSec"] ?></option>
+                                                <option value="0"><?php //echo $data["MahalleSec"]       ?></option>
                                             </select>
                                         </div>
                                         <div class="form-group" id="postaKoduDiv" style="display:none">
                                             <input type="text" name="postaKoduSec" id="postaKoduSec" class="form-control" disabled>
                                                 <input type="hidden" name="postaKodu" value="" id="postaKodu" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="input-group">
-                                                            <input type="text" name="tarihSec"  id="tarihSec" class="form-control" placeholder="<?php echo $data["GonTarih"] ?>">
-                                                                <span class="input-group-btn">
-                                                                    <button id="tarihSecBtn" class="btn btn-default" type="button" style="padding: 10px 18px; margin-top: -10px;"><i class="fa fa-calendar"></i></button>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <select name="saatSec" id="saatSec" class="form-control">
-                                                            <option value="0"><?php echo $data["SaatAra"] ?></option>
-                                                            <option value="1">08:00 - 10:00</option>
-                                                            <option value="2">10:00 - 12:00</option>
-                                                            <option value="3">12:00 - 14:00</option>
-                                                            <option value="4">14:00 - 16:00</option>
-                                                            <option value="5">16:00 - 18:00</option>
-                                                        </select>
-                                                    </div>
-                                                    <button type="button" id="urunSipVer" class="btn btn-fefault cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <?php echo $data["SiparisVer"] ?>
-                                                    </button>
-                                                    </div>
-                                                    </div>
-                                                    </form>
-                                                    </div>
-                                                    </div><!--/product-details-->
+                                                    </div>-->
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" name="tarihSec"  id="tarihSec" class="form-control" placeholder="<?php echo $data["GonTarih"] ?>">
+                                                    <span class="input-group-btn">
+                                                        <button id="tarihSecBtn" class="btn btn-default" type="button" style="padding: 10px 18px;margin-top: -10px;"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <select name="saatSec" id="saatSec" class="form-control">
+                                                <option value="0"><?php echo $data["SaatAra"] ?></option>
+                                                <option value="1">08:00 - 10:00</option>
+                                                <option value="2">10:00 - 12:00</option>
+                                                <option value="3">12:00 - 14:00</option>
+                                                <option value="4">14:00 - 16:00</option>
+                                                <option value="5">16:00 - 18:00</option>
+                                            </select>
+                                        </div>
+                                        <button type="button" id="urunSipVer" class="btn btn-fefault cart">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <?php echo $data["SiparisVer"] ?>
+                                        </button>
+                                </div>
+                            </div>
 
-                                                    </div>
-                                                    </div>
-                                                    </div>
-                                                    </section>
-                                                    <section id="advertisement">
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-sm-12">
+                        </form>
+                    </div>
+                </div><!--/product-details-->
 
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </section>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="advertisement">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
 
-                                                    <script type="text/javascript">
-                                                        $(document).ready(function () {
-                                                            $('#urun-zoom').zoom();
-                                                            $("#tarihSec").datepicker();
-                                                            $(document).on("click", "#tarihSecBtn", function () {
-                                                                $("#tarihSec").focus();
-                                                            });
-                                                        });
-                                                    </script>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#urun-zoom').zoom();
+        $("#tarihSec").datepicker();
+        $(document).on("click", "#tarihSecBtn", function () {
+            $("#tarihSec").focus();
+        });
+    });
+</script>

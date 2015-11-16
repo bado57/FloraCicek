@@ -8,8 +8,12 @@
                     <div id="slider-carousel" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#slider-carousel" data-slide-to="1"></li>
-                            <li data-target="#slider-carousel" data-slide-to="2"></li>
+                            <?php
+                            $indiccount = count($model[4]);
+                            for ($indic = 1; $indic < $indiccount; $indic++) {
+                                ?>
+                                <li data-target="#slider-carousel" data-slide-to="<?php echo $indic; ?>"></li>
+                            <?php } ?>
                         </ol>
                         <div class="carousel-inner">
                             <?php foreach ($model[4] as $vitrinModel) { ?>
@@ -122,7 +126,7 @@
                 <div class="features_items">
                     <!--features_items-->
                     <?php if (count($model[5][3]) > 0) { ?>
-                    <h2 class="title text-center kampanyaTitle"><?php echo $data["KmpnyUrun"]; ?> <a href="#" class="btn btn-primary btn-sm" style="margin-top:0;margin-left: 10px;">Tümünü Gör</a></h2>
+                        <h2 class="title text-center kampanyaTitle"><?php echo $data["KmpnyUrun"]; ?> <?php echo count($model[5][3]) < 20 ? '<a href="kampanyali-urunler" class="btn btn-primary btn-sm" style="margin-top:0;margin-left: 10px;">Tümünü Gör</a>' : ''; ?>  </h2>
                         <?php foreach ($model[5][3] as $kampanyaModel) { ?>
                             <div class="col-sm-3 col-xs-6">
                                 <div class="product-image-wrapper">
@@ -134,6 +138,26 @@
                                             <p><?php echo $kampanyaModel['Adi']; ?><br /> <small><?php echo $data["UrunKod"]; ?> : <?php echo $kampanyaModel['Kod']; ?></small></p>
                                             <h2><span><?php echo $kampanyaModel['Fiyat']; ?> TL</span> <?php echo round(($kampanyaModel['Fiyat'] - (($kampanyaModel['Fiyat'] * $kampanyaModel['KYuzde']) / 100))); ?> TL</h2>
                                             <a href="<?php echo $kampanyaModel['Url']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><?php echo $data["SiparisVer"]; ?></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    } else if (count($model[5][4]) > 0) {
+                        ?>
+                        <h2 class="title text-center kampanyaTitle"><?php echo $data["CokSatan"]; ?> <?php echo count($model[5][3]) > 20 ? '<a href="coksatan-urunler" class="btn btn-primary btn-sm" style="margin-top:0;margin-left: 10px;">Tümünü Gör</a>' : ''; ?>  </h2>
+                        <?php foreach ($model[5][4] as $coksatanModel) { ?>
+                            <div class="col-sm-3 col-xs-6">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <div class="imgThumb">
+                                                <img src="<?php echo SITE_PRODUCT ?>/<?php echo $coksatanModel['Path']; ?>" alt="Türkiye Flora Çiçek <?php echo $coksatanModel['Adi']; ?>" />
+                                            </div>
+                                            <p><?php echo $coksatanModel['Adi']; ?><br /> <small><?php echo $data["UrunKod"]; ?> : <?php echo $coksatanModel['Kod']; ?></small></p>
+                                            <h2><?php echo $coksatanModel['Fiyat'] . " TL"; ?></h2>
+                                            <a href="<?php echo $coksatanModel['Url']; ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><?php echo $data["SiparisVer"]; ?></a>
                                         </div>
                                     </div>
                                 </div>

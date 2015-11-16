@@ -25,23 +25,19 @@ class AdminGenel extends Controller {
             Switch ($tip) {
 
                 case "kategoriEkle":
-                    $form->post("katAdi", true);
-                    $form->post("ustKatText", true);
-                    $form->post("ustKatVal", true);
                     $form->post("altKatSira", true);
                     $form->post("durum", true);
                     $form->post("sira", true);
-                    $form->post("katYazi", true);
                     $form->post("sonUstSira", true);
                     $form->post("degisecekID", true);
                     $form->post("trID", true);
-                    $katAdi = $form->values['katAdi'];
-                    $ustKatText = $form->values['ustKatText'];
-                    $ustKatVal = $form->values['ustKatVal'];
+                    $katAdi = $_POST['katAdi'];
+                    $ustKatText = $_POST['ustKatText'];
+                    $ustKatVal = $_POST['ustKatVal'];
                     $altKatSira = $form->values['altKatSira']; //üst kateori altındaki alt kategorilerdeki son sıra
                     $durum = $form->values['durum'];
                     $sira = $form->values['sira'];
-                    $katYazi = $form->values['katYazi'];
+                    $katYazi = $_POST['katYazi'];
                     $sonUstSira = $form->values['sonUstSira'];
                     $degisecekID = $form->values['degisecekID'];
                     $trID = $form->values['trID'];
@@ -199,13 +195,10 @@ class AdminGenel extends Controller {
                     break;
 
                 case "kategoriDuzenle":
-                    $form->post("katAdi", true);
-                    $form->post("normalkatAdi", true);
                     $form->post("ustKatVal", true);
                     $form->post("altKatSira", true);
                     $form->post("durum", true);
                     $form->post("sira", true);
-                    $form->post("katYazi", true);
                     $form->post("sonUstSira", true);
                     $form->post("degisecekID", true);
                     $form->post("trID", true);
@@ -213,13 +206,13 @@ class AdminGenel extends Controller {
                     $form->post("normalSira", true);
                     $form->post("normalUstKatID", true);
                     $form->post("aynıustfarklialtSira", true);
-                    $katAdi = $form->values['katAdi'];
-                    $normalkatAdi = $form->values['normalkatAdi'];
+                    $katAdi = $_POST['katAdi'];
+                    $normalkatAdi = $_POST['normalkatAdi'];
                     $ustKatVal = $form->values['ustKatVal'];
                     $altKatSira = $form->values['altKatSira']; //üst kategori altındaki alt kategorilerdeki son sıra
                     $durum = $form->values['durum'];
                     $sira = $form->values['sira'];
-                    $katYazi = $form->values['katYazi'];
+                    $katYazi = $_POST['katYazi'];
                     $sonUstSira = $form->values['sonUstSira'];
                     $degisecekID = $form->values['degisecekID'];
                     $trID = $form->values['trID'];
@@ -876,26 +869,22 @@ class AdminGenel extends Controller {
                 case "urunEkle":
                     require "app/otherClasses/class.upload.php";
 
-                    $form->post("urunAdi", true);
                     $form->post("urunKod", true);
-                    $form->post("urunKatText", true);
                     $form->post("siraolanurun", true);
                     $form->post("urunKatVal", true);
-                    $form->post("urunFiyat", true);
                     $form->post("durum", true);
                     $form->post("sira", true);
-                    $form->post("urunYazi", true);
                     $form->post("degisecekurunid", true);
                     $form->post("maxSira", true);
-                    $urunAdi = $form->values['urunAdi'];
+                    $urunAdi = $_POST['urunAdi'];
                     $urunKod = $form->values['urunKod'];
-                    $urunKatText = $form->values['urunKatText'];
+                    $urunKatText = $_POST['urunKatText'];
                     $siraolanurun = $form->values['siraolanurun'];
                     $urunKatVal = $form->values['urunKatVal'];
-                    $urunFiyat = $form->values['urunFiyat'];
+                    $urunFiyat = $_POST['urunFiyat'];
                     $durum = $form->values['durum'];
                     $sira = $form->values['sira'];
-                    $urunYazi = $form->values['urunYazi'];
+                    $urunYazi = $_POST['urunYazi'];
                     $degisecekurunid = $form->values['degisecekurunid'];
                     $maxSira = $form->values['maxSira'];
                     $urunOzellikArray = $_REQUEST['urunOzellikArray'];
@@ -956,7 +945,7 @@ class AdminGenel extends Controller {
                                                         $image->image_min_width = 250;
                                                         $image->image_max_height = 2000;
                                                         $image->image_max_width = 2000;
-                                                        $image->file_new_name_body = $form->benzersiz_Sayi_Harf(60);
+                                                        $image->file_new_name_body = time();
                                                         $image->file_name_body_pre = 'flora_';
                                                         $image->image_resize = true;
                                                         $image->image_ratio_crop = false;
@@ -1132,7 +1121,7 @@ class AdminGenel extends Controller {
                                                     $image->image_min_width = 250;
                                                     $image->image_max_height = 2000;
                                                     $image->image_max_width = 2000;
-                                                    $image->file_new_name_body = $form->benzersiz_Sayi_Harf(60);
+                                                    $image->file_new_name_body = time();
                                                     $image->file_name_body_pre = 'flora_';
                                                     $image->image_resize = true;
                                                     $image->image_ratio_crop = false;
@@ -1318,29 +1307,25 @@ class AdminGenel extends Controller {
                     require "app/otherClasses/class.upload.php";
 
                     $form->post("urunID", true);
-                    $form->post("urunAdi", true);
                     $form->post("urunKod", true);
-                    $form->post("urunKatText", true);
                     $form->post("siraolanurun", true);
                     $form->post("urunKatVal", true);
-                    $form->post("urunFiyat", true);
                     $form->post("durum", true);
                     $form->post("sira", true);
-                    $form->post("urunYazi", true);
                     $form->post("degisecekurunid", true);
                     $form->post("resimKontrol", true);
                     $form->post("newImage", true);
                     $form->post("normalSira", true);
                     $urunID = $form->values['urunID'];
-                    $urunAdi = $form->values['urunAdi'];
+                    $urunAdi = $_POST['urunAdi'];
                     $urunKod = $form->values['urunKod'];
-                    $urunKatText = $form->values['urunKatText'];
+                    $urunKatText = $_POST['urunKatText'];
                     $siraolanurun = $form->values['siraolanurun'];
                     $urunKatVal = $form->values['urunKatVal'];
-                    $urunFiyat = $form->values['urunFiyat'];
+                    $urunFiyat = $_POST['urunFiyat'];
                     $durum = $form->values['durum'];
                     $sira = $form->values['sira'];
-                    $urunYazi = $form->values['urunYazi'];
+                    $urunYazi = $_POST['urunYazi'];
                     $degisecekurunid = $form->values['degisecekurunid'];
                     $resimKontrol = $form->values['resimKontrol'];
                     $newImage = $form->values['newImage'];
@@ -1503,7 +1488,7 @@ class AdminGenel extends Controller {
                                                         $image->image_min_width = 200;
                                                         $image->image_max_height = 2000;
                                                         $image->image_max_width = 2000;
-                                                        $image->file_new_name_body = $form->benzersiz_Sayi_Harf(60);
+                                                        $image->file_new_name_body = time();
                                                         $image->file_name_body_pre = 'flora_';
                                                         $image->image_resize = true;
                                                         $image->image_ratio_crop = false;
@@ -1768,7 +1753,7 @@ class AdminGenel extends Controller {
                                                     $image->image_min_width = 200;
                                                     $image->image_max_height = 2000;
                                                     $image->image_max_width = 2000;
-                                                    $image->file_new_name_body = $form->benzersiz_Sayi_Harf(60);
+                                                    $image->file_new_name_body = time();
                                                     $image->file_name_body_pre = 'flora_';
                                                     $image->image_resize = true;
                                                     $image->image_ratio_crop = false;
@@ -1904,12 +1889,11 @@ class AdminGenel extends Controller {
                     break;
 
                 case "etiketEkle":
-                    $form->post("etiketAdi", true);
                     $form->post("durum", true);
                     $form->post("sira", true);
                     $form->post("maksSira", true);
                     $form->post("degisecekID", true);
-                    $etiketAdi = $form->values['etiketAdi'];
+                    $etiketAdi = $_POST['etiketAdi'];
                     $durum = $form->values['durum'];
                     $sira = $form->values['sira'];
                     $sonUstSira = $form->values['maksSira'];
@@ -1996,16 +1980,14 @@ class AdminGenel extends Controller {
                     break;
 
                 case "etiketDuzenle":
-                    $form->post("etiketAdi", true);
-                    $form->post("etiketNormalAdi", true);
                     $form->post("durum", true);
                     $form->post("sira", true);
                     $form->post("maksSira", true);
                     $form->post("degisecekID", true);
                     $form->post("normalSira", true);
                     $form->post("duzenlenenID", true);
-                    $etiketAdi = $form->values['etiketAdi'];
-                    $etiketNormalAdi = $form->values['etiketNormalAdi'];
+                    $etiketAdi = $_POST['etiketAdi'];
+                    $etiketNormalAdi = $_POST['etiketNormalAdi'];
                     $durum = $form->values['durum'];
                     $sira = $form->values['sira'];
                     $sonUstSira = $form->values['maksSira'];

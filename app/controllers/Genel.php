@@ -558,6 +558,55 @@ class Genel extends Controller {
 
                     $sonuc["result"] = $kategorilist;
                     break;
+                case "ebulten":
+                    $form->post("email", true);
+                    $email = $form->values['email'];
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                        $emailValidate = $form->mailControl1($email);
+                        if ($emailValidate == 1) {
+                            $mailliste = $Panel_Model->ebultenDbKontrol($email);
+                            if (count($mailliste) <= 0) {
+                                if (Session::get("KID") > 0) {
+                                    if ($form->submit()) {
+                                        $data = array(
+                                            'mailhavuz_KID' => Session::get("KID"),
+                                            'mailhavuz_Rol' => Session::get("KRol"),
+                                            'mailhavuz_Mail' => $email
+                                        );
+                                    }
+                                    $resultMail = $Panel_Model->mailHavuzInsert($data);
+                                    if ($resultMail) {
+                                        Session::set("EBulten", $resultMail);
+                                        $sonuc["result"] = "Tebrikler e-bültene kayıt oldunuz";
+                                    } else {
+                                        $sonuc["hata"] = "Bir hata oluştu tekrar deneyiniz";
+                                    }
+                                } else {
+                                    if ($form->submit()) {
+                                        $data = array(
+                                            'mailhavuz_KID' => 0,
+                                            'mailhavuz_Rol' => 3,
+                                            'mailhavuz_Mail' => $email
+                                        );
+                                    }
+                                    $resultMail = $Panel_Model->mailHavuzInsert($data);
+                                    if ($resultMail) {
+                                        Session::set("EBulten", $resultMail);
+                                        $sonuc["result"] = "Tebrikler e-bültene kayıt oldunuz";
+                                    } else {
+                                        $sonuc["hata"] = "Bir hata oluştu tekrar deneyiniz";
+                                    }
+                                }
+                            } else {
+                                $sonuc["hata"] = "Bu mail adresi zaten kayıtlıdır! Tekrar deneyiniz.";
+                            }
+                        } else {
+                            $sonuc["hata"] = "Mailiniz kullanımda değildir. Lütfen başka bir mail deneyiniz.";
+                        }
+                    } else {
+                        $sonuc["hata"] = "Lütfen geçerli bir email adresi giriniz.";
+                    }
+                    break;
                 case "urunDetay":
                     $form->post("urunID", true);
                     $form->post("ilText", true);
@@ -575,26 +624,18 @@ class Genel extends Controller {
                     $urunID = $form->values['urunID'];
                     $ilText = $form->values['ilText'];
                     $ilceText = $form->values['ilceText'];
-                    $semtText = $form->values['semtText'];
-                    $mahText = $form->values['mahText'];
                     $tarihim = $form->values['tarih'];
                     $saatText = $form->values['saat'];
                     $ilID = $form->values['ilID'];
                     $ilceID = $form->values['ilceID'];
-                    $semtID = $form->values['semtID'];
-                    $mahID = $form->values['mahID'];
                     $saatID = $form->values['saatID'];
                     $pKodu = $form->values['pKodu'];
                     Session::set("SipIl", $ilText);
                     Session::set("SipIlID", $ilID);
                     Session::set("SipIlce", $ilceText);
                     Session::set("SipIlceID", $ilceID);
-                    Session::set("SipSemt", $semtText);
-                    Session::set("SipSemtID", $semtID);
-                    Session::set("SipMah", $mahID);
-                    Session::set("SipMahID", $mahText);
                     Session::set("SipPKodu", $pKodu);
-                    $newAdres = $ilText . ' ' . $ilceText . ' ' . $semtText . ' ' . $mahText . ' (' . $pKodu . ')';
+
                     $tarih = explode("/", $tarihim);
                     $newTarih = $tarih[0] . "." . $tarih[1] . "." . $tarih[2];
                     $gun = date('D', strtotime("$tarih[1]/$tarih[0]/$tarih[2]"));
@@ -602,33 +643,34 @@ class Genel extends Controller {
                     if ($urunID > 0) {
                         if ($ilID > 0) {
                             if ($ilceID > 0) {
-                                if ($semtID > 0) {
-                                    if ($mahID > 0) {
-                                        if ($tarihim != '') {
-                                            if ($saatText != '') {
-                                                $ilceliste = $Panel_Model->urunIlceFiyatListele($ilceID);
-                                                foreach ($ilceliste as $ilcelistee) {
-                                                    $ilcefiyat = $ilcelistee['ilce_ekucret'];
-                                                }
-                                                unset($_SESSION['EkUrunID']);
-                                                Session::set("SipID", $urunID);
-                                                Session::set("SipAdres", $newAdres);
-                                                Session::set("SipIlceFiyat", $ilcefiyat);
-                                                Session::set("SipTarih", $newTarih);
-                                                Session::set("SipSaat", $saatText);
-                                                Session::set("SipGun", $simdikiGun);
-                                                $sonuc["result"] = 1;
-                                            } else {
-                                                $sonuc["hata"] = "Lütfen Saat Aralığı Seçiniz";
-                                            }
+                                if ($tarihim != '') {
+                                    if ($saatText != '') {
+                                        $explSaat = explode(" - ", $saatText);
+                                        date_default_timezone_set('Europe/Istanbul');
+                                        $nowdate = date('H:i');
+                                        if ($nowdate > $explSaat[0]) {
+                                            $sonuc["hata"] = "Lütfen İleri Saatleri Seçiniz";
                                         } else {
-                                            $sonuc["hata"] = "Lütfen Tarih Seçiniz";
+                                            $ilceliste = $Panel_Model->urunIlceFiyatListele($ilceID);
+                                            foreach ($ilceliste as $ilcelistee) {
+                                                $ilcefiyat = $ilcelistee['ilce_ekucret'];
+                                                $ilceadi = $ilcelistee['ilce_adi'];
+                                            }
+                                            unset($_SESSION['EkUrunID']);
+                                            $newAdres = $ilText . ' ' . $ilceadi;
+                                            Session::set("SipID", $urunID);
+                                            Session::set("SipAdres", $newAdres);
+                                            Session::set("SipIlceFiyat", $ilcefiyat);
+                                            Session::set("SipTarih", $newTarih);
+                                            Session::set("SipSaat", $saatText);
+                                            Session::set("SipGun", $simdikiGun);
+                                            $sonuc["result"] = 1;
                                         }
                                     } else {
-                                        $sonuc["hata"] = "Lütfen Mahalle Seçiniz";
+                                        $sonuc["hata"] = "Lütfen Saat Aralığı Seçiniz";
                                     }
                                 } else {
-                                    $sonuc["hata"] = "Lütfen Semt Seçiniz";
+                                    $sonuc["hata"] = "Lütfen Tarih Seçiniz";
                                 }
                             } else {
                                 $sonuc["hata"] = "Lütfen İlçe Seçiniz";
@@ -663,40 +705,42 @@ class Genel extends Controller {
                     }
                     $sonuc["result"] = $ilceList;
                     break;
-                case "urunSemt":
-                    $form->post("ilceid", true);
-                    $ilceid = $form->values['ilceid'];
-                    $semtliste = $Panel_Model->urunSemtListele($ilceid);
-                    $s = 0;
-                    foreach ($semtliste as $semtlistee) {
-                        $semtList[$s]["ID"] = $semtlistee['semt_ilceID'];
-                        $semtList[$s]["Ad"] = $semtlistee['semt_ad'];
-                        $s++;
-                    }
-                    $sonuc["result"] = $semtList;
-                    break;
-                case "urunMahalle":
-                    $form->post("semtid", true);
-                    $semtid = $form->values['semtid'];
-                    $mahalleliste = $Panel_Model->urunMahalleListele($semtid);
-                    $m = 0;
-                    foreach ($mahalleliste as $mahallelistee) {
-                        $mahalleList[$m]["ID"] = $mahallelistee['flora_mahalleID'];
-                        $mahalleList[$m]["Ad"] = $mahallelistee['flora_mahallead'];
-                        $m++;
-                    }
-                    $sonuc["result"] = $mahalleList;
-                    break;
-                case "urunPKodu":
-                    $form->post("mahid", true);
-                    $mahid = $form->values['mahid'];
-                    $pkoduliste = $Panel_Model->urunPKoduListele($mahid);
-                    foreach ($pkoduliste as $pkodulistee) {
-                        $pkoduList["ID"] = $pkodulistee['pkID'];
-                        $pkoduList["Kod"] = $pkodulistee['pk_kod'];
-                    }
-                    $sonuc["result"] = $pkoduList;
-                    break;
+                /*
+                  case "urunSemt":
+                  $form->post("ilceid", true);
+                  $ilceid = $form->values['ilceid'];
+                  $semtliste = $Panel_Model->urunSemtListele($ilceid);
+                  $s = 0;
+                  foreach ($semtliste as $semtlistee) {
+                  $semtList[$s]["ID"] = $semtlistee['semt_ilceID'];
+                  $semtList[$s]["Ad"] = $semtlistee['semt_ad'];
+                  $s++;
+                  }
+                  $sonuc["result"] = $semtList;
+                  break;
+                  case "urunMahalle":
+                  $form->post("semtid", true);
+                  $semtid = $form->values['semtid'];
+                  $mahalleliste = $Panel_Model->urunMahalleListele($semtid);
+                  $m = 0;
+                  foreach ($mahalleliste as $mahallelistee) {
+                  $mahalleList[$m]["ID"] = $mahallelistee['flora_mahalleID'];
+                  $mahalleList[$m]["Ad"] = $mahallelistee['flora_mahallead'];
+                  $m++;
+                  }
+                  $sonuc["result"] = $mahalleList;
+                  break;
+                  case "urunPKodu":
+                  $form->post("mahid", true);
+                  $mahid = $form->values['mahid'];
+                  $pkoduliste = $Panel_Model->urunPKoduListele($mahid);
+                  foreach ($pkoduliste as $pkodulistee) {
+                  $pkoduList["ID"] = $pkodulistee['pkID'];
+                  $pkoduList["Kod"] = $pkodulistee['pk_kod'];
+                  }
+                  $sonuc["result"] = $pkoduList;
+                  break;
+                 */
                 case "girisYap":
                     if (Session::get("KID") > 0) {
                         $sonuc["result"] = 1;
@@ -711,6 +755,12 @@ class Genel extends Controller {
                                 $realSifre = $form->userSifreOlustur($email, $sifre);
                                 $kullaniciliste = $Panel_Model->girisSorgu($email, $realSifre);
                                 if (count($kullaniciliste) > 0) {
+                                    //mail havuzuna kayıt oldu ise, session oluşturuyoruz
+                                    $mailliste = $Panel_Model->ebultenDbKontrol($email);
+                                    if (count($mailliste) > 0) {
+                                        Session::set("EBulten", $mailliste[0]['mailhavuz_ID']);
+                                    }
+
                                     foreach ($kullaniciliste as $kullanicilistee) {
                                         $id = $kullanicilistee['kullanici_id'];
                                         $ad = $kullanicilistee['kullanici_adSoyad'];
@@ -743,6 +793,40 @@ class Genel extends Controller {
                         }
                     }
                     break;
+                case "sifreHatirlat":
+                    $form->post("email", true);
+                    $form->post("randomsayi", true);
+                    $email = $form->values['email'];
+                    $randomsayi = $form->values['randomsayi'];
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                        $kullaniciliste = $Panel_Model->emailDbKontrol($email);
+                        if (count($kullaniciliste) > 0) {
+                            if ($randomsayi != '') {
+                                if ($randomsayi == Session::get("guvenlikKod")) {
+                                    foreach ($kullaniciliste as $kullanicilistee) {
+                                        $id = $kullanicilistee['kullanici_id'];
+                                        $ad = $kullanicilistee['kullanici_adSoyad'];
+                                        $sifre = $kullanicilistee['kullanici_realsifre'];
+                                    }
+                                    $resultMail = $form->sHatirlatMailGonder($email, $ad, $sifre);
+                                    if ($resultMail == 1) {
+                                        $sonuc["result"] = "Mailiniz gönderilmiştir. Lütfen $email adresini kontrol ediniz";
+                                    } else {
+                                        $sonuc["hata"] = "Bir hata oluştu! Tekrar deneyiniz";
+                                    }
+                                } else {
+                                    $sonuc["hata"] = "Toplama işlemi sonucu yanlış! Tekrar deneyiniz.";
+                                }
+                            } else {
+                                $sonuc["hata"] = "Lütfen toplama işlemi sonucunu yazınız.";
+                            }
+                        } else {
+                            $sonuc["hata"] = "Bu mail adresi kayıtlı değildir! Tekrar deneyiniz.";
+                        }
+                    } else {
+                        $sonuc["hata"] = "Lütfen geçerli bir email adresi giriniz.";
+                    }
+                    break;
                 case "birUye":
                     $form->post("adSoyad", true);
                     $form->post("email", true);
@@ -763,38 +847,48 @@ class Genel extends Controller {
                     }
                     if ($adSoyad != '') {
                         if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-                            if ($sifre != '') {
-                                if ($sifre == $sifreTkrar) {
-                                    if ($uyesoz == "true") {
-                                        $realSifre = $form->userSifreOlustur($email, $sifre);
-                                        if ($form->submit()) {
-                                            $data = array(
-                                                'kullanici_adSoyad' => $adSoyad,
-                                                'kullanici_eposta' => $email,
-                                                'kullanici_sifre' => $realSifre,
-                                                'kullanici_realsifre' => $sifre,
-                                                'kullanici_rol' => 0,
-                                                'kullanici_kampanyamesaj' => $kmpnya
-                                            );
-                                        }
-                                        $result = $Panel_Model->birUye($data);
-                                        if ($result) {
-                                            Session::set("KID", $result);
-                                            Session::set("KRol", 0);
-                                            Session::set("KAdSoyad", $adSoyad);
-                                            Session::set("KEposta", $eposta);
-                                            $sonuc["result"] = 1;
+                            $emailValidate = $form->mailControl1($email);
+                            if ($emailValidate == 1) {
+                                $kullaniciliste = $Panel_Model->emailDbKontrol($email);
+                                if (count($kullaniciliste) > 0) {
+                                    if ($sifre != '') {
+                                        if ($sifre == $sifreTkrar) {
+                                            if ($uyesoz == "true") {
+                                                $realSifre = $form->userSifreOlustur($email, $sifre);
+                                                if ($form->submit()) {
+                                                    $data = array(
+                                                        'kullanici_adSoyad' => $adSoyad,
+                                                        'kullanici_eposta' => $email,
+                                                        'kullanici_sifre' => $realSifre,
+                                                        'kullanici_realsifre' => $sifre,
+                                                        'kullanici_rol' => 0,
+                                                        'kullanici_kampanyamesaj' => $kmpnya
+                                                    );
+                                                }
+                                                $result = $Panel_Model->birUye($data);
+                                                if ($result) {
+                                                    Session::set("KID", $result);
+                                                    Session::set("KRol", 0);
+                                                    Session::set("KAdSoyad", $adSoyad);
+                                                    Session::set("KEposta", $eposta);
+                                                    $sonuc["result"] = 1;
+                                                } else {
+                                                    $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz!";
+                                                }
+                                            } else {
+                                                $sonuc["hata"] = "Üyelik Sözleşmesini Kabul Ediniz!";
+                                            }
                                         } else {
-                                            $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz!";
+                                            $sonuc["hata"] = "Şifreler Uyuşmuyor.";
                                         }
                                     } else {
-                                        $sonuc["hata"] = "Üyelik Sözleşmesini Kabul Ediniz!";
+                                        $sonuc["hata"] = "Şifreyi Unutmayınız.";
                                     }
                                 } else {
-                                    $sonuc["hata"] = "Şifreler Uyuşmuyor.";
+                                    $sonuc["hata"] = "Bu mail daha önce kullanılmış başka bir mail adresi deneyiniz.";
                                 }
                             } else {
-                                $sonuc["hata"] = "Şifreyi Unutmayınız.";
+                                $sonuc["hata"] = "Mailiniz kullanımda değildir. Lütfen başka bir mail deneyiniz.";
                             }
                         } else {
                             $sonuc["hata"] = "Lütfen geçerli bir email adresi giriniz.";
@@ -833,63 +927,73 @@ class Genel extends Controller {
                     }
                     if ($adSoyad != '') {
                         if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-                            if ($sifre != '') {
-                                if ($sifre == $sifreTkrar) {
-                                    if ($kurAdi != '') {
-                                        if ($kurVDaire != '') {
-                                            if ($kurVNo != '') {
-                                                if ($kurVTel != '') {
-                                                    if ($uyesoz == "true") {
-                                                        $realSifre = $form->userSifreOlustur($email, $sifre);
-                                                        if ($form->submit()) {
-                                                            $data = array(
-                                                                'kullanici_adSoyad' => $adSoyad,
-                                                                'kullanici_eposta' => $email,
-                                                                'kullanici_sifre' => $realSifre,
-                                                                'kullanici_realsifre' => $sifre,
-                                                                'kullanici_kurumadi' => $kurAdi,
-                                                                'kullanici_vergid' => $kurVDaire,
-                                                                'kullanici_vergino' => $kurVNo,
-                                                                'kullanici_kurumtel' => $kurVTel,
-                                                                'kullanici_adres' => $adres,
-                                                                'kullanici_rol' => 2,
-                                                                'kullanici_kampanyamesaj' => $kmpnya
-                                                            );
-                                                        }
-                                                        $result = $Panel_Model->kurUye($data);
-                                                        if ($result) {
-                                                            Session::set("KID", $result);
-                                                            Session::set("KRol", 2);
-                                                            Session::set("KAdSoyad", $adSoyad);
-                                                            Session::set("KEposta", $eposta);
-                                                            //kurumsal veriler
-                                                            Session::set("KurVergiNo", $kurVNo);
-                                                            Session::set("KurVerDaire", $kurVDaire);
-                                                            Session::set("KurFAdres", $adres);
-                                                            $sonuc["result"] = 1;
+                            $emailValidate = $form->mailControl1($email);
+                            if ($emailValidate == 1) {
+                                $kullaniciliste = $Panel_Model->emailDbKontrol($email);
+                                if (count($kullaniciliste) > 0) {
+                                    if ($sifre != '') {
+                                        if ($sifre == $sifreTkrar) {
+                                            if ($kurAdi != '') {
+                                                if ($kurVDaire != '') {
+                                                    if ($kurVNo != '') {
+                                                        if ($kurVTel != '') {
+                                                            if ($uyesoz == "true") {
+                                                                $realSifre = $form->userSifreOlustur($email, $sifre);
+                                                                if ($form->submit()) {
+                                                                    $data = array(
+                                                                        'kullanici_adSoyad' => $adSoyad,
+                                                                        'kullanici_eposta' => $email,
+                                                                        'kullanici_sifre' => $realSifre,
+                                                                        'kullanici_realsifre' => $sifre,
+                                                                        'kullanici_kurumadi' => $kurAdi,
+                                                                        'kullanici_vergid' => $kurVDaire,
+                                                                        'kullanici_vergino' => $kurVNo,
+                                                                        'kullanici_kurumtel' => $kurVTel,
+                                                                        'kullanici_adres' => $adres,
+                                                                        'kullanici_rol' => 2,
+                                                                        'kullanici_kampanyamesaj' => $kmpnya
+                                                                    );
+                                                                }
+                                                                $result = $Panel_Model->kurUye($data);
+                                                                if ($result) {
+                                                                    Session::set("KID", $result);
+                                                                    Session::set("KRol", 2);
+                                                                    Session::set("KAdSoyad", $adSoyad);
+                                                                    Session::set("KEposta", $eposta);
+                                                                    //kurumsal veriler
+                                                                    Session::set("KurVergiNo", $kurVNo);
+                                                                    Session::set("KurVerDaire", $kurVDaire);
+                                                                    Session::set("KurFAdres", $adres);
+                                                                    $sonuc["result"] = 1;
+                                                                } else {
+                                                                    $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz!";
+                                                                }
+                                                            } else {
+                                                                $sonuc["hata"] = "Üyelik Sözleşmesini Kabul Ediniz!";
+                                                            }
                                                         } else {
-                                                            $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz!";
+                                                            $sonuc["hata"] = "Lütfen Kurum Telefon Numarasını Giriniz!";
                                                         }
                                                     } else {
-                                                        $sonuc["hata"] = "Üyelik Sözleşmesini Kabul Ediniz!";
+                                                        $sonuc["hata"] = "Lütfen Kurum Vergi Dairesi No Giriniz!";
                                                     }
                                                 } else {
-                                                    $sonuc["hata"] = "Lütfen Kurum Telefon Numarasını Giriniz!";
+                                                    $sonuc["hata"] = "Lütfen Kurum Vergi Dairesini Giriniz!";
                                                 }
                                             } else {
-                                                $sonuc["hata"] = "Lütfen Kurum Vergi Dairesi No Giriniz!";
+                                                $sonuc["hata"] = "Lütfen Kurum Adını Giriniz!";
                                             }
                                         } else {
-                                            $sonuc["hata"] = "Lütfen Kurum Vergi Dairesini Giriniz!";
+                                            $sonuc["hata"] = "Şifreler Uyuşmuyor.";
                                         }
                                     } else {
-                                        $sonuc["hata"] = "Lütfen Kurum Adını Giriniz!";
+                                        $sonuc["hata"] = "Şifreyi Unutmayınız.";
                                     }
                                 } else {
-                                    $sonuc["hata"] = "Şifreler Uyuşmuyor.";
+                                    $sonuc["hata"] = "Bu mail daha önce kullanılmış başka bir mail adresi deneyiniz.";
                                 }
                             } else {
-                                $sonuc["hata"] = "Şifreyi Unutmayınız.";
+                                $sonuc["hata"] = "Mailiniz kullanımda değildir. Lütfen başka bir mail deneyiniz.";
                             }
                         } else {
                             $sonuc["hata"] = "Lütfen geçerli bir email adresi giriniz.";

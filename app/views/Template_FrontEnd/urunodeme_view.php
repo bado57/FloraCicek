@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12" style="margin-top:20px;  padding-bottom:30px;">
-                <div class="defaultDiv" style="max-width:210px; margin: -9px 20px 0 0;"> <a href="<?php echo SITE_URL; ?>"><img class="img-responsive" src="<?php echo SITE_IMAGES ?>/logo.png" alt="" /></a></div>
+                <div class="defaultDiv" style="max-width:210px; margin: -9px 20px 0 0;"> <a href="<?php echo SITE_VITRIN . "/" . $model[3][0]['Logo']; ?>"><img class="img-responsive" src="<?php echo SITE_IMAGES ?>/logo.png" alt="" /></a></div>
                 <div class="wizard"><div class="step">1</div> <span><?php echo $data["EkUrun"]; ?></span></div>
                 <?php if (Session::get("KID") > 0) { ?>
                     <div class="wizard"><div class="step">2</div> <span><?php echo $data["TesBilgi"]; ?></span></div>
@@ -223,7 +223,7 @@
                             <h4><?php echo $model[0][0]['urunAd'] ?></h4>
                             <p><?php echo $data["UrunKod"] ?>: <?php echo $model[0][0]['urunKod'] ?><span class="pull-right"> TL</span> <span class="urunFiyat pull-right"><?php echo $model[0][0]['urunFiyat'] ?></span></p>
                             <hr />
-                            <p><?php echo Session::get("SipAdres"); ?><br /> <small><?php echo Session::get("SipTarih"); ?> <?php echo Session::get("SipGun"); ?> <span class="pull-right"><?php echo Session::get("SipSaat"); ?></span></small></p>
+                            <p><?php echo Session::get("SipAdres") . ' ( +' . Session::get("SipIlceFiyat") . ' TL)'; ?><br /> <small><?php echo Session::get("SipTarih"); ?> <?php echo Session::get("SipGun"); ?> <span class="pull-right"><?php echo Session::get("SipSaat"); ?></span></small></p>
                             <hr />
                             <?php if (count($model[1]) > 0) { ?>
                                 <ul class="ekurunler">

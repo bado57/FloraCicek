@@ -330,6 +330,7 @@ class Admin extends Controller {
             $iceriklist[$i]['Twit'] = $icerikListee['sbt_twit'];
             $iceriklist[$i]['Instagram'] = $icerikListee['sbt_instag'];
             $iceriklist[$i]['GPlus'] = $icerikListee['sbt_gplus'];
+            $iceriklist[$i]['Logo'] = $icerikListee['sbt_logo'];
             $i++;
         }
 

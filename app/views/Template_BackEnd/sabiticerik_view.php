@@ -40,6 +40,13 @@
                                                                         <input type="text" class="form-control" id="harita" name="harita" placeholder="Harita iFrame" value="<?php echo $model[0]["IFrame"]; ?>">
                                                                             <input type="hidden" name="hidharita" value="<?php echo $model[0]["IFrame"]; ?>">
                                                                                 </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="logoresim">Site Logo</label>
+                                                                                    <input id="logoresim" name="logoresim" class="form-control" type="file" />
+                                                                                    <div id="image-holder" style="height:290px; width:100%; margin-top:10px;">
+                                                                                        <img src="<?php echo SITE_VITRIN . "/" . $model[0]["Logo"]; ?>" class="thumb-image img-responsive" style="width:auto;max-width:100%;heaight:auto;max-height:100%;">
+                                                                                    </div>
+                                                                                </div>
                                                                                 </div><!-- /.col -->
                                                                                 <div class="col-md-4">
                                                                                     <div class="form-group">

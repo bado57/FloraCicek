@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="logo pull-left" style="text-align:center;">
-                    <a href="<?php echo SITE_URL; ?>"><img src="<?php echo SITE_IMAGES ?>/logo.png" alt="" /></a>
+                    <a href="<?php echo SITE_URL; ?>"><img src="<?php echo SITE_VITRIN . '/' . $model[8]["logo"]; ?>" alt="" /></a>
                 </div>
             </div>
             <?php if (Session::get("KRol") == 2 || Session::get("KRol") == 1) { ?>
@@ -50,7 +50,7 @@
                         <li><a href="<?php echo SITE_URL; ?>"><?php echo $data["Anasayfa"]; ?></a></li>
                         <li><a href="<?php echo SITE_URL . "/sayfa-hakkimizda" ?>" id="sesso" data-url="StaticPager" data-method="index"><?php echo $data["Kurumsal"]; ?></a></li>
                         <li><a href="<?php echo SITE_URL . "/Home/Contact" ?>"><?php echo $data["Iletisim"]; ?></a></li>
-                        <li><a href="#" style="font-size:26px; color:#b51e91;"><i class="fa fa-phone"></i> <?php echo $model[8]["telefon"]; ?></a></li>
+                        <li><a href="<?php echo SITE_URL . "/Home/Contact" ?>" style="font-size:26px; color:#b51e91;"><i class="fa fa-phone"></i> <?php echo $model[8]["telefon"]; ?></a></li>
                     </ul>
                 </div>
             </div>
