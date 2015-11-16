@@ -800,7 +800,7 @@ class Genel extends Controller {
                     $randomsayi = $form->values['randomsayi'];
                     if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                         $kullaniciliste = $Panel_Model->emailDbKontrol($email);
-                        if (count($kullaniciliste) > 0) {
+                        if (count($kullaniciliste) <= 0) {
                             if ($randomsayi != '') {
                                 if ($randomsayi == Session::get("guvenlikKod")) {
                                     foreach ($kullaniciliste as $kullanicilistee) {
@@ -850,7 +850,7 @@ class Genel extends Controller {
                             $emailValidate = $form->mailControl1($email);
                             if ($emailValidate == 1) {
                                 $kullaniciliste = $Panel_Model->emailDbKontrol($email);
-                                if (count($kullaniciliste) > 0) {
+                                if (count($kullaniciliste) <= 0) {
                                     if ($sifre != '') {
                                         if ($sifre == $sifreTkrar) {
                                             if ($uyesoz == "true") {
@@ -930,7 +930,7 @@ class Genel extends Controller {
                             $emailValidate = $form->mailControl1($email);
                             if ($emailValidate == 1) {
                                 $kullaniciliste = $Panel_Model->emailDbKontrol($email);
-                                if (count($kullaniciliste) > 0) {
+                                if (count($kullaniciliste) <= 0) {
                                     if ($sifre != '') {
                                         if ($sifre == $sifreTkrar) {
                                             if ($kurAdi != '') {
