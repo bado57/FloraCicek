@@ -60,22 +60,23 @@ $(document).ready(function () {
             }
         });
     });
-    $(document).on('click', 'input#bankakaydet', function (e) {
+    $(document).on('click', '#kampanyakaydet', function (e) {
         var duzenleme = $("input[name=duzenleme]").val();
         if (duzenleme == 0) {//ekleme
-            var bankAdi = $("#bankaadi").val();
-            var bankHesap = $("#hesapno").val();
-            var bankAlici = $("#alici").val();
-            var bankSube = $("#subeadi").val();
-            var bankIban = $("#ibanno").val();
+            var kmpbaslik = $("#kampanyabaslik").val();
+            var baslamaTarh = $("#baslamatarihi").val();
+            var btsTarih = $("#bitistarihi").val();
+            var yuzde = $("#indirimyuzde").val();
+            var kmpYazi = CKEDITOR.instances['kampanyayazi'].getData();
             var aktiflik = $("#aktiflik").val();
+            var urunKatVal = $("#kategoriler").val();
             $.ajax({
                 type: "post",
-                url: SITE_URL + "/AdminSiparis/ajaxCall",
+                url: SITE_URL + "/AdminKampanya/ajaxCall",
                 cache: false,
                 dataType: "json",
-                data: {"bankAdi": bankAdi, "bankHesap": bankHesap, "bankAlici": bankAlici,
-                    "bankSube": bankSube, "bankIban": bankIban, "aktiflik": aktiflik, "tip": "bankaEkle"},
+                data: {"kmpbaslik": kmpbaslik, "baslamaTarh": baslamaTarh, "btsTarih": btsTarih,
+                    "yuzde": yuzde, "kmpYazi": kmpYazi, "aktiflik": aktiflik, "urunKatVal[]": urunKatVal, "tip": "kampanyaEkle"},
                 success: function (cevap) {
                     if (cevap.hata) {
                         reset();
@@ -83,28 +84,31 @@ $(document).ready(function () {
                         return false;
                     } else {
                         if (cevap.result == 1) {
-                            window.location.href = SITE_URL + '/Admin/Banka';
+                            window.location.href = SITE_URL + '/Admin/Kampanya';
                         } else {
-                            window.location.href = SITE_URL + '/Admin/Banka';
+                            window.location.href = SITE_URL + '/Admin/Kampanya';
                         }
                     }
                 }
             });
         } else {//düzenleme
             var ID = $("input[name=duzenlemeID]").val();
-            var bankAdi = $("#bankaadi").val();
-            var bankHesap = $("#hesapno").val();
-            var bankAlici = $("#alici").val();
-            var bankSube = $("#subeadi").val();
-            var bankIban = $("#ibanno").val();
+            var kmpbaslik = $("#kampanyabaslik").val();
+            var baslamaTarh = $("#baslamatarihi").val();
+            var btsTarih = $("#bitistarihi").val();
+            var yuzde = $("#indirimyuzde").val();
+            var kmpYazi = CKEDITOR.instances['kampanyayazi'].getData();
             var aktiflik = $("#aktiflik").val();
+            var urunKatVal = $("#kategoriler").val();
+            var urunEskiKatVal = $("input[name=eskikatval]").val();
             $.ajax({
                 type: "post",
-                url: SITE_URL + "/AdminSiparis/ajaxCall",
+                url: SITE_URL + "/AdminKampanya/ajaxCall",
                 cache: false,
                 dataType: "json",
-                data: {"ID": ID, "bankAdi": bankAdi, "bankHesap": bankHesap, "bankAlici": bankAlici,
-                    "bankSube": bankSube, "bankIban": bankIban, "aktiflik": aktiflik, "tip": "bankaDuzenle"},
+                data: {"ID": ID, "kmpbaslik": kmpbaslik, "baslamaTarh": baslamaTarh, "btsTarih": btsTarih,
+                    "yuzde": yuzde, "kmpYazi": kmpYazi, "aktiflik": aktiflik, "urunKatVal[]": urunKatVal,
+                    "urunEskiKatVal[]": urunEskiKatVal, "tip": "kampanyaDuzenle"},
                 success: function (cevap) {
                     if (cevap.hata) {
                         reset();
@@ -112,9 +116,9 @@ $(document).ready(function () {
                         return false;
                     } else {
                         if (cevap.result == 1) {
-                            window.location.href = SITE_URL + '/Admin/Banka';
+                            window.location.href = SITE_URL + '/Admin/Kampanya';
                         } else {
-                            window.location.href = SITE_URL + '/Admin/Banka';
+                            window.location.href = SITE_URL + '/Admin/Kampanya';
                         }
                     }
                 }
@@ -136,17 +140,18 @@ $(document).ready(function () {
                     return false;
                 } else {
                     if (cevap.result) {
-                        console.log(cevap.result);
                         $("#kampanyabaslik").val(cevap.result.Baslik);
                         $("#baslamatarihi").val(cevap.result.BsTarih);
                         $("#bitistarihi").val(cevap.result.BtTarih);
                         $("#indirimyuzde").val(cevap.result.Yuzde);
                         CKEDITOR.instances['kampanyayazi'].setData(cevap.result.Yazi);
-                        $("#kategoriler").select2("val", 0);
+                        var katstr = cevap.result.Kategori.split(",");
+                        $("#kategoriler").select2("val", katstr);
                         $("#aktiflik").select2("val", cevap.result.Aktif);
                         $("#kampanyaustbaslik").text(cevap.result.Baslik);
                         $("input[name=duzenleme]").val(1);
                         $("input[name=duzenlemeID]").val(cevap.result.ID);
+                        $("input[name=eskikatval]").val(cevap.result.Kategori);
                         var kapaliacik = $("input[name=kapaliacik]").val();
                         if (kapaliacik == 0) {
                             $("#formToggleKampanya").click();

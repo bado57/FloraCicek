@@ -406,6 +406,11 @@ class Panel_Model extends Model {
         return ($this->db->insert("flora_kategori", $data));
     }
 
+    //kampanya ekleme
+    public function kampanyaEkle($data) {
+        return ($this->db->insert("flora_kampanya", $data));
+    }
+
     //üst kataegorisi olana alt kategori ekleme
     public function kategoriIsimEkle($data) {
         return ($this->db->insert("flora_kategorisim", $data));
@@ -773,7 +778,7 @@ class Panel_Model extends Model {
     }
 
     public function kampanyaDelete($gelenid) {
-        return ($this->db->delete(" flora_kampanya", "kampanya_ID=$gelenid"));
+        return ($this->db->delete("flora_kampanya", "kampanya_ID=$gelenid"));
     }
 
     public function kampanyaUrunUpdate($data, $gelenid) {
@@ -782,8 +787,16 @@ class Panel_Model extends Model {
 
     //vitrin değerler listeleme
     public function panelKampanyaListe($id) {
-        $sql = "SELECT kampanya_ID,kampanya_baslik,kampanya_yazi,kampanya_baslamatarih,kampanya_bitistarihi,kampanya_aktiflik,kampanya_indirimyuzde FROM  flora_kampanya WHERE kampanya_ID=$id";
+        $sql = "SELECT kampanya_ID,kampanya_baslik,kampanya_yazi,kampanya_baslamatarih,kampanya_bitistarihi,kampanya_aktiflik,kampanya_indirimyuzde,kampanya_kategori FROM  flora_kampanya WHERE kampanya_ID=$id";
         return $this->db->select($sql);
+    }
+
+    public function kampanyUrunUpdate($data, $array = array()) {
+        return ($this->db->update("flora_urun", $data, "urun_kategoriID IN ($array)"));
+    }
+
+    public function kampanyaUpdate($data, $gelenid) {
+        return ($this->db->update("flora_kampanya", $data, "kampanya_ID=$gelenid"));
     }
 
 }
