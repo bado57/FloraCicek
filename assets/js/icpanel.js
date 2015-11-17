@@ -574,13 +574,6 @@ $(document).ready(function () {
                             $("#yeniurun").prop('checked', false);
                             $("#yeniurun").parent().removeClass("checked");
                         }
-                        if (cevap.result[1].Ek == 1) {
-                            $("#ekurun").prop('checked', true);
-                            $("#ekurun").parent().addClass("checked");
-                        } else {
-                            $("#ekurun").prop('checked', false);
-                            $("#ekurun").parent().removeClass("checked");
-                        }
                         if (cevap.result[1].Resim) {
                             $("#image-holder").empty();
                             $("#image-holder").prepend('<img id="theImg" src="' + SITE_URL + '/products/' + cevap.result[1].Resim + '" class="thumb-image img-responsive urunresim" style="width:auto; max - width:100 % ; heaight:auto; max - height:100 % ; "/>');
