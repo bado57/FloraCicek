@@ -16,7 +16,7 @@
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
                 <a href="#">
-                    <div class="small-box bg-aqua">
+                    <div class="small-box bg-red">
                         <div class="inner">
                             <h3><?php echo $model[2]; ?></h3>
                             <p>Yeni Sipariş</p>
@@ -33,8 +33,8 @@
                 <a href="#">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
-                            <p>Mail Dönüşü</p>
+                            <h3>265<sup style="font-size: 20px">TL</sup></h3>
+                            <p>Aylık Satış</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -48,11 +48,11 @@
                 <a href="#">
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3><?php echo $model[0]; ?></h3>
-                            <p>Yeni Bireysel Üye</p>
+                            <h3>3</h3>
+                            <p>Aktif Kampanya</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-person-add"></i>
+                            <i class="fa fa-gift"></i>
                         </div>
                         <div class="small-box-footer">Detaylar <i class="fa fa-arrow-circle-right"></i></div>
                     </div>
@@ -61,13 +61,13 @@
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
                 <a href="#">
-                    <div class="small-box bg-red">
+                    <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3><?php echo $model[1]; ?></h3>
-                            <p>Yeni Kurumsal Üye</p>
+                            <h3>70<sup style="font-size: 20px">%</sup></h3>
+                            <p>Mail Dönüşü</p>
                         </div>
                         <div class="icon">
-                            <i class="fa fa-briefcase"></i>
+                            <i class="fa fa-refresh"></i>
                         </div>
                         <div class="small-box-footer">Detaylar <i class="fa fa-arrow-circle-right"></i></div>
                     </div>

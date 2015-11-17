@@ -124,10 +124,11 @@
                                                     <option value="5">Yapı Kredi</option>
                                                 </select>
                                                 <br />
-                                                <p>Havale ya da EFT işlemlerinizde “Hesaba Havale” seçeneğini seçiniz. Havale/EFT işlemini yaparken açıklama kısmına sipariş numaranızı belirtiniz.</p>
+                                                <p style="color:red; font-size: 16px;"><i class="fa fa-warning"></i> Uyarı</p>
+                                                <p>Havale ya da EFT işlemlerinizde “Hesaba Havale” seçeneğini seçiniz. Havale/EFT işlemini yaparken açıklama kısmına <strong class="spNo">185246</strong> olan sipariş numaranızı belirtiniz.</p>
                                                 <p>Havale işlemini ATM’den kartsız bir şekilde gerçekleştirdiyseniz, işlem sırasında size verilen referans numarasını alarak 0352 232 23 32 numaralı Çağrı Merkezini arayınız.</p>
                                                 <p>Havale ödemenizi en geç 3 gün içerisinde gerçekleştirmediğiniz takdirde, siparişiniz otomatik olarak iptal olacaktır.</p>
-                                                <p>Siparişinizi tamamlamak için “Sipariş Ver” butonuna basınız.</p>
+                                                <p>Siparişinizi tamamlamak için “Siparişi Tamamla” butonuna basınız.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -198,8 +199,9 @@
                                         <div class="login-form">
                                             <div class="form">
                                                 <p>Ortak kullanım yapılan alanlardan internete erişim sağlayıp, siparişinizi bu şekilde gerçekleştiriyorsanız telefon ile ödeme seçeneğini tercih edebilirsiniz.</p>
+                                                
+                                                <p>Siparişinizin işleme konulabilmesi için "Siparişi Tamamla" butonuna tıkladıktan sonra kredi kartı bilgilerinizi ve <strong class="spNo">185246</strong> olan sipariş numaranızı aşağıda yazılı olan telefon numarasını arayarak <b>turkiyefloracicek.com</b>'a ulaştırmanız gerekmektedir.</p>
                                                 <h2><i class="fa fa-phone-square"></i> 0352 232 23 32</h2>
-                                                <p>Siparişinizin işleme konulabilmesi için kredi kart bilgilerinizi telefonla <b>turkiyefloracicek.com</b>'a ulaştırmanız gerekmektedir.</p>
                                                 <p>
                                                     <span><input id="telSatisSoz" type="checkbox" name="telSatisSoz" style="margin-top:3px;"> <a role="button" data-toggle="modal" data-target="#satisSozlesmesi" style="color:#FE980F;"> Mesafeli satış sözleşmesini ve Teslimat Şartlarını</a> okudum, kabul ediyorum.</span>
                                                 </p>

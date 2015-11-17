@@ -45,16 +45,16 @@
                         <h2 class="title text-center">SOSYAL MEDYA</h2>
                         <ul>
                             <li>
-                                <a href="<?php echo $model[8]["face"]; ?>"><i class="fa fa-facebook"></i></a>
+                                <a href="<?php echo $model[8]["face"]; ?>" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
                             <li>
-                                <a href="<?php echo $model[8]["twit"]; ?>"><i class="fa fa-twitter"></i></a>
+                                <a href="<?php echo $model[8]["twit"]; ?>" target="_blank"><i class="fa fa-twitter"></i></a>
                             </li>
                             <li>
-                                <a href="<?php echo $model[8]["gplus"]; ?>"><i class="fa fa-google-plus"></i></a>
+                                <a href="<?php echo $model[8]["gplus"]; ?>" target="_blank"><i class="fa fa-google-plus"></i></a>
                             </li>
                             <li>
-                                <a href="<?php echo $model[8]["instag"]; ?>"><i class="fa fa-instagram"></i></a>
+                                <a href="<?php echo $model[8]["instag"]; ?>" target="_blank"><i class="fa fa-instagram"></i></a>
                             </li>
                         </ul>
                     </div>

@@ -1,8 +1,6 @@
 $(document).ready(function () {
     resizeThumbs();
-    $('.carousel').on('slid.bs.carousel', function () {
-        resizeThumbs();
-    });
+    
     $(document).on("click", "a#urunTab", function (e) {
         $("a#urunTab").each(function () {
             $(this).removeClass('active');
@@ -80,14 +78,13 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Ürün önizlemelerini boyutlandır.
+ */	
 function resizeThumbs() {
     $('.imgThumb').each(function () {
-        var width = $(this).width();
-        $(this).css("height", width);
-        var img = $(this).find('img');
-        var imgH = img.height();
-        if (imgH < width) {
-            img.css("margin-top", (width - imgH) / 2);
-        }
+        var wdth = $(this).width();
+        $(this).css("height", wdth);
+        $(this).find('img').css("min-height", wdth);
     });
 }

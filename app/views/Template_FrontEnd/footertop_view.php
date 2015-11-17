@@ -117,5 +117,6 @@
     <script type="text/javascript">
         $(document).ready(function (){
             $("[data-mask]").inputmask();
+            $(".SayfaBaslik").fitText(0.8);
         });
     </script>

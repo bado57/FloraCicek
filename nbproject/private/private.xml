@@ -3,11 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/home_view.php</file>
-            <file>file:/C:/xampp/htdocs/FloraCicek/app/language/tr.php</file>
+            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/headermiddle_view.php</file>
+            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/footertop_view.php</file>
+            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/headertop_view.php</file>
+            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/urunodeme_view.php</file>
             <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/blog_view.php</file>
             <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/blogpost_view.php</file>
             <file>file:/C:/xampp/htdocs/FloraCicek/assets/css/main.css</file>
+            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/bireysel_view.php</file>
+            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/home_view.php</file>
+            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/urundetay_view.php</file>
+            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_BackEnd/home_view.php</file>
+            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/kurumsal_view.php</file>
+            <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/urunteslimat_view.php</file>
             <file>file:/C:/xampp/htdocs/FloraCicek/app/views/Template_FrontEnd/login_view.php</file>
         </group>
     </open-files>

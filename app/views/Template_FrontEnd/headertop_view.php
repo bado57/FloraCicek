@@ -26,6 +26,7 @@
                     <script src="<?php echo SITE_JS ?>/jquery.easing.min.js" type="text/javascript"></script>
                     <script src="<?php echo SITE_JS ?>/bootstrap.min.js"></script>
                     <script src="<?php echo SITE_JS ?>/jquery.lazyload.min.js"></script>
+                    <script src="<?php echo SITE_JS ?>/jquery.fittext.js"></script>
                     <script src="<?php echo SITE_JS ?>/jquery.resizecrop-1.0.3.min.js"></script>
                     <script src="<?php echo SITE_JS ?>/jquery.scrollUp.min.js"></script>
                     <script src="<?php echo SITE_JS ?>/jquery.prettyPhoto.js"></script>

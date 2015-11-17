@@ -24,7 +24,7 @@
                     <i class="fa fa-clock-o"></i> <span>Bekleyen Siparişler</span> <small class="label pull-right bg-red"><?php echo $model[0]; ?></small>
                 </a>
             </li>
-            <li class=" treeview">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-shopping-cart"></i> <span>Sipariş İşlemleri</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -40,7 +40,7 @@
             <li>
                 <a href="<?php echo SITE_URL; ?>/Admin/Kampanya"><i class="fa fa-gift"></i> <span>Kampanya İşlemleri</span> <small class="label pull-right bg-green">2</small></a>
             </li>
-            <li class=" treeview">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-cube"></i> <span>Ürün İşlemleri</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -50,7 +50,7 @@
                     <li><a href="<?php echo SITE_URL; ?>/Admin/Urun"><i class="fa fa-circle-o"></i> Ürünler</a></li>
                 </ul>
             </li>
-            <li class=" treeview">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-user"></i> <span>Üye İşlemleri</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -59,18 +59,17 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i> Bireysel Üyeler</a></li>
                 </ul>
             </li>
-            <li class=" treeview">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-envelope"></i> <span>Mail İşlemleri</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Yeni Mail Oluştur</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Mail Şablonları</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Kurumsal Mail Havuzu</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Bireysel Mail Havuzu</a></li>
                 </ul>
             </li>
-            <li class=" treeview">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-desktop"></i> <span>Site İşlemleri</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -88,5 +87,16 @@
             </li>
         </ul>
     </section>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var url = window.location.href;
+            $(".sidebar-menu").find("li.active").removeClass("active");
+            var link = $(".sidebar-menu").find('[href="'+url+'"]');
+            if (link.parent().parent().hasClass("treeview-menu")) {
+                link.parent().parent().parent().addClass("active");  
+            }
+            link.parent().addClass("active");
+        });
+    </script>
     <!-- /.sidebar -->
 </aside><!-- /SOL MENÜ -->
