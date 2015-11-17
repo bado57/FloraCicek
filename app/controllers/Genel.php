@@ -1283,10 +1283,6 @@ class Genel extends Controller {
                     unset($_SESSION['KurVergiNo']);
                     unset($_SESSION['KurVerDaire']);
                     unset($_SESSION['KurFAdres']);
-                    unset($_SESSION['Class']);
-                    unset($_SESSION['Kategori']);
-                    unset($_SESSION['ID']);
-                    unset($_SESSION['Method']);
                     Session::destroy();
                     $sonuc["result"] = 1;
                     break;
