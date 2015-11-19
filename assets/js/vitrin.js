@@ -718,7 +718,7 @@ $(document).ready(function () {
             var ID = $("input[name=duzenlemeID]").val();
             var sayfaTuru = $("#sayfaturu").val();
             var sayfaAdi = $("#sayfaadi").val();
-            var normalSayfaAdi = $("#sayfaustbaslik").text(sayfaAdi);
+            var normalSayfaAdi = $("#sayfaustbaslik").text();
             var sira = $("#sira").val();
             var normalSira = $("input[name=normalSira]").val();
             var durum = $("#aktiflik").val();

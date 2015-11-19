@@ -1190,6 +1190,39 @@ class Form {
         }
     }
 
+    //smtp backup önderme işlemi
+    function backupDatabase($file) {
+        require "Plugins/PHPMailer/PHPMailerAutoload.php";
+        $mail = new PHPMailer;
+        //$mail->SMTPDebug = 2;                               // Enable verbose debug output
+
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->SMTPAuth = true;         // Enable SMTP authentication
+
+        $mail->Host = 'ns1.turkiyefloracicek.com';  // Specify main and backup SMTP servers
+        $mail->Username = 'noreply@turkiyefloracicek.com';                 // SMTP username
+        $mail->Password = '478965Flora';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to(ssl ise port 465)
+        date_default_timezone_set('Europe/Istanbul');
+        $mail->setFrom('noreply@turkiyefloracicek.com', 'Flora Database Yedek');
+        $mail->addAddress('bayramaltnsk032038@gmail.com', 'Flora Sql/' . date('d.m.Y H:i:s'));     // Add a recipient
+        $mail->addAttachment($file);
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->AddEmbeddedImage("vitrin/logo.png", "logo", "vitrin/logo.png");
+        $mail->Subject = 'Türkiye Flora Çiçek - Flora Database Yedek';
+        $mail->Body = 'Geri dönmek için aşağıdaki linke tıklayınız.'
+                . '<br/><br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>'
+                . '<br/><br/><br/><img src="cid:logo" alt="Türkiye Flora Çiçek" >';
+
+        if (!$mail->send()) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
 }
 
 ?>
