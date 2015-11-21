@@ -1114,6 +1114,82 @@ class Form {
         return $array;
     }
 
+    //smtp ile tekli mail controlü yapma
+    function mailControl1($validemail) {
+        require_once('smtp_validateEmail.class.php');
+        // sorgu atacak email. //noreply@floracicek.com
+        $sender = 'noreply@turkiyefloracicek.com';
+
+        $SMTP_Validator = new SMTP_validateEmail();
+        $SMTP_Validator->debug = true;
+        // valdiation
+        $results = $SMTP_Validator->validate(array($validemail), $sender);
+        // sonuç
+        //echo $email . ' is ' . ($results[$email] ? 'valid' : 'invalid') . "\n";
+        // send email? 
+        if ($results[$validemail]) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    //smtp ile ikili mail controlü yapma
+    function mailControl2($validemail) {
+        require_once('smtp_validateEmail.class.php');
+
+        // doğrulanacak email
+        $emails = array('user@example.com', 'user2@example.com');
+        // sorgu atacak email. //noreply@floracicek.com
+        $sender = 'noreply@turkiyefloracicek.com';
+
+        $SMTP_Validator = new SMTP_validateEmail();
+        $SMTP_Validator->debug = true;
+        // valdiation
+        $results = $SMTP_Validator->validate(array($emails), $sender);
+        // sonuç
+        foreach ($results as $email => $result) {
+            // send email? 
+            if ($result) {
+                //mail($email, 'Confirm Email', 'Please reply to this email to confirm', 'From:'.$sender."\r\n"); // send email
+            } else {
+                echo 'The email address ' . $email . ' is not valid';
+            }
+        }
+    }
+
+    //smtp ile mail gönderme işlemi
+    function sHatirlatMailGonder($email, $isim, $sifre) {
+        require "Plugins/PHPMailer/PHPMailerAutoload.php";
+        $mail = new PHPMailer;
+
+        //$mail->SMTPDebug = 2;                               // Enable verbose debug output
+
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->SMTPAuth = true;         // Enable SMTP authentication
+
+        $mail->Host = 'ns1.turkiyefloracicek.com';  // Specify main and backup SMTP servers
+        $mail->Username = 'noreply@turkiyefloracicek.com';                 // SMTP username
+        $mail->Password = '478965Flora';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to(ssl ise port 465)
+
+        $mail->setFrom('noreply@turkiyefloracicek.com', 'Şifre Hatırlatma');
+        $mail->addAddress($email, $isim);     // Add a recipient
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(true);                                  // Set email format to HTML
+
+        $mail->Subject = 'Türkiye Flora Çiçek - Şifre Hatırlatma';
+        $mail->Body = 'Merhaba ' . $isim . '!<br/>Şifreniz=' . $sifre . ' Geri dönmek için aşağıdaki linke tıklayınız.'
+                . '<br/><br/><a href="https://www.turkiyefloracicek.com/Home/login">Türkiye Flora Çiçek</a>';
+
+        if (!$mail->send()) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
 }
 
 ?>

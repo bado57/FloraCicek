@@ -9,12 +9,14 @@ $(document).ready(function () {
             dataType: "json",
             data: {"ID": ID, "tip": "siparisDuzenlemeDegerler"},
             success: function (cevap) {
+                
                 if (cevap.hata) {
                     reset();
                     alertify.alert(cevap.hata);
                     return false;
                 } else {
                     if (cevap.result) {
+                        
                         $("#siparisbilgileri").show();
                         $("#urunbilgileri").show();
                         $("#müsteribilgileri").show();
@@ -22,15 +24,18 @@ $(document).ready(function () {
                         $("#teslimatbilgileri").show();
                         var durum = $("#" + ID).attr("data-durum");
                         $("#siparisdurum").select2("val", durum);
-                        $("#sipno").text(cevap.result[0].No);
-                        $("#siptarih").text(cevap.result[0].Tarih);
-                        $("#siptutar").text(cevap.result[0].TTutar);
+                        
+                        ////// Bilgiler
+                        
+                        $(".sipno").text(cevap.result[0].No);
+                        $(".siptarih").text(cevap.result[0].Tarih);
+                        $(".siptutar").text(cevap.result[0].TTutar);
                         if (cevap.result[0].OdeTip == 0) {
-                            $("#sipOdeme").text("Kart İle Ödeme");
+                            $(".sipOdeme").text("Kart İle Ödeme");
                         } else if (cevap.result[0].OdeTip == 1) {
-                            $("#sipOdeme").text("Banka Havalesi");
+                            $(".sipOdeme").text("Banka Havalesi");
                         } else {
-                            $("#sipOdeme").text("Telefon İle Ödeme");
+                            $(".sipOdeme").text("Telefon İle Ödeme");
                         }
 
                         if (cevap.result[1]) {
@@ -41,43 +46,62 @@ $(document).ready(function () {
                                         + "<td id='urunbirimfiyat'>" + cevap.result[1][i].SUTtar + "</td>"
                                         + "<td id='urunmiktar'>" + cevap.result[1][i].SUMiktar + "</td>"
                                         + "<td id='uruntutar'>" + cevap.result[1][i].SUTplmTutar + " TL</td></tr>");
+                                
+                                $("#urunSipPrint").append('<div style="margin-left: 0.2cm; position: relative; display: inline-block; width: 47%; height: 3.5cm; margin-bottom: 0.2 cm; margin-top: 0.2cm; border:1px solid #e6e6e6; padding: 0.1cm;">'
+                                        +'<img src="https://www.turkiyefloracicek.com/products/'+ cevap.result[1][i].SUResim +'" style="max-width: 40%; max-height: 3.5cm; margin: :0cm; position: relative; display: inline-block; vertical-align: top !important" />'
+                                        +'<font style="font-size: 9pt; position: relative; display: inline-block; width: 58%; margin-left: 0.2cm; line-height: 14pt;">'
+                                                        +'<b>Ürün Kodu :</b> '+ cevap.result[1][i].SUKod +' <br/>'
+                                                        +'<b>Ürün Adı :</b> '+ cevap.result[1][i].SUAd +' <br/>'
+                                                        +'<b>Birim Fiyat :</b> '+ cevap.result[1][i].SUTtar +' TL <br/>'
+                                                        +'<b>Adet :</b> '+ cevap.result[1][i].SUMiktar +' <br/>'
+                                                        +'<b>Toplam Tutar :</b> '+ cevap.result[1][i].SUTplmTutar +' TL <br/>'
+                                                        +'</font>'
+                                                    +'</div>');
+                                
                             }
-                            $("#uruntoplamtutar").text(cevap.result[1][i - 1].Toplam);
+                            $(".uruntoplamtutar").text(cevap.result[1][i - 1].Toplam);
                         }
 
 
-                        $("#gndad").text(cevap.result[0].GAd);
-                        $("#gndtel").text(cevap.result[0].GTel);
-                        $("#gndmail").text(cevap.result[0].GMail);
+                        $(".gndad").text(cevap.result[0].GAd);
+                        $(".gndtel").text(cevap.result[0].GTel);
+                        $(".gndmail").text(cevap.result[0].GMail);
+                        
                         if (cevap.result[0].GUDurum == 0) {
-                            $("#gndtip").text("Bireysel Üye");
+                            $(".gndtip").html('<i class="fa fa-user"></i> Bireysel Üye');
                         } else if (cevap.result[0].GUDurum == 1) {
-                            $("#gndtip").text("Admin");
+                            $(".gndtip").html('<i class="fa fa-admin"></i> Admin');
                         } else if (cevap.result[0].GUDurum == 2) {
-                            $("#gndtip").text("Kurumsal Üye");
+                            $(".gndtip").html('<i class="fa fa-briefcase"></i>  Kurumsal Üye');
                         } else if (cevap.result[0].GUDurum == 3) {
-                            $("#gndtip").text("Normal Kullanci");
+                            $(".gndtip").html('<i class="fa fa-shopping-cart"></i>  Üye Değil');
                         }
 
-                        $("#ftrunvn").text(cevap.result[0].FUnvan);
-                        $("#ftrtc").text(cevap.result[0].FTcNo);
-                        $("#ftrvdaire").text(cevap.result[0].FVDaire);
-                        $("#ftrvno").text(cevap.result[0].FVNo);
-                        $("#ftradres").text(cevap.result[0].FAdres);
-                        $("#aliciad").text(cevap.result[0].AAd);
-                        $("#alicitel").text(cevap.result[0].ATel);
-                        $("#tslmttarih").text(cevap.result[0].SGonTar);
-                        $("#tslimtyer").text(cevap.result[0].SGitYer);
-                        $("#tslimtadres").text(cevap.result[0].SGAdres);
-                        $("#tslmtadrestrf").text(cevap.result[0].SGAdresTrf);
-                        $("#tslmtnot").text(cevap.result[0].SNot);
-                        $("#tslmtkartmsj").text(cevap.result[0].SKartMsj);
-                        $("#tslmtkartisim").text(cevap.result[0].SKartIsim);
+                        $(".ftrunvn").text(cevap.result[0].FUnvan);
+                        $(".ftrtc").text(cevap.result[0].FTcNo);
+                        $(".ftrvdaire").text(cevap.result[0].FVDaire);
+                        $(".ftrvno").text(cevap.result[0].FVNo);
+                        $(".ftradres").text(cevap.result[0].FAdres);
+                        $(".aliciad").text(cevap.result[0].AAd);
+                        $(".alicitel").text(cevap.result[0].ATel);
+                        $(".tslmttarih").text(cevap.result[0].SGonTar);
+                        $(".tslmsaat").text(cevap.result[0].SGonSaat);
+                        $(".tslimtyer").text(cevap.result[0].SGitYer);
+                        $(".tslimtadres").text(cevap.result[0].SGAdres);
+                        $(".tslmtadrestrf").text(cevap.result[0].SGAdresTrf);
+                        $(".tslmtnot").text(cevap.result[0].SNot);
+                        $(".tslmtkartmsj").text(cevap.result[0].SKartMsj);
+                        $(".tslmtkartisim").text(cevap.result[0].SKartIsim);
+                        
                         if (cevap.result[0].SIsimGstr == 1) {
-                            $("#tslmtisimgrnme").text("Görünsün");
+                            $(".tslmtisimgrnme").text("Görünsün");
                         } else {
-                            $("#tslmtisimgrnme").text("Görünmesin");
+                            $(".tslmtisimgrnme").text("Görünmesin");
                         }
+                        
+                        $(".spPrintFooter").text(cevap.result[0].GAd + " " + cevap.result[0].Tarih + " " + cevap.result[0].No + " no'lu sipariş detayları.");
+                        $(".spTotalFooter").text("Tpolam Tutar : " + cevap.result[0].TTutar + " TL");
+                        ///// ----- Bilgiler
                         $("#tslmtgndndn").text(cevap.result[0].SGndNdn);
                         $("#siparisustbaslik").text(cevap.result[0].No);
                         $("input[name=duzenleme]").val(1);
@@ -91,6 +115,7 @@ $(document).ready(function () {
             }
         });
     });
+    
     $(document).on('click', 'button#formToggleSiparis', function (e) {
         var kapaliacik = $("input[name=kapaliacik]").val();
         var duzenleme = $("input[name=duzenleme]").val();
@@ -107,6 +132,7 @@ $(document).ready(function () {
                 $("#siparisaciklama").val("");
                 $("#siparisdurum").select2("val", -1);
                 $("#siparisustbaslik").text("Yeni");
+                $("#urunSip").empty();
             }
         } else {
             $("input[name=duzenleme]").val(0);
@@ -120,6 +146,7 @@ $(document).ready(function () {
             $("#siparisaciklama").val("");
             $("#siparisdurum").select2("val", -1);
             $("#siparisustbaslik").text("Yeni");
+            $("#urunSip").empty();
         }
     });
     $(document).on('click', 'input#sipariskaydet', function (e) {

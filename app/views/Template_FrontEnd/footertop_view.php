@@ -93,12 +93,14 @@
                 </div>
                 <div class="col-sm-3 col-sm-offset-1">
                     <div class="single-widget">
-                        <h2>E-Bülten</h2>
-                        <form action="#" class="searchform">
-                            <input type="email" required placeholder="E-mail adresiniz" />
-                            <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
-                            <p>E-mail adresinizle üye olun,<br />kampanya ve indirimlerden yararlanın! </p>
-                        </form>
+                        <?php if (Session::get("EBulten") <= 0) { ?>
+                            <h2 id="h2ebulten">E-Bülten</h2>
+                            <div class="searchform" id="divebulten">
+                                <input id="inputebulten" type="email" required placeholder="E-mail adresiniz" />
+                                <button id="btnebulten" type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+                                <p>E-mail adresinizle üye olun,<br />kampanya ve indirimlerden yararlanın! </p>
+                            </div>
+                        <?php } ?>
                         <div class="social-icons">
                             <ul class="nav navbar-nav">
                                 <li><a href="<?php echo $model[8]["face"]; ?>" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -109,13 +111,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    
+
     <script type="text/javascript">
-        $(document).ready(function (){
+        $(document).ready(function () {
             $("[data-mask]").inputmask();
             $(".SayfaBaslik").fitText(0.8);
         });

@@ -68,11 +68,9 @@ class AdminKampanya extends Controller {
                     break;
 
                 case "kargoEkle":
-                    $form->post("ad", true);
-                    $form->post("aciklama", true);
                     $form->post("aktiflik", true);
-                    $ad = $form->values['ad'];
-                    $aciklama = $form->values['aciklama'];
+                    $ad = $_POST['ad'];
+                    $aciklama = $_POST['aciklama'];
                     $aktiflik = $form->values['aktiflik'];
 
                     if ($ad == "") {
@@ -97,12 +95,10 @@ class AdminKampanya extends Controller {
 
                 case "kargoDuzenle":
                     $form->post("ID", true);
-                    $form->post("ad", true);
-                    $form->post("aciklama", true);
                     $form->post("aktiflik", true);
                     $ID = $form->values['ID'];
-                    $ad = $form->values['ad'];
-                    $aciklama = $form->values['aciklama'];
+                    $ad = $_POST['ad'];
+                    $aciklama = $_POST['aciklama'];
                     $aktiflik = $form->values['aktiflik'];
 
                     if ($ad == "") {

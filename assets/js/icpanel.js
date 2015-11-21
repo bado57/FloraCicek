@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    yardir();
+    
     //table düzenle butonları
     $(document).on('click', 'a#KatDuzenle', function (e) {
         var ustID = $(this).parent().parent().attr('data-ust');
@@ -309,7 +309,7 @@ $(document).ready(function () {
             var durum = $("#aktiflik").val();
             var sira = $("#sira").val();
             formData.append('file', $("#urunresim")[0].files[0]);
-            var urunYazi = $("#urunyazisi").val();
+            var urunYazi = CKEDITOR.instances['urunyazisi'].getData();
             if (urunKatVal != 0) {//burada o kategori ile ilgili son ürünün sırasına bakılacak
                 var trlength = $("#urunTbodyTable tr").length;
                 var maxSira = 0;
@@ -415,7 +415,7 @@ $(document).ready(function () {
             formData.append('resimKontrol', imageKontrol);
             formData.append('newImage', newimage);
             formData.append('normalSira', normalSira);
-            var urunYazi = $("#urunyazisi").val();
+            var urunYazi = CKEDITOR.instances['urunyazisi'].getData();
             if (normalSira != sira) {
                 if (urunKatVal != 0) {//burada o kategori ile ilgili son ürünün sırasına bakılacak
                     var trlength = $("#urunTbodyTable tr").length;
@@ -549,10 +549,10 @@ $(document).ready(function () {
                         $("#urunadi").val(cevap.result[1].Adi);
                         $("#urunkodu").val(cevap.result[1].Kod);
                         $("#urunkategori").select2("val", cevap.result[1].KatID);
-                        $("#urunfiyat").val(cevap.result[1].NFiyat);
+                        $("#urunfiyat").val(cevap.result[1].Fiyat);
                         $("#aktiflik").select2("val", cevap.result[1].Aktif);
                         $("#sira").val(cevap.result[1].Sira);
-                        $("#urunyazisi").val(cevap.result[1].Aciklama);
+                        CKEDITOR.instances['urunyazisi'].setData(cevap.result[1].Aciklama);
                         if (cevap.result[1].HaftaUrun == 1) {
                             $("#haftaninurunu").prop('checked', true);
                             $("#haftaninurunu").parent().addClass("checked");
@@ -772,8 +772,9 @@ $(document).ready(function () {
         }
 
     });
-});
-function yardir() {
+    
+    // Genel İşlemler
+    
     $(".select2").select2();
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
@@ -825,4 +826,20 @@ function yardir() {
         image_holder.empty();
         $("#formToggleEtiket").click();
     });
-}
+    
+    $(".printBtn").on("click", function(){
+        var divContents = $($(this).attr("data-print-target")).html();
+        var title = $(this).attr("data-print-title")
+        var printWindow = window.open('', '', '');
+            printWindow.document.write('<html><head><title>www.turkiyefloracicek.com - '+title+' </title>');
+            printWindow.document.write('</head><body style="font-family:Arial;" >');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+    });
+    
+    
+    
+    
+});

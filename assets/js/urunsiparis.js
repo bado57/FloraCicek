@@ -71,7 +71,6 @@ $(document).ready(function () {
         });
     });
     $(document).on("click", "button#btnGiris", function (e) {
-        alert("deneme");
         var email = $("#girisemail").val();
         var sifre = $("#girissifre").val();
         $.ajax({

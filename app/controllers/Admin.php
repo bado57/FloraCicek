@@ -330,6 +330,7 @@ class Admin extends Controller {
             $iceriklist[$i]['Twit'] = $icerikListee['sbt_twit'];
             $iceriklist[$i]['Instagram'] = $icerikListee['sbt_instag'];
             $iceriklist[$i]['GPlus'] = $icerikListee['sbt_gplus'];
+            $iceriklist[$i]['Logo'] = $icerikListee['sbt_logo'];
             $i++;
         }
 
@@ -746,6 +747,48 @@ class Admin extends Controller {
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger, $siparisCount);
         $this->load->view("Template_BackEnd/ililce", $languagedeger, $ililcedizi);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
+    
+    function Kurumsaluye() {
+        //model bağlantısı
+        $Panel_Model = $this->load->model("Panel_Model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();
+
+        
+
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger);
+        $this->load->view("Template_BackEnd/kurumsaluye", $languagedeger);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
+    
+    function Bireyseluye() {
+        //model bağlantısı
+        $Panel_Model = $this->load->model("Panel_Model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();
+
+        
+
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger);
+        $this->load->view("Template_BackEnd/bireyseluye", $languagedeger);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
+    
+    function Siparismail() {
+        //model bağlantısı
+        $Panel_Model = $this->load->model("Panel_Model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();
+
+        
+
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger);
+        $this->load->view("Template_BackEnd/siparismailsablon", $languagedeger);
         $this->load->view("Template_BackEnd/footer", $languagedeger);
     }
 

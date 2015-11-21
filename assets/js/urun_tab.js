@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    resizeThumbs();
-    
     $(document).on("click", "a#urunTab", function (e) {
         $("a#urunTab").each(function () {
             $(this).removeClass('active');
@@ -50,7 +48,6 @@ $(document).ready(function () {
                                     + "</div></div></div></div>");
                         }
                     }
-                    resizeThumbs();
                     $("#tabs-container").removeClass('loading');
                     $("#tabs-container").fadeIn('fast');
                 }
@@ -76,15 +73,28 @@ $(document).ready(function () {
             }
         });
     });
-});
 
-/**
- * Ürün önizlemelerini boyutlandır.
- */	
-function resizeThumbs() {
-    $('.imgThumb').each(function () {
-        var wdth = $(this).width();
-        $(this).css("height", wdth);
-        $(this).find('img').css("min-height", wdth);
+    $(document).on("click", "#btnebulten", function (e) {
+        var email = $("#inputebulten").val();
+        $.ajax({
+            type: "post",
+            url: SITE_URL + "/Genel/ajaxCall",
+            cache: false,
+            dataType: "json",
+            data: {"email": email, "tip": "ebulten"},
+            success: function (cevap) {
+                if (cevap.hata) {
+                    reset();
+                    alertify.alert(cevap.hata);
+                    return false;
+                } else {
+                    $("#h2ebulten").hide();
+                    $("#divebulten").hide();
+                    reset();
+                    alertify.alert(cevap.result);
+                    return false;
+                }
+            }
+        });
     });
-}
+});

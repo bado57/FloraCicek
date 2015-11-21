@@ -55,8 +55,8 @@
                     <i class="fa fa-user"></i> <span>Üye İşlemleri</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Kurumsal Üyeler</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Bireysel Üyeler</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/Admin/Kurumsaluye"><i class="fa fa-circle-o"></i> Kurumsal Üyeler</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>/Admin/Bireyseluye"><i class="fa fa-circle-o"></i> Bireysel Üyeler</a></li>
                 </ul>
             </li>
             <li class="treeview">

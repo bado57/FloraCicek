@@ -19,15 +19,19 @@ class PagerLoad extends Controller {
         if ($gelenurl == "ek-urunler") {
             $this->ekurun();
         } else if ($url[0] == "sayfa") {
-            $newurl = ltrim($gelenurl, "sayfa-");
+            $newurl = substr($gelenurl, 6);
             $this->pager($newurl);
         } else if ($url[0] == "blog") {
             if (isset($url[1])) {
-                $newurl = ltrim($gelenurl, "blog-");
+                $newurl = substr($gelenurl, 5);
                 $this->blogPage($newurl);
             } else {
                 $this->blog();
             }
+        } else if ($gelenurl == "kampanyali-urunler") {
+            $this->kampanyaliurun();
+        } else if ($gelenurl == "coksatan-urunler") {
+            $this->coksatan();
         } else {
             if (ereg("[0-9]", $url[$count - 1])) {//sayı varsa son halinde üründür, ürün kodundan
                 $kod = $url[$count - 1];
@@ -420,6 +424,7 @@ class PagerLoad extends Controller {
             $iceriklist['twit'] = $icerikListe['sbt_twit'];
             $iceriklist['instag'] = $icerikListe['sbt_instag'];
             $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
         }
         $homedizi[8] = $iceriklist;
 
@@ -583,6 +588,7 @@ class PagerLoad extends Controller {
             $iceriklist['twit'] = $icerikListe['sbt_twit'];
             $iceriklist['instag'] = $icerikListe['sbt_instag'];
             $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
         }
         $homedizi[8] = $iceriklist;
 
@@ -768,13 +774,377 @@ class PagerLoad extends Controller {
             $iceriklist['twit'] = $icerikListe['sbt_twit'];
             $iceriklist['instag'] = $icerikListe['sbt_instag'];
             $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
         }
         $homedizi[8] = $iceriklist; //etiket listesi
 
         $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
-        $this->load->view("Template_FrontEnd/headermiddle", $languagedeger);
+        $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/ekurunhome", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/footertop", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
+    }
+
+    function kampanyaliurun() {
+        //Tüm Sessionlar iptal edilmekte
+        $homedizi = array();
+        $form = $this->load->otherClasses('Form');
+        //model bağlantısı
+        $Panel_Model = $this->load->model("Panel_Model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();
+
+        //etiketleri listeleme
+        $etiketListe = $Panel_Model->etiketlistele();
+        $a = 0;
+        foreach ($etiketListe as $etiketListee) {
+            $etiketlist[$a]['etiketID'] = $etiketListee['etiket_id'];
+            $etiketlist[$a]['etiketAd'] = $etiketListee['etiket_adi'];
+            $etiketlist[$a]['etiketUrl'] = $etiketListee['etiket_benzad'];
+            $a++;
+        }
+        $homedizi[0] = $etiketlist; //etiket listesi
+        //kategorileri listeleme
+        $kategoriListe = $Panel_Model->kategorilistele();
+        $b = 0;
+        $c = 0;
+        foreach ($kategoriListe as $kategoriListee) {
+            if ($kategoriListee['kategori_UstID'] == 0) {//Üst Kategori Olanlar
+                $kategorilistUst[$b]['ID'] = $kategoriListee['kategori_ID'];
+                $kategorilistUst[$b]['Adi'] = $kategoriListee['kategori_Adi'];
+                $kategorilistUst[$b]['Sira'] = $kategoriListee['kategori_Sira'];
+                $b++;
+            } else {
+                $kategorilistAlt[$c]['ID'] = $kategoriListee['kategori_ID'];
+                $kategorilistAlt[$c]['Adi'] = $kategoriListee['kategori_Adi'];
+                $kategorilistAlt[$c]['Sira'] = $kategoriListee['kategori_Sira'];
+                $kategorilistAlt[$c]['UstID'] = $kategoriListee['kategori_UstID'];
+                $kategorilistAlt[$c]['Url'] = $kategoriListee['kategori_BenzAd'];
+                $c++;
+            }
+        }
+        //alt kategorileri üst kategoriye göre gruplama
+        for ($x = 0; $x < count($kategorilistUst); $x++) {
+            $t = 0;
+            for ($y = 0; $y < count($kategorilistAlt); $y++) {
+                if ($kategorilistUst[$x]['ID'] == $kategorilistAlt[$y]['UstID']) {
+                    $kategoriAltSira[$x][$t]['ID'] = $kategorilistAlt[$y]['ID'];
+                    $kategoriAltSira[$x][$t]['UstID'] = $kategorilistAlt[$y]['UstID'];
+                    $kategoriAltSira[$x][$t]['Adi'] = $kategorilistAlt[$y]['Adi'];
+                    $kategoriAltSira[$x][$t]['Url'] = $kategorilistAlt[$y]['Url'];
+                    $kategoriAltSira[$x][$t]['Sira'] = $kategorilistAlt[$y]['Sira'];
+                    $t++;
+                }
+            }
+        }
+        $homedizi[1] = $kategorilistUst; //Üst Kategori
+        $homedizi[2] = $kategoriAltSira; //Alt Kategori
+
+        $kampanyaListe = $Panel_Model->kampanyalistele();
+        $k = 0;
+        foreach ($kampanyaListe as $kampanyaListee) {
+            $kampanyalist[$k]['ID'] = $kampanyaListee['kampanya_ID'];
+            $kampanyalist[$k]['Adi'] = $kampanyaListee['kampanya_baslik'];
+            $kampanyalist[$k]['Url'] = $kampanyaListee['kampanya_benbaslik'];
+            $k++;
+        }
+        $homedizi[3] = $kampanyalist; //Kampanya Kategori
+
+        $vitrinListe = $Panel_Model->vitrinlistele();
+        $vi = 0;
+        foreach ($vitrinListe as $vitrinListee) {
+            $vitrinlist[$vi]['ID'] = $vitrinListee['vitrin_ID'];
+            $vitrinlist[$vi]['Path'] = $vitrinListee['vitrin_resimpath'];
+            $vitrinlist[$vi]['Baslik'] = $vitrinListee['vitrin_baslik'];
+            $vitrinlist[$vi]['Yazi'] = $vitrinListee['vitrin_yazi'];
+            $vitrinlist[$vi]['Url'] = $vitrinListee['vitrin_url'];
+            $vitrinlist[$vi]['AltBaslik'] = $vitrinListee['vitrin_altbaslik'];
+            $vitrinlist[$vi]['BtnYazi'] = $vitrinListee['vitrin_buttonyazi'];
+            $vi++;
+        }
+
+        $homedizi[4] = $vitrinlist; //Virin Listesi
+        //kampanyalı ürünleri listeleme
+        $kampanyaliurunListe = $Panel_Model->kampanyaliurunlistele();
+        //kampanyalı ürünlerin listesi
+        foreach ($kampanyaliurunListe as $kampanyaliurunListee) {
+            if ($kampanyaliurunListee['urun_kmpnyaid'] != 0) {//kampanyalı ürünler
+                $ekkampanyaId[] = $kampanyaliurunListee['urun_kmpnyaid'];
+            }
+        }
+        //kampanyalı ürünler için 
+        if (count($ekkampanyaId) > 0) {
+            $kampanyadizi = implode(',', $ekkampanyaId);
+            $ekkampanyalar = $Panel_Model->urunkampanyalistele($kampanyadizi, date("Y/m/d"));
+            $kmpny = 0;
+            foreach ($ekkampanyalar as $ekkampanyalarr) {
+                $urunkampanya[$kmpny]['ID'] = $ekkampanyalarr['kampanya_ID'];
+                $urunkampanya[$kmpny]['Yuzde'] = $ekkampanyalarr['kampanya_indirimyuzde'];
+                $kmpny++;
+            }
+        }
+
+        $uk = 0;
+        foreach ($kampanyaliurunListe as $kampanyaliurunListee) {
+            for ($ku = 0; $ku < count($urunkampanya); $ku++) {
+                if ($urunkampanya[$ku]['ID'] == $kampanyaliurunListee['urun_kmpnyaid']) {
+                    $kampanyaurunlist[0][$uk]['KmpnyaID'] = $kampanyaliurunListee['urun_ID'];
+                    $kampanyaurunlist[0][$uk]['KmpnyaKod'] = $kampanyaliurunListee['urun_kodu'];
+                    $kampanyaurunlist[0][$uk]['NormalEkFiyat'] = $kampanyaliurunListee['urun_fiyat'];
+                    $kampanyaurunlist[0][$uk]['KmpnyaFiyat'] = round($kampanyaliurunListee['urun_fiyat'] - (($kampanyaliurunListee['urun_fiyat'] * $urunkampanya[$ku]['Yuzde']) / 100));
+                    $kampanyaurunlist[0][$uk]['KmpnyaAdi'] = $kampanyaliurunListee['urun_adi'];
+                    $kampanyaurunlist[0][$uk]['KmpnyaKmpID'] = $urunkampanya[$ku]['ID'];
+                    $kampanyaurunlist[0][$uk]['KmpnyaResim'] = $kampanyaliurunListee['urun_anaresim'];
+                    $kampanyaurunlist[0][$uk]['KmpnyaUrl'] = $kampanyaliurunListee['urun_benzad'] . "-" . $kampanyaliurunListee['urun_benzersizkod'];
+                }
+            }
+            $uk++;
+        }
+
+        $homedizi[5] = $kampanyaurunlist; //ürün Listesi
+        //Footer Dinamik Bilgiler
+        //kategorileri listeleme
+        $fotkategoriListe = $Panel_Model->footerkategorilistele();
+        $fb = 0;
+        $fc = 0;
+        foreach ($fotkategoriListe as $fotkategoriListee) {
+            if ($fotkategoriListee['sayfa_UstID'] == 0) {//Footer Üst Kategori Olanlar
+                $fotkategorilistUst[$fb]['ID'] = $fotkategoriListee['sabitsayfaid'];
+                $fotkategorilistUst[$fb]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
+                $fotkategorilistUst[$fb]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
+                $fotkategorilistUst[$fb]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                $fb++;
+            } else {
+                $fotkategorilistAlt[$fc]['ID'] = $fotkategoriListee['sabitsayfaid'];
+                $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
+                $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
+                $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
+                $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                $fc++;
+            }
+        }
+
+        //alt kategorileri üst kategoriye göre gruplama
+        for ($x = 0; $x < count($fotkategorilistUst); $x++) {
+            $t = 0;
+            for ($y = 0; $y < count($fotkategorilistAlt); $y++) {
+                if ($fotkategorilistUst[$x]['ID'] == $fotkategorilistAlt[$y]['UstID']) {
+                    $fotkategoriAltSira[$x][$t]['ID'] = $fotkategorilistAlt[$y]['ID'];
+                    $fotkategoriAltSira[$x][$t]['UstID'] = $fotkategorilistAlt[$y]['UstID'];
+                    $fotkategoriAltSira[$x][$t]['Adi'] = $fotkategorilistAlt[$y]['Adi'];
+                    $fotkategoriAltSira[$x][$t]['Url'] = $fotkategorilistAlt[$y]['Url'];
+                    $fotkategoriAltSira[$x][$t]['Sira'] = $fotkategorilistAlt[$y]['Sira'];
+                    $t++;
+                }
+            }
+        }
+
+        $homedizi[6] = $fotkategorilistUst; //Footer Üst Kategori Listesi
+        $homedizi[7] = $fotkategoriAltSira; //Footer Alt Kategori Listesi
+        //sabit içerikleri listeleme
+        $icerikListe = $Panel_Model->sabiticeriklistele();
+        foreach ($icerikListe as $icerikListe) {
+            $iceriklist['telefon'] = $icerikListe['sbt_telefon'];
+            $iceriklist['mail'] = $icerikListe['sbt_iletisimmail'];
+            $iceriklist['face'] = $icerikListe['sbt_face'];
+            $iceriklist['twit'] = $icerikListe['sbt_twit'];
+            $iceriklist['instag'] = $icerikListe['sbt_instag'];
+            $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
+        }
+        $homedizi[8] = $iceriklist; //etiket listesi
+
+        $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/kampanyaliurun", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/footertop", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
+    }
+
+    function coksatan() {
+        //Tüm Sessionlar iptal edilmekte
+        $homedizi = array();
+        $form = $this->load->otherClasses('Form');
+        //model bağlantısı
+        $Panel_Model = $this->load->model("Panel_Model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();
+
+        //etiketleri listeleme
+        $etiketListe = $Panel_Model->etiketlistele();
+        $a = 0;
+        foreach ($etiketListe as $etiketListee) {
+            $etiketlist[$a]['etiketID'] = $etiketListee['etiket_id'];
+            $etiketlist[$a]['etiketAd'] = $etiketListee['etiket_adi'];
+            $etiketlist[$a]['etiketUrl'] = $etiketListee['etiket_benzad'];
+            $a++;
+        }
+        $homedizi[0] = $etiketlist; //etiket listesi
+        //kategorileri listeleme
+        $kategoriListe = $Panel_Model->kategorilistele();
+        $b = 0;
+        $c = 0;
+        foreach ($kategoriListe as $kategoriListee) {
+            if ($kategoriListee['kategori_UstID'] == 0) {//Üst Kategori Olanlar
+                $kategorilistUst[$b]['ID'] = $kategoriListee['kategori_ID'];
+                $kategorilistUst[$b]['Adi'] = $kategoriListee['kategori_Adi'];
+                $kategorilistUst[$b]['Sira'] = $kategoriListee['kategori_Sira'];
+                $b++;
+            } else {
+                $kategorilistAlt[$c]['ID'] = $kategoriListee['kategori_ID'];
+                $kategorilistAlt[$c]['Adi'] = $kategoriListee['kategori_Adi'];
+                $kategorilistAlt[$c]['Sira'] = $kategoriListee['kategori_Sira'];
+                $kategorilistAlt[$c]['UstID'] = $kategoriListee['kategori_UstID'];
+                $kategorilistAlt[$c]['Url'] = $kategoriListee['kategori_BenzAd'];
+                $c++;
+            }
+        }
+        //alt kategorileri üst kategoriye göre gruplama
+        for ($x = 0; $x < count($kategorilistUst); $x++) {
+            $t = 0;
+            for ($y = 0; $y < count($kategorilistAlt); $y++) {
+                if ($kategorilistUst[$x]['ID'] == $kategorilistAlt[$y]['UstID']) {
+                    $kategoriAltSira[$x][$t]['ID'] = $kategorilistAlt[$y]['ID'];
+                    $kategoriAltSira[$x][$t]['UstID'] = $kategorilistAlt[$y]['UstID'];
+                    $kategoriAltSira[$x][$t]['Adi'] = $kategorilistAlt[$y]['Adi'];
+                    $kategoriAltSira[$x][$t]['Url'] = $kategorilistAlt[$y]['Url'];
+                    $kategoriAltSira[$x][$t]['Sira'] = $kategorilistAlt[$y]['Sira'];
+                    $t++;
+                }
+            }
+        }
+        $homedizi[1] = $kategorilistUst; //Üst Kategori
+        $homedizi[2] = $kategoriAltSira; //Alt Kategori
+
+        $kampanyaListe = $Panel_Model->kampanyalistele();
+        $k = 0;
+        foreach ($kampanyaListe as $kampanyaListee) {
+            $kampanyalist[$k]['ID'] = $kampanyaListee['kampanya_ID'];
+            $kampanyalist[$k]['Adi'] = $kampanyaListee['kampanya_baslik'];
+            $kampanyalist[$k]['Url'] = $kampanyaListee['kampanya_benbaslik'];
+            $k++;
+        }
+        $homedizi[3] = $kampanyalist; //Kampanya Kategori
+
+        $vitrinListe = $Panel_Model->vitrinlistele();
+        $vi = 0;
+        foreach ($vitrinListe as $vitrinListee) {
+            $vitrinlist[$vi]['ID'] = $vitrinListee['vitrin_ID'];
+            $vitrinlist[$vi]['Path'] = $vitrinListee['vitrin_resimpath'];
+            $vitrinlist[$vi]['Baslik'] = $vitrinListee['vitrin_baslik'];
+            $vitrinlist[$vi]['Yazi'] = $vitrinListee['vitrin_yazi'];
+            $vitrinlist[$vi]['Url'] = $vitrinListee['vitrin_url'];
+            $vitrinlist[$vi]['AltBaslik'] = $vitrinListee['vitrin_altbaslik'];
+            $vitrinlist[$vi]['BtnYazi'] = $vitrinListee['vitrin_buttonyazi'];
+            $vi++;
+        }
+
+        $homedizi[4] = $vitrinlist; //Virin Listesi
+        //çok satan ürünleri listeleme
+        $coksatanListe = $Panel_Model->coksatanurunlistele();
+        //kampanyalı ürünlerin listesi
+        foreach ($coksatanListe as $coksatanListee) {
+            if ($coksatanListee['urun_kmpnyaid'] != 0) {//kampanyalı ürünler
+                $ekkampanyaId[] = $coksatanListee['urun_kmpnyaid'];
+            }
+        }
+        //kampanyalı ürünler için 
+        if (count($ekkampanyaId) > 0) {
+            $kampanyadizi = implode(',', $ekkampanyaId);
+            $ekkampanyalar = $Panel_Model->urunkampanyalistele($kampanyadizi, date("Y/m/d"));
+            $kmpny = 0;
+            foreach ($ekkampanyalar as $ekkampanyalarr) {
+                $ekurunkampanya[$kmpny]['ID'] = $ekkampanyalarr['kampanya_ID'];
+                $ekurunkampanya[$kmpny]['Yuzde'] = $ekkampanyalarr['kampanya_indirimyuzde'];
+                $kmpny++;
+            }
+        }
+
+        $uc = 0;
+        foreach ($coksatanListe as $coksatanListee) {
+            if ($coksatanListee['urun_kmpnyaid'] != 0) {//kampanyalı ürünler
+                for ($ku = 0; $ku < count($ekurunkampanya); $ku++) {
+                    if ($ekurunkampanya[$ku]['ID'] == $coksatanListee['urun_kmpnyaid']) {
+                        $coksatanlist[0][$uc]['EkID'] = $coksatanListee['urun_ID'];
+                        $coksatanlist[0][$uc]['EkKod'] = $coksatanListee['urun_kodu'];
+                        $coksatanlist[0][$uc]['NormalEkFiyat'] = $coksatanListee['urun_fiyat'];
+                        $coksatanlist[0][$uc]['EkFiyat'] = round($coksatanListee['urun_fiyat'] - (($coksatanListee['urun_fiyat'] * $ekurunkampanya[$ku]['Yuzde']) / 100));
+                        $coksatanlist[0][$uc]['EkAdi'] = $coksatanListee['urun_adi'];
+                        $coksatanlist[0][$uc]['EkKmpID'] = $ekurunkampanya[$ku]['ID'];
+                        $coksatanlist[0][$uc]['EkResim'] = $coksatanListee['urun_anaresim'];
+                        $coksatanlist[0][$uc]['EkUrl'] = $coksatanListee['urun_benzad'] . "-" . $coksatanListee['urun_benzersizkod'];
+                    }
+                }
+            } else {
+                $coksatanlist[0][$uc]['EkID'] = $coksatanListee['urun_ID'];
+                $coksatanlist[0][$uc]['EkKod'] = $coksatanListee['urun_kodu'];
+                $coksatanlist[0][$uc]['NormalEkFiyat'] = $coksatanListee['urun_fiyat'];
+                $coksatanlist[0][$uc]['EkAdi'] = $coksatanListee['urun_adi'];
+                $coksatanlist[0][$uc]['EkResim'] = $coksatanListee['urun_anaresim'];
+                $coksatanlist[0][$uc]['EkUrl'] = $coksatanListee['urun_benzad'] . "-" . $coksatanListee['urun_benzersizkod'];
+            }
+            $uc++;
+        }
+
+        $homedizi[5] = $coksatanlist; //Virin Listesi
+        //Footer Dinamik Bilgiler
+        //kategorileri listeleme
+        $fotkategoriListe = $Panel_Model->footerkategorilistele();
+        $fb = 0;
+        $fc = 0;
+        foreach ($fotkategoriListe as $fotkategoriListee) {
+            if ($fotkategoriListee['sayfa_UstID'] == 0) {//Footer Üst Kategori Olanlar
+                $fotkategorilistUst[$fb]['ID'] = $fotkategoriListee['sabitsayfaid'];
+                $fotkategorilistUst[$fb]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
+                $fotkategorilistUst[$fb]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
+                $fotkategorilistUst[$fb]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                $fb++;
+            } else {
+                $fotkategorilistAlt[$fc]['ID'] = $fotkategoriListee['sabitsayfaid'];
+                $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
+                $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
+                $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
+                $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                $fc++;
+            }
+        }
+
+        //alt kategorileri üst kategoriye göre gruplama
+        for ($x = 0; $x < count($fotkategorilistUst); $x++) {
+            $t = 0;
+            for ($y = 0; $y < count($fotkategorilistAlt); $y++) {
+                if ($fotkategorilistUst[$x]['ID'] == $fotkategorilistAlt[$y]['UstID']) {
+                    $fotkategoriAltSira[$x][$t]['ID'] = $fotkategorilistAlt[$y]['ID'];
+                    $fotkategoriAltSira[$x][$t]['UstID'] = $fotkategorilistAlt[$y]['UstID'];
+                    $fotkategoriAltSira[$x][$t]['Adi'] = $fotkategorilistAlt[$y]['Adi'];
+                    $fotkategoriAltSira[$x][$t]['Url'] = $fotkategorilistAlt[$y]['Url'];
+                    $fotkategoriAltSira[$x][$t]['Sira'] = $fotkategorilistAlt[$y]['Sira'];
+                    $t++;
+                }
+            }
+        }
+
+        $homedizi[6] = $fotkategorilistUst; //Footer Üst Kategori Listesi
+        $homedizi[7] = $fotkategoriAltSira; //Footer Alt Kategori Listesi
+        //sabit içerikleri listeleme
+        $icerikListe = $Panel_Model->sabiticeriklistele();
+        foreach ($icerikListe as $icerikListe) {
+            $iceriklist['telefon'] = $icerikListe['sbt_telefon'];
+            $iceriklist['mail'] = $icerikListe['sbt_iletisimmail'];
+            $iceriklist['face'] = $icerikListe['sbt_face'];
+            $iceriklist['twit'] = $icerikListe['sbt_twit'];
+            $iceriklist['instag'] = $icerikListe['sbt_instag'];
+            $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
+        }
+        $homedizi[8] = $iceriklist; //etiket listesi
+
+        $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/coksatanurun", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/footertop", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
     }
@@ -900,6 +1270,7 @@ class PagerLoad extends Controller {
             $iceriklist['twit'] = $icerikListe['sbt_twit'];
             $iceriklist['instag'] = $icerikListe['sbt_instag'];
             $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
         }
         $homedizi[8] = $iceriklist;
 
@@ -1020,6 +1391,7 @@ class PagerLoad extends Controller {
             $iceriklist['twit'] = $icerikListe['sbt_twit'];
             $iceriklist['instag'] = $icerikListe['sbt_instag'];
             $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
         }
         $homedizi[8] = $iceriklist;
         //blogları listeleme
@@ -1209,6 +1581,7 @@ class PagerLoad extends Controller {
             $iceriklist['twit'] = $icerikListe['sbt_twit'];
             $iceriklist['instag'] = $icerikListe['sbt_instag'];
             $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
         }
         $homedizi[8] = $iceriklist; //etiket listesi
         //blogları listeleme

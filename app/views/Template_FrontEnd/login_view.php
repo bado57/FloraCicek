@@ -20,35 +20,36 @@
                 <div class="col-sm-10">
                     <div class="tab-content">
                         <div class="tab-pane active" id="uyegiris">
-                            <form id="formgirisyap">
-                                <div class="col-sm-6">
-                                    <div class="login-form">
-                                        <!--login form-->
-                                        <h2><?php echo $data["KullaniciBilgi"]; ?></h2>
-                                        <div class="form">
-                                            <input type="email" id="girisemail" name="girisemail" placeholder="<?php echo $data["Email"]; ?>" />
-                                            <input type="password" id="girissifre" name="girissifre" placeholder="<?php echo $data["Sifre"]; ?>" />
-                                            <label class="checkbox-inline" style="margin-top:10px;"><input id="hatirlaCheck" type="checkbox" name="hatirlaCheck"><?php echo $data["BeniHatirla"]; ?></label>
-                                            <a role="button" class="sfrhtr pull-right" style="margin-top:10px;"><?php echo $data["SifreUnut"]; ?></a>
-                                            <button type="input" id="btnGiris" class="btn btn-default"><?php echo $data["Giris"]; ?></button>
-                                        </div>
-                                    </div><!--/login form-->
-                                </div>
-                            </form>
-                            <form action="#">
-                                <div class="col-sm-6">
-                                    <div class="login-form sifreHatirlat" style="display:none;">
-                                        <!--login form-->
-                                        <h2><?php echo $data["SifreHatirla"]; ?> <a role="button" class="sfrhtrKapat pull-right"><i class="fa fa-times-circle"></i></a></h2>
-                                        <div class="form">
-                                            <input type="email" placeholder="<?php echo $data["EmailAdres"]; ?>" />
-                                            <input type="text" placeholder="12 + 5 = ?" />
-                                            <label style="margin-top:10px;">* <?php echo $data["EksiksizBilgi"]; ?></label>
-                                            <button type="input" class="btn btn-default"><?php echo $data["Hatirlat"]; ?></button>
-                                        </div>
-                                    </div><!--/login form-->
-                                </div>
-                            </form>
+                            <div class="col-sm-6">
+                                <div class="login-form">
+                                    <!--login form-->
+                                    <h2><?php echo $data["KullaniciBilgi"]; ?></h2>
+                                    <div class="form">
+                                        <input type="email" id="girisemail" name="girisemail" placeholder="<?php echo $data["Email"]; ?>" />
+                                        <input type="password" id="girissifre" name="girissifre" placeholder="<?php echo $data["Sifre"]; ?>" />
+                                        <label class="checkbox-inline" style="margin-top:10px;"><input id="hatirlaCheck" type="checkbox" name="hatirlaCheck"><?php echo $data["BeniHatirla"]; ?></label>
+                                        <a role="button" class="sfrhtr pull-right" style="margin-top:10px;"><?php echo $data["SifreUnut"]; ?></a>
+                                        <button type="input" id="btnGiris" class="btn btn-default"><?php echo $data["Giris"]; ?></button>
+                                    </div>
+                                </div><!--/login form-->
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="login-form sifreHatirlat" style="display:none;">
+                                    <!--login form12 + 5 = ?-->
+                                    <h2><?php echo $data["SifreHatirla"]; ?> <a role="button" class="sfrhtrKapat pull-right"><i class="fa fa-times-circle"></i></a></h2>
+                                    <div class="form">
+                                        <input id="unutemail" type="email" placeholder="<?php echo $data["EmailAdres"]; ?>" />
+                                        <?php
+                                        $value1 = rand(0, 50);
+                                        $value2 = rand(0, 50);
+                                        Session::set("guvenlikKod", $value1 + $value2);
+                                        ?>
+                                        <input id="randomsayi" type="text" placeholder="<?php echo $value1 . ' + ' . $value2 . ' =  ?'; ?>" />
+                                        <label style="margin-top:10px;">* <?php echo $data["EksiksizBilgi"]; ?></label>
+                                        <button type="input" id="btnHatirlat" class="btn btn-default"><?php echo $data["Hatirlat"]; ?></button>
+                                    </div>
+                                </div><!--/login form-->
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -22,11 +22,6 @@ class Order extends Controller {
 
             $id = Session::get("SipID");
 
-            $urunlist[0][0]['Adres'] = Session::get("SipAdres");
-            $urunlist[0][0]['Tarih'] = Session::get("SipTarih");
-            $urunlist[0][0]['Saat'] = Session::get("SipSaat");
-            $urunlist[0][0]['IlceEkFiyat'] = Session::get("SipIlceFiyat");
-
             $urunListe = $Panel_Model->urundetaysiparis($id);
 
             //kampanyalı ürünlerin listesi
@@ -172,9 +167,10 @@ class Order extends Controller {
                 $iceriklist['twit'] = $icerikListe['sbt_twit'];
                 $iceriklist['instag'] = $icerikListe['sbt_instag'];
                 $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+                $iceriklist['logo'] = $icerikListe['sbt_logo'];
             }
             $homedizi[8] = $iceriklist;
-
+            $urunlist[4][0]['Logo'] = $iceriklist['logo'];
 
             $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/ekurun", $languagedeger, $urunlist);
@@ -202,11 +198,13 @@ class Order extends Controller {
                 $iceriklist['twit'] = $icerikListe['sbt_twit'];
                 $iceriklist['instag'] = $icerikListe['sbt_instag'];
                 $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+                $iceriklist['logo'] = $icerikListe['sbt_logo'];
             }
             $homedizi[8] = $iceriklist;
+            $siparis[0][0]['Logo'] = $iceriklist['logo'];
 
             $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
-            $this->load->view("Template_FrontEnd/siparisuye", $languagedeger);
+            $this->load->view("Template_FrontEnd/siparisuye", $languagedeger, $siparis);
             $this->load->view("Template_FrontEnd/footertop", $languagedeger);
             $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
         }
@@ -335,8 +333,10 @@ class Order extends Controller {
             $iceriklist['twit'] = $icerikListe['sbt_twit'];
             $iceriklist['instag'] = $icerikListe['sbt_instag'];
             $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
         }
         $homedizi[8] = $iceriklist;
+        $deliverylist[4][0]['Logo'] = $iceriklist['logo'];
 
         $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/urunteslimat", $languagedeger, $deliverylist);
@@ -455,8 +455,10 @@ class Order extends Controller {
             $iceriklist['twit'] = $icerikListe['sbt_twit'];
             $iceriklist['instag'] = $icerikListe['sbt_instag'];
             $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
         }
         $homedizi[8] = $iceriklist;
+        $cardlist[3][0]["Logo"] = $iceriklist['logo'];
 
         $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/urunodeme", $languagedeger, $cardlist);

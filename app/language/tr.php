@@ -90,6 +90,7 @@ class tr {
             "Copyright" => "Türkiye Flora Çiçek. Tüm hakları saklıdır.",
             "Blog" => "Blog",
             "SonYayinlar" => "Son Yayınlar",
+            "CokSatan" => "Çok Satanlar",
         );
         return $trdil;
     }

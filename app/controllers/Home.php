@@ -117,6 +117,7 @@ class Home extends Controller {
         $uyeni = 0;
         $uek = 0;
         $ukmpny = 0;
+        $ucoksatan = 0;
         foreach ($urunListe as $urunListee) {
             if ($urunListee['urun_kmpnyaid'] != 0) {//kampanyalı ürünler
                 for ($ku = 0; $ku < count($urunkampanya); $ku++) {
@@ -187,8 +188,18 @@ class Home extends Controller {
                     $urunlist[2][$uek]['Kod'] = $urunListee['urun_kodu'];
                     $urunlist[2][$uek]['Fiyat'] = $urunListee['urun_fiyat'];
                     $urunlist[2][$uek]['Adi'] = $urunListee['urun_adi'];
+                    $urunlist[2][$uek]['Path'] = $urunListee['urun_anaresim'];
                     $urunlist[2][$uek]['Url'] = $urunListee['urun_benzad'] . "-" . $urunListee['urun_benzersizkod'];
                     $uek++;
+                }
+                if ($urunListee['urun_coksatan'] != 0) {//ek ürün
+                    $urunlist[4][$ucoksatan]['ID'] = $urunListee['urun_ID'];
+                    $urunlist[4][$ucoksatan]['Kod'] = $urunListee['urun_kodu'];
+                    $urunlist[4][$ucoksatan]['Fiyat'] = $urunListee['urun_fiyat'];
+                    $urunlist[4][$ucoksatan]['Adi'] = $urunListee['urun_adi'];
+                    $urunlist[4][$ucoksatan]['Path'] = $urunListee['urun_anaresim'];
+                    $urunlist[4][$ucoksatan]['Url'] = $urunListee['urun_benzad'] . "-" . $urunListee['urun_benzersizkod'];
+                    $ucoksatan++;
                 }
             }
         }
@@ -241,6 +252,7 @@ class Home extends Controller {
             $iceriklist['twit'] = $icerikListe['sbt_twit'];
             $iceriklist['instag'] = $icerikListe['sbt_instag'];
             $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
         }
         $homedizi[8] = $iceriklist;
 
@@ -260,7 +272,6 @@ class Home extends Controller {
             $Panel_Model = $this->load->model("Panel_Model");
             $formlanguage = $this->load->multilanguage("tr");
             $languagedeger = $formlanguage->multilanguage();
-
             //sabit içerikleri listeleme
             $icerikListe = $Panel_Model->sabiticeriklistele();
             foreach ($icerikListe as $icerikListe) {
@@ -270,6 +281,7 @@ class Home extends Controller {
                 $iceriklist['twit'] = $icerikListe['sbt_twit'];
                 $iceriklist['instag'] = $icerikListe['sbt_instag'];
                 $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+                $iceriklist['logo'] = $icerikListe['sbt_logo'];
             }
             $homedizi[8] = $iceriklist;
 
@@ -305,6 +317,7 @@ class Home extends Controller {
                 $iceriklist['twit'] = $icerikListe['sbt_twit'];
                 $iceriklist['instag'] = $icerikListe['sbt_instag'];
                 $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+                $iceriklist['logo'] = $icerikListe['sbt_logo'];
             }
             $homedizi[8] = $iceriklist;
 
@@ -340,6 +353,7 @@ class Home extends Controller {
                 $iceriklist['twit'] = $icerikListe['sbt_twit'];
                 $iceriklist['instag'] = $icerikListe['sbt_instag'];
                 $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+                $iceriklist['logo'] = $icerikListe['sbt_logo'];
             }
             $homedizi[8] = $iceriklist; //etiket listesi
 
@@ -369,6 +383,7 @@ class Home extends Controller {
             $iceriklist['twit'] = $icerikListe['sbt_twit'];
             $iceriklist['instag'] = $icerikListe['sbt_instag'];
             $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+            $iceriklist['logo'] = $icerikListe['sbt_logo'];
         }
         $homedizi[8] = $iceriklist; //etiket listesi
 

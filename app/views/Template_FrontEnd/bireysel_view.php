@@ -20,28 +20,28 @@
                 <div class="col-sm-10">
                     <div class="tab-content">
                         <div class="tab-pane active" id="bireysel">
-                                <div class="col-sm-6">
-                                    <div class="login-form">
-                                        <!--login form-->
-                                        <h2><?php echo $data["BirUye"]; ?></h2>
-                                        <div class="form">
-                                            <input type="text" id="birAdSoyad" name="birAdSoyad" placeholder="<?php echo $data["AdSoyad"]; ?>" />
-                                            <input type="email" id="birEmail" name="birEmail" placeholder="<?php echo $data["Email"]; ?>" />
-                                            <input type="password" id="birSifre" name="birSifre" placeholder="<?php echo $data["Sifre"]; ?>" />
-                                            <input type="password" id="birSifreTekrar" name="birSifreTekrar" placeholder="<?php echo $data["SifreTkrar"]; ?>" />
-                                            <span>
-                                                <input id="kmp-bireysel" type="checkbox" class="checkbox" checked>
-                                                    <?php echo $data["KmpnyaYnlk"]; ?>
-                                            </span>
-                                            <p></p>
-                                            <span>
-                                                <input id="uyesoz-bireysel" name="birUyeSoz" type="checkbox" class="checkbox">
-                                                    <a role="button" data-toggle="modal" data-target="#uyelikSozlesmesi" style="color:#FE980F;"><?php echo $data["UyelikSoz"]; ?></a> <?php echo $data["OkuKabul"]; ?>.
-                                            </span>
-                                            <button type="input" id="biruyeol" class="btn btn-default"><?php echo $data["KayıtOl"]; ?></button>
-                                        </div>
+                            <div class="col-sm-6">
+                                <div class="login-form">
+                                    <!--login form-->
+                                    <h2><?php echo $data["BirUye"]; ?></h2>
+                                    <div class="form">
+                                        <input type="text" id="birAdSoyad" name="birAdSoyad" placeholder="<?php echo $data["AdSoyad"]; ?>" />
+                                        <input type="email" id="birEmail" name="birEmail" placeholder="<?php echo $data["Email"]; ?>" />
+                                        <input type="password" id="birSifre" name="birSifre" placeholder="<?php echo $data["Sifre"]; ?>" />
+                                        <input type="password" id="birSifreTekrar" name="birSifreTekrar" placeholder="<?php echo $data["SifreTkrar"]; ?>" />
+                                        <span>
+                                            <input id="kmp-bireysel" type="checkbox" class="checkbox" checked>
+                                                <?php echo $data["KmpnyaYnlk"]; ?>
+                                        </span>
+                                        <p></p>
+                                        <span>
+                                            <input id="uyesoz-bireysel" name="birUyeSoz" type="checkbox" class="checkbox">
+                                                <a role="button" data-toggle="modal" data-target="#uyelikSozlesmesi" style="color:#FE980F;"><?php echo $data["UyelikSoz"]; ?></a> <?php echo $data["OkuKabul"]; ?>.
+                                        </span>
+                                        <button type="input" id="biruyeol" class="btn btn-default"><?php echo $data["KayıtOl"]; ?></button>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>

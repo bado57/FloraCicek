@@ -12,7 +12,7 @@ $(document).ready(function () {
                 $("#vitrinaltbaslik").val("");
                 $("#vitrinbuttonyazi").val("");
                 $("#vitrinadres").val("");
-                $("#vitrinyazi").val("");
+                CKEDITOR.instances['vitrinyazi'].setData("");
                 $("#aktiflik").select2("val", 0);
                 $("#sira").val("");
                 $("#etiketustbaslik").text("Yeni");
@@ -25,7 +25,7 @@ $(document).ready(function () {
             $("#vitrinaltbaslik").val("");
             $("#vitrinbuttonyazi").val("");
             $("#vitrinadres").val("");
-            $("#vitrinyazi").val("");
+            CKEDITOR.instances['vitrinyazi'].setData("");
             $("#aktiflik").select2("val", 0);
             $("#sira").val("");
             $("#etiketustbaslik").text("Yeni");
@@ -71,7 +71,7 @@ $(document).ready(function () {
             var altbaslik = $("#vitrinaltbaslik").val();
             var buttonyazi = $("#vitrinbuttonyazi").val();
             var adres = $("#vitrinadres").val();
-            var yazi = $("#vitrinyazi").val();
+            var yazi = CKEDITOR.instances['vitrinyazi'].getData();
             var aktiflik = $("#aktiflik").val();
             var sira = $("#sira").val();
             formData.append('file', $("#vitrinresim")[0].files[0]);
@@ -131,7 +131,7 @@ $(document).ready(function () {
             var altbaslik = $("#vitrinaltbaslik").val();
             var buttonyazi = $("#vitrinbuttonyazi").val();
             var adres = $("#vitrinadres").val();
-            var yazi = $("#vitrinyazi").val();
+            var yazi = CKEDITOR.instances['vitrinyazi'].getData();
             var aktiflik = $("#aktiflik").val();
             var sira = $("#sira").val();
             var normalSira = $("input[name=normalSira]").val();
@@ -219,7 +219,7 @@ $(document).ready(function () {
                         $("#vitrinaltbaslik").val(cevap.result.AltBaslik);
                         $("#vitrinbuttonyazi").val(cevap.result.Button);
                         $("#vitrinadres").val(cevap.result.Url);
-                        $("#vitrinyazi").val(cevap.result.Yazi);
+                        CKEDITOR.instances['vitrinyazi'].setData(cevap.result.Yazi);
                         $("#aktiflik").select2("val", cevap.result.Aktif);
                         $("#sira").val(cevap.result.Sira);
                         $("#vitrinustbaslik").text(cevap.result.Baslik);
@@ -242,6 +242,7 @@ $(document).ready(function () {
     ///////////////////////Sabit İçerikler//////////////////////////////
     //buton kaydet
     $(document).on('click', 'input#sabiticerikkaydet', function (e) {
+        var formData = new FormData();
         var telefon = $("input[name=telefon]").val();
         var fax = $("input[name=fax]").val();
         var iletisimmail = $("input[name=iletisimmail]").val();
@@ -253,14 +254,37 @@ $(document).ready(function () {
         var adres = $("#adres").val();
         var yoneticimail = $("input[name=yoneticimail]").val();
         var yoneticimailek = $("input[name=yoneticimailek]").val();
+        var imageKontrol = $("#image-holder img").length;
+        var newimage = 0;
+        if ($("#logoresim")[0].files[0] == undefined) {
+            newimage = 0;
+        } else {
+            newimage = 1;
+        }
+        formData.append('file', $("#logoresim")[0].files[0]);
+        formData.append('newImage', newimage);
+        formData.append('telefon', telefon);
+        formData.append('fax', fax);
+        formData.append('iletisimmail', iletisimmail);
+        formData.append('harita', harita);
+        formData.append('facebook', facebook);
+        formData.append('twitter', twitter);
+        formData.append('instagram', instagram);
+        formData.append('googleplus', googleplus);
+        formData.append('adres', adres);
+        formData.append('yoneticimail', yoneticimail);
+        formData.append('yoneticimailek', yoneticimailek);
+        formData.append('tip', "sabitIcerikEkle");
         $.ajax({
             type: "post",
             url: SITE_URL + "/AdminVitrin/ajaxCall",
             cache: false,
             dataType: "json",
-            data: {"telefon": telefon, "fax": fax, "iletisimmail": iletisimmail, "harita": harita,
-                "facebook": facebook, "twitter": twitter, "instagram": instagram, "googleplus": googleplus,
-                "adres": adres, "yoneticimail": yoneticimail, "yoneticimailek": yoneticimailek, "tip": "sabitIcerikEkle"},
+            data: formData,
+            async: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
             success: function (cevap) {
                 if (cevap.hata) {
                     reset();
@@ -387,6 +411,7 @@ $(document).ready(function () {
         } else {//düzenleme
             var ID = $("input[name=duzenlemeID]").val();
             var baslik = $("#blogbaslik").val();
+            var normalbaslik = $("#blogustbaslik").text();
             var cke = CKEDITOR.instances['blogyazisi'].getData();
             var aktiflik = $("#aktiflik").val();
 
@@ -401,6 +426,7 @@ $(document).ready(function () {
             formData.append('newImage', newimage);
             formData.append('ID', ID);
             formData.append('baslik', baslik);
+            formData.append('normalbaslik', normalbaslik);
             formData.append('file', $("#blogresim")[0].files[0]);
             formData.append('yazi', cke);
             formData.append('aktiflik', aktiflik);
@@ -454,6 +480,7 @@ $(document).ready(function () {
                             $("#image-holder").empty();
                             $("#image-holder").prepend('<img id="theImg" src="' + SITE_URL + '/blogum/' + cevap.result.Resim + '" class="thumb-image img-responsive urunresim" style="width:auto; max - width:100 % ; heaight:auto; max - height:100 % ; "/>');
                         }
+                        $("#blogustbaslik").text(cevap.result.Baslik);
                         $("input[name=duzenleme]").val(1);
                         $("input[name=duzenlemeID]").val(cevap.result.ID);
                         var kapaliacik = $("input[name=kapaliacik]").val();
@@ -635,6 +662,7 @@ $(document).ready(function () {
                 }
             } else if (sayfaTuru == "kategori") {//üst kategori
                 var trlength = $("#sayfatbody tr").length;
+                var kategoriSayi = 1;
                 for (var a = 0; a < trlength; a++) {
                     var ust = $("#sayfatbody tr:eq(" + a + ")").attr("data-ust");
                     if (ust == 0) {
@@ -646,11 +674,13 @@ $(document).ready(function () {
                         if (sirasi == sira) {
                             var degisecekID = trID;
                         }
+                        kategoriSayi++;
                     }
                 }
             }
             formData.append('sayfaTuru', sayfaTuru);
             formData.append('sayfaAdi', sayfaAdi);
+            formData.append('kategoriSayi', kategoriSayi);
             formData.append('sira', sira);
             formData.append('durum', durum);
             formData.append('file', $("#sayfaresim")[0].files[0]);
@@ -683,12 +713,12 @@ $(document).ready(function () {
                     }
                 }
             });
-
         }
         else {//düzenleme
             var ID = $("input[name=duzenlemeID]").val();
             var sayfaTuru = $("#sayfaturu").val();
             var sayfaAdi = $("#sayfaadi").val();
+            var normalSayfaAdi = $("#sayfaustbaslik").text(sayfaAdi);
             var sira = $("#sira").val();
             var normalSira = $("input[name=normalSira]").val();
             var durum = $("#aktiflik").val();
@@ -739,6 +769,7 @@ $(document).ready(function () {
             formData.append('newImage', newimage);
             formData.append('sayfaTuru', sayfaTuru);
             formData.append('sayfaAdi', sayfaAdi);
+            formData.append('normalSayfaAdi', normalSayfaAdi);
             formData.append('sira', sira);
             formData.append('normalSira', normalSira);
             formData.append('durum', durum);
@@ -790,12 +821,14 @@ $(function () {
         expanderCollapsedClass: 'glyphicon glyphicon-plus',
         initialState: 'collapsed'
     });
+    
     $("#vitrinTable").DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
         "ordering": false,
         "info": true});
+    
     $("#blogTable").DataTable({
         "paging": true,
         "lengthChange": true,
@@ -803,6 +836,7 @@ $(function () {
         "ordering": false,
         "info": false
     });
+    
     $("#sayfaTable").DataTable({
         "paging": true,
         "lengthChange": true,
@@ -810,6 +844,8 @@ $(function () {
         "ordering": false,
         "info": false
     });
+    
+    
 
     var image_holder = $("#image-holder");
     $("#vitrinresim").on("change", function () {
@@ -855,6 +891,27 @@ $(function () {
     });
     var image_holder = $("#image-holder");
     $("#sayfaresim").on("change", function () {
+        if (typeof (FileReader) != "undefined") {
+            image_holder.empty();
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image img-responsive",
+                    "style": "width:auto;max-width:100%;heaight:auto;max-height:100%;"
+                }).appendTo(image_holder);
+
+            }
+            image_holder.show();
+            reader.readAsDataURL($(this)[0].files[0]);
+        } else {
+            //alert("This browser does not support FileReader.");
+        }
+
+    });
+    var image_holder = $("#image-holder");
+    $("#logoresim").on("change", function () {
         if (typeof (FileReader) != "undefined") {
             image_holder.empty();
 

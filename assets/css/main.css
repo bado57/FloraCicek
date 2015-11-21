@@ -612,8 +612,9 @@ ul.sub-menu {
     color: #696763;
     font-family: 'Open Sans', sans-serif !important;
     font-weight: 300 !important;
-    font-size: 48px;
-    margin-top: 30px;
+    font-size: 35px;
+    margin-top: 60px;
+    margin-bottom: 10px;
 }
 
 .item h1 span {
@@ -623,7 +624,7 @@ ul.sub-menu {
 .item h2 {
     color: #d71616;
     font-family: 'Open Sans', sans-serif !important;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 400;
     margin-bottom: 22px;
     margin-top: 10px;
@@ -2882,8 +2883,8 @@ ul.ekurunler{padding-left:0 !important;}
 .imgThumb img{
     width:auto;
     max-width: 100%;
-    height: auto;
-    max-height: 100%;
+    height: 260px;
+    max-height: 260px;
     margin:0 auto;
 }
 
@@ -2928,4 +2929,13 @@ ul.ekurunler{padding-left:0 !important;}
 strong.spNo{
     color:red;
     font-size: 16px;
+}
+
+@media (max-width: 480px) { 
+    .yeniUrunImg{
+        width:auto;
+        max-width: 100%;
+        height: 115px;
+        max-height: 115px;
+    }
 }

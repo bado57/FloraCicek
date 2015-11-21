@@ -25,13 +25,13 @@ class Panel_Model extends Model {
 
     //sabit içerikler listeleme
     public function sabiticeriklistele() {
-        $sql = "SELECT sbt_telefon,sbt_iletisimmail,sbt_face,sbt_twit,sbt_instag,sbt_gplus FROM flora_sabiticerik";
+        $sql = "SELECT sbt_telefon,sbt_iletisimmail,sbt_face,sbt_twit,sbt_instag,sbt_gplus,sbt_logo FROM flora_sabiticerik";
         return $this->db->select($sql);
     }
 
     //sabit içerikler listeleme
     public function sabiticerikcontactlistele() {
-        $sql = "SELECT sbt_telefon,sbt_fax,sbt_adres,sbt_haritaiframe,sbt_iletisimmail,sbt_face,sbt_twit,sbt_instag,sbt_gplus FROM flora_sabiticerik";
+        $sql = "SELECT sbt_telefon,sbt_fax,sbt_adres,sbt_haritaiframe,sbt_iletisimmail,sbt_face,sbt_twit,sbt_instag,sbt_gplus,sbt_logo FROM flora_sabiticerik";
         return $this->db->select($sql);
     }
 
@@ -73,7 +73,7 @@ class Panel_Model extends Model {
 
     //ürün listeleme
     public function urunlistele() {
-        $sql = "SELECT urun_ID,urun_kodu,urun_benzersizkod,urun_fiyat,urun_yeniurun,urun_ekurun,urun_adi,urun_benzad,urun_benzad,urun_kmpnyaid,urun_hafta,urun_anaresim FROM flora_urun WHERE urun_aktiflik=1";
+        $sql = "SELECT urun_ID,urun_kodu,urun_benzersizkod,urun_fiyat,urun_yeniurun,urun_ekurun,urun_adi,urun_benzad,urun_benzad,urun_kmpnyaid,urun_hafta,urun_anaresim,urun_coksatan FROM flora_urun WHERE urun_aktiflik=1";
         return $this->db->select($sql);
     }
 
@@ -211,7 +211,7 @@ class Panel_Model extends Model {
 
     //ürün ilçeler fiyat listeleme
     public function urunIlceFiyatListele($ilceid) {
-        $sql = "SELECT ilce_ekucret FROM flora_ilce WHERE ilce_id= $ilceid";
+        $sql = "SELECT ilce_ekucret,ilce_adi FROM flora_ilce WHERE ilce_id= $ilceid";
         return $this->db->select($sql);
     }
 
@@ -245,15 +245,44 @@ class Panel_Model extends Model {
         return $this->db->select($sql);
     }
 
+    //kampanyalı ürün listeleme
+    public function kampanyaliurunlistele() {
+        $sql = "SELECT urun_ID,urun_kodu,urun_benzersizkod,urun_fiyat,urun_adi,urun_benzad,urun_kmpnyaid,urun_anaresim FROM flora_urun WHERE urun_kmpnyaid=1 AND urun_aktiflik=1 ";
+        return $this->db->select($sql);
+    }
+
+    //çok satan ürün listeleme
+    public function coksatanurunlistele() {
+        $sql = "SELECT urun_ID,urun_kodu,urun_benzersizkod,urun_fiyat,urun_adi,urun_benzad,urun_kmpnyaid,urun_anaresim FROM flora_urun WHERE urun_coksatan=1 AND urun_aktiflik=1 ";
+        return $this->db->select($sql);
+    }
+
     //giriş yap sorgulama
     public function girisSorgu($email, $realsifre) {
         $sql = "SELECT kullanici_id,kullanici_adSoyad,kullanici_eposta,kullanici_vergid,kullanici_vergino,kullanici_adres,kullanici_rol FROM flora_kullanici WHERE kullanici_eposta='$email' AND kullanici_sifre='$realsifre'";
         return $this->db->select($sql);
     }
 
+    //email kontrol etme
+    public function emailDbKontrol($email) {
+        $sql = "SELECT kullanici_id,kullanici_adSoyad,kullanici_realsifre FROM flora_kullanici WHERE kullanici_eposta='$email'";
+        return $this->db->select($sql);
+    }
+
+    //mail havuz email kontrol etme
+    public function ebultenDbKontrol($email) {
+        $sql = "SELECT mailhavuz_ID FROM flora_mailhavuz WHERE mailhavuz_Mail='$email'";
+        return $this->db->select($sql);
+    }
+
     //bireysel üyeleri kaydetme
     public function birUye($data) {
         return ($this->db->insert("flora_kullanici", $data));
+    }
+
+    //mail havuzuna mailleri kaydetme
+    public function mailHavuzInsert($data) {
+        return ($this->db->insert("flora_mailhavuz", $data));
     }
 
     //kurumsal üyeleri kaydetme
@@ -547,7 +576,7 @@ class Panel_Model extends Model {
     }
 
     public function panelsabiticerikliste() {
-        $sql = "SELECT sbt_id,sbt_telefon,sbt_fax,sbt_adres,sbt_haritaiframe,sbt_iletisimmail,sbt_yonetmail2,sbt_yonetmail1,sbt_face,sbt_twit,sbt_instag,sbt_gplus FROM  flora_sabiticerik";
+        $sql = "SELECT sbt_id,sbt_telefon,sbt_fax,sbt_adres,sbt_haritaiframe,sbt_iletisimmail,sbt_yonetmail2,sbt_yonetmail1,sbt_face,sbt_twit,sbt_instag,sbt_gplus,sbt_logo FROM  flora_sabiticerik";
         return $this->db->select($sql);
     }
 
@@ -720,6 +749,12 @@ class Panel_Model extends Model {
 
     public function siparisUrunDetaylistele($id) {
         $sql = "SELECT siparisurun_ID,siparisurun_siparisID,siparisurun_urunID,siparisurun_ad,siparisurun_kod,siparisurun_miktar,siparisurun_tutar from flora_siparisurun WHERE siparisurun_siparisID=$id";
+        return $this->db->select($sql);
+    }
+    
+    /// Bu saçmalığı selman yaptı :)
+    public function siparisUrunResimGetir($id) {
+        $sql = "SELECT urun_anaresim from flora_urun WHERE urun_ID=$id";
         return $this->db->select($sql);
     }
 
