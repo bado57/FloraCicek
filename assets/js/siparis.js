@@ -705,7 +705,9 @@ $(document).ready(function () {
         var ustID = $(this).parent().parent().attr('data-ust');
         var ID = $(this).parent().parent().attr('id');
         if (ustID > 0) {//ilce
-//il temizle
+            //il temizle
+            $("#ilForm").hide();
+            $("#ilceForm").show();
             $("input[name=iladi]").val("");
             $("#ilaktiflik").select2("val", 0);
             var ilAdi = $("#ilad" + ustID).text();
@@ -719,7 +721,9 @@ $(document).ready(function () {
             $("#ilceaktiflik").select2("val", ilceDurum);
             $("#ililceustbaslik").text(ilceAdi);
         } else {//il
-//ilce temizle
+            //ilce temizle
+            $("#ilceForm").hide();
+            $("#ilForm").show();
             $("input[name=ilceiladi]").val("");
             $("input[name=ilceadi]").val("");
             $("input[name=ekucret]").val("");

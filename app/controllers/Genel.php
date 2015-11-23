@@ -645,11 +645,29 @@ class Genel extends Controller {
                             if ($ilceID > 0) {
                                 if ($tarihim != '') {
                                     if ($saatText != '') {
-                                        $explSaat = explode(" - ", $saatText);
                                         date_default_timezone_set('Europe/Istanbul');
-                                        $nowdate = date('H:i');
-                                        if ($nowdate > $explSaat[0]) {
-                                            $sonuc["hata"] = "Lütfen İleri Saatleri Seçiniz";
+                                        $nowtarihim = date('d/m/Y');
+                                        if ($nowtarihim == $tarihim) {
+                                            $explSaat = explode(" - ", $saatText);
+                                            $nowdate = date('H:i');
+                                            if ($nowdate > $explSaat[0]) {
+                                                $sonuc["hata"] = "Lütfen İleri Saatleri Seçiniz";
+                                            } else {
+                                                $ilceliste = $Panel_Model->urunIlceFiyatListele($ilceID);
+                                                foreach ($ilceliste as $ilcelistee) {
+                                                    $ilcefiyat = $ilcelistee['ilce_ekucret'];
+                                                    $ilceadi = $ilcelistee['ilce_adi'];
+                                                }
+                                                unset($_SESSION['EkUrunID']);
+                                                $newAdres = $ilText . ' ' . $ilceadi;
+                                                Session::set("SipID", $urunID);
+                                                Session::set("SipAdres", $newAdres);
+                                                Session::set("SipIlceFiyat", $ilcefiyat);
+                                                Session::set("SipTarih", $newTarih);
+                                                Session::set("SipSaat", $saatText);
+                                                Session::set("SipGun", $simdikiGun);
+                                                $sonuc["result"] = 1;
+                                            }
                                         } else {
                                             $ilceliste = $Panel_Model->urunIlceFiyatListele($ilceID);
                                             foreach ($ilceliste as $ilcelistee) {
@@ -1265,10 +1283,6 @@ class Genel extends Controller {
                     unset($_SESSION['KurVergiNo']);
                     unset($_SESSION['KurVerDaire']);
                     unset($_SESSION['KurFAdres']);
-                    unset($_SESSION['Class']);
-                    unset($_SESSION['Kategori']);
-                    unset($_SESSION['ID']);
-                    unset($_SESSION['Method']);
                     Session::destroy();
                     $sonuc["result"] = 1;
                     break;

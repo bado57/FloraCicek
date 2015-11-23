@@ -443,6 +443,7 @@ class Admin extends Controller {
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
         $siparisCount = array();
+        $array = array();
         $siparisCountListe = $Panel_Model->siparisCountListele();
         $bekleyensiparis = 0;
         foreach ($siparisCountListe as $siparisCountListee) {
@@ -462,10 +463,25 @@ class Admin extends Controller {
             $kampanyalist[$k]['Yuzde'] = $kampanyaListee['kampanya_indirimyuzde'];
             $k++;
         }
+        $array[0] = $kampanyalist;
+
+        $kategoriListe = $Panel_Model->urunKategorilistele();
+        $b = 0;
+        foreach ($kategoriListe as $kategoriListee) {
+            $kategorilistUst[$b]['ID'] = $kategoriListee['kategori_ID'];
+            $kategorilistUst[$b]['Adi'] = $kategoriListee['kategori_Adi'];
+            $kategorilistUst[$b]['Aktif'] = $kategoriListee['kategori_Aktiflik'];
+            $kategorilistUst[$b]['Sira'] = $kategoriListee['kategori_Sira'];
+            $kategorilistUst[$b]['Yazi'] = $kategoriListee['kategori_Yazi'];
+            $kategorilistUst[$b]['UstID'] = $kategoriListee['kategori_UstID'];
+            $b++;
+        }
+
+        $array[1] = $kategorilistUst;
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger, $siparisCount);
-        $this->load->view("Template_BackEnd/kampanya", $languagedeger, $kampanyalist);
+        $this->load->view("Template_BackEnd/kampanya", $languagedeger, $array);
         $this->load->view("Template_BackEnd/footer", $languagedeger);
     }
 

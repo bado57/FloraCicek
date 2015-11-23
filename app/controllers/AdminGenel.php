@@ -897,7 +897,7 @@ class AdminGenel extends Controller {
                         if ($urunKod == "") {
                             $sonuc["hata"] = "Lütfen Ürün Kodunu Giriniz.";
                         } else {
-                            if ($explodeOzellikArray[1] <= 0) {
+                            if ($urunKatVal != -1) {
                                 if ($urunKatVal == 0) {
                                     $sonuc["hata"] = "Lütfen Ürün Kategorisini Giriniz.";
                                 } else {
@@ -924,20 +924,17 @@ class AdminGenel extends Controller {
                                                     //oranlama
                                                     $width = $image->image_src_x;
                                                     $height = $image->image_src_y;
-                                                    /*
-                                                      $oran = $width / $height;
-                                                      if ($oran < 1) {
-                                                      $newheight = 600;
-                                                      $newwidth = round($height * $oran);
-                                                      } else if ($oran == 1) {
-                                                      $newheight = 600;
-                                                      $newwidth = 600;
-                                                      } else {
-                                                      $newheight = round($width / $oran);
-                                                      $newwidth = 600;
-                                                      }
-                                                     * 
-                                                     */
+                                                    $oran = $width / $height;
+                                                    if ($oran < 1) {
+                                                        $newheight = 500;
+                                                        $newwidth = round($height * $oran);
+                                                    } else if ($oran == 1) {
+                                                        $newheight = 500;
+                                                        $newwidth = 500;
+                                                    } else {
+                                                        $newheight = round($width / $oran);
+                                                        $newwidth = 500;
+                                                    }
                                                     if ($image->uploaded) {
                                                         // sadece resim formatları yüklensin
                                                         $image->allowed = array('image/*');
@@ -949,14 +946,14 @@ class AdminGenel extends Controller {
                                                         $image->file_name_body_pre = 'flora_';
                                                         $image->image_resize = true;
                                                         $image->image_ratio_crop = false;
-                                                        $image->image_x = $width;
-                                                        $image->image_y = $height;
+                                                        $image->image_x = $newwidth;
+                                                        $image->image_y = $newheight;
                                                         $image->image_watermark = 'images/watermark.png';
                                                         $image->image_watermark_position = 'B';
 
                                                         $image->Process("products");
                                                         if ($image->processed) {
-                                                            if ($explodeOzellikArray[2] > 0) {
+                                                            if ($explodeOzellikArray[1] > 0) {
                                                                 if ($form->submit()) {
                                                                     $dataUrunHafta = array(
                                                                         'urun_hafta' => 0
@@ -988,10 +985,10 @@ class AdminGenel extends Controller {
                                                                             'urun_adi' => $urunAdi,
                                                                             'urun_benzad' => $yeniurun,
                                                                             'urun_kmpnyaid' => 0,
-                                                                            'urun_hafta' => $explodeOzellikArray[2],
+                                                                            'urun_hafta' => $explodeOzellikArray[1],
                                                                             'urun_anaresim' => $image->file_dst_name,
                                                                             'urun_anaresimreal' => $realName,
-                                                                            'urun_coksatan' => $explodeOzellikArray[3]
+                                                                            'urun_coksatan' => $explodeOzellikArray[2]
                                                                         );
                                                                     }
                                                                     $result = $Panel_Model->panelUrunEkle($dataUrun);
@@ -1036,10 +1033,10 @@ class AdminGenel extends Controller {
                                                                         'urun_adi' => $urunAdi,
                                                                         'urun_benzad' => $yeniurun,
                                                                         'urun_kmpnyaid' => 0,
-                                                                        'urun_hafta' => $explodeOzellikArray[2],
+                                                                        'urun_hafta' => $explodeOzellikArray[1],
                                                                         'urun_anaresim' => $image->file_dst_name,
                                                                         'urun_anaresimreal' => $realName,
-                                                                        'urun_coksatan' => $explodeOzellikArray[3]
+                                                                        'urun_coksatan' => $explodeOzellikArray[2]
                                                                     );
                                                                 }
                                                                 $result = $Panel_Model->panelUrunEkle($dataUrun);
@@ -1100,20 +1097,18 @@ class AdminGenel extends Controller {
                                                 //oranlama
                                                 $width = $image->image_src_x;
                                                 $height = $image->image_src_y;
-                                                /*
-                                                  $oran = $width / $height;
-                                                  if ($oran < 1) {
-                                                  $newheight = 600;
-                                                  $newwidth = round($height * $oran);
-                                                  } else if ($oran == 1) {
-                                                  $newheight = 600;
-                                                  $newwidth = 600;
-                                                  } else {
-                                                  $newheight = round($width / $oran);
-                                                  $newwidth = 600;
-                                                  }
-                                                 * 
-                                                 */
+
+                                                $oran = $width / $height;
+                                                if ($oran < 1) {
+                                                    $newheight = 500;
+                                                    $newwidth = round($height * $oran);
+                                                } else if ($oran == 1) {
+                                                    $newheight = 500;
+                                                    $newwidth = 500;
+                                                } else {
+                                                    $newheight = round($width / $oran);
+                                                    $newwidth = 500;
+                                                }
                                                 if ($image->uploaded) {
                                                     // sadece resim formatları yüklensin
                                                     $image->allowed = array('image/*');
@@ -1125,14 +1120,14 @@ class AdminGenel extends Controller {
                                                     $image->file_name_body_pre = 'flora_';
                                                     $image->image_resize = true;
                                                     $image->image_ratio_crop = false;
-                                                    $image->image_x = $width;
-                                                    $image->image_y = $height;
+                                                    $image->image_x = $newwidth;
+                                                    $image->image_y = $newheight;
                                                     $image->image_watermark = 'images/watermark.png';
                                                     $image->image_watermark_position = 'B';
 
                                                     $image->Process("products");
                                                     if ($image->processed) {
-                                                        if ($explodeOzellikArray[2] > 0) {
+                                                        if ($explodeOzellikArray[1] > 0) {
                                                             if ($form->submit()) {
                                                                 $dataUrunHafta = array(
                                                                     'urun_hafta' => 0
@@ -1160,14 +1155,14 @@ class AdminGenel extends Controller {
                                                                         'urun_aktiflik' => $durum,
                                                                         'urun_sira' => $sira,
                                                                         'urun_yeniurun' => $explodeOzellikArray[0],
-                                                                        'urun_ekurun' => $explodeOzellikArray[1],
+                                                                        'urun_ekurun' => 1,
                                                                         'urun_adi' => $urunAdi,
                                                                         'urun_benzad' => $yeniurun,
                                                                         'urun_kmpnyaid' => 0,
-                                                                        'urun_hafta' => $explodeOzellikArray[2],
+                                                                        'urun_hafta' => $explodeOzellikArray[1],
                                                                         'urun_anaresim' => $image->file_dst_name,
                                                                         'urun_anaresimreal' => $realName,
-                                                                        'urun_coksatan' => $explodeOzellikArray[3]
+                                                                        'urun_coksatan' => $explodeOzellikArray[2]
                                                                     );
                                                                 }
                                                                 $result = $Panel_Model->panelUrunEkle($dataUrun);
@@ -1208,14 +1203,14 @@ class AdminGenel extends Controller {
                                                                     'urun_aktiflik' => $durum,
                                                                     'urun_sira' => $sira,
                                                                     'urun_yeniurun' => $explodeOzellikArray[0],
-                                                                    'urun_ekurun' => $explodeOzellikArray[1],
+                                                                    'urun_ekurun' => 1,
                                                                     'urun_adi' => $urunAdi,
                                                                     'urun_benzad' => $yeniurun,
                                                                     'urun_kmpnyaid' => 0,
-                                                                    'urun_hafta' => $explodeOzellikArray[2],
+                                                                    'urun_hafta' => $explodeOzellikArray[1],
                                                                     'urun_anaresim' => $image->file_dst_name,
                                                                     'urun_anaresimreal' => $realName,
-                                                                    'urun_coksatan' => $explodeOzellikArray[3]
+                                                                    'urun_coksatan' => $explodeOzellikArray[2]
                                                                 );
                                                             }
                                                             $result = $Panel_Model->panelUrunEkle($dataUrun);
@@ -1341,7 +1336,7 @@ class AdminGenel extends Controller {
                         if ($urunKod == "") {
                             $sonuc["hata"] = "Lütfen Ürün Kodunu Giriniz.";
                         } else {
-                            if ($explodeOzellikArray[1] <= 0) {
+                            if ($urunKatVal != -1) {
                                 if ($urunKatVal == 0) {
                                     $sonuc["hata"] = "Lütfen Ürün Kategorisini Giriniz.";
                                 } else {
@@ -1354,7 +1349,7 @@ class AdminGenel extends Controller {
                                             if ($resimKontrol == 0) {
                                                 $sonuc["hata"] = "Lütfen Ürün Resmi Giriniz.";
                                             } else {
-                                                if ($explodeOzellikArray[2] > 0) {
+                                                if ($explodeOzellikArray[1] > 0) {
                                                     if ($form->submit()) {
                                                         $dataUrunHafta = array(
                                                             'urun_hafta' => 0
@@ -1387,8 +1382,8 @@ class AdminGenel extends Controller {
                                                                     'urun_adi' => $urunAdi,
                                                                     'urun_benzad' => $yeniurun,
                                                                     'urun_kmpnyaid' => 0,
-                                                                    'urun_hafta' => $explodeOzellikArray[2],
-                                                                    'urun_coksatan' => $explodeOzellikArray[3]
+                                                                    'urun_hafta' => $explodeOzellikArray[1],
+                                                                    'urun_coksatan' => $explodeOzellikArray[2]
                                                                 );
                                                             }
                                                             $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
@@ -1433,8 +1428,8 @@ class AdminGenel extends Controller {
                                                                 'urun_adi' => $urunAdi,
                                                                 'urun_benzad' => $yeniurun,
                                                                 'urun_kmpnyaid' => 0,
-                                                                'urun_hafta' => $explodeOzellikArray[2],
-                                                                'urun_coksatan' => $explodeOzellikArray[3]
+                                                                'urun_hafta' => $explodeOzellikArray[1],
+                                                                'urun_coksatan' => $explodeOzellikArray[2]
                                                             );
                                                         }
                                                         $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
@@ -1467,20 +1462,17 @@ class AdminGenel extends Controller {
                                                     //oranlama
                                                     $width = $image->image_src_x;
                                                     $height = $image->image_src_y;
-                                                    /*
-                                                      $oran = $width / $height;
-                                                      if ($oran < 1) {
-                                                      $newheight = 600;
-                                                      $newwidth = round($height * $oran);
-                                                      } else if ($oran == 1) {
-                                                      $newheight = 600;
-                                                      $newwidth = 600;
-                                                      } else {
-                                                      $newheight = round($width / $oran);
-                                                      $newwidth = 600;
-                                                      }
-                                                     * 
-                                                     */
+                                                    $oran = $width / $height;
+                                                    if ($oran < 1) {
+                                                        $newheight = 500;
+                                                        $newwidth = round($height * $oran);
+                                                    } else if ($oran == 1) {
+                                                        $newheight = 500;
+                                                        $newwidth = 500;
+                                                    } else {
+                                                        $newheight = round($width / $oran);
+                                                        $newwidth = 500;
+                                                    }
                                                     if ($image->uploaded) {
                                                         // sadece resim formatları yüklensin
                                                         $image->allowed = array('image/*');
@@ -1492,8 +1484,8 @@ class AdminGenel extends Controller {
                                                         $image->file_name_body_pre = 'flora_';
                                                         $image->image_resize = true;
                                                         $image->image_ratio_crop = false;
-                                                        $image->image_x = $width;
-                                                        $image->image_y = $height;
+                                                        $image->image_x = $newwidth;
+                                                        $image->image_y = $newheight;
                                                         $image->image_watermark = 'images/watermark.png';
                                                         $image->image_watermark_position = 'B';
 
@@ -1522,10 +1514,10 @@ class AdminGenel extends Controller {
                                                                             'urun_adi' => $urunAdi,
                                                                             'urun_benzad' => $yeniurun,
                                                                             'urun_kmpnyaid' => 0,
-                                                                            'urun_hafta' => $explodeOzellikArray[2],
+                                                                            'urun_hafta' => $explodeOzellikArray[1],
                                                                             'urun_anaresim' => $image->file_dst_name,
                                                                             'urun_anaresimreal' => $realName,
-                                                                            'urun_coksatan' => $explodeOzellikArray[3]
+                                                                            'urun_coksatan' => $explodeOzellikArray[2]
                                                                         );
                                                                     }
                                                                     $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
@@ -1570,10 +1562,10 @@ class AdminGenel extends Controller {
                                                                         'urun_adi' => $urunAdi,
                                                                         'urun_benzad' => $yeniurun,
                                                                         'urun_kmpnyaid' => 0,
-                                                                        'urun_hafta' => $explodeOzellikArray[2],
+                                                                        'urun_hafta' => $explodeOzellikArray[1],
                                                                         'urun_anaresim' => $image->file_dst_name,
                                                                         'urun_anaresimreal' => $realName,
-                                                                        'urun_coksatan' => $explodeOzellikArray[3]
+                                                                        'urun_coksatan' => $explodeOzellikArray[2]
                                                                     );
                                                                 }
                                                                 $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
@@ -1621,7 +1613,7 @@ class AdminGenel extends Controller {
                                         if ($resimKontrol == 0) {
                                             $sonuc["hata"] = "Lütfen Ürün Resmi Giriniz.";
                                         } else {
-                                            if ($explodeOzellikArray[2] > 0) {
+                                            if ($explodeOzellikArray[1] > 0) {
                                                 if ($form->submit()) {
                                                     $dataUrunHafta = array(
                                                         'urun_hafta' => 0
@@ -1649,12 +1641,12 @@ class AdminGenel extends Controller {
                                                                 'urun_aktiflik' => $durum,
                                                                 'urun_sira' => $sira,
                                                                 'urun_yeniurun' => $explodeOzellikArray[0],
-                                                                'urun_ekurun' => $explodeOzellikArray[1],
+                                                                'urun_ekurun' => 1,
                                                                 'urun_adi' => $urunAdi,
                                                                 'urun_benzad' => $yeniurun,
                                                                 'urun_kmpnyaid' => 0,
-                                                                'urun_hafta' => $explodeOzellikArray[2],
-                                                                'urun_coksatan' => $explodeOzellikArray[3]
+                                                                'urun_hafta' => $explodeOzellikArray[1],
+                                                                'urun_coksatan' => $explodeOzellikArray[2]
                                                             );
                                                         }
                                                         $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
@@ -1694,12 +1686,12 @@ class AdminGenel extends Controller {
                                                             'urun_aktiflik' => $durum,
                                                             'urun_sira' => $sira,
                                                             'urun_yeniurun' => $explodeOzellikArray[0],
-                                                            'urun_ekurun' => $explodeOzellikArray[1],
+                                                            'urun_ekurun' => 1,
                                                             'urun_adi' => $urunAdi,
                                                             'urun_benzad' => $yeniurun,
                                                             'urun_kmpnyaid' => 0,
-                                                            'urun_hafta' => $explodeOzellikArray[2],
-                                                            'urun_coksatan' => $explodeOzellikArray[3]
+                                                            'urun_hafta' => $explodeOzellikArray[1],
+                                                            'urun_coksatan' => $explodeOzellikArray[2]
                                                         );
                                                     }
                                                     $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
@@ -1732,20 +1724,18 @@ class AdminGenel extends Controller {
                                                 //oranlama
                                                 $width = $image->image_src_x;
                                                 $height = $image->image_src_y;
-                                                /*
-                                                  $oran = $width / $height;
-                                                  if ($oran < 1) {
-                                                  $newheight = 600;
-                                                  $newwidth = round($height * $oran);
-                                                  } else if ($oran == 1) {
-                                                  $newheight = 600;
-                                                  $newwidth = 600;
-                                                  } else {
-                                                  $newheight = round($width / $oran);
-                                                  $newwidth = 600;
-                                                  }
-                                                 * 
-                                                 */
+
+                                                $oran = $width / $height;
+                                                if ($oran < 1) {
+                                                    $newheight = 500;
+                                                    $newwidth = round($height * $oran);
+                                                } else if ($oran == 1) {
+                                                    $newheight = 500;
+                                                    $newwidth = 500;
+                                                } else {
+                                                    $newheight = round($width / $oran);
+                                                    $newwidth = 500;
+                                                }
                                                 if ($image->uploaded) {
                                                     // sadece resim formatları yüklensin
                                                     $image->allowed = array('image/*');
@@ -1757,8 +1747,8 @@ class AdminGenel extends Controller {
                                                     $image->file_name_body_pre = 'flora_';
                                                     $image->image_resize = true;
                                                     $image->image_ratio_crop = false;
-                                                    $image->image_x = $width;
-                                                    $image->image_y = $height;
+                                                    $image->image_x = $newwidth;
+                                                    $image->image_y = $newheight;
                                                     $image->image_watermark = 'images/watermark.png';
                                                     $image->image_watermark_position = 'B';
 
@@ -1780,12 +1770,15 @@ class AdminGenel extends Controller {
                                                                         'urun_normalfiyat' => $urunFiyat + round(($urunFiyat * 18) / 100),
                                                                         'urun_aktiflik' => $durum,
                                                                         'urun_sira' => $sira,
-                                                                        'urun_yeniurun' => $explodeOzellikArray[0], 'urun_ekurun' => $explodeOzellikArray[1], 'urun_adi' => $urunAdi,
+                                                                        'urun_yeniurun' => $explodeOzellikArray[0],
+                                                                        'urun_ekurun' => 1,
+                                                                        'urun_adi' => $urunAdi,
                                                                         'urun_benzad' => $yeniurun,
                                                                         'urun_kmpnyaid' => 0,
-                                                                        'urun_hafta' => $explodeOzellikArray[2], 'urun_anaresim' => $image->file_dst_name,
+                                                                        'urun_hafta' => $explodeOzellikArray[1],
+                                                                        'urun_anaresim' => $image->file_dst_name,
                                                                         'urun_anaresimreal' => $realName,
-                                                                        'urun_coksatan' => $explodeOzellikArray[3]
+                                                                        'urun_coksatan' => $explodeOzellikArray[2]
                                                                     );
                                                                 }
                                                                 $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);
@@ -1826,14 +1819,14 @@ class AdminGenel extends Controller {
                                                                     'urun_aktiflik' => $durum,
                                                                     'urun_sira' => $sira,
                                                                     'urun_yeniurun' => $explodeOzellikArray[0],
-                                                                    'urun_ekurun' => $explodeOzellikArray[1],
+                                                                    'urun_ekurun' => 1,
                                                                     'urun_adi' => $urunAdi,
                                                                     'urun_benzad' => $yeniurun,
                                                                     'urun_kmpnyaid' => 0,
-                                                                    'urun_hafta' => $explodeOzellikArray[2],
+                                                                    'urun_hafta' => $explodeOzellikArray[1],
                                                                     'urun_anaresim' => $image->file_dst_name,
                                                                     'urun_anaresimreal' => $realName,
-                                                                    'urun_coksatan' => $explodeOzellikArray[3]
+                                                                    'urun_coksatan' => $explodeOzellikArray[2]
                                                                 );
                                                             }
                                                             $result = $Panel_Model->panelurunUpdate($dataUrun, $urunID);

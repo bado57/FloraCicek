@@ -48,6 +48,7 @@
                                                                         <?php for ($kat = 0; $kat < count($model[0]); $kat++) { ?>
                                                                             <option value="<?php echo $model[0][$kat]['ID']; ?>"><?php echo $model[0][$kat]['Adi']; ?></option>
                                                                         <?php } ?>
+                                                                        <option id="ekurunselect2" value="-1">Ek Urun</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-sm-6 col-xs-12">
@@ -75,9 +76,6 @@
                                                             <div class="row" style="margin-top:15px;" id="urunOzellik">
                                                                 <label class="col-sm-3 col-xs-6">
                                                                     <input data-islem="1" id="yeniurun" name="yeniurun" type="checkbox" class="minimal"> <span style="margin-left:5px;">Yeni Ürün</span>
-                                                                </label>
-                                                                <label class="col-sm-3 col-xs-6">
-                                                                    <input data-islem="2" id="ekurun" name="ekurun" type="checkbox" class="minimal"> <span style="margin-left:5px;">Ek Ürün</span>
                                                                 </label>
                                                                 <label class="col-sm-3 col-xs-6">
                                                                     <input data-islem="3" id="haftaninurunu" name="haftaninurunu" type="checkbox" class="minimal"> <span style="margin-left:5px;">Haftanın Ürünü</span>
@@ -138,7 +136,6 @@
                                                                 <th class="hidden-xs">Sıra</th>
                                                                 <th class="hidden-xs">Kampanyalı</th>
                                                                 <th class="hidden-xs">Yeni Ürün</th>
-                                                                <th class="hidden-xs">Ek Ürün</th>
                                                                 <th class="hidden-xs">Çok Satan</th>
                                                                 <th class="hidden-xs">Haftanın Ürünü</th>
                                                                 <th class="text-right">İşlemler</th>
@@ -154,7 +151,6 @@
                                                                     <td id="urunsira<?php echo $model[2][$urun]['ID']; ?>" class="hidden-xs"><?php echo $model[2][$urun]['Sira']; ?></td>
                                                                     <td id="urunkmpnya<?php echo $model[2][$urun]['ID']; ?>" data-kmpnya="<?php echo $model[2][$urun]['Kampanya']; ?>" class="hidden-xs"><i class="fa fa-<?php echo $model[2][$urun]['Kampanya'] == 1 ? "check" : "times"; ?>"></i></td>
                                                             <td id="urunyeni<?php echo $model[2][$urun]['ID']; ?>" data-yeni="<?php echo $model[2][$urun]['Yeni']; ?>" class="hidden-xs"><i class="fa fa-<?php echo $model[2][$urun]['Yeni'] == 1 ? "check" : "times"; ?>"></i></td>
-                                                            <td id="urunek<?php echo $model[2][$urun]['ID']; ?>" data-ek="<?php echo $model[2][$urun]['Ek']; ?>" class="hidden-xs"><i class="fa fa-<?php echo $model[2][$urun]['Ek'] == 1 ? "check" : "times"; ?>"></i></td>
                                                             <td id="uruncok<?php echo $model[2][$urun]['ID']; ?>" data-cok="<?php echo $model[2][$urun]['CokSatan']; ?>" class="hidden-xs"><i class="fa fa-<?php echo $model[2][$urun]['CokSatan'] == 1 ? "check" : "times"; ?>"></i></td>
                                                             <td id="urunhafta<?php echo $model[2][$urun]['ID']; ?>" data-hafta="<?php echo $model[2][$urun]['HaftaUrun']; ?>" class="hidden-xs"><i class="fa fa-<?php echo $model[2][$urun]['HaftaUrun'] == 1 ? "check" : "times"; ?>"></i></td>
                                                             <td class="text-right">

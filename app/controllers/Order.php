@@ -185,7 +185,7 @@ class Order extends Controller {
         } else {
             $form = $this->load->otherClasses('Form');
             //model bağlantısı
-            $Panel_Model = $this->load->model("panel_model");
+            $Panel_Model = $this->load->model("Panel_Model");
             $formlanguage = $this->load->multilanguage("tr");
             $languagedeger = $formlanguage->multilanguage();
 
@@ -213,7 +213,7 @@ class Order extends Controller {
     function Delivery() {
         $form = $this->load->otherClasses('Form');
         //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
         $urunid = Session::get("SipID");
@@ -347,7 +347,7 @@ class Order extends Controller {
     function Card() {
         $form = $this->load->otherClasses('Form');
         //model bağlantısı
-        $Panel_Model = $this->load->model("panel_model");
+        $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
         $urunid = Session::get("SipID");
