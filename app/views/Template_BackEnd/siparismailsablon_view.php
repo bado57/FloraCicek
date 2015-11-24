@@ -73,7 +73,7 @@
                     <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; padding-bottom: 0.2cm;"></div>
                     
                     <div style="margin-left: 0.2cm; position: relative; display: inline-block; width: 47%; height: 3.5cm; margin-bottom: 0.2 cm; margin-top: 0.2cm; border:1px solid #e6e6e6; padding: 0.1cm;">
-                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: :0cm; position: relative; display: inline-block; vertical-align: top !important" />
+                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: 0cm; position: relative; display: inline-block; vertical-align: top !important" />
                                 <font style="font-size: 9pt; position: relative; display: inline-block; width: 58%; margin-left: 0.2cm; line-height: 14pt;">
                                 <b>Ürün Kodu :</b> 458962 <br/>
                                 <b>Ürün Adı :</b> Cam Vazoda 7 <br/>
@@ -83,7 +83,7 @@
                                 </font>
                         </div>
                         <div style="margin-left: 0.2cm; position: relative; display: inline-block; width: 47%; height: 3.5cm; margin-bottom: 0.2 cm; margin-top: 0.2cm; border:1px solid #e6e6e6; padding: 0.1cm;">
-                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: :0cm; position: relative; display: inline-block; vertical-align: top !important" />
+                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: 0cm; position: relative; display: inline-block; vertical-align: top !important" />
                                 <font style="font-size: 9pt; position: relative; display: inline-block; width: 58%; margin-left: 0.2cm; line-height: 14pt;">
                                 <b>Ürün Kodu :</b> 458962 <br/>
                                 <b>Ürün Adı :</b> Cam Vazoda 7 <br/>
@@ -94,7 +94,7 @@
                         </div>
                         
                         <div style="margin-left: 0.2cm; position: relative; display: inline-block; width: 47%; height: 3.5cm; margin-bottom: 0.2 cm; margin-top: 0.2cm; border:1px solid #e6e6e6; padding: 0.1cm;">
-                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: :0cm; position: relative; display: inline-block; vertical-align: top !important" />
+                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: 0cm; position: relative; display: inline-block; vertical-align: top !important" />
                                 <font style="font-size: 9pt; position: relative; display: inline-block; width: 58%; margin-left: 0.2cm; line-height: 14pt;">
                                 <b>Ürün Kodu :</b> 458962 <br/>
                                 <b>Ürün Adı :</b> Cam Vazoda 7 <br/>
@@ -104,7 +104,7 @@
                                 </font>
                         </div>
                         <div style="margin-left: 0.2cm; position: relative; display: inline-block; width: 47%; height: 3.5cm; margin-bottom: 0.2 cm; margin-top: 0.2cm; border:1px solid #e6e6e6; padding: 0.1cm;">
-                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: :0cm; position: relative; display: inline-block; vertical-align: top !important" />
+                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: 0cm; position: relative; display: inline-block; vertical-align: top !important" />
                                 <font style="font-size: 9pt; position: relative; display: inline-block; width: 58%; margin-left: 0.2cm; line-height: 14pt;">
                                 <b>Ürün Kodu :</b> 458962 <br/>
                                 <b>Ürün Adı :</b> Cam Vazoda 7 <br/>
@@ -115,7 +115,7 @@
                         </div>
                         
                         <div style="margin-left: 0.2cm; position: relative; display: inline-block; width: 47%; height: 3.5cm; margin-bottom: 0.2 cm; margin-top: 0.2cm; border:1px solid #e6e6e6; padding: 0.1cm;">
-                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: :0cm; position: relative; display: inline-block; vertical-align: top !important" />
+                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: 0cm; position: relative; display: inline-block; vertical-align: top !important" />
                                 <font style="font-size: 9pt; position: relative; display: inline-block; width: 58%; margin-left: 0.2cm; line-height: 14pt;">
                                 <b>Ürün Kodu :</b> 458962 <br/>
                                 <b>Ürün Adı :</b> Cam Vazoda 7 <br/>
@@ -125,7 +125,7 @@
                                 </font>
                         </div>
                         <div style="margin-left: 0.2cm; position: relative; display: inline-block; width: 47%; height: 3.5cm; margin-bottom: 0.2 cm; margin-top: 0.2cm; border:1px solid #e6e6e6; padding: 0.1cm;">
-                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: :0cm; position: relative; display: inline-block; vertical-align: top !important" />
+                                <img src="https://www.turkiyefloracicek.com/products/flora_r01bX6T5VgqxDzl79nadMhUKWcYHLPJmCsEvNReoFfu2Z4IOQBGw8kytjASp.jpg" style="max-width: 40%; max-height: 3.5cm; margin: 0cm; position: relative; display: inline-block; vertical-align: top !important" />
                                 <font style="font-size: 9pt; position: relative; display: inline-block; width: 58%; margin-left: 0.2cm; line-height: 14pt;">
                                 <b>Ürün Kodu :</b> 458962 <br/>
                                 <b>Ürün Adı :</b> Cam Vazoda 7 <br/>
