@@ -637,7 +637,7 @@ class Genel extends Controller {
                     Session::set("SipPKodu", $pKodu);
 
                     $tarih = explode("/", $tarihim);
-                    $newTarih = $tarih[0] . "." . $tarih[1] . "." . $tarih[2];
+                    $newTarih = $tarih[0] . "/" . $tarih[1] . "/" . $tarih[2];
                     $gun = date('D', strtotime("$tarih[1]/$tarih[0]/$tarih[2]"));
                     $simdikiGun = $form->gunogrenme("$gun");
                     if ($urunID > 0) {
@@ -1085,11 +1085,6 @@ class Genel extends Controller {
                     $ilID = Session::get("SipIlID");
                     $ilceText = Session::get("SipIlce");
                     $ilceID = Session::get("SipIlceID");
-                    $semtText = Session::get("SipSemt");
-                    $semtID = Session::get("SipSemtID");
-                    $mahText = Session::get("SipMah");
-                    $mahID = Session::get("SipMahID");
-                    $pKodu = Session::get("SipPKodu");
                     $tarih = Session::get("SipTarih");
                     $gun = Session::get("SipGun");
                     $saat = Session::get("SipSaat");
@@ -1136,11 +1131,6 @@ class Genel extends Controller {
                                                                                 'siparis_sehirID' => $ilID,
                                                                                 'siparis_ilce' => $ilceText,
                                                                                 'siparis_ilceID' => $ilceID,
-                                                                                'siparis_semt' => $semtText,
-                                                                                'siparis_semtID' => $semtID,
-                                                                                'siparis_mahalle' => $mahText,
-                                                                                'siparis_mahalleID' => $mahID,
-                                                                                'siparis_postakodu' => $pKodu,
                                                                                 'siparis_saat' => $saat,
                                                                                 'siparis_gun' => $gun,
                                                                                 'siparis_tarih' => $tarih,
@@ -1157,6 +1147,7 @@ class Genel extends Controller {
                                                                             if (count($ekurunID) > 0) {
                                                                                 unset($_SESSION['EkUrunID']);
                                                                                 Session::set("EkUrunID", $ekuruniddizi);
+                                                                                //geçici-sipariş id si
                                                                                 Session::set("SipGeciciUrunID", $result);
                                                                             } else {
                                                                                 unset($_SESSION['EkUrunID']);
@@ -1219,11 +1210,6 @@ class Genel extends Controller {
                                                             'siparis_sehirID' => $ilID,
                                                             'siparis_ilce' => $ilceText,
                                                             'siparis_ilceID' => $ilceID,
-                                                            'siparis_semt' => $semtText,
-                                                            'siparis_semtID' => $semtID,
-                                                            'siparis_mahalle' => $mahText,
-                                                            'siparis_mahalleID' => $mahID,
-                                                            'siparis_postakodu' => $pKodu,
                                                             'siparis_saat' => $saat,
                                                             'siparis_gun' => $gun,
                                                             'siparis_tarih' => $tarih,
@@ -1240,6 +1226,7 @@ class Genel extends Controller {
                                                     if ($result) {
                                                         if (count($ekurunID) > 0) {
                                                             Session::set("EkUrunID", $ekuruniddizi);
+                                                            //geçici-sipariş id si
                                                             Session::set("SipGeciciUrunID", $result);
                                                         } else {
                                                             unset($_SESSION['EkUrunID']);

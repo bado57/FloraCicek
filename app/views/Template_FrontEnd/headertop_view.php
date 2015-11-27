@@ -89,7 +89,7 @@
                                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span> <?php echo $data["AmacaGore"] ?></a>
                                                 <ul role="menu" class="dropdown-menu">
                                                     <?php foreach ($model[0] as $etiketModel) { ?>
-                                                        <li><a href="<?php echo SITE_URL . '/' . $etiketModel['etiketUrl']; ?>" data-url="Kategori" data-method="index" data-kategori="1" data-id="<?php echo $etiketModel['etiketID']; ?>"><?php echo $etiketModel['etiketAd']; ?></a></li>
+                                                        <li><a href="<?php echo $etiketModel['etiketUrl']; ?>"><?php echo $etiketModel['etiketAd']; ?></a></li>
                                                     <?php } ?>
                                                 </ul>
                                             </li>
@@ -97,8 +97,10 @@
                                                 <li class="dropdown">
                                                     <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="caret"></span> <?php echo $model[1][$ustkat]['Adi']; ?></a>
                                                     <ul role="menu" class="dropdown-menu">
-                                                        <?php for ($altkat = 0; $altkat < count($model[2]); $altkat++) { ?>
-                                                            <li><a href="<?php echo SITE_URL . '/' . $model[2][$ustkat][$altkat]['Url']; ?>" data-url="Kategori" data-method="index" data-kategori="2" data-id="<?php echo $model[2][$ustkat][$altkat]['ID']; ?>"><?php echo $model[2][$ustkat][$altkat]['Adi']; ?></a></li>
+                                                        <?php for ($altkat = 0; $altkat < count($model[2][$ustkat]); $altkat++) { ?>
+                                                            <?php if ($model[2][$ustkat][$altkat]['ID'] != '') { ?>
+                                                                <li><a href="<?php echo $model[2][$ustkat][$altkat]['Url']; ?>"><?php echo $model[2][$ustkat][$altkat]['Adi']; ?></a></li>
+                                                            <?php } ?>
                                                         <?php } ?>
                                                     </ul>
                                                 </li>
@@ -108,12 +110,12 @@
                                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span> <?php echo $data["Kampanya"] ?></a>
                                                     <ul role="menu" class="dropdown-menu">
                                                         <?php foreach ($model[3] as $etiketModel) { ?>
-                                                            <li><a href="<?php echo SITE_URL . '/' . $etiketModel['Url']; ?>" data-url="Home" data-method="index" data-kategori="3" data-id="<?php echo $etiketModel['ID']; ?>"><?php echo $etiketModel['Adi']; ?></a></li>
+                                                            <li><a href="<?php echo $etiketModel['Url']; ?>"><?php echo $etiketModel['Adi']; ?></a></li>
                                                         <?php } ?>
                                                     </ul>
                                                 </li>
                                             <?php } ?>
-                                            <li><a href="#">BLOG</a></li>
+                                            <li><a href="blog"><?php echo $data["Blog"] ?></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -159,4 +161,4 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!--/header_top-->
+                            </div>
