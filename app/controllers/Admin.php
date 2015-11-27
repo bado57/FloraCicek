@@ -319,6 +319,12 @@ class Admin extends Controller {
         $i = 0;
         foreach ($icerikListe as $icerikListee) {
             $iceriklist[$i]['ID'] = $icerikListee['sbt_id'];
+            $iceriklist[$i]['UyeSoz'] = $icerikListee['sbt_uyeliksoz'];
+            $iceriklist[$i]['HizmetSoz'] = $icerikListee['sbt_hzmtsoz'];
+            $iceriklist[$i]['GizlilikSoz'] = $icerikListee['sbt_gzllksoz'];
+            $iceriklist[$i]['MesafeliSoz'] = $icerikListee['sbt_mesafelistssoz'];
+            $iceriklist[$i]['TeslimatSart'] = $icerikListee['sbt_tslmatsart'];
+            $iceriklist[$i]['OnBilgiFormu'] = $icerikListee['sbt_onbilgilendirmeform'];
             $iceriklist[$i]['Tel'] = $icerikListee['sbt_telefon'];
             $iceriklist[$i]['Fax'] = $icerikListee['sbt_fax'];
             $iceriklist[$i]['Adres'] = $icerikListee['sbt_adres'];
@@ -765,42 +771,42 @@ class Admin extends Controller {
         $this->load->view("Template_BackEnd/ililce", $languagedeger, $ililcedizi);
         $this->load->view("Template_BackEnd/footer", $languagedeger);
     }
-    
+
     function Kurumsaluye() {
         //model bağlantısı
         $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
-        
+
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger);
         $this->load->view("Template_BackEnd/kurumsaluye", $languagedeger);
         $this->load->view("Template_BackEnd/footer", $languagedeger);
     }
-    
+
     function Bireyseluye() {
         //model bağlantısı
         $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
-        
+
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger);
         $this->load->view("Template_BackEnd/bireyseluye", $languagedeger);
         $this->load->view("Template_BackEnd/footer", $languagedeger);
     }
-    
+
     function Siparismail() {
         //model bağlantısı
         $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
-        
+
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger);

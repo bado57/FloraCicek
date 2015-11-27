@@ -261,6 +261,12 @@ $(document).ready(function () {
         } else {
             newimage = 1;
         }
+        var uyelikSoz = CKEDITOR.instances['uyelikSoz'].getData();
+        var onBilgi = CKEDITOR.instances['onBilgi'].getData();
+        var mesafeliSatis = CKEDITOR.instances['mesafeliSatis'].getData();
+        var gizlilikSoz = CKEDITOR.instances['gizlilikSoz'].getData();
+        var hizmetSoz = CKEDITOR.instances['hizmetSoz'].getData();
+        var teslimatSart = CKEDITOR.instances['teslimatSart'].getData();
         formData.append('file', $("#logoresim")[0].files[0]);
         formData.append('newImage', newimage);
         formData.append('telefon', telefon);
@@ -274,6 +280,12 @@ $(document).ready(function () {
         formData.append('adres', adres);
         formData.append('yoneticimail', yoneticimail);
         formData.append('yoneticimailek', yoneticimailek);
+        formData.append('uyelikSoz', uyelikSoz);
+        formData.append('onBilgi', onBilgi);
+        formData.append('mesafeliSatis', mesafeliSatis);
+        formData.append('gizlilikSoz', gizlilikSoz);
+        formData.append('hizmetSoz', hizmetSoz);
+        formData.append('teslimatSart', teslimatSart);
         formData.append('tip', "sabitIcerikEkle");
         $.ajax({
             type: "post",
@@ -821,14 +833,14 @@ $(function () {
         expanderCollapsedClass: 'glyphicon glyphicon-plus',
         initialState: 'collapsed'
     });
-    
+
     $("#vitrinTable").DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
         "ordering": false,
         "info": true});
-    
+
     $("#blogTable").DataTable({
         "paging": true,
         "lengthChange": true,
@@ -836,7 +848,7 @@ $(function () {
         "ordering": false,
         "info": false
     });
-    
+
     $("#sayfaTable").DataTable({
         "paging": true,
         "lengthChange": true,
@@ -844,8 +856,8 @@ $(function () {
         "ordering": false,
         "info": false
     });
-    
-    
+
+
 
     var image_holder = $("#image-holder");
     $("#vitrinresim").on("change", function () {
