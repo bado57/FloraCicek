@@ -1,15 +1,11 @@
 <section id="advertisement">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-12">
                 <div id="katID" data-value="<?php echo $model[0][0]['katID']; ?>" style="display:none"></div>
                 <div id="katTip" data-value="<?php echo $model[0][0]['katTip']; ?>" style="display:none"></div>
-                <p class="SayfaBaslik"><?php echo $model[0][0]['katAd']; ?></p>
-            </div>
-            <div class="col-sm-9">
+                <h1 class="SayfaBaslik"><?php echo $model[0][0]['katAd']; ?></h1>
                 <p><?php echo $model[0][0]['katYazi']; ?></p>
             </div>
-        </div>
         <div class="col-sm-12 filtre" id="tabClick">
             <div class="row">
                 <div id="tab" class="col-sm-3 col-xs-3 text-center" style="border-right: 1px solid #e6e6e6;">

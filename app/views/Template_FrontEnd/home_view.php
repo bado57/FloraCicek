@@ -88,7 +88,7 @@
                                 <div class="item <?php echo $yni == 0 ? 'active' : ''; ?>">
                                     <?php for ($ynii = 0; $ynii < 3; $ynii++) { ?>
                                         <?php if ($modelyuruncount > 0) { ?>
-                                            <div class="col-sm-4 col-xs-4">
+                                            <div class="col-sm-4">
                                                 <div class="product-image-wrapper">
                                                     <div class="single-products">
                                                         <div class="productinfo text-center">

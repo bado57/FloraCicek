@@ -1136,7 +1136,7 @@ h2.title {
 
 
 #advertisement {
-    padding-top: 45px;
+    padding-top: 20px;
     padding-bottom: 45px;
 }
 
@@ -1224,6 +1224,7 @@ h2.title {
 
 .view-product {
     position: relative;
+    border: 1px solid #e6e6e6;
 }
 
 .view-product:after {
@@ -1235,10 +1236,11 @@ h2.title {
     top: 0;
     right: 0;
     background: transparent url(../../images/zoom.png);
+
 }
 
 .view-product img {
-    border: 1px solid #e6e6e6;
+
     width: 100%;
     height: auto;
 }
@@ -2610,7 +2612,6 @@ h2.title {
 }
 
 .SayfaBaslik {
-    font-size: 48px;
     font-weight: 200;
     font-family: 'Oswald', sans-serif;
     color: #E20707;
@@ -2877,14 +2878,29 @@ ul.ekurunler{padding-left:0 !important;}
 
 .imgThumb{
     width: 100%;
+    height: 260px;
+    margin-bottom: 20px;
+}
+
+.imgThumbEk{
+    width: 100%;
+    height: 168px;
     margin-bottom: 20px;
 }
 
 .imgThumb img{
     width:auto;
     max-width: 100%;
-    height: 260px;
+    height: auto;
     max-height: 260px;
+    margin:0 auto;
+}
+
+.imgThumbEk img{
+    width:auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 168px;
     margin:0 auto;
 }
 
@@ -2931,11 +2947,24 @@ strong.spNo{
     font-size: 16px;
 }
 
-@media (max-width: 480px) { 
-    .yeniUrunImg{
+
+@media only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2) {
+
+    .imgThumb{
+        width: 100%;
+        height: 168px;
+        margin-bottom: 20px;
+    }
+
+    .imgThumb img{
         width:auto;
         max-width: 100%;
-        height: 115px;
-        max-height: 115px;
+        height: auto;
+        max-height: 168px;
+        margin:0 auto;
     }
+
 }

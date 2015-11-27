@@ -66,6 +66,13 @@
             $(".sfrhtrKapat").on("click", function () {
                 $(".sifreHatirlat").slideUp("fast");
             });
+
+            $(document).keypress("#girissifre", function (e) {
+                if (e.which == 13) {
+                    $("#btnGiris").click();
+                }
+            });
+
         });
     </script>
 

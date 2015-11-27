@@ -37,7 +37,7 @@
                                         <div class="single-products">
                                             <div class="productinfo text-center" data-id="<?php echo $urunModel["EkID"] ?>">
                                                 <p class="ekurun-id hidden"><?php echo $urunModel['EkID']; ?></p>
-                                                <div class="imgThumb">
+                                                <div class="imgThumb imgThumbEk">
                                                     <img src="<?php echo SITE_PRODUCT ?>/<?php echo $urunModel['EkResim']; ?>" alt="" />
                                                 </div>
                                                 <p class="ekurun-isim"><?php echo $urunModel['EkAdi']; ?><br /> <small><?php echo $data["UrunKod"]; ?> : <?php echo $urunModel['EkKod']; ?></small></p>
