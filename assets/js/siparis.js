@@ -9,14 +9,13 @@ $(document).ready(function () {
             dataType: "json",
             data: {"ID": ID, "tip": "siparisDuzenlemeDegerler"},
             success: function (cevap) {
-                
+
                 if (cevap.hata) {
                     reset();
                     alertify.alert(cevap.hata);
                     return false;
                 } else {
                     if (cevap.result) {
-                        
                         $("#siparisbilgileri").show();
                         $("#urunbilgileri").show();
                         $("#müsteribilgileri").show();
@@ -24,9 +23,9 @@ $(document).ready(function () {
                         $("#teslimatbilgileri").show();
                         var durum = $("#" + ID).attr("data-durum");
                         $("#siparisdurum").select2("val", durum);
-                        
+
                         ////// Bilgiler
-                        
+
                         $(".sipno").text(cevap.result[0].No);
                         $(".siptarih").text(cevap.result[0].Tarih);
                         $(".siptutar").text(cevap.result[0].TTutar);
@@ -41,23 +40,30 @@ $(document).ready(function () {
                         if (cevap.result[1]) {
                             var length = cevap.result[1].length;
                             for (var i = 0; i < length; i++) {
+                                var urunresulttip = "";
+                                if (cevap.result[1][i].SUTip != 0) {
+                                    urunresulttip = "Ek Ürün";
+                                } else {
+                                    urunresulttip = "Ana Ürün";
+                                }
                                 $("#urunSip").append("<tr>"
                                         + "<td id='urunkod'>" + cevap.result[1][i].SUKod + "/" + cevap.result[1][i].SUAd + "</td>"
                                         + "<td id='urunbirimfiyat'>" + cevap.result[1][i].SUTtar + "</td>"
                                         + "<td id='urunmiktar'>" + cevap.result[1][i].SUMiktar + "</td>"
                                         + "<td id='uruntutar'>" + cevap.result[1][i].SUTplmTutar + " TL</td></tr>");
-                                
+
                                 $("#urunSipPrint").append('<div style="margin-left: 0.2cm; position: relative; display: inline-block; width: 47%; height: 3.5cm; margin-bottom: 0.2 cm; margin-top: 0.2cm; border:1px solid #e6e6e6; padding: 0.1cm;">'
-                                        +'<img src="https://www.turkiyefloracicek.com/products/'+ cevap.result[1][i].SUResim +'" style="max-width: 40%; max-height: 3.5cm; margin: :0cm; position: relative; display: inline-block; vertical-align: top !important" />'
-                                        +'<font style="font-size: 9pt; position: relative; display: inline-block; width: 58%; margin-left: 0.2cm; line-height: 14pt;">'
-                                                        +'<b>Ürün Kodu :</b> '+ cevap.result[1][i].SUKod +' <br/>'
-                                                        +'<b>Ürün Adı :</b> '+ cevap.result[1][i].SUAd +' <br/>'
-                                                        +'<b>Birim Fiyat :</b> '+ cevap.result[1][i].SUTtar +' TL <br/>'
-                                                        +'<b>Adet :</b> '+ cevap.result[1][i].SUMiktar +' <br/>'
-                                                        +'<b>Toplam Tutar :</b> '+ cevap.result[1][i].SUTplmTutar +' TL <br/>'
-                                                        +'</font>'
-                                                    +'</div>');
-                                
+                                        + '<img src="https://www.turkiyefloracicek.com/products/' + cevap.result[1][i].SUResim + '" style="max-width: 40%; max-height: 3.5cm; margin: :0cm; position: relative; display: inline-block; vertical-align: top !important" />'
+                                        + '<font style="font-size: 9pt; position: relative; display: inline-block; width: 58%; margin-left: 0.2cm; line-height: 14pt;">'
+                                        + '<b>Ürün Kodu :</b> ' + cevap.result[1][i].SUKod + ' <br/>'
+                                        + '<b>Ürün Adı :</b> ' + cevap.result[1][i].SUAd + ' <br/>'
+                                        + '<b>Ürün Tipi :</b> ' + urunresulttip + ' <br/>'
+                                        + '<b>Birim Fiyat :</b> ' + cevap.result[1][i].SUTtar + ' TL <br/>'
+                                        + '<b>Adet :</b> ' + cevap.result[1][i].SUMiktar + ' <br/>'
+                                        + '<b>Toplam Tutar :</b> ' + cevap.result[1][i].SUTplmTutar + ' TL <br/>'
+                                        + '</font>'
+                                        + '</div>');
+
                             }
                             $(".uruntoplamtutar").text(cevap.result[1][i - 1].Toplam);
                         }
@@ -66,7 +72,7 @@ $(document).ready(function () {
                         $(".gndad").text(cevap.result[0].GAd);
                         $(".gndtel").text(cevap.result[0].GTel);
                         $(".gndmail").text(cevap.result[0].GMail);
-                        
+
                         if (cevap.result[0].GUDurum == 0) {
                             $(".gndtip").html('<i class="fa fa-user"></i> Bireysel Üye');
                         } else if (cevap.result[0].GUDurum == 1) {
@@ -92,13 +98,13 @@ $(document).ready(function () {
                         $(".tslmtnot").text(cevap.result[0].SNot);
                         $(".tslmtkartmsj").text(cevap.result[0].SKartMsj);
                         $(".tslmtkartisim").text(cevap.result[0].SKartIsim);
-                        
+
                         if (cevap.result[0].SIsimGstr == 1) {
                             $(".tslmtisimgrnme").text("Görünsün");
                         } else {
                             $(".tslmtisimgrnme").text("Görünmesin");
                         }
-                        
+
                         $(".spPrintFooter").text(cevap.result[0].GAd + " " + cevap.result[0].Tarih + " " + cevap.result[0].No + " no'lu sipariş detayları.");
                         $(".spTotalFooter").text("Tpolam Tutar : " + cevap.result[0].TTutar + " TL");
                         ///// ----- Bilgiler
@@ -115,7 +121,6 @@ $(document).ready(function () {
             }
         });
     });
-    
     $(document).on('click', 'button#formToggleSiparis', function (e) {
         var kapaliacik = $("input[name=kapaliacik]").val();
         var duzenleme = $("input[name=duzenleme]").val();

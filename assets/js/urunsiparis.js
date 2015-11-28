@@ -86,7 +86,6 @@ $(document).ready(function () {
                     return false;
                 } else {
                     if (cevap.giris) {
-                        alert(cevap.giris);
                         if (cevap.result == 1) {
                             window.location.href = SITE_URL + '/Order/Delivery';
                         }
@@ -110,6 +109,7 @@ $(document).ready(function () {
         var gndndnID = $("#gonderimNedeni option:selected").val();
         var alcadsoyad = $("#aliciadsoyad").val();
         var alctel = $("#alicitel").val();
+        var siparisnotu = $("#siparisnotu").val();
         var alcgityertext = $("#gidecegiYer option:selected").text();
         var alcgityerid = $("#gidecegiYer option:selected").val();
         var alcadres = $("#aliciadres").val();
@@ -135,7 +135,7 @@ $(document).ready(function () {
             cache: false,
             dataType: "json",
             data: {"gndadsoyad": gndadsoyad, "gndmail": gndmail, "gndtel": gndtel, "gndndnTxt": gndndnTxt,
-                "gndndnID": gndndnID, "alcadsoyad": alcadsoyad, "alctel": alctel, "alcgityertext": alcgityertext,
+                "gndndnID": gndndnID, "alcadsoyad": alcadsoyad, "alctel": alctel, "siparisnotu": siparisnotu, "alcgityertext": alcgityertext,
                 "alcgityerid": alcgityerid, "alcadres": alcadres, "alcadresdetay": alcadresdetay, "okfis": okfis,
                 "okfatura": okfatura, "ftrunvan": ftrunvan, "vd": vd, "vn": vn,
                 "tcno": tcno, "ftradres": ftradres, "kartisim": kartisim, "kartmesaj": kartmesaj,
@@ -148,25 +148,77 @@ $(document).ready(function () {
                 } else {
                     if (cevap.result == 1) {
                         window.location.href = SITE_URL + '/Order/Card';
-                    } else if (cevap.result == 0) {
-                        window.location.href = SITE_URL + '/Order/Card';
                     }
                 }
             }
         });
     });
-    $(document).on("click", "button#odemeIleri", function (e) {
+    $(document).on("click", "button#spKartTamamla", function (e) {
         var kartNo = $("#kartno").val();
         var kartSonAyText = $("#kartAy option:selected").text();
-        var kartSonAyID = $("#kartAy option:selected").val();
         var kartSonYilText = $("#kartYil option:selected").text();
-        var kartSonYilID = $("#kartYil option:selected").val();
         var cvv = $("#cvv").val();
-        var ucd = $('#3dsecure').is(":checked");
-        var kartsatisSoz = $('#kartSatisSoz').is(":checked");
-        var bankaText = $("#banka option:selected").text();
-        var bankaID = $("#banka option:selected").val();
-        var havaleSatisSoz = $("#havaleSatisSoz option:selected").val();
-        var telSatisSoz = $("#telSatisSoz option:selected").val();
+        var mss = $('#kartSatisSoz').is(":checked");
+        $.ajax({
+            type: "post",
+            url: SITE_URL + "/Genel/ajaxCall",
+            cache: false,
+            dataType: "json",
+            data: {"mss": mss, "kartNo": kartNo, "kartSonAyText": kartSonAyText, "kartSonYilText": kartSonYilText,
+                "cvv": cvv, "tip": "kartSiparis"},
+            success: function (cevap) {
+                if (cevap.hata) {
+                    reset();
+                    alertify.alert(cevap.hata);
+                    return false;
+                } else {
+                    if (cevap.result == 1) {
+                        window.location.href = SITE_URL + '/Order/Onay';
+                    }
+                }
+            }
+        });
+    });
+    $(document).on("click", "button#spHavaleTamamla", function (e) {
+        var hss = $('#havaleSatisSoz').is(":checked");
+        $.ajax({
+            type: "post",
+            url: SITE_URL + "/Genel/ajaxCall",
+            cache: false,
+            dataType: "json",
+            data: {"hss": hss, "tip": "havaleSiparis"},
+            success: function (cevap) {
+                if (cevap.hata) {
+                    reset();
+                    alertify.alert(cevap.hata);
+                    return false;
+                } else {
+                    if (cevap.result == 1) {
+                        window.location.href = SITE_URL + '/Order/Onay';
+                    }
+                }
+            }
+        });
+    });
+    $(document).on("click", "button#spTelefonTamamla", function (e) {
+        var tss = $('#telSatisSoz').is(":checked");
+        $.ajax({
+            type: "post",
+            url: SITE_URL + "/Genel/ajaxCall",
+            cache: false,
+            dataType: "json",
+            data: {"tss": tss, "tip": "telefonSiparis"},
+            success: function (cevap) {
+                if (cevap.hata) {
+                    reset();
+                    alertify.alert(cevap.hata);
+                    return false;
+                } else {
+                    if (cevap.result == 1) {
+                        window.location.href = SITE_URL + '/Order/Onay';
+                    }
+                }
+            }
+        });
     });
 });

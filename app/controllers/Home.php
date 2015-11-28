@@ -19,7 +19,7 @@ class Home extends Controller {
         $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
-
+        
         //etiketleri listeleme
         $etiketListe = $Panel_Model->etiketlistele();
         $a = 0;

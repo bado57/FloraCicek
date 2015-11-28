@@ -319,6 +319,48 @@ class Panel_Model extends Model {
         return ($this->db->insert("flora_gecicisiparis", $data));
     }
 
+    //sipariş real insert
+    public function sipRealInsert($data) {
+        return ($this->db->insert("flora_siparis", $data));
+    }
+
+    //sipariş ana ürün insert
+    public function sipAnaUrunInsert($data) {
+        return ($this->db->insert("flora_siparisurun", $data));
+    }
+
+    //sipariş ek ürün insert
+    public function sipEkUrunInsert($data) {
+        return ($this->db->multiInsert('flora_siparisurun', $data));
+    }
+
+    //ürün siparis benzersiz Kod Kontrolü
+    public function siparisBenzersizKontrol($kod) {
+        $sql = "SELECT siparis_ID FROM flora_siparis WHERE siparis_No=$kod";
+        return $this->db->select($sql);
+    }
+
+    //geçicci Sipariş Bilgileri Getirme
+    public function geciciSiparis($id) {
+        $sql = "SELECT * FROM flora_gecicisiparis WHERE siparis_ID=$id";
+        return $this->db->select($sql);
+    }
+
+    //son eklenilen siparişi silme
+    public function siparisDelete($gelenid) {
+        return ($this->db->delete("flora_siparis", "siparis_ID=$gelenid"));
+    }
+
+    //eçici Sipariş Tablosunu Boşaltma
+    public function geciciSiparisFullDelete() {
+        return ($this->db->delete("flora_gecicisiparis", "siparis_ID>0"));
+    }
+
+    public function bankaFrontListele() {
+        $sql = "SELECT banka_ID,banka_adi,banka_aktif,banka_sube,banka_hesapno,banka_ibanno,banka_alici FROM flora_banka WHERE banka_aktif=1 ORDER BY banka_adi ASC";
+        return $this->db->select($sql);
+    }
+
     //mesafeli sözleşmesi 
     public function mesafeliSozlistele() {
         $sql = "SELECT sbt_mesafelistssoz FROM flora_sabiticerik";
@@ -753,7 +795,7 @@ class Panel_Model extends Model {
     }
 
     public function siparisUrunDetaylistele($id) {
-        $sql = "SELECT siparisurun_ID,siparisurun_siparisID,siparisurun_urunID,siparisurun_ad,siparisurun_kod,siparisurun_miktar,siparisurun_tutar from flora_siparisurun WHERE siparisurun_siparisID=$id";
+        $sql = "SELECT siparisurun_ID,siparisurun_siparisID,siparisurun_urunID,siparisurun_ad,siparisurun_kod,siparisurun_miktar,siparisurun_tutar,siparisurun_tip,siparisurun_resim from flora_siparisurun WHERE siparisurun_siparisID=$id";
         return $this->db->select($sql);
     }
 
