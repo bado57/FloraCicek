@@ -31,62 +31,62 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="telefon">Telefon</label>
-                                    <input type="text" class="form-control" id="telefon" name="telefon" placeholder="Telefon" value="<?php echo $model[0]["tel"]; ?>">
-                                        <input type="hidden" name="hidtelefon" value="<?php echo $model[0][" tel"]; ?>">
+                                    <input type="text" class="form-control" id="telefon" name="telefon" placeholder="Telefon" value="<?php echo $model[0]["Tel"]; ?>">
+                                        <input type="hidden" name="hidtelefon" value="<?php echo $model[0]["Tel"]; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label for="fax">Fax</label>
-                                                <input type="text" class="form-control" id="fax" name="fax" placeholder="Fax" value="<?php echo $model[0]["fax"]; ?>">
-                                                    <input type="hidden" name="hidfax" value="<?php echo $model[0][" fax"]; ?>">
+                                                <input type="text" class="form-control" id="fax" name="fax" placeholder="Fax" value="<?php echo $model[0]["Fax"]; ?>">
+                                                    <input type="hidden" name="hidfax" value="<?php echo $model[0]["Fax"]; ?>">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="iletisimmail">İletişim Email</label>
-                                                            <input type="email" class="form-control" id="iletisimmail" name="iletisimmail" placeholder="İletişim Emaili" value="<?php echo $model[0]["iletmail"]; ?>">
-                                                                <input type="hidden" name="hidemail" value="<?php echo $model[0][" iletmail"]; ?>">
+                                                            <input type="email" class="form-control" id="iletisimmail" name="iletisimmail" placeholder="İletişim Emaili" value="<?php echo $model[0]["IletMail"]; ?>">
+                                                                <input type="hidden" name="hidemail" value="<?php echo $model[0]["IletMail"]; ?>">
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="harita">Harita iFrame</label>
-                                                                        <input type="text" class="form-control" id="harita" name="harita" placeholder="Harita iFrame" value="<?php echo $model[0]["iframe"]; ?>">
-                                                                            <input type="hidden" name="hidharita" value="<?php echo $model[0][" iframe"]; ?>">
+                                                                        <input type="text" class="form-control" id="harita" name="harita" placeholder="Harita iFrame" value="<?php echo $model[0]["IFrame"]; ?>">
+                                                                            <input type="hidden" name="hidharita" value="<?php echo $model[0]["IFrame"]; ?>">
                                                                                 </div>
                                                                                 </div><!-- /.col -->
                                                                                 <div class="col-md-3">
                                                                                     <div class="form-group">
                                                                                         <label for="facebook"><i class="fa fa-facebook-square"></i> Facebook</label>
-                                                                                        <input type="text" class="form-control" id="facebook" name="facebook" placeholder="Facebook Bağlantısı" value="<?php echo $model[0]["face"]; ?>">
-                                                                                            <input type="hidden" name="hidfacebook" value="<?php echo $model[0][" face"]; ?>">
+                                                                                        <input type="text" class="form-control" id="facebook" name="facebook" placeholder="Facebook Bağlantısı" value="<?php echo $model[0]["Face"]; ?>">
+                                                                                            <input type="hidden" name="hidfacebook" value="<?php echo $model[0]["Face"]; ?>">
                                                                                                 </div>
                                                                                                 <div class="form-group">
                                                                                                     <label for="twitter"><i class="fa fa-twitter-square"></i> Twitter</label>
-                                                                                                    <input type="text" class="form-control" id="twitter" name="twitter" placeholder="Twitter Bağlantısı" value="<?php echo $model[0]["twit"]; ?>">
-                                                                                                        <input type="hidden" name="hidtwitter" value="<?php echo $model[0][" twit"]; ?>">
+                                                                                                    <input type="text" class="form-control" id="twitter" name="twitter" placeholder="Twitter Bağlantısı" value="<?php echo $model[0]["Twit"]; ?>">
+                                                                                                        <input type="hidden" name="hidtwitter" value="<?php echo $model[0]["Twit"]; ?>">
                                                                                                             </div>
                                                                                                             <div class="form-group">
                                                                                                                 <label for="instagram"><i class="fa fa-instagram"></i> İnstagram</label>
-                                                                                                                <input type="text" class="form-control" id="instagram" name="instagram" placeholder="İnstagram Bağlantısı" value="<?php echo $model[0][" instagram"]; ?>">
-                                                                                                                    <input type="hidden" name="hidinstagram" value="<?php echo $model[0][" instagram"]; ?>">
+                                                                                                                <input type="text" class="form-control" id="instagram" name="instagram" placeholder="İnstagram Bağlantısı" value="<?php echo $model[0]["Instagram"]; ?>">
+                                                                                                                    <input type="hidden" name="hidinstagram" value="<?php echo $model[0]["Instagram"]; ?>">
                                                                                                                         </div>
                                                                                                                         <div class="form-group">
                                                                                                                             <label for="googleplus"><i class="fa fa-google-plus-square"></i> Google +</label>
-                                                                                                                            <input type="text" class="form-control" id="googleplus" name="googleplus" placeholder="Google + Bağlantısı" value="<?php echo $model[0]["gplus"]; ?>">
-                                                                                                                                <input type="hidden" name="hidgoogleplus" value="<?php echo $model[0][" gplus"]; ?>">
+                                                                                                                            <input type="text" class="form-control" id="googleplus" name="googleplus" placeholder="Google + Bağlantısı" value="<?php echo $model[0]["GPlus"]; ?>">
+                                                                                                                                <input type="hidden" name="hidgoogleplus" value="<?php echo $model[0]["GPlus"]; ?>">
                                                                                                                                     </div>
                                                                                                                                     </div><!-- /.col -->
                                                                                                                                     <div class="col-md-3">
                                                                                                                                         <div class="form-group" style="margin-bottom:10px;">
                                                                                                                                             <label for="adres">Adres</label>
                                                                                                                                             <textarea class="form-control nock" id="adres" name="adres" rows="5"><?php echo $model[0]["Adres"]; ?></textarea>
-                                                                                                                                            <input type="hidden" name="hidadres" value="<?php echo $model[0]["adres"]; ?>">
+                                                                                                                                            <input type="hidden" name="hidadres" value="<?php echo $model[0]["Adres"]; ?>">
                                                                                                                                         </div>
                                                                                                                                         <div class="form-group">
                                                                                                                                             <label for="yoneticimail">Yönetici Takip Maili</label>
-                                                                                                                                            <input type="email" class="form-control" id="yoneticimail" name="yoneticimail" placeholder="Yönetici Takip Maili" value="<?php echo $model[0]["ymail1"]; ?>">
-                                                                                                                                                <input type="hidden" name="hidyoneticimail" value="<?php echo $model[0][" ymail1"]; ?>">
+                                                                                                                                            <input type="email" class="form-control" id="yoneticimail" name="yoneticimail" placeholder="Yönetici Takip Maili" value="<?php echo $model[0]["YMail1"]; ?>">
+                                                                                                                                                <input type="hidden" name="hidyoneticimail" value="<?php echo $model[0]["YMail1"]; ?>">
                                                                                                                                                     </div>
                                                                                                                                                     <div class="form-group">
                                                                                                                                                         <label for="yoneticimailek">Yönetici Takip Maili 2</label>
-                                                                                                                                                        <input type="email" class="form-control" id="yoneticimailek" name="yoneticimailek" placeholder="Yönetici Takip Maili 2" value="<?php echo $model[0][" ymail2"]; ?>">
-                                                                                                                                                            <input type="hidden" name="hidyoneticimailek" value="<?php echo $model[0]["ymail2"]; ?>">
+                                                                                                                                                        <input type="email" class="form-control" id="yoneticimailek" name="yoneticimailek" placeholder="Yönetici Takip Maili 2" value="<?php echo $model[0]["YMail2"]; ?>">
+                                                                                                                                                            <input type="hidden" name="hidyoneticimailek" value="<?php echo $model[0]["YMail2"]; ?>">
                                                                                                                                                                 </div>
                                                                                                                                                                 </div><!-- /.col -->
                                                                                                                                                                 <div class="col-md-12">
