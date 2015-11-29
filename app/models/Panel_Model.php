@@ -841,6 +841,37 @@ class Panel_Model extends Model {
         return ($this->db->update("flora_kampanya", $data, "kampanya_ID=$gelenid"));
     }
 
+    public function kurumsalUyeListele() {
+        $sql = "SELECT kullanici_id,kullanici_adSoyad,kullanici_eposta,kullanici_tel FROM flora_kullanici WHERE kullanici_rol=2 ORDER BY kullanici_adSoyad ASC";
+        return $this->db->select($sql);
+    }
+
+    public function kurumsalUyeDetayListe($id) {
+        $sql = "SELECT kullanici_id,kullanici_adSoyad,kullanici_eposta,kullanici_kurumadi,kullanici_vergid,kullanici_vergino,kullanici_kurumtel,kullanici_tel,kullanici_adres,kullanici_tarih FROM  flora_kullanici WHERE kullanici_id=$id";
+        return $this->db->select($sql);
+    }
+
+    public function kurumsalUyeSiparis($id) {
+        $sql = "SELECT siparis_No,siparis_girilmetarih,siparis_toplamtutar FROM  flora_siparis WHERE siparis_gonderenID=$id";
+        return $this->db->select($sql);
+    }
+
+    public function bireyselUyeListele() {
+        $sql = "SELECT kullanici_id,kullanici_adSoyad,kullanici_eposta,kullanici_tel FROM flora_kullanici WHERE kullanici_rol=0 ORDER BY kullanici_adSoyad ASC";
+        return $this->db->select($sql);
+    }
+
+    public function bireyselUyeSiparis($id) {
+        $sql = "SELECT siparis_No,siparis_girilmetarih,siparis_toplamtutar FROM  flora_siparis WHERE siparis_gonderenID=$id";
+        return $this->db->select($sql);
+    }
+
+    public function bireyselUyeDetayListe($id) {
+        $sql = "SELECT kullanici_id,kullanici_adSoyad,kullanici_eposta,kullanici_kurumadi,kullanici_vergid,kullanici_vergino,kullanici_kurumtel,kullanici_tel,kullanici_adres,kullanici_tarih FROM  flora_kullanici WHERE kullanici_id=$id";
+        error_log($sql);
+        return $this->db->select($sql);
+    }
+
 }
 
 ?>
