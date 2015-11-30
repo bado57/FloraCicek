@@ -819,6 +819,11 @@ class Panel_Model extends Model {
         return $this->db->select($sql);
     }
 
+    public function kampanyaCountListele() {
+        $sql = "SELECT kampanya_ID FROM  flora_kampanya";
+        return $this->db->select($sql);
+    }
+
     //kampanya listeleme
     public function adminkampanyalistele() {
         $sql = "SELECT kampanya_ID,kampanya_baslik,kampanya_aktiflik,kampanya_indirimyuzde,kampanya_kategori FROM flora_kampanya";
@@ -874,7 +879,6 @@ class Panel_Model extends Model {
 
     public function bireyselUyeDetayListe($id) {
         $sql = "SELECT kullanici_id,kullanici_adSoyad,kullanici_eposta,kullanici_kurumadi,kullanici_vergid,kullanici_vergino,kullanici_kurumtel,kullanici_tel,kullanici_adres,kullanici_tarih FROM  flora_kullanici WHERE kullanici_id=$id";
-        error_log($sql);
         return $this->db->select($sql);
     }
 

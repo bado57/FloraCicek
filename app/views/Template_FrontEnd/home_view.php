@@ -126,7 +126,7 @@
                 <div class="features_items">
                     <!--features_items-->
                     <?php if (count($model[5][3]) > 0) { ?>
-                        <h2 class="title text-center kampanyaTitle"><?php echo $data["KmpnyUrun"]; ?> <?php echo count($model[5][3]) < 20 ? '<a href="kampanyali-urunler" class="btn btn-primary btn-sm" style="margin-top:0;margin-left: 10px;">Tümünü Gör</a>' : ''; ?>  </h2>
+                        <h2 class="title text-center kampanyaTitle"><?php echo $data["KmpnyUrun"]; ?> <?php echo count($model[5][3]) > 20 ? '<a href="kampanyali-urunler" class="btn btn-primary btn-sm" style="margin-top:0;margin-left: 10px;">Tümünü Gör</a>' : ''; ?>  </h2>
                         <?php foreach ($model[5][3] as $kampanyaModel) { ?>
                             <div class="col-sm-3 col-xs-6">
                                 <div class="product-image-wrapper">

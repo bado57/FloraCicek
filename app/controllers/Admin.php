@@ -31,6 +31,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $uyeliste = $Panel_Model->adminPanelUyeCount();
         $a = 0;
@@ -115,6 +118,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $kategoriListe = $Panel_Model->adminKategorilistele();
         $b = 0;
@@ -178,6 +184,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $kategoriListe = $Panel_Model->urunKategorilistele();
         $b = 0;
@@ -246,6 +255,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $etiketListe = $Panel_Model->paneletiketlistele();
         $b = 0;
@@ -280,6 +292,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $vitrinListe = $Panel_Model->panelvitrinlistele();
         $v = 0;
@@ -314,6 +329,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $icerikListe = $Panel_Model->panelsabiticerikliste();
         $i = 0;
@@ -363,6 +381,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $blogListe = $Panel_Model->panelblogliste();
         $b = 0;
@@ -399,6 +420,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $sayfaListe = $Panel_Model->adminSayfalistele();
         $b = 0;
@@ -460,6 +484,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $kampanyaListe = $Panel_Model->adminkampanyalistele();
         $k = 0;
@@ -539,6 +566,9 @@ class Admin extends Controller {
         $siparis[2] = $bekleyensiparis;
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparislist);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger, $siparisCount);
@@ -581,6 +611,9 @@ class Admin extends Controller {
         $siparis[2] = $bekleyensiparis;
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparislist);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger, $siparisCount);
@@ -603,6 +636,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
 
         $bankaListe = $Panel_Model->bankaListele();
@@ -639,6 +675,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $kargoListe = $Panel_Model->kargoListele();
         $k = 0;
@@ -673,6 +712,11 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
+        
+        
         $yerListe = $Panel_Model->yerListele();
         $y = 0;
         foreach ($yerListe as $yerListee) {
@@ -704,6 +748,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         $nedenListe = $Panel_Model->nedenListele();
         $n = 0;
@@ -737,6 +784,9 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
         //il listele
         $ilListe = $Panel_Model->adminIllistele();
@@ -798,6 +848,10 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
+        
         $kuyeListe = $Panel_Model->kurumsalUyeListele();
         $ku = 0;
         foreach ($kuyeListe as $kuyeListee) {
@@ -829,6 +883,10 @@ class Admin extends Controller {
         }
         $siparisCount[0] = $bekleyensiparis;
         $siparisCount[1] = count($siparisCountListe);
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
+        
         $buyeListe = $Panel_Model->bireyselUyeListele();
         $bu = 0;
         foreach ($buyeListe as $buyeListee) {
@@ -850,7 +908,9 @@ class Admin extends Controller {
         $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
-
+        
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
 
 
         $this->load->view("Template_BackEnd/header", $languagedeger);

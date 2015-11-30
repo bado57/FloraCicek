@@ -38,7 +38,7 @@
                 </ul>
             </li>
             <li>
-                <a href="<?php echo SITE_URL; ?>/Admin/Kampanya"><i class="fa fa-gift"></i> <span>Kampanya İşlemleri</span> <small class="label pull-right bg-green">2</small></a>
+                <a href="<?php echo SITE_URL; ?>/Admin/Kampanya"><i class="fa fa-gift"></i> <span>Kampanya İşlemleri</span> <small class="label pull-right bg-green"><?php echo $model[2]; ?></small></a>
             </li>
             <li class="treeview">
                 <a href="#">
@@ -88,12 +88,12 @@
         </ul>
     </section>
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             var url = window.location.href;
             $(".sidebar-menu").find("li.active").removeClass("active");
-            var link = $(".sidebar-menu").find('[href="'+url+'"]');
+            var link = $(".sidebar-menu").find('[href="' + url + '"]');
             if (link.parent().parent().hasClass("treeview-menu")) {
-                link.parent().parent().parent().addClass("active");  
+                link.parent().parent().parent().addClass("active");
             }
             link.parent().addClass("active");
         });

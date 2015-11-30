@@ -19,7 +19,7 @@ class Home extends Controller {
         $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
-        
+
         //etiketleri listeleme
         $etiketListe = $Panel_Model->etiketlistele();
         $a = 0;
@@ -362,7 +362,7 @@ class Home extends Controller {
 
             $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
-            $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headerbottom", $languagedeger);
             $this->load->view("Template_FrontEnd/bireysel", $languagedeger, $uyelikSoz);
             $this->load->view("Template_FrontEnd/footertop", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
@@ -444,7 +444,7 @@ class Home extends Controller {
             $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
         }
     }
-    
+
     function siparisdetay() {
         if (Session::get("KID") > 0) {
             header("Refresh:0; url=" . SITE_URL);
@@ -525,7 +525,61 @@ class Home extends Controller {
         $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
+        //etiketleri listeleme
+        $etiketListe = $Panel_Model->etiketlistele();
+        $a = 0;
+        foreach ($etiketListe as $etiketListee) {
+            $etiketlist[$a]['etiketID'] = $etiketListee['etiket_id'];
+            $etiketlist[$a]['etiketAd'] = $etiketListee['etiket_adi'];
+            $etiketlist[$a]['etiketUrl'] = $etiketListee['etiket_benzad'];
+            $a++;
+        }
+        $homedizi[0] = $etiketlist; //etiket listesi
+        //kategorileri listeleme
+        $kategoriListe = $Panel_Model->kategorilistele();
+        $b = 0;
+        $c = 0;
+        foreach ($kategoriListe as $kategoriListee) {
+            if ($kategoriListee['kategori_UstID'] == 0) {//Üst Kategori Olanlar
+                $kategorilistUst[$b]['ID'] = $kategoriListee['kategori_ID'];
+                $kategorilistUst[$b]['Adi'] = $kategoriListee['kategori_Adi'];
+                $kategorilistUst[$b]['Sira'] = $kategoriListee['kategori_Sira'];
+                $b++;
+            } else {
+                $kategorilistAlt[$c]['ID'] = $kategoriListee['kategori_ID'];
+                $kategorilistAlt[$c]['Adi'] = $kategoriListee['kategori_Adi'];
+                $kategorilistAlt[$c]['Sira'] = $kategoriListee['kategori_Sira'];
+                $kategorilistAlt[$c]['UstID'] = $kategoriListee['kategori_UstID'];
+                $kategorilistAlt[$c]['Url'] = $kategoriListee['kategori_BenzAd'];
+                $c++;
+            }
+        }
+        //alt kategorileri üst kategoriye göre gruplama
+        for ($x = 0; $x < count($kategorilistUst); $x++) {
+            $t = 0;
+            for ($y = 0; $y < count($kategorilistAlt); $y++) {
+                if ($kategorilistUst[$x]['ID'] == $kategorilistAlt[$y]['UstID']) {
+                    $kategoriAltSira[$x][$t]['ID'] = $kategorilistAlt[$y]['ID'];
+                    $kategoriAltSira[$x][$t]['UstID'] = $kategorilistAlt[$y]['UstID'];
+                    $kategoriAltSira[$x][$t]['Adi'] = $kategorilistAlt[$y]['Adi'];
+                    $kategoriAltSira[$x][$t]['Url'] = $kategorilistAlt[$y]['Url'];
+                    $kategoriAltSira[$x][$t]['Sira'] = $kategorilistAlt[$y]['Sira'];
+                    $t++;
+                }
+            }
+        }
+        $homedizi[1] = $kategorilistUst; //Üst Kategori
+        $homedizi[2] = $kategoriAltSira; //Alt Kategori
 
+        $kampanyaListe = $Panel_Model->kampanyalistele();
+        $k = 0;
+        foreach ($kampanyaListe as $kampanyaListee) {
+            $kampanyalist[$k]['ID'] = $kampanyaListee['kampanya_ID'];
+            $kampanyalist[$k]['Adi'] = $kampanyaListee['kampanya_baslik'];
+            $kampanyalist[$k]['Url'] = $kampanyaListee['kampanya_benbaslik'];
+            $k++;
+        }
+        $homedizi[3] = $kampanyalist; //Kampanya Kategori
         //Footer Dinamik Bilgiler
         //kategorileri listeleme
         $fotkategoriListe = $Panel_Model->footerkategorilistele();
