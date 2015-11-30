@@ -48,21 +48,39 @@ class AdminKampanya extends Controller {
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
                     $kampanyaList = array();
+                    $arrayKategori = array();
 
                     $kmpnyaListe = $Panel_Model->panelKampanyaListe($ID);
                     foreach ($kmpnyaListe as $kmpnyaListee) {
-                        $kampanyaList['ID'] = $kmpnyaListee['kampanya_ID'];
-                        $kampanyaList['Baslik'] = $kmpnyaListee['kampanya_baslik'];
-                        $kampanyaList['Yazi'] = $kmpnyaListee['kampanya_yazi'];
+                        $kampanyaList[0][0]['ID'] = $kmpnyaListee['kampanya_ID'];
+                        $kampanyaList[0][0]['Baslik'] = $kmpnyaListee['kampanya_baslik'];
+                        $kampanyaList[0][0]['Yazi'] = $kmpnyaListee['kampanya_yazi'];
                         $explodeBaslama = explode(" ", $kmpnyaListee['kampanya_baslamatarih']);
                         $explodeBasTarih = explode("-", $explodeBaslama[0]);
-                        $kampanyaList["BsTarih"] = $explodeBasTarih[2] . '/' . $explodeBasTarih[1] . '/' . $explodeBasTarih[0];
+                        $kampanyaList[0][0]["BsTarih"] = $explodeBasTarih[2] . '/' . $explodeBasTarih[1] . '/' . $explodeBasTarih[0];
                         $explodeBitis = explode(" ", $kmpnyaListee['kampanya_bitistarihi']);
                         $explodeBitisTarih = explode("-", $explodeBitis[0]);
-                        $kampanyaList["BtTarih"] = $explodeBitisTarih[2] . '/' . $explodeBitisTarih[1] . '/' . $explodeBitisTarih[0];
-                        $kampanyaList['Aktif'] = $kmpnyaListee['kampanya_aktiflik'];
-                        $kampanyaList['Yuzde'] = $kmpnyaListee['kampanya_indirimyuzde'];
-                        $kampanyaList['Kategori'] = $kmpnyaListee['kampanya_kategori'];
+                        $kampanyaList[0][0]["BtTarih"] = $explodeBitisTarih[2] . '/' . $explodeBitisTarih[1] . '/' . $explodeBitisTarih[0];
+                        $kampanyaList[0][0]['Aktif'] = $kmpnyaListee['kampanya_aktiflik'];
+                        $kampanyaList[0][0]['Yuzde'] = $kmpnyaListee['kampanya_indirimyuzde'];
+                        $kampanyaList[0][0]['Kategori'] = $kmpnyaListee['kampanya_kategori'];
+                        $arrayKategori[] = $kmpnyaListee['kampanya_kategori'];
+                    }
+
+                    $kampKatDizi = implode(',', $arrayKategori);
+                    $kk = 0;
+                    //ek ürün daha önce kullanılmış mı onu ayırmak için
+                    if (in_array("-1", $arrayKategori)) {
+                        $kampanyaList[1][$kk]['ID'] = "-1";
+                        $kampanyaList[1][$kk]['Adi'] = "Ek Ürün";
+                        $kk++;
+                    }
+                    $kategoriListe = $Panel_Model->kampKategori($kampKatDizi);
+
+                    foreach ($kategoriListe as $kategoriListee) {
+                        $kampanyaList[1][$kk]['ID'] = $kategoriListee['kategori_ID'];
+                        $kampanyaList[1][$kk]['Adi'] = $kategoriListee['kategori_Adi'];
+                        $kk++;
                     }
 
                     $sonuc["result"] = $kampanyaList;

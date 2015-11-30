@@ -76,10 +76,15 @@
                                                             <div class="form-group">
                                                                 <label for="kategoriler">Kategoriler</label>
                                                                 <select class="form-control select2" multiple="multiple" data-placeholder="Kategori Seçiniz" id="kategoriler" name="kategoriler" style="width: 100%;">
-                                                                    <?php for ($kat = 0; $kat < count($model[1]); $kat++) { ?>
-                                                                        <option value="<?php echo $model[1][$kat]['ID']; ?>"><?php echo $model[1][$kat]['Adi']; ?></option>
+                                                                    <?php $kampCount = count($model[1]); ?>
+                                                                    <?php if ($kampCount > 0) { ?>
+                                                                        <?php for ($kat = 0; $kat < $kampCount; $kat++) { ?>
+                                                                            <option value="<?php echo $model[1][$kat]['ID']; ?>"><?php echo $model[1][$kat]['Adi']; ?></option>
+                                                                        <?php } ?>
                                                                     <?php } ?>
-                                                                    <option value="-1">Ek Urun</option>
+                                                                    <?php if ($model[2] == 0) { ?>
+                                                                        <option value="-1">Ek Urun</option>
+                                                                    <?php } ?>
                                                                 </select>
                                                             </div>
                                                         </div>

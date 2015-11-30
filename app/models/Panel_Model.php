@@ -513,8 +513,14 @@ class Panel_Model extends Model {
     }
 
     //home kategori listeleme
-    public function urunKategorilistele() {
-        $sql = "SELECT kategori_ID,kategori_Adi,kategori_Yazi,kategori_Aktiflik,kategori_Sira,kategori_UstID FROM flora_kategori WHERE kategori_Aktiflik=1 AND kategori_UstID !=0 ORDER BY kategori_Sira ASC";
+    public function urunKategorilistele($array = array()) {
+        $sql = "SELECT kategori_ID,kategori_Adi,kategori_Yazi,kategori_Aktiflik,kategori_Sira,kategori_UstID FROM flora_kategori WHERE kategori_Aktiflik=1 AND kategori_UstID !=0 AND kategori_ID NOT IN ($array) ORDER BY kategori_Sira ASC";
+        return $this->db->select($sql);
+    }
+
+    //kampanya kategori listeleme
+    public function kampKategori($array = array()) {
+        $sql = "SELECT kategori_ID,kategori_Adi,kategori_Yazi,kategori_Aktiflik,kategori_Sira,kategori_UstID FROM flora_kategori WHERE kategori_Aktiflik=1 AND kategori_UstID !=0 AND kategori_ID IN ($array) ORDER BY kategori_Sira ASC";
         return $this->db->select($sql);
     }
 
@@ -815,7 +821,7 @@ class Panel_Model extends Model {
 
     //kampanya listeleme
     public function adminkampanyalistele() {
-        $sql = "SELECT kampanya_ID,kampanya_baslik,kampanya_aktiflik,kampanya_indirimyuzde FROM flora_kampanya";
+        $sql = "SELECT kampanya_ID,kampanya_baslik,kampanya_aktiflik,kampanya_indirimyuzde,kampanya_kategori FROM flora_kampanya";
         return $this->db->select($sql);
     }
 

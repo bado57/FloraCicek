@@ -450,6 +450,7 @@ class Admin extends Controller {
         $languagedeger = $formlanguage->multilanguage();
         $siparisCount = array();
         $array = array();
+        $arrayKategori = array();
         $siparisCountListe = $Panel_Model->siparisCountListele();
         $bekleyensiparis = 0;
         foreach ($siparisCountListe as $siparisCountListee) {
@@ -467,11 +468,21 @@ class Admin extends Controller {
             $kampanyalist[$k]['Baslik'] = $kampanyaListee['kampanya_baslik'];
             $kampanyalist[$k]['Aktif'] = $kampanyaListee['kampanya_aktiflik'];
             $kampanyalist[$k]['Yuzde'] = $kampanyaListee['kampanya_indirimyuzde'];
+            if ($kampanyalist[$k]['Aktif'] == 1) {
+                $arrayKategori[] = $kampanyaListee['kampanya_kategori'];
+            }
             $k++;
         }
         $array[0] = $kampanyalist;
+        $kampKatDizi = implode(',', $arrayKategori);
+        //ek ürün daha önce kullanılmış mı onu ayırmak için
+        if (in_array("-1", $arrayKategori)) {
+            $array[2] = "1";
+        } else {
+            $array[2] = "0";
+        }
 
-        $kategoriListe = $Panel_Model->urunKategorilistele();
+        $kategoriListe = $Panel_Model->urunKategorilistele($kampKatDizi);
         $b = 0;
         foreach ($kategoriListe as $kategoriListee) {
             $kategorilistUst[$b]['ID'] = $kategoriListee['kategori_ID'];
