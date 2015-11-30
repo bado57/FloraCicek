@@ -1,6 +1,6 @@
 <!--iç sayfa-->
 <?php if (count($model[4]) > 0) { ?>
-    <section id="slider">
+    <section id="slider" class="hidden-xs">
         <!--slider-->
         <div class="container">
             <div class="row">

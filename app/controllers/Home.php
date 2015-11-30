@@ -287,6 +287,7 @@ class Home extends Controller {
 
             $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/login", $languagedeger);
             $this->load->view("Template_FrontEnd/footertop", $languagedeger);
             $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
@@ -361,6 +362,7 @@ class Home extends Controller {
 
             $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/bireysel", $languagedeger, $uyelikSoz);
             $this->load->view("Template_FrontEnd/footertop", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
@@ -436,7 +438,83 @@ class Home extends Controller {
 
             $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/kurumsal", $languagedeger, $uyelikSoz);
+            $this->load->view("Template_FrontEnd/footertop", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
+        }
+    }
+    
+    function siparisdetay() {
+        if (Session::get("KID") > 0) {
+            header("Refresh:0; url=" . SITE_URL);
+        } else {
+            $form = $this->load->otherClasses('Form');
+            //model bağlantısı
+            $Panel_Model = $this->load->model("Panel_Model");
+            $formlanguage = $this->load->multilanguage("tr");
+            $languagedeger = $formlanguage->multilanguage();
+
+            $uyelikListe = $Panel_Model->uyelikSozlistele();
+            foreach ($uyelikListe as $uyelikListee) {
+                $uyelikSoz[0] = $uyelikListee['sbt_uyeliksoz'];
+            }
+
+            //Footer Dinamik Bilgiler
+            //kategorileri listeleme
+            $fotkategoriListe = $Panel_Model->footerkategorilistele();
+            $fb = 0;
+            $fc = 0;
+            foreach ($fotkategoriListe as $fotkategoriListee) {
+                if ($fotkategoriListee['sayfa_UstID'] == 0) {//Footer Üst Kategori Olanlar
+                    $fotkategorilistUst[$fb]['ID'] = $fotkategoriListee['sabitsayfaid'];
+                    $fotkategorilistUst[$fb]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
+                    $fotkategorilistUst[$fb]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
+                    $fotkategorilistUst[$fb]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                    $fb++;
+                } else {
+                    $fotkategorilistAlt[$fc]['ID'] = $fotkategoriListee['sabitsayfaid'];
+                    $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
+                    $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
+                    $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                    $fc++;
+                }
+            }
+
+            //alt kategorileri üst kategoriye göre gruplama
+            for ($x = 0; $x < count($fotkategorilistUst); $x++) {
+                $t = 0;
+                for ($y = 0; $y < count($fotkategorilistAlt); $y++) {
+                    if ($fotkategorilistUst[$x]['ID'] == $fotkategorilistAlt[$y]['UstID']) {
+                        $fotkategoriAltSira[$x][$t]['ID'] = $fotkategorilistAlt[$y]['ID'];
+                        $fotkategoriAltSira[$x][$t]['UstID'] = $fotkategorilistAlt[$y]['UstID'];
+                        $fotkategoriAltSira[$x][$t]['Adi'] = $fotkategorilistAlt[$y]['Adi'];
+                        $fotkategoriAltSira[$x][$t]['Url'] = $fotkategorilistAlt[$y]['Url'];
+                        $fotkategoriAltSira[$x][$t]['Sira'] = $fotkategorilistAlt[$y]['Sira'];
+                        $t++;
+                    }
+                }
+            }
+
+            $homedizi[6] = $fotkategorilistUst; //Footer Üst Kategori Listesi
+            $homedizi[7] = $fotkategoriAltSira; //Footer Alt Kategori Listesi
+            //sabit içerikleri listeleme
+            $icerikListe = $Panel_Model->sabiticeriklistele();
+            foreach ($icerikListe as $icerikListe) {
+                $iceriklist['telefon'] = $icerikListe['sbt_telefon'];
+                $iceriklist['mail'] = $icerikListe['sbt_iletisimmail'];
+                $iceriklist['face'] = $icerikListe['sbt_face'];
+                $iceriklist['twit'] = $icerikListe['sbt_twit'];
+                $iceriklist['instag'] = $icerikListe['sbt_instag'];
+                $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+                $iceriklist['logo'] = $icerikListe['sbt_logo'];
+            }
+            $homedizi[8] = $iceriklist; //etiket listesi
+
+            $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/siparisdetay", $languagedeger, $uyelikSoz);
             $this->load->view("Template_FrontEnd/footertop", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
         }
@@ -505,6 +583,7 @@ class Home extends Controller {
 
         $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/contact", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/footertop", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);

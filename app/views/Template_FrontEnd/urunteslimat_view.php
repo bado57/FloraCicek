@@ -2,6 +2,13 @@
 <script src="<?php echo SITE_JS ?>/jquery.validate.js"></script>
 <script src="<?php echo SITE_JS ?>/bootstrap-switch.js" type="text/javascript"></script>
 <script src="<?php echo SITE_JS ?>/urunsiparis.js" type="text/javascript"></script>
+<!-- Sipariş adımlarında açılır menünün gizlenmesi için css -->
+<style type="text/css">
+    #mCollapse{display: none;}
+    #orderLink{display: block !important;}
+    .footer-top, .footer-widget, .mobile_login_menu{display: none;}
+</style>
+<!-- End Sipariş adımlarında açılır menünün gizlenmesi için css -->
 <section id="advertisementt">
     <div class="container">
         <div class="row">
@@ -102,7 +109,7 @@
                                         <div class="col-sm-12 login-form">
                                             <h2><?php echo $data["KartBilgi"]; ?></h2>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 col-xs-12">
                                             <div class="login-form">
                                                 <div class="form" style="padding-bottom:30px;">
                                                     <textarea id="kartmesaji" name="kartmesaji" rows="4" maxlength="160" placeholder="Kartın Mesajı"></textarea>
@@ -112,7 +119,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 hidden-xs">
                                             <div class="login-form">
                                                 <div class="form">
                                                     <div class="sampleCard">

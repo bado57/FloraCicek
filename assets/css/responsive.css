@@ -281,6 +281,27 @@ ul.sub-menu{
 /* XS Portrait */
 @media (max-width: 480px) {
 
+    .body-content{
+        position: relative;
+        display: inline-block;
+    }
+    
+    #headermobile .navbar-header{
+        border-bottom: 1px solid #e6e6e6;
+    }
+    
+    #navbarMobile{
+        background-color: #e6e6e6;
+    }
+    
+    #xsPadding{
+        padding-right: 15px;
+    }
+    
+    .xsMarginBottom{
+        margin-bottom: 20px;
+    }
+    
 .contactinfo{
 	text-align: center;
 }
@@ -436,9 +457,9 @@ ul.sub-menu{
 }
 
 .footer-widget .col-sm-2 {
-	width: 50%;
+	width: 100%;
 	display: flex;
-	margin-bottom: 50px;
+	margin-bottom: 5px;
 	margin-top: 0;
 	float: left;
 	padding-right: 0;
@@ -516,12 +537,24 @@ ul.sub-menu{
 }
 
 .product-information{
-	padding-left: 0;
-	text-align: center;
+	padding-left: 0 !important;
+	text-align: left;
+        margin-top: 0;
+        border:none !important;
 }
 
 .product-information span span{
 	float: none;
 }
+
+#advertisement{padding-bottom: 15px !important;}
+#urunTab{font-size: 14px !important;}
+.SayfaBaslik{font-size: 30px;}
+.blog-post-area{padding: 0 !important;}
+.blog-post-area li{margin-bottom: 20px;}
+.contact-page{position: relative; display: inline-block;}
+.bg h2.title{margin-top: 70px !important;}
+
+
 
 }

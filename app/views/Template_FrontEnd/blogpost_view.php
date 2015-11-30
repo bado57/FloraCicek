@@ -32,16 +32,16 @@
             <div class="col-sm-9">
                 <div class="blog-post-area">
                     <div class="single-blog-post col-sm-12">
-                        <h3><i class="fa fa-angle-right"></i> <?php echo $model[0][0]['Baslik']; ?></h3>
-                        <div class="post-meta">
-                            <ul>
-                                <li><i class="fa fa-calendar"></i> <?php echo $model[0][0]['Tarih']; ?></li>
-                                <li><i class="fa fa-clock-o"></i> <?php echo $model[0][0]['Saat']; ?></li>
-                            </ul>
-                        </div>
-                        <img class="img-responsive" src="<?php echo SITE_BLOG ?>/<?php echo $model[0][0]['Resim']; ?>" alt="" />
-                        <br/>
-                        <p><?php echo $model[0][0]['Yazi']; ?></p>
+                            <h3><i class="fa fa-angle-right"></i> <?php echo $model[0][0]['Baslik']; ?></h3>
+                            <div class="post-meta">
+                                <ul>
+                                    <li><i class="fa fa-calendar"></i> <?php echo $model[0][0]['Tarih']; ?></li>
+                                    <li><i class="fa fa-clock-o"></i> <?php echo $model[0][0]['Saat']; ?></li>
+                                </ul>
+                            </div>
+                            <img class="img-responsive" src="<?php echo SITE_BLOG ?>/<?php echo $model[0][0]['Resim']; ?>" alt="" />
+                            <br/>
+                            <p><?php echo $model[0][0]['Yazi']; ?></p>
                     </div>
                 </div>
             </div>	

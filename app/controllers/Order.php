@@ -173,6 +173,8 @@ class Order extends Controller {
             $urunlist[4][0]['Logo'] = $iceriklist['logo'];
 
             $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/ekurun", $languagedeger, $urunlist);
             $this->load->view("Template_FrontEnd/footertop", $languagedeger);
             $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
@@ -204,6 +206,8 @@ class Order extends Controller {
             $siparis[0][0]['Logo'] = $iceriklist['logo'];
 
             $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
             $this->load->view("Template_FrontEnd/siparisuye", $languagedeger, $siparis);
             $this->load->view("Template_FrontEnd/footertop", $languagedeger);
             $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
@@ -339,6 +343,8 @@ class Order extends Controller {
         $deliverylist[4][0]['Logo'] = $iceriklist['logo'];
 
         $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/urunteslimat", $languagedeger, $deliverylist);
         $this->load->view("Template_FrontEnd/footertop", $languagedeger);
         $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
@@ -461,6 +467,8 @@ class Order extends Controller {
         $cardlist[3][0]["Logo"] = $iceriklist['logo'];
 
         $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/urunodeme", $languagedeger, $cardlist);
         $this->load->view("Template_FrontEnd/footertop", $languagedeger);
         $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);

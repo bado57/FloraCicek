@@ -1,6 +1,6 @@
 <script src="<?php echo SITE_JS; ?>/blog.js" type="text/javascript"></script>
 <section>
-    <div class="container" style="margin-bottom: 60px; margin-top: 45px;">
+    <div id="blogContainer" class="container" style="margin-bottom: 60px; margin-top: 45px;">
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
@@ -35,9 +35,12 @@
             <div class="col-sm-9">
                 <?php if (count($model[0]) > 0) { ?>
                     <ul class="blog-post-area" id=fullblog>
+                        <div class="row">
                         <h2 class="title text-center"><?php echo $data["SonYayinlar"]; ?></h2>
+                        </div>
                         <?php for ($h = 0; $h < count($model[0]); $h++) { ?>
-                            <li class="single-blog-post col-sm-12">
+                            <li class="single-blog-post col-sm-12 col-xs-12">
+                                <div class="row">
                                 <h3><?php echo $model[0][$h]['Baslik']; ?></h3>
                                 <div class="post-meta">
                                     <ul>
@@ -55,6 +58,7 @@
                                     <a  class="btn btn-primary" href="<?php echo $model[0][$h]['Url']; ?>">Devamını Oku</a>
                                 </div>
                                 <hr/>
+                                </div>
                             </li>
                         <?php } ?>
                         <div id="sayfalar" class="pagination-area">

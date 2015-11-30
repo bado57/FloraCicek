@@ -71,73 +71,82 @@
                     </script>
                     </head>
                     <body>
-                        <header id="headermobile" class="hidden-md hidden-lg">
-                            <nav class="navbar navbar-header navbar-inverse navbar-collapse-mobile">
-                                <div class="container-fluid">
-                                    <div class="navbar-header">
-                                        <a class="navbar-brand padding-right" href="<?php echo SITE_URL ?>"><img src="<?php echo SITE_FRONT_IMAGES ?>/logo.png" style="max-width:60%;" alt="" /></a>
-                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarMobile" style="margin-top:20px;">
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                        </button>
-                                    </div>
-                                    <div class="collapse navbar-collapse" id="navbarMobile">
-                                        <ul class="nav navbar-nav">
-                                            <li><li class="active"><a href="#">ANASAYFA</a></li></li>
-                                            <li class="dropdown">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span> <?php echo $data["AmacaGore"] ?></a>
-                                                <ul role="menu" class="dropdown-menu">
-                                                    <?php foreach ($model[0] as $etiketModel) { ?>
-                                                        <li><a href="<?php echo $etiketModel['etiketUrl']; ?>"><?php echo $etiketModel['etiketAd']; ?></a></li>
-                                                    <?php } ?>
-                                                </ul>
-                                            </li>
-                                            <?php for ($ustkat = 0; $ustkat < count($model[1]); $ustkat++) { ?>
+                        <header id="header">
+                            <!-- Mobil Menü -->
+                            <div id="headermobile" class="hidden-md hidden-lg">
+                                <nav class="navbar navbar-header navbar-collapse-mobile">
+                                    <div class="container-fluid">
+                                        <div class="navbar-header">
+                                            <a class="navbar-brand padding-right" style="max-width:60% !important;" href="<?php echo SITE_URL ?>"><img src="<?php echo SITE_VITRIN . '/' . $model[8]["logo"]; ?>" style="max-width:100% !important;" alt="" /></a>
+                                            <button id="mCollapse" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarMobile" style="margin-top:20px;">
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+                                            <a id="orderLink" href="#" class="navbar-toggle"  style="margin-top:20px; padding: 7px 12px; background-color: #e6e6e6; display: none;"><i class="fa fa-home"></i></a>
+                                        </div>
+                                        <div class="collapse navbar-collapse" id="navbarMobile" style="position: relative; max-height: 800px !important;">
+                                            <ul class="nav navbar-nav">
+                                                <li><li class="active"><a href="#">ANASAYFA</a></li></li>
                                                 <li class="dropdown">
-                                                    <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="caret"></span> <?php echo $model[1][$ustkat]['Adi']; ?></a>
+                                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span> <?php echo $data["AmacaGore"] ?></a>
                                                     <ul role="menu" class="dropdown-menu">
-                                                        <?php for ($altkat = 0; $altkat < count($model[2][$ustkat]); $altkat++) { ?>
-                                                            <?php if ($model[2][$ustkat][$altkat]['ID'] != '') { ?>
-                                                                <li><a href="<?php echo $model[2][$ustkat][$altkat]['Url']; ?>"><?php echo $model[2][$ustkat][$altkat]['Adi']; ?></a></li>
+                                                        <?php foreach ($model[0] as $etiketModel) { ?>
+                                                            <li><a href="<?php echo $etiketModel['etiketUrl']; ?>"><?php echo $etiketModel['etiketAd']; ?></a></li>
+                                                        <?php } ?>
+                                                    </ul>
+                                                </li>
+                                                <?php for ($ustkat = 0; $ustkat < count($model[1]); $ustkat++) { ?>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="caret"></span> <?php echo $model[1][$ustkat]['Adi']; ?></a>
+                                                        <ul role="menu" class="dropdown-menu">
+                                                            <?php for ($altkat = 0; $altkat < count($model[2][$ustkat]); $altkat++) { ?>
+                                                                <?php if ($model[2][$ustkat][$altkat]['ID'] != '') { ?>
+                                                                    <li><a href="<?php echo $model[2][$ustkat][$altkat]['Url']; ?>"><?php echo $model[2][$ustkat][$altkat]['Adi']; ?></a></li>
+                                                                <?php } ?>
                                                             <?php } ?>
-                                                        <?php } ?>
-                                                    </ul>
-                                                </li>
-                                            <?php } ?>
-                                            <?php if (count($model[3]) > 0) { ?>
-                                                <li class="dropdown">
-                                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span> <?php echo $data["Kampanya"] ?></a>
-                                                    <ul role="menu" class="dropdown-menu">
-                                                        <?php foreach ($model[3] as $etiketModel) { ?>
-                                                            <li><a href="<?php echo $etiketModel['Url']; ?>"><?php echo $etiketModel['Adi']; ?></a></li>
-                                                        <?php } ?>
-                                                    </ul>
-                                                </li>
-                                            <?php } ?>
-                                            <li><a href="blog"><?php echo $data["Blog"] ?></a></li>
-                                        </ul>
+                                                        </ul>
+                                                    </li>
+                                                <?php } ?>
+                                                <?php if (count($model[3]) > 0) { ?>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span> <?php echo $data["Kampanya"] ?></a>
+                                                        <ul role="menu" class="dropdown-menu">
+                                                            <?php foreach ($model[3] as $etiketModel) { ?>
+                                                                <li><a href="<?php echo $etiketModel['Url']; ?>"><?php echo $etiketModel['Adi']; ?></a></li>
+                                                            <?php } ?>
+                                                        </ul>
+                                                    </li>
+                                                <?php } ?>
+                                                <li><a href="blog"><?php echo $data["Blog"] ?></a></li>
+                                                <li><a href="<?php echo SITE_URL . "/sayfa-hakkimizda" ?>" id="sesso" data-url="StaticPager" data-method="index"><?php echo $data["Kurumsal"]; ?></a></li>
+                                                <li><a href="<?php echo SITE_URL . "/Home/Contact" ?>"><?php echo $data["Iletisim"]; ?></a></li>
+                                                <li><a href="<?php echo SITE_URL . "/Home/Contact" ?>" style="font-size:26px; color:#b51e91;"><i class="fa fa-phone"></i> <?php echo $model[8]["telefon"]; ?></a></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            </nav>
-                            <div class="col-xs-12 col-sm-12 mobile_login_menu">
-                                <div class="col-xs-6">
-                                    <div class="row">
-                                        <a class="mobile_top_button col-xs-6" href="#"><span class="glyphicon glyphicon-user"></span> Üye Ol</a>
-                                        <a class="mobile_top_button col-xs-6" href="#"><span class="glyphicon glyphicon-log-in"></span> Giriş Yap</a>
+                                </nav>
+                                <div class="col-xs-12 col-sm-12 mobile_login_menu">
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="btn-group text-center" role="group" style="width:100%;">
+                                                <a href="<?php echo SITE_URL ?>/Home/bireysel" role="button" class="btn btn-default col-xs-6"><span class="glyphicon glyphicon-user"></span> Üye Ol</a>
+                                                <a href="<?php echo SITE_URL ?>/Home/login" role="login" class="btn btn-default col-xs-6"><span class="glyphicon glyphicon-log-in"></span> Giriş Yap</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="input-group col-xs-6 pull-right">
-                                    <input type="text" class="form-control" placeholder="<?php echo $data["SiparisTakip"]; ?>">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                                        </span>
+                                    <hr/>
+                                    <div class="input-group col-xs-12">
+                                        <input type="text" class="form-control" placeholder="<?php echo $data["SiparisTakip"]; ?>">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                            </span>
+                                    </div>
                                 </div>
                             </div>
-                        </header>
-                        <header id="header" class="hidden-xs hidden-sm">
-                            <!--header-->
-                            <div class="header_top">
+                            <!-- End Mobil Menü -->
+                            <!-- Browser Menü -->                          
+                            <div class="header_top hidden-xs hidden-sm">
                                 <!--header_top-->
                                 <div class="container">
                                     <div class="row">
@@ -162,3 +171,4 @@
                                     </div>
                                 </div>
                             </div>
+

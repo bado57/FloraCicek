@@ -5,8 +5,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">
-                    <div class="companyinfo">
-                        <img class="img-responsive" src="<?php echo SITE_IMAGES ?>/footer-logo.png" alt="" />
+                    <div class="companyinfo text-center">
+                        <img class="" src="<?php echo SITE_IMAGES ?>/footer-logo.png" alt="" />
                     </div>
                 </div>
                 <div class="col-sm-7">
@@ -67,7 +67,7 @@
         <div class="container">
             <div class="row">
                 <?php for ($ustkat = 0; $ustkat < count($model[6]); $ustkat++) { ?>
-                    <div class="col-sm-2">
+                    <div class="col-sm-2 col-xs-12">
                         <div class="single-widget">
                             <h2><?php echo $model[6][$ustkat]['Adi']; ?></h2>
                             <ul class="nav nav-pills nav-stacked">
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 <?php } ?>
-                <div class="col-sm-2">
+                <div class="col-sm-2 col-xs-12">
                     <div class="single-widget">
                         <h2>İletişim</h2>
                         <ul class="nav nav-pills nav-stacked">

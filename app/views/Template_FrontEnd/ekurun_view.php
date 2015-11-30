@@ -2,10 +2,17 @@
 <script src="<?php echo SITE_JS ?>/jquery.validate.js"></script>
 <script src="<?php echo SITE_JS ?>/bootstrap-switch.js" type="text/javascript"></script>
 <script src="<?php echo SITE_JS ?>/urunsiparis.js" type="text/javascript"></script>
+<!-- Sipariş adımlarında açılır menünün gizlenmesi için css -->
+<style type="text/css">
+    #mCollapse{display: none;}
+    #orderLink{display: block !important;}
+    .footer-top, .footer-widget, .mobile_login_menu{display: none;}
+</style>
+<!-- End Sipariş adımlarında açılır menünün gizlenmesi için css -->
 <section id="advertisementt">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12" style="margin-top:20px;  padding-bottom:30px;">
+            <div class="col-sm-12 hidden-xs" style="margin-top:20px;  padding-bottom:30px;">
                 <div class="defaultDiv" style="max-width:210px; margin: -9px 20px 0 0;"> <a href="<?php echo SITE_URL; ?>"><img class="img-responsive" src="<?php echo SITE_VITRIN . "/" . $model[4][0]['Logo']; ?>" alt="" /></a></div>
                 <div class="wizard activeStep"><div class="step">1</div> <span><?php echo $data["EkUrun"]; ?></span></div>
                 <?php if (Session::get("KID") > 0) { ?>
@@ -17,6 +24,24 @@
                     <div class="wizard"><div class="step">4</div> <span><?php echo $data["OdeBilgi"]; ?></span></div>
                 <?php } ?>
                 <div class="wizard"><div class="step"><i class="fa fa-check"></i></div> <span><?php echo $data["SipOnay"]; ?></span></div>
+            </div>
+            <div class="col-xs-12 hidden-lg hidden-md">
+                <?php if (Session::get("KID") > 0) { ?>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default active">Ek Ürünler</button>
+                        <button type="button" class="btn btn-default">2</button>
+                        <button type="button" class="btn btn-default">3</button>
+                        <button type="button" class="btn btn-default">4</button>
+                    </div>
+                <?php } else { ?>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default">1</button>
+                        <button type="button" class="btn btn-default">2</button>
+                        <button type="button" class="btn btn-default">3</button>
+                        <button type="button" class="btn btn-default">4</button>
+                        <button type="button" class="btn btn-default">5</button>
+                    </div>
+                <?php } ?>
             </div>
         </div>
         <div class="col-sm-12" style="border-bottom:1px solid #e6e6e6;"></div>
@@ -92,12 +117,9 @@
         </div>
     </div>
 </section>
-
-
 <script type="text/javascript">
     $(document).ready(function () {
         fiyatTopla();
-        $('#urun-zoom').zoom();
         // Ek Ürün Ekleme Çıkarma
         $(".switch-state").each(function () {
             var fiyat = $(this).parent().find(".ekurun-fiyat").html();

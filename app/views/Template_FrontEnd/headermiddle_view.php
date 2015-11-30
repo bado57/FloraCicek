@@ -1,4 +1,4 @@
-<div class="header-middle">
+<div class="header-middle hidden-xs hidden-sm">
     <!--header-middle-->
     <div class="container">
         <div class="row">

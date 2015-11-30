@@ -8,12 +8,12 @@
             <div class="col-sm-12 padding-right">
                 <div class="product-details">
                     <!--product-details-->
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 col-xs-6">
                         <div class="imgThumb view-product" id="urun-zoom">
                             <img class="img-responsive" src="<?php echo SITE_PRODUCT ?>/<?php echo $model[0]['urunResim']; ?>" alt="" />
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 col-xs-6">
                         <div class="product-information">
                             <h2><?php echo $model[0]['urunAd']; ?></h2>
                             <p>Ürün Kodu: <?php echo $model[0]['urunKod']; ?></p>
@@ -35,7 +35,7 @@
 
                         </div><!--/product-information-->
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 col-xs-12">
                         <form id="furunsiparis">
                             <div class="login-form">
                                 <div class="form">

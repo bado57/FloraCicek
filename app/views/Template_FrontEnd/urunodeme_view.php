@@ -2,6 +2,13 @@
 <script src="<?php echo SITE_JS ?>/jquery.validate.js"></script>
 <script src="<?php echo SITE_JS ?>/bootstrap-switch.js" type="text/javascript"></script>
 <script src="<?php echo SITE_JS ?>/urunsiparis.js" type="text/javascript"></script>
+<!-- Sipariş adımlarında açılır menünün gizlenmesi için css -->
+<style type="text/css">
+    #mCollapse{display: none;}
+    #orderLink{display: block !important;}
+    .footer-top, .footer-widget, .mobile_login_menu{display: none;}
+</style>
+<!-- End Sipariş adımlarında açılır menünün gizlenmesi için css -->
 <section id="advertisementt">
     <div class="container">
         <div class="row">
@@ -45,14 +52,14 @@
                                     <div class="col-sm-12 login-form">
                                         <h2><?php echo $data["KartBilgi"]; ?></h2>
                                     </div>
-                                    <div class="col-sm-6 col-xs-12">
+                                    <div class="col-sm-6 col-xs-12 xsMarginBottom">
                                         <div class="login-form">
                                             <div class="form">
                                                 <p><?php echo $data["KartNum"]; ?></p>
                                                 <input id="kartno" type="text" placeholder="Kart Numarası" data-inputmask='"mask": "9999999999999999"' data-mask maxlength="16" />
                                                 <div class="row">
                                                     <p class="col-sm-12"><?php echo $data["SonKullanma"]; ?></p>
-                                                    <div class="col-sm-6 padding-right">
+                                                    <div id="xsPadding" class="col-sm-6 padding-right">
                                                         <select id="kartAy">
                                                             <option value="0"><?php echo $data["Ay"]; ?></option>
                                                             <option value="01">01</option>
@@ -132,7 +139,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 col-xs-12 xsMarginBottom">
                                         <div class="bankaBilgi">
                                             <table class="table table-responsive table-bordered" style="margin-top:29px;">
                                                 <thead>
@@ -195,7 +202,7 @@
                                     <div class="col-sm-12 login-form">
                                         <h2>Telefonla Ödeme</h2>
                                     </div>
-                                    <div class="col-sm-6 col-xs-12">
+                                    <div class="col-sm-6 col-xs-12 xsMarginBottom">
                                         <div class="login-form">
                                             <div class="form">
                                                 <p>Ortak kullanım yapılan alanlardan internete erişim sağlayıp, siparişinizi bu şekilde gerçekleştiriyorsanız telefon ile ödeme seçeneğini tercih edebilirsiniz.</p>

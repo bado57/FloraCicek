@@ -2,6 +2,13 @@
 <script src="<?php echo SITE_JS ?>/bootstrap-switch.js" type="text/javascript"></script>
 <script src="<?php echo SITE_JS ?>/jquery.validate.js"></script>
 <script src="<?php echo SITE_JS ?>/urunsiparis.js" type="text/javascript"></script>
+<!-- Sipariş adımlarında açılır menünün gizlenmesi için css -->
+<style type="text/css">
+    #mCollapse{display: none;}
+    #orderLink{display: block !important;}
+    .footer-top, .footer-widget, .mobile_login_menu{display: none;}
+</style>
+<!-- End Sipariş adımlarında açılır menünün gizlenmesi için css -->
 <section id="advertisementt">
     <div class="container">
         <div class="row">

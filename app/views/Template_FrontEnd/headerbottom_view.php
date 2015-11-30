@@ -1,4 +1,4 @@
-<div class="header-bottom">
+<div class="header-bottom hidden-xs hidden-sm">
     <!--header-bottom-->
     <div class="container">
         <div class="row">
@@ -47,7 +47,6 @@
         </div>
     </div>
 </div><!--/header-bottom-->
-
 </header><!--/header-->
 
 <div class="body-content">
