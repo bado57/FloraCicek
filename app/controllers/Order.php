@@ -466,6 +466,19 @@ class Order extends Controller {
         $homedizi[8] = $iceriklist;
         $cardlist[3][0]["Logo"] = $iceriklist['logo'];
 
+        //kart bilgileri
+        $bankaListe = $Panel_Model->bankaFrontListele();
+        $b = 0;
+        foreach ($bankaListe as $bankaListee) {
+            $cardlist[4][$b]['ID'] = $bankaListee['banka_ID'];
+            $cardlist[4][$b]['Adi'] = $bankaListee['banka_adi'];
+            $cardlist[4][$b]['Sube'] = $bankaListee['banka_sube'];
+            $cardlist[4][$b]['HesapNo'] = $bankaListee['banka_hesapno'];
+            $cardlist[4][$b]['IbanNo'] = $bankaListee['banka_ibanno'];
+            $cardlist[4][$b]['Alici'] = $bankaListee['banka_alici'];
+            $b++;
+        }
+
         $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
         $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);

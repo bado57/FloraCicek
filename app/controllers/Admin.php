@@ -319,6 +319,12 @@ class Admin extends Controller {
         $i = 0;
         foreach ($icerikListe as $icerikListee) {
             $iceriklist[$i]['ID'] = $icerikListee['sbt_id'];
+            $iceriklist[$i]['UyeSoz'] = $icerikListee['sbt_uyeliksoz'];
+            $iceriklist[$i]['HizmetSoz'] = $icerikListee['sbt_hzmtsoz'];
+            $iceriklist[$i]['GizlilikSoz'] = $icerikListee['sbt_gzllksoz'];
+            $iceriklist[$i]['MesafeliSoz'] = $icerikListee['sbt_mesafelistssoz'];
+            $iceriklist[$i]['TeslimatSart'] = $icerikListee['sbt_tslmatsart'];
+            $iceriklist[$i]['OnBilgiFormu'] = $icerikListee['sbt_onbilgilendirmeform'];
             $iceriklist[$i]['Tel'] = $icerikListee['sbt_telefon'];
             $iceriklist[$i]['Fax'] = $icerikListee['sbt_fax'];
             $iceriklist[$i]['Adres'] = $icerikListee['sbt_adres'];
@@ -444,6 +450,7 @@ class Admin extends Controller {
         $languagedeger = $formlanguage->multilanguage();
         $siparisCount = array();
         $array = array();
+        $arrayKategori = array();
         $siparisCountListe = $Panel_Model->siparisCountListele();
         $bekleyensiparis = 0;
         foreach ($siparisCountListe as $siparisCountListee) {
@@ -461,11 +468,21 @@ class Admin extends Controller {
             $kampanyalist[$k]['Baslik'] = $kampanyaListee['kampanya_baslik'];
             $kampanyalist[$k]['Aktif'] = $kampanyaListee['kampanya_aktiflik'];
             $kampanyalist[$k]['Yuzde'] = $kampanyaListee['kampanya_indirimyuzde'];
+            if ($kampanyalist[$k]['Aktif'] == 1) {
+                $arrayKategori[] = $kampanyaListee['kampanya_kategori'];
+            }
             $k++;
         }
         $array[0] = $kampanyalist;
+        $kampKatDizi = implode(',', $arrayKategori);
+        //ek ürün daha önce kullanılmış mı onu ayırmak için
+        if (in_array("-1", $arrayKategori)) {
+            $array[2] = "1";
+        } else {
+            $array[2] = "0";
+        }
 
-        $kategoriListe = $Panel_Model->urunKategorilistele();
+        $kategoriListe = $Panel_Model->urunKategorilistele($kampKatDizi);
         $b = 0;
         foreach ($kategoriListe as $kategoriListee) {
             $kategorilistUst[$b]['ID'] = $kategoriListee['kategori_ID'];
@@ -765,42 +782,76 @@ class Admin extends Controller {
         $this->load->view("Template_BackEnd/ililce", $languagedeger, $ililcedizi);
         $this->load->view("Template_BackEnd/footer", $languagedeger);
     }
-    
+
     function Kurumsaluye() {
         //model bağlantısı
         $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
-
-        
+        $siparisCount = array();
+        $siparisCountListe = $Panel_Model->siparisCountListele();
+        $bekleyensiparis = 0;
+        foreach ($siparisCountListe as $siparisCountListee) {
+            if ($siparisCountListee['siparis_durum'] == 0) {
+                $bekleyensiparis = $bekleyensiparis + 1;
+            }
+        }
+        $siparisCount[0] = $bekleyensiparis;
+        $siparisCount[1] = count($siparisCountListe);
+        $kuyeListe = $Panel_Model->kurumsalUyeListele();
+        $ku = 0;
+        foreach ($kuyeListe as $kuyeListee) {
+            $kuyelist[$ku]['ID'] = $kuyeListee['kullanici_id'];
+            $kuyelist[$ku]['Adi'] = $kuyeListee['kullanici_adSoyad'];
+            $kuyelist[$ku]['EPosta'] = $kuyeListee['kullanici_eposta'];
+            $kuyelist[$ku]['Tel'] = $kuyeListee['kullanici_kurumtel'];
+            $ku++;
+        }
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
-        $this->load->view("Template_BackEnd/left", $languagedeger);
-        $this->load->view("Template_BackEnd/kurumsaluye", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger, $siparisCount);
+        $this->load->view("Template_BackEnd/kurumsaluye", $languagedeger, $kuyelist);
         $this->load->view("Template_BackEnd/footer", $languagedeger);
     }
-    
+
     function Bireyseluye() {
         //model bağlantısı
         $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
-
-        
+        $siparisCount = array();
+        $siparisCountListe = $Panel_Model->siparisCountListele();
+        $bekleyensiparis = 0;
+        foreach ($siparisCountListe as $siparisCountListee) {
+            if ($siparisCountListee['siparis_durum'] == 0) {
+                $bekleyensiparis = $bekleyensiparis + 1;
+            }
+        }
+        $siparisCount[0] = $bekleyensiparis;
+        $siparisCount[1] = count($siparisCountListe);
+        $buyeListe = $Panel_Model->bireyselUyeListele();
+        $bu = 0;
+        foreach ($buyeListe as $buyeListee) {
+            $buyelist[$bu]['ID'] = $buyeListee['kullanici_id'];
+            $buyelist[$bu]['Adi'] = $buyeListee['kullanici_adSoyad'];
+            $buyelist[$bu]['EPosta'] = $buyeListee['kullanici_eposta'];
+            $buyelist[$bu]['Tel'] = $buyeListee['kullanici_kurumtel'];
+            $bu++;
+        }
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
-        $this->load->view("Template_BackEnd/left", $languagedeger);
-        $this->load->view("Template_BackEnd/bireyseluye", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger, $siparisCount);
+        $this->load->view("Template_BackEnd/bireyseluye", $languagedeger, $buyelist);
         $this->load->view("Template_BackEnd/footer", $languagedeger);
     }
-    
+
     function Siparismail() {
         //model bağlantısı
         $Panel_Model = $this->load->model("Panel_Model");
         $formlanguage = $this->load->multilanguage("tr");
         $languagedeger = $formlanguage->multilanguage();
 
-        
+
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger);

@@ -408,11 +408,10 @@ class AdminSiparis extends Controller {
                         $urunlist[$u]['SUAd'] = $urunn['siparisurun_ad'];
                         $urunlist[$u]['SUKod'] = $urunn['siparisurun_kod'];
                         $urunlist[$u]['SUMiktar'] = $urunn['siparisurun_miktar'];
+                        $urunlist[$u]['SUTip'] = $urunn['siparisurun_tip'];
+                        $urunlist[$u]['SUResim'] = $urunn['siparisurun_resim'];
                         $urunlist[$u]['SUTtar'] = $urunn['siparisurun_tutar'];
                         $urunlist[$u]['SUTplmTutar'] = $urunn['siparisurun_tutar'] * $urunn['siparisurun_miktar'];
-                        // Burada ürün resimlerini getirsin. :/
-                        $urunlist[$u]['SUResim'] = $Panel_Model->siparisUrunResimGetir($urunn['siparisurun_urunID'])['urun_anaresim'];
-                        
                         $tutar = $tutar + $urunlist[$u]['SUTplmTutar'];
                         $urunlist[$u]['Toplam'] = $tutar;
                         $u++;

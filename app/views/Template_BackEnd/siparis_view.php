@@ -352,7 +352,7 @@
                                                 <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; padding-bottom: 0.2cm;"></div>
                                                 <font style="font-size: 9pt;line-height: 14pt;">
                                                 <b>Ad Soyad :</b> <span class="gndad"></span> <br/>
-                                                <b>Üyelik :</b> <span class="gndUyeDurum"></span> <br/>
+                                                <b>Üyelik :</b> <span class="gndtip"></span> <br/>
                                                 <b>Telefon :</b> <span class="gndtel"></span> <br/>
                                                 <b>E-mail :</b> <span class="gndmail"></span> <br/>
                                                 <b>Fatura Ünvanı :</b> <span class="ftrunvn"></span> <br/>

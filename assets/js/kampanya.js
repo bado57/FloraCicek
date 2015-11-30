@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var katkampDegerler = "";
     $(document).on('click', 'button#formToggleKampanya', function (e) {
         var kapaliacik = $("input[name=kapaliacik]").val();
         var duzenleme = $("input[name=duzenleme]").val();
@@ -12,6 +13,16 @@ $(document).ready(function () {
                 $("#bitistarihi").val("");
                 $("#indirimyuzde").val("");
                 $("#kategoriler").select2("val", 0);
+                if (katkampDegerler != "") {
+                    //daha önceden kalan kategori varsa onları temizliyorum
+                    var arr = katkampDegerler.split(',');
+                    var length = arr.length;
+                    for (var l = 0; l < length; l++) {
+                        $("#kategoriler option[value='" + arr[l] + "']").remove();
+                    }
+                    $("#kategoriler").change();
+                }
+                $("#kategoriler").change();
                 $("#aktiflik").select2("val", 0);
                 CKEDITOR.instances['kampanyayazi'].setData("");
                 $("#kampanyaustbaslik").text("Yeni");
@@ -25,6 +36,15 @@ $(document).ready(function () {
             $("#bitistarihi").val("");
             $("#indirimyuzde").val("");
             $("#kategoriler").select2("val", 0);
+            if (katkampDegerler != "") {
+                //daha önceden kalan kategori varsa onları temizliyorum
+                var arr = katkampDegerler.split(',');
+                var length = arr.length;
+                for (var l = 0; l < length; l++) {
+                    $("#kategoriler option[value='" + arr[l] + "']").remove();
+                }
+                $("#kategoriler").change();
+            }
             $("#aktiflik").select2("val", 0);
             CKEDITOR.instances['kampanyayazi'].setData("");
             $("#kampanyaustbaslik").text("Yeni");
@@ -140,18 +160,37 @@ $(document).ready(function () {
                     return false;
                 } else {
                     if (cevap.result) {
-                        $("#kampanyabaslik").val(cevap.result.Baslik);
-                        $("#baslamatarihi").val(cevap.result.BsTarih);
-                        $("#bitistarihi").val(cevap.result.BtTarih);
-                        $("#indirimyuzde").val(cevap.result.Yuzde);
-                        CKEDITOR.instances['kampanyayazi'].setData(cevap.result.Yazi);
-                        var katstr = cevap.result.Kategori.split(",");
-                        $("#kategoriler").select2("val", katstr);
-                        $("#aktiflik").select2("val", cevap.result.Aktif);
-                        $("#kampanyaustbaslik").text(cevap.result.Baslik);
+                        if (katkampDegerler != "") {
+                            //daha önceden kalan kategori varsa onları temizliyorum
+                            var arr = katkampDegerler.split(',');
+                            var length = arr.length;
+                            for (var l = 0; l < length; l++) {
+                                $("#kategoriler option[value='" + arr[l] + "']").remove();
+                            }
+                            $("#kategoriler").change();
+                        }
+                        $("#kampanyabaslik").val(cevap.result[0][0].Baslik);
+                        $("#baslamatarihi").val(cevap.result[0][0].BsTarih);
+                        $("#bitistarihi").val(cevap.result[0][0].BtTarih);
+                        $("#indirimyuzde").val(cevap.result[0][0].Yuzde);
+                        CKEDITOR.instances['kampanyayazi'].setData(cevap.result[0][0].Yazi);
+                        $("#aktiflik").select2("val", cevap.result[0][0].Aktif);
+                        $("#kampanyaustbaslik").text(cevap.result[0][0].Baslik);
+                        katkampDegerler = cevap.result[0][0].Kategori;
+                        //kampanya kategorileri
+                        if (cevap.result[1]) {
+                            var katkamplength = cevap.result[1].length;
+                            for (var kk = 0; kk < katkamplength; kk++) {
+                                var select = $('#kategoriler');
+                                var option = $('<option></option>').attr('selected', true).text(cevap.result[1][kk].Adi).val(cevap.result[1][kk].ID);
+                                option.appendTo(select);
+                                select.trigger('change');
+                            }
+                        }
+
                         $("input[name=duzenleme]").val(1);
-                        $("input[name=duzenlemeID]").val(cevap.result.ID);
-                        $("input[name=eskikatval]").val(cevap.result.Kategori);
+                        $("input[name=duzenlemeID]").val(cevap.result[0][0].ID);
+                        $("input[name=eskikatval]").val(cevap.result[0][0].Kategori);
                         var kapaliacik = $("input[name=kapaliacik]").val();
                         if (kapaliacik == 0) {
                             $("#formToggleKampanya").click();

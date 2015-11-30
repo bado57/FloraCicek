@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12" style="margin-top:20px;  padding-bottom:30px;">
-                <div class="defaultDiv" style="max-width:210px; margin: -9px 20px 0 0;"> <a href="<?php echo SITE_VITRIN . "/" . $model[3][0]['Logo']; ?>"><img class="img-responsive" src="<?php echo SITE_IMAGES ?>/logo.png" alt="" /></a></div>
+                <div class="defaultDiv" style="max-width:210px; margin: -9px 20px 0 0;"> <a href="<?php echo SITE_URL; ?>"><img class="img-responsive" src="<?php echo SITE_VITRIN . "/" . $model[3][0]['Logo']; ?>" alt="" /></a></div>
                 <div class="wizard"><div class="step">1</div> <span><?php echo $data["EkUrun"]; ?></span></div>
                 <?php if (Session::get("KID") > 0) { ?>
                     <div class="wizard"><div class="step">2</div> <span><?php echo $data["TesBilgi"]; ?></span></div>
@@ -124,11 +124,11 @@
                                                 <p>Banka Seçiniz</p>
                                                 <select id="banka">
                                                     <option value="0">Banka Seçiniz</option>
-                                                    <option value="1">Garanti Bankası</option>
-                                                    <option value="2">Finans Bank</option>
-                                                    <option value="3">Ziraat Bankası</option>
-                                                    <option value="4">Akbank</option>
-                                                    <option value="5">Yapı Kredi</option>
+                                                    <?php if (count($model[4]) > 0) { ?>
+                                                        <?php foreach ($model[4] as $bankaIsımModel) { ?>
+                                                            <option value="<?php echo $bankaIsımModel["ID"] ?>"><?php echo $bankaIsımModel["Adi"] ?></option>
+                                                        <?php } ?>
+                                                    <?php } ?>
                                                 </select>
                                                 <br />
                                                 <p style="color:red; font-size: 16px;"><i class="fa fa-warning"></i> Uyarı</p>
@@ -148,46 +148,30 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="bankainfo">
-                                                    <tr class="b1">
-                                                        <td><b>BANKA</b></td>
-                                                        <td>Garanti Bankası</td>
-                                                    </tr>
-                                                    <tr class="b1">
-                                                        <td><b>ŞUBE</b></td>
-                                                        <td>Anayurt Şubesi (23856)</td>
-                                                    </tr>
-                                                    <tr class="b1">
-                                                        <td><b>HESAP NO</b></td>
-                                                        <td>0962563</td>
-                                                    </tr>
-                                                    <tr class="b1">
-                                                        <td><b>IBAN NO</b></td>
-                                                        <td>TR80 0006 2000 0045 0850 9703 62</td>
-                                                    </tr>
-                                                    <tr class="b1">
-                                                        <td><b>ALICI</b></td>
-                                                        <td>Sedat Yazır - Flora Çiçekçilik</td>
-                                                    </tr>
-                                                    <tr class="b2">
-                                                        <td><b>BANKA</b></td>
-                                                        <td>Finans Bankası</td>
-                                                    </tr>
-                                                    <tr class="b2">
-                                                        <td><b>ŞUBE</b></td>
-                                                        <td>Kayseri Şubesi (23856)</td>
-                                                    </tr>
-                                                    <tr class="b2">
-                                                        <td><b>HESAP NO</b></td>
-                                                        <td>1234545</td>
-                                                    </tr>
-                                                    <tr class="b2">
-                                                        <td><b>IBAN NO</b></td>
-                                                        <td>TR90 0007 3000 0081 0850 9703 62</td>
-                                                    </tr>
-                                                    <tr class="b2">
-                                                        <td><b>ALICI</b></td>
-                                                        <td>Sedat Yazır - Flora Çiçekçilik</td>
-                                                    </tr>
+                                                    <?php if (count($model[4]) > 0) { ?>
+                                                        <?php foreach ($model[4] as $bankaTableModel) { ?>
+                                                            <tr class="b<?php echo $bankaTableModel["ID"] ?>">
+                                                                <td><b>BANKA</b></td>
+                                                                <td><?php echo $bankaTableModel["Adi"] ?></td>
+                                                            </tr>
+                                                            <tr class="b<?php echo $bankaTableModel["ID"] ?>">
+                                                                <td><b>ŞUBE</b></td>
+                                                                <td><?php echo $bankaTableModel["Sube"] ?></td>
+                                                            </tr>
+                                                            <tr class="b<?php echo $bankaTableModel["ID"] ?>">
+                                                                <td><b>HESAP NO</b></td>
+                                                                <td><?php echo $bankaTableModel["HesapNo"] ?></td>
+                                                            </tr>
+                                                            <tr class="b<?php echo $bankaTableModel["ID"] ?>">
+                                                                <td><b>IBAN NO</b></td>
+                                                                <td><?php echo $bankaTableModel["IbanNo"] ?></td>
+                                                            </tr>
+                                                            <tr class="b<?php echo $bankaTableModel["ID"] ?>">
+                                                                <td><b>ALICI</b></td>
+                                                                <td><?php echo $bankaTableModel["Alici"] ?></td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    <?php } ?>
                                                 </tbody>
                                             </table>
                                             <p>
@@ -206,7 +190,7 @@
                                         <div class="login-form">
                                             <div class="form">
                                                 <p>Ortak kullanım yapılan alanlardan internete erişim sağlayıp, siparişinizi bu şekilde gerçekleştiriyorsanız telefon ile ödeme seçeneğini tercih edebilirsiniz.</p>
-                                                
+
                                                 <p>Siparişinizin işleme konulabilmesi için "Siparişi Tamamla" butonuna tıkladıktan sonra kredi kartı bilgilerinizi ve <strong class="spNo">185246</strong> olan sipariş numaranızı aşağıda yazılı olan telefon numarasını arayarak <b>turkiyefloracicek.com</b>'a ulaştırmanız gerekmektedir.</p>
                                                 <h2><i class="fa fa-phone-square"></i> 0352 232 23 32</h2>
                                                 <p>

@@ -386,6 +386,12 @@ class AdminVitrin extends Controller {
                     $adres = $_POST['adres'];
                     $yoneticimail = $_POST['yoneticimail'];
                     $yoneticimailek = $_POST['yoneticimailek'];
+                    $uyelikSoz = $_POST['uyelikSoz'];
+                    $onBilgi = $_POST['onBilgi'];
+                    $mesafeliSatis = $_POST['mesafeliSatis'];
+                    $gizlilikSoz = $_POST['gizlilikSoz'];
+                    $hizmetSoz = $_POST['hizmetSoz'];
+                    $teslimatSart = $_POST['teslimatSart'];
                     $form->post("newimage", true);
                     $newImage = $form->values['newImage'];
 
@@ -397,6 +403,12 @@ class AdminVitrin extends Controller {
                         if ($newImage == 0) {//yeni resim eklenmemiş
                             if ($form->submit()) {
                                 $dataA = array(
+                                    'sbt_uyeliksoz' => $uyelikSoz,
+                                    'sbt_hzmtsoz' => $hizmetSoz,
+                                    'sbt_gzllksoz' => $gizlilikSoz,
+                                    'sbt_mesafelistssoz' => $mesafeliSatis,
+                                    'sbt_tslmatsart' => $teslimatSart,
+                                    'sbt_onbilgilendirmeform' => $onBilgi,
                                     'sbt_telefon' => $telefon,
                                     'sbt_fax' => $fax,
                                     'sbt_adres' => $adres,
