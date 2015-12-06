@@ -83,12 +83,7 @@ class Home extends Controller {
             $vitrinlist[$vi]['Path'] = $vitrinListee['vitrin_resimpath'];
             $vitrinlist[$vi]['Baslik'] = $vitrinListee['vitrin_baslik'];
             $vitrinlist[$vi]['Yazi'] = $vitrinListee['vitrin_yazi'];
-            $kes = explode("/", $vitrinListee['vitrin_url']);
-            if (count($kes) == 3) {
-                $vitrinlist[$vi]['Url'] = $kes[2];
-            } else if (count($kes) == 4) {
-                $vitrinlist[$vi]['Url'] = $kes[2] . "/" . $kes[3];
-            }
+            $vitrinlist[$vi]['Url'] = $vitrinListee['vitrin_url'];
             $vitrinlist[$vi]['AltBaslik'] = $vitrinListee['vitrin_altbaslik'];
             $vitrinlist[$vi]['BtnYazi'] = $vitrinListee['vitrin_buttonyazi'];
             $vi++;
