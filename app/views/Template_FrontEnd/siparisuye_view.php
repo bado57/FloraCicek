@@ -6,7 +6,7 @@
 <style type="text/css">
     #mCollapse{display: none;}
     #orderLink{display: block !important;}
-    .footer-top, .footer-widget, .mobile_login_menu{display: none;}
+    .footer-top, .header-middle, .footer-widget, .mobile_login_menu{display: none !important;}
 </style>
 <!-- End Sipariş adımlarında açılır menünün gizlenmesi için css -->
 <section id="advertisementt">

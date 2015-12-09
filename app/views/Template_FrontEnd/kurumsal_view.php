@@ -1,6 +1,13 @@
 <script src="<?php echo SITE_JS ?>/userform.js"></script>
 <script src="<?php echo SITE_JS ?>/jquery.validate.js"></script>
 <link href="<?php echo SITE_CSS ?>/bootstrap.vertical-tabs.css" rel="stylesheet" type="text/css"/>
+<!-- Sipariş adımlarında açılır menünün gizlenmesi için css -->
+<style type="text/css">
+    #mCollapse{display: none;}
+    #orderLink{display: block !important;}
+    .footer-top, .footer-widget, .mobile_login_menu, .header-bottom{display: none !important;}
+</style>
+<!-- End Sipariş adımlarında açılır menünün gizlenmesi için css -->
 <div class="body-content">
     <!--iç sayfa-->
     <section id="form">

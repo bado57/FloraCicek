@@ -514,7 +514,7 @@ class Home extends Controller {
             $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
         }
     }
-
+    
     //daha önce login oldu ise
     function Contact() {
         $Panel_Model = $this->load->model("Panel_Model");

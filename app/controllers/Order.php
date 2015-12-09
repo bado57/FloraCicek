@@ -486,6 +486,36 @@ class Order extends Controller {
         $this->load->view("Template_FrontEnd/footertop", $languagedeger);
         $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
     }
+    
+    function Access() {
+        $form = $this->load->otherClasses('Form');
+        //model bağlantısı
+        $Panel_Model = $this->load->model("Panel_Model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();
+        $urunid = Session::get("SipID");
+        
+        // Banka hesap bilgileri
+        $bankaListe = $Panel_Model->bankaFrontListele();
+        $b = 0;
+        foreach ($bankaListe as $bankaListee) {
+            $cardlist[4][$b]['ID'] = $bankaListee['banka_ID'];
+            $cardlist[4][$b]['Adi'] = $bankaListee['banka_adi'];
+            $cardlist[4][$b]['Sube'] = $bankaListee['banka_sube'];
+            $cardlist[4][$b]['HesapNo'] = $bankaListee['banka_hesapno'];
+            $cardlist[4][$b]['IbanNo'] = $bankaListee['banka_ibanno'];
+            $cardlist[4][$b]['Alici'] = $bankaListee['banka_alici'];
+            $b++;
+        }
+        
+
+        $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/siparisonay", $languagedeger);
+        $this->load->view("Template_FrontEnd/footertop", $languagedeger);
+        $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
+    }
 
 }
 

@@ -43,7 +43,7 @@
                                                 <script type="text/javascript" src="<?php echo SITE_PLUGINS; ?>/treegrid/jquery.treegrid.js"></script>
                                                 <script type="text/javascript" src="<?php echo SITE_PLUGINS; ?>/treegrid/jquery.treegrid.bootstrap3.js"></script>
                                                 <script>
-                                                    var SITE_URL = "http://localhost/floracicek";
+                                                    var SITE_URL = "http://localhost/floracicek/";
                                                     function reset() {
                                                         alertify.set({
                                                             labels: {

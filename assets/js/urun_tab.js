@@ -88,7 +88,7 @@ $(document).ready(function () {
                     alertify.alert(cevap.hata);
                     return false;
                 } else {
-                    $("#h2ebulten").hide();
+					$("#h2ebulten").hide();
                     $("#divebulten").hide();
                     reset();
                     alertify.alert(cevap.result);
