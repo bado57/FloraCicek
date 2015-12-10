@@ -133,7 +133,7 @@
                                                 <br />
                                                 <p style="color:red; font-size: 16px;"><i class="fa fa-warning"></i> Uyarı</p>
                                                 <p>Havale ya da EFT işlemlerinizde “Hesaba Havale” seçeneğini seçiniz. Havale/EFT işlemini yaparken açıklama kısmına sipariş numaranızı belirtiniz.</p>
-                                                <p>Havale işlemini ATM’den kartsız bir şekilde gerçekleştirdiyseniz, işlem sırasında size verilen referans numarasını alarak 0352 232 23 32 numaralı Çağrı Merkezini arayınız.</p>
+                                                <p>Havale işlemini ATM’den kartsız bir şekilde gerçekleştirdiyseniz, işlem sırasında size verilen referans numarasını alarak <?php echo $model[3][1]['Tel']; ?> numaralı Çağrı Merkezini arayınız.</p>
                                                 <p>Havale ödemenizi en geç 3 gün içerisinde gerçekleştirmediğiniz takdirde, siparişiniz otomatik olarak iptal olacaktır.</p>
                                                 <p>Siparişinizi tamamlamak için “Siparişi Tamamla” butonuna basınız.</p>
                                             </div>

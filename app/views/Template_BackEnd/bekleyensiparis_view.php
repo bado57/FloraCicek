@@ -1,4 +1,5 @@
 <script src="<?php echo SITE_JS; ?>/siparis.js" type="text/javascript"></script>
+<script src="<?php echo SITE_JS; ?>/icpanel.js" type="text/javascript"></script>
 <!-- İÇ SAYFA -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -18,7 +19,7 @@
                         <input name="kapaliacik" type="hidden" value="0" >
                             <input name="duzenleme" type="hidden" value="" >
                                 <input name="duzenlemeID" type="hidden" value="" >
-                                    <h3 class="box-title"><i class="fa fa-shopping-cart"></i><span id=siparisustbaslik></span> Sipariş Detayı</h3>
+                                    <h3 class="box-title"><i class="fa fa-shopping-cart"></i> <span id=siparisustbaslik></span> Sipariş Detayı</h3>
                                     <div class="box-tools pull-right">
                                         <button id="formToggleSiparis" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                     </div>
@@ -37,19 +38,19 @@
                                                         <table id="siparisbilgileri" class="table table-responsive table-hover table-condensed table-bordered" style="margin-bottom:0;">
                                                             <tr>
                                                                 <td><b>Sipariş No</b></td>
-                                                                <td id="sipno"></td>
+                                                                <td class="sipno"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Sipariş Tarihi</b></td>
-                                                                <td id="siptarih"></td>
+                                                                <td class="siptarih"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Toplam Tutar</b></td>
-                                                                <td><b><span id="siptutar"></span> TL</b></td>
+                                                                <td><b><span class="siptutar"></span> TL</b></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Ödeme</b></td>
-                                                                <td id="sipOdeme"></td>
+                                                                <td class="sipOdeme"></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -83,7 +84,7 @@
                                                             </tbody>
                                                             <tfoot>
                                                                 <tr>
-                                                                    <td colspan="4" class="text-right"><b>Toplam : <span id="uruntoplamtutar"></span> TL</b></td>
+                                                                    <td colspan="4" class="text-right"><b>Toplam : <span class="uruntoplamtutar"></span> TL</b></td>
                                                                 </tr>
                                                             </tfoot>
                                                         </table>
@@ -103,19 +104,19 @@
                                                         <table id="müsteribilgileri" class="table table-responsive table-hover table-condensed table-bordered" style="margin-bottom:0;">
                                                             <tr>
                                                                 <td><b>Ad Soyad</b></td>
-                                                                <td id="gndad"></td>
+                                                                <td class="gndad"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Telefon</b></td>
-                                                                <td id="gndtel"></td>
+                                                                <td class="gndtel"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Email</b></td>
-                                                                <td id="gndmail"></td>
+                                                                <td class="gndmail"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Üyelik Durumu</b></td>
-                                                                <td><i class="fa fa-briefcase"></i> <span id="gndtip"></span></td>
+                                                                <td><span class="gndtip"></span></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -131,23 +132,23 @@
                                                         <table id="faturabilgileri" class="table table-responsive table-hover table-condensed table-bordered" style="margin-bottom:0;">
                                                             <tr>
                                                                 <td><b>Ünvan</b></td>
-                                                                <td id="ftrunvn"></td>
+                                                                <td class="ftrunvn"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>TC No</b></td>
-                                                                <td id="ftrtc"></td>
+                                                                <td class="ftrtc"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Vergi D.</b></td>
-                                                                <td id="ftrvdaire"></td>
+                                                                <td class="ftrvdaire"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Vergi No</b></td>
-                                                                <td id="ftrvno"></td>
+                                                                <td class="ftrvno"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Adres</b></td>
-                                                                <td id="ftradres"></td>
+                                                                <td class="ftradres"></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -165,47 +166,47 @@
                                                         <table id="teslimatbilgileri" class="table table-responsive table-hover table-condensed table-bordered" style="margin-bottom:0;">
                                                             <tr>
                                                                 <td><b>Alıcı</b></td>
-                                                                <td id="aliciad"></td>
+                                                                <td class="aliciad"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Telefon</b></td>
-                                                                <td id="alicitel"></td>
+                                                                <td class="alicitel"></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><b>Gönderim Tarihi</b></td>
-                                                                <td id="tslmttarih">23/10/2015 (08:00 - 09:00 Arası)</td>
+                                                                <td><b>Teslimat Tarihi</b></td>
+                                                                <td><span class="tslmttarih"></span> (<span class="tslmsaat"></span>)</td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Gideceği Yer</b></td>
-                                                                <td id="tslimtyer"></td>
+                                                                <td class="tslimtyer"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Adres</b></td>
-                                                                <td id="tslimtadres"></td>
+                                                                <td class="tslimtadres"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Adres Tarifi</b></td>
-                                                                <td id="tslmtadrestrf"></td>
+                                                                <td class="tslmtadrestrf"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Sipariş Notu</b></td>
-                                                                <td id="tslmtnot"></td>
+                                                                <td class="tslmtnot"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Kart Mesajı</b></td>
-                                                                <td id="tslmtkartmsj"></td>
+                                                                <td class="tslmtkartmsj"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Kart İsim</b></td>
-                                                                <td id="tslmtkartisim"></td>
+                                                                <td class="tslmtkartisim"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>İsim Göster</b></td>
-                                                                <td id="tslmtisimgrnme"></td>
+                                                                <td class="tslmtisimgrnme"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Gönderim Nedeni</b></td>
-                                                                <td id="tslmtgndndn"></td>
+                                                                <td class="tslmtgndndn"></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -245,6 +246,7 @@
                                                 <div class="form-group">
                                                     <input id="sipariskaydet" type="button" value="Kaydet" class="btn btn-primary pull-right" />
                                                     <input id="siparisvazgec" type="button" value="Kapat" class="btn btn-default pull-right" style="margin-right:10px;" />
+                                                    <input data-print-target=".printable" data-print-title="Sipariş Detayı" type="button" value="Yazdır" class="printBtn btn btn-warning pull-right" style="margin-right: 10px;"/>
                                                 </div>
                                             </div>
                                         </form><!-- /.row -->
@@ -267,20 +269,26 @@
                                                 </thead>
                                                 <tbody class="">
                                                     <?php for ($siparis = 0; $siparis < count($model[0]); $siparis++) { ?>
-                                                        <tr id="<?php echo $model[0][$siparis]['ID']; ?>" data-durum="<?php echo $model[0][$siparis]["Durum"]; ?>" class="text-red">
+                                                        <?php if ($model[0][$siparis]["Durum"] == 0) { ?>
+                                                            <tr id="<?php echo $model[0][$siparis]['ID']; ?>" data-durum="<?php echo $model[0][$siparis]["Durum"]; ?>" class="text-red">
+                                                            <?php } else if ($model[0][$siparis]["Durum"] == 1) { ?>
+                                                            <tr id="<?php echo $model[0][$siparis]['ID']; ?>" data-durum="<?php echo $model[0][$siparis]["Durum"]; ?>" class="text-orange">
+                                                            <?php } else { ?>
+                                                            <tr id="<?php echo $model[0][$siparis]['ID']; ?>" data-durum="<?php echo $model[0][$siparis]["Durum"]; ?>" class="text-green">
+                                                            <?php } ?>
                                                             <td><?php echo $model[0][$siparis]["No"]; ?></td>
                                                             <td><?php echo $model[0][$siparis]["Tarih"]; ?></td>
                                                             <?php if ($model[0][$siparis]["Tip"] == 0) { ?>
                                                                 <td><i class="fa fa-user"></i> <?php echo $model[0][$siparis]["Ad"]; ?></td>
                                                     <?php } else if ($model[0][$siparis]["Tip"] == 1) { ?>
-                                                        <td><i class="fa fa-user"></i> <?php echo $model[0][$siparis]["Ad"]; ?></td>
+                                                        <td><i class="fa fa-admin"></i> <?php echo $model[0][$siparis]["Ad"]; ?></td>
                                                     <?php } else if ($model[0][$siparis]["Tip"] == 2) { ?>
-                                                        <td><i class="fa fa-user"></i> <?php echo $model[0][$siparis]["Ad"]; ?></td>
+                                                        <td><i class="fa fa-briefcase"></i> <?php echo $model[0][$siparis]["Ad"]; ?></td>
                                                     <?php } else if ($model[0][$siparis]["Tip"] == 3) { ?>
                                                         <td><i class="fa fa-square"></i> <?php echo $model[0][$siparis]["Ad"]; ?></td>
                                                     <?php } ?>
                                                     <td class="text-right">
-                                                        <a id="siparisduzenle" class="btn btn-primary btn-sm" title="Düzenle"><i class="fa fa-eye"></i></a>
+                                                        <a id="siparisduzenle" class="btn btn-primary btn-sm" title="İşlemler"><i class="fa fa-search"></i></a>
                                                     </td>
                                                     </tr>
                                                 <?php } ?>
@@ -292,3 +300,90 @@
                                     </div><!-- /.row (main row) -->
                                     </section><!-- /.content -->
                                     </div><!-- /İÇ SAYFA -->
+
+
+                                    <!-- /İÇ SAYFA -->
+                                    <div class="printable" style="width:21cm; height:auto; padding: 1.1cm; background: #fff; border:2px solid #e6e6e6; font-family: Arial; display: none;">
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td><img src="https://www.turkiyefloracicek.com/vitrin/logo.png" alt="www.turkiyefloracicek.com" style="width:auto; height: 1cm;" /></td>
+                                            <td valign="middle" style="font-size: 12pt;"><div style="text-align: right;">Sipariş Detayı : 458962 </div></td>
+                                            </tr>
+                                        </table>
+                                        <br/>
+                                        <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; margin-bottom: 0.2cm;"></div>
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td valign="top" style="width: 33%;">
+                                            <div style="padding: 0.2cm; border:1px solid #e6e6e6; height: 100%;">
+                                                <font style="font-size: 10pt; font-weight: bold; color: #D20F0F;">Sipariş Bilgileri</font> <br/>
+                                                <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; padding-bottom: 0.2cm;"></div>
+                                                <font style="font-size: 9pt;line-height: 14pt;">
+                                                <b>Sipariş No :</b> <span class="sipno"></span> <br/>
+                                                <b>Sipariş Tarihi :</b> <span class="siptarih"></span> <br/>
+                                                <b>Sipariş Saati :</b> <span class="tslmsaat"></span> <br/>
+                                                <b>Toplam Tutar :</b> <span class="siptutar"></span> TL <br/>
+                                                <b>Ödeme Şekli :</b> <span class="sipOdeme"></span> <br/>
+                                                <b>Kart Mesajı :</b> <span class="tslmtkartmsj"></span> <br/>
+                                                <b>Kart İsim :</b> <span class="tslmtkartisim"></span> <br/>
+                                                <b>Kart İsmi :</b> <span class="tslmtisimgrnme"></span> <br/>
+                                                <b>Sipariş Notu :</b> <span class="tslmtnot"></span> <br/>
+                                                </font>
+                                            </div>
+                                            </td>
+
+                                            <td valign="top" style="padding-left: 0.2cm; width: 33%;">
+                                            <div style="padding: 0.2cm; border:1px solid #e6e6e6; height: 100%;"> 
+                                                <font style="font-size: 10pt; font-weight: bold; color: #D20F0F;">Teslimat Bilgileri</font> <br/>
+                                                <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; padding-bottom: 0.2cm;"></div>
+                                                <font style="font-size: 9pt;line-height: 14pt;">
+                                                <b>Alıcı Ad Soyad :</b> <span class="aliciad"></span> <br/>
+                                                <b>Telefon :</b> <span class="alicitel"></span> <br/>
+                                                <b>Adres :</b> <b class="tslimtyer">Ev</b> <span class="tslimtadres"></span> <br/>
+                                                <b>Adres Tarifi :</b> <span class="tslmtadrestrf"></span> <br/>
+                                                <b>Teslimat Tarihi :</b> <span class="tslmttarih"></span> <br/>
+                                                <b>Teslimat Saati :</b> <span class="tslmsaat"></span> <br/>
+                                                </font>
+                                            </div>
+                                            </td>
+                                            <td valign="top" style="padding-left: 0.2cm; width: 33%;">
+                                            <div style="padding: 0.2cm; border:1px solid #e6e6e6; height: 100%;">
+                                                <font style="font-size: 10pt; font-weight: bold; color: #D20F0F;">Gönderici Bilgileri</font> <br/>
+                                                <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; padding-bottom: 0.2cm;"></div>
+                                                <font style="font-size: 9pt;line-height: 14pt;">
+                                                <b>Ad Soyad :</b> <span class="gndad"></span> <br/>
+                                                <b>Üyelik :</b> <span class="gndtip"></span> <br/>
+                                                <b>Telefon :</b> <span class="gndtel"></span> <br/>
+                                                <b>E-mail :</b> <span class="gndmail"></span> <br/>
+                                                <b>Fatura Ünvanı :</b> <span class="ftrunvn"></span> <br/>
+                                                <b>TC Kimlik No :</b> <span class="ftrtc"></span> <br/>
+                                                <b>Vergi Dairesi :</b> <span class="ftrvdaire"></span> <br/>
+                                                <b>Vergi No :</b> <span class="ftrvno"></span> <br/>
+                                                <b>Fatura Adresi :</b> <span class="ftradres"></span> <br/>
+                                                </font>
+                                            </div>
+                                            </td>
+                                            </tr>
+                                        </table>
+                                        <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; margin-bottom: 0.2cm;"></div>
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td valign="top">
+                                                    <font style="font-size: 10pt; font-weight: bold; color: #D20F0F;">Ürün Bilgileri</font> <br/>
+                                            <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; padding-bottom: 0.2cm;"></div>
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top" id="urunSipPrint"></td>
+                                            </tr>
+                                        </table>
+                                        <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; margin-bottom: 0.2cm;"></div>
+                                        <table style="width:100%; border:0.1cm solid #e6e6e6;">
+                                            <tr>
+                                                <td class="spPrintFooter" style="font-size: 9pt;"></td>
+                                                <td style="text-align: right;">
+                                                    <b class="spTotalFooter"></b>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>

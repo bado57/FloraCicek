@@ -2,11 +2,12 @@ php_flag display_errors on
 php_value error_reporting 9999
 
 RewriteEngine On
-<FilesMatch "\.(ttf|otf|eot|woff|php|css|js)$">
-  <IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
-  </IfModule>
-</FilesMatch>
+<ifmodule mod_expires.c>
+<filesmatch "\.(jpg|gif|png|css|js)$">
+ExpiresActive on
+ExpiresDefault "access plus 1 year"
+</filesmatch>
+</ifmodule>
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l

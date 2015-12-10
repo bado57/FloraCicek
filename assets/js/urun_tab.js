@@ -54,7 +54,6 @@ $(document).ready(function () {
             }
         });
     });
-
     $(document).on("click", "a#cikisYap", function (e) {
         $.ajax({
             type: "post",
@@ -73,7 +72,6 @@ $(document).ready(function () {
             }
         });
     });
-
     $(document).on("click", "#btnebulten", function (e) {
         var email = $("#inputebulten").val();
         $.ajax({
@@ -88,11 +86,109 @@ $(document).ready(function () {
                     alertify.alert(cevap.hata);
                     return false;
                 } else {
-					$("#h2ebulten").hide();
+                    $("#h2ebulten").hide();
                     $("#divebulten").hide();
                     reset();
                     alertify.alert(cevap.result);
                     return false;
+                }
+            }
+        });
+    });
+    $(document).on("click", "#siparisArama", function (e) {
+        var sipKod = $("#siparisTakip").val();
+        $.ajax({
+            type: "post",
+            url: SITE_URL + "/Genel/ajaxCall",
+            cache: false,
+            dataType: "json",
+            data: {"sipKod": sipKod, "tip": "siparisDuzenlemeDegerler"},
+            success: function (cevap) {
+                if (cevap.hata) {
+                    reset();
+                    alertify.alert(cevap.hata);
+                    return false;
+                } else {
+                    if (cevap.result) {
+                        $("#urunSip").empty();
+                        $("#siparisbilgileri").show();
+                        $("#urunbilgileri").show();
+                        $("#müsteribilgileri").show();
+                        $("#faturabilgileri").show();
+                        $("#teslimatbilgileri").show();
+
+                        ////// Bilgiler
+                        $("#sipDurum").text(cevap.result[0].SDurum);
+                        $("#sipAdminNot").text(cevap.result[0].SAdminNot);
+                        $(".sipno").text(cevap.result[0].No);
+                        $(".siptarih").text(cevap.result[0].Tarih);
+                        $(".siptutar").text(cevap.result[0].TTutar);
+                        if (cevap.result[0].OdeTip == 0) {
+                            $(".sipOdeme").text("Kart İle Ödeme");
+                        } else if (cevap.result[0].OdeTip == 1) {
+                            $(".sipOdeme").text("Banka Havalesi");
+                        } else {
+                            $(".sipOdeme").text("Telefon İle Ödeme");
+                        }
+
+                        if (cevap.result[1]) {
+                            var length = cevap.result[1].length;
+                            for (var i = 0; i < length; i++) {
+                                var urunresulttip = "";
+                                if (cevap.result[1][i].SUTip != 0) {
+                                    urunresulttip = "Ek Ürün";
+                                } else {
+                                    urunresulttip = "Ana Ürün";
+                                }
+                                $("#urunSip").append("<tr>"
+                                        + "<td id='urunkod'>" + cevap.result[1][i].SUKod + "/" + cevap.result[1][i].SUAd + "</td>"
+                                        + "<td id='urunbirimfiyat'>" + cevap.result[1][i].SUTtar + "</td>"
+                                        + "<td id='urunmiktar'>" + cevap.result[1][i].SUMiktar + "</td>"
+                                        + "<td id='uruntutar'>" + cevap.result[1][i].SUTplmTutar + " TL</td></tr>");
+
+                            }
+                            $(".uruntoplamtutar").text(cevap.result[1][i - 1].Toplam);
+                        }
+
+
+                        $(".gndad").text(cevap.result[0].GAd);
+                        $(".gndtel").text(cevap.result[0].GTel);
+                        $(".gndmail").text(cevap.result[0].GMail);
+
+                        if (cevap.result[0].GUDurum == 0) {
+                            $(".gndtip").html('<i class="fa fa-user"></i> Bireysel Üye');
+                        } else if (cevap.result[0].GUDurum == 1) {
+                            $(".gndtip").html('<i class="fa fa-admin"></i> Admin');
+                        } else if (cevap.result[0].GUDurum == 2) {
+                            $(".gndtip").html('<i class="fa fa-briefcase"></i>  Kurumsal Üye');
+                        } else if (cevap.result[0].GUDurum == 3) {
+                            $(".gndtip").html('<i class="fa fa-shopping-cart"></i>  Üye Değil');
+                        }
+
+                        $(".ftrunvn").text(cevap.result[0].FUnvan);
+                        $(".ftrtc").text(cevap.result[0].FTcNo);
+                        $(".ftrvdaire").text(cevap.result[0].FVDaire);
+                        $(".ftrvno").text(cevap.result[0].FVNo);
+                        $(".ftradres").text(cevap.result[0].FAdres);
+                        $(".aliciad").text(cevap.result[0].AAd);
+                        $(".alicitel").text(cevap.result[0].ATel);
+                        $(".tslmttarih").text(cevap.result[0].SGonTar);
+                        $(".tslmsaat").text(cevap.result[0].SGonSaat);
+                        $(".tslimtyer").text(cevap.result[0].SGitYer);
+                        $(".tslimtadres").text(cevap.result[0].SGAdres);
+                        $(".tslmtadrestrf").text(cevap.result[0].SGAdresTrf);
+                        $(".tslmtnot").text(cevap.result[0].SNot);
+                        $(".tslmtkartmsj").text(cevap.result[0].SKartMsj);
+                        $(".tslmtkartisim").text(cevap.result[0].SKartIsim);
+
+                        if (cevap.result[0].SIsimGstr == 1) {
+                            $(".tslmtisimgrnme").text("Görünsün");
+                        } else {
+                            $(".tslmtisimgrnme").text("Görünmesin");
+                        }
+                        ///// ----- Bilgiler
+                        $("#tslmtgndndn").text(cevap.result[0].SGndNdn);
+                    }
                 }
             }
         });

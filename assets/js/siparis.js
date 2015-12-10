@@ -9,13 +9,13 @@ $(document).ready(function () {
             dataType: "json",
             data: {"ID": ID, "tip": "siparisDuzenlemeDegerler"},
             success: function (cevap) {
-
                 if (cevap.hata) {
                     reset();
                     alertify.alert(cevap.hata);
                     return false;
                 } else {
                     if (cevap.result) {
+                        $("#urunSip").empty();
                         $("#siparisbilgileri").show();
                         $("#urunbilgileri").show();
                         $("#müsteribilgileri").show();

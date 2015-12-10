@@ -881,6 +881,11 @@ class Panel_Model extends Model {
         $sql = "SELECT kullanici_id,kullanici_adSoyad,kullanici_eposta,kullanici_kurumadi,kullanici_vergid,kullanici_vergino,kullanici_kurumtel,kullanici_tel,kullanici_adres,kullanici_tarih FROM  flora_kullanici WHERE kullanici_id=$id";
         return $this->db->select($sql);
     }
+    
+    public function siparisFrontDetaylistele($kod) {
+        $sql = "SELECT * from flora_siparis WHERE siparis_No=$kod";
+        return $this->db->select($sql);
+    }
 
 }
 

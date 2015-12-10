@@ -18,7 +18,6 @@ $(document).ready(function () {
             }
         }
     });
-
     $(document).on("click", "button#urunSipVer", function (e) {
         var urunID = $("#urunID").val();
         var ilText = $("#sehirSec option:selected").text();

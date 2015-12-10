@@ -33,7 +33,6 @@ class AdminSiparis extends Controller {
                         $sonuc["cevap"] = "Başarıyla silinmiştir.";
                     }
                     break;
-
                 case "kargoEkle":
                     $form->post("aktiflik", true);
                     $ad = $_POST['ad'];
@@ -59,7 +58,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "kargoDuzenle":
                     $form->post("ID", true);
                     $form->post("aktiflik", true);
@@ -87,7 +85,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "bankaSil":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -97,7 +94,6 @@ class AdminSiparis extends Controller {
                         $sonuc["cevap"] = "Başarıyla silinmiştir.";
                     }
                     break;
-
                 case "bankaEkle":
                     $form->post("aktiflik", true);
                     $bankAdi = $_POST['bankAdi'];
@@ -145,7 +141,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "bankaDuzenle":
                     $form->post("ID", true);
                     $form->post("aktiflik", true);
@@ -195,7 +190,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "yerSil":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -205,7 +199,6 @@ class AdminSiparis extends Controller {
                         $sonuc["cevap"] = "Başarıyla silinmiştir.";
                     }
                     break;
-
                 case "yerEkle":
                     $form->post("aktiflik", true);
                     $yerAdi = $_POST['ad'];
@@ -229,7 +222,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "yerDuzenle":
                     $form->post("ID", true);
                     $form->post("aktiflik", true);
@@ -255,7 +247,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "nedenSil":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -265,7 +256,6 @@ class AdminSiparis extends Controller {
                         $sonuc["cevap"] = "Başarıyla silinmiştir.";
                     }
                     break;
-
                 case "nedenEkle":
                     $form->post("aktiflik", true);
                     $nedenAdi = $_POST['ad'];
@@ -289,7 +279,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "nedenDuzenle":
                     $form->post("ID", true);
                     $form->post("aktiflik", true);
@@ -315,7 +304,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "ilDuzenle":
                     $form->post("ID", true);
                     $form->post("aktiflik", true);
@@ -335,7 +323,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "ilceDuzenle":
                     $form->post("ID", true);
                     $form->post("ekucrett", true);
@@ -358,7 +345,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "siparisDuzenlemeDegerler":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -425,7 +411,6 @@ class AdminSiparis extends Controller {
                     }
 
                     break;
-
                 case "siparisDuzenle":
                     $form->post("ID", true);
                     $form->post("durum", true);

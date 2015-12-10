@@ -56,7 +56,7 @@
 
                     </script>
                     <script>
-                        var SITE_URL = "http://localhost/floracicek/";
+                        var SITE_URL = "http://localhost/floracicek";
                         function reset() {
                             alertify.set({
                                 labels: {
@@ -91,9 +91,9 @@
                                             </div>
                                             <div id="spDtyDurum" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="spHeadingDurum">
                                                 <div class="panel-body">
-                                                    <p>Siparişiniz... <!-- hazırlanıyor. (Paneldeki durum yaacak) --></p>
+                                                    <p id="sipDurum"></p>
                                                     <!-- Admin notu varsa -->
-                                                    <p>Yönetici notu</p>
+                                                    <p id="sipAdminNot"></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -191,46 +191,46 @@
                                             <div id="spDtyGonderen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="spHeadingGonderen">
                                                 <div class="panel-body">
                                                     <table id="müsteribilgileri" class="table table-responsive table-hover table-condensed table-bordered" style="margin-bottom:0;">
-                                                            <tr>
-                                                                <td><b>Ad Soyad</b></td>
-                                                                <td class="gndad"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Telefon</b></td>
-                                                                <td class="gndtel"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Email</b></td>
-                                                                <td class="gndmail"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Üyelik Durumu</b></td>
-                                                                <td><span class="gndtip"></span></td>
-                                                            </tr>
-                                                        </table>
+                                                        <tr>
+                                                            <td><b>Ad Soyad</b></td>
+                                                            <td class="gndad"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Telefon</b></td>
+                                                            <td class="gndtel"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Email</b></td>
+                                                            <td class="gndmail"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Üyelik Durumu</b></td>
+                                                            <td><span class="gndtip"></span></td>
+                                                        </tr>
+                                                    </table>
                                                     <!-- Varsa Fatura bilgileri -->
                                                     <h4>Fatura Bilgileri</h4>
                                                     <table id="faturabilgileri" class="table table-responsive table-hover table-condensed table-bordered" style="margin-bottom:0;">
-                                                            <tr>
-                                                                <td><b>Ünvan</b></td>
-                                                                <td class="ftrunvn"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>TC No</b></td>
-                                                                <td class="ftrtc"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Vergi D.</b></td>
-                                                                <td class="ftrvdaire"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Vergi No</b></td>
-                                                                <td class="ftrvno"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Adres</b></td>
-                                                                <td class="ftradres"></td>
-                                                            </tr>
+                                                        <tr>
+                                                            <td><b>Ünvan</b></td>
+                                                            <td class="ftrunvn"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>TC No</b></td>
+                                                            <td class="ftrtc"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Vergi D.</b></td>
+                                                            <td class="ftrvdaire"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Vergi No</b></td>
+                                                            <td class="ftrvno"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Adres</b></td>
+                                                            <td class="ftradres"></td>
+                                                        </tr>
                                                     </table>
                                                     <!-- End Varsa Fatura bilgileri -->
                                                 </div>
@@ -249,51 +249,51 @@
                                             <div id="spDtyTeslimat" class="panel-collapse collapse" role="tabpanel" aria-labelledby="spHeadingTeslimat">
                                                 <div class="panel-body">
                                                     <table id="teslimatbilgileri" class="table table-responsive table-hover table-condensed table-bordered" style="margin-bottom:0;">
-                                                            <tr>
-                                                                <td><b>Alıcı</b></td>
-                                                                <td class="aliciad"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Telefon</b></td>
-                                                                <td class="alicitel"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Teslimat Tarihi</b></td>
-                                                                <td><span class="tslmttarih"></span> (<span class="tslmsaat"></span>)</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Gideceği Yer</b></td>
-                                                                <td class="tslimtyer"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Adres</b></td>
-                                                                <td class="tslimtadres"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Adres Tarifi</b></td>
-                                                                <td class="tslmtadrestrf"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Sipariş Notu</b></td>
-                                                                <td class="tslmtnot"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Kart Mesajı</b></td>
-                                                                <td class="tslmtkartmsj"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Kart İsim</b></td>
-                                                                <td class="tslmtkartisim"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>İsim Göster</b></td>
-                                                                <td class="tslmtisimgrnme"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Gönderim Nedeni</b></td>
-                                                                <td class="tslmtgndndn"></td>
-                                                            </tr>
-                                                        </table>
+                                                        <tr>
+                                                            <td><b>Alıcı</b></td>
+                                                            <td class="aliciad"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Telefon</b></td>
+                                                            <td class="alicitel"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Teslimat Tarihi</b></td>
+                                                            <td><span class="tslmttarih"></span> (<span class="tslmsaat"></span>)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Gideceği Yer</b></td>
+                                                            <td class="tslimtyer"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Adres</b></td>
+                                                            <td class="tslimtadres"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Adres Tarifi</b></td>
+                                                            <td class="tslmtadrestrf"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Sipariş Notu</b></td>
+                                                            <td class="tslmtnot"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Kart Mesajı</b></td>
+                                                            <td class="tslmtkartmsj"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Kart İsim</b></td>
+                                                            <td class="tslmtkartisim"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>İsim Göster</b></td>
+                                                            <td class="tslmtisimgrnme"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Gönderim Nedeni</b></td>
+                                                            <td class="tslmtgndndn"></td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>

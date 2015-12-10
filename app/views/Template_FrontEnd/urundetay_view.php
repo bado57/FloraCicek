@@ -51,21 +51,6 @@
                                                 <option value="0"><?php echo $data["IlceSec"] ?></option>
                                             </select>
                                         </div>
-                                        <!--
-                                        <div class="form-group">
-                                            <select name="semtSec" id="semtSec" class="form-control select2">
-                                                <option value="0"><?php //echo $data["SemtSec"]       ?></option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select name="mahalleSec" id="mahalleSec" class="form-control select2">
-                                                <option value="0"><?php //echo $data["MahalleSec"]       ?></option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="postaKoduDiv" style="display:none">
-                                            <input type="text" name="postaKoduSec" id="postaKoduSec" class="form-control" disabled>
-                                                <input type="hidden" name="postaKodu" value="" id="postaKodu" class="form-control">
-                                                    </div>-->
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input type="text" name="tarihSec"  id="tarihSec" class="form-control" placeholder="<?php echo $data["GonTarih"] ?>">

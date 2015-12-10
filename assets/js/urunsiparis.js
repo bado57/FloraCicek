@@ -155,8 +155,8 @@ $(document).ready(function () {
     });
     $(document).on("click", "button#spKartTamamla", function (e) {
         var kartNo = $("#kartno").val();
-        var kartSonAyText = $("#kartAy option:selected").text();
-        var kartSonYilText = $("#kartYil option:selected").text();
+        var kartSonAyVal = $("#kartAy option:selected").val();
+        var kartSonYilVal = $("#kartYil option:selected").val();
         var cvv = $("#cvv").val();
         var mss = $('#kartSatisSoz').is(":checked");
         $.ajax({
@@ -164,7 +164,7 @@ $(document).ready(function () {
             url: SITE_URL + "/Genel/ajaxCall",
             cache: false,
             dataType: "json",
-            data: {"mss": mss, "kartNo": kartNo, "kartSonAyText": kartSonAyText, "kartSonYilText": kartSonYilText,
+            data: {"mss": mss, "kartNo": kartNo, "kartSonAyVal": kartSonAyVal, "kartSonYilVal": kartSonYilVal,
                 "cvv": cvv, "tip": "kartSiparis"},
             success: function (cevap) {
                 if (cevap.hata) {
@@ -173,7 +173,7 @@ $(document).ready(function () {
                     return false;
                 } else {
                     if (cevap.result == 1) {
-                        window.location.href = SITE_URL + '/Order/Onay';
+                        window.location.href = SITE_URL + '/Order/Access';
                     }
                 }
             }
@@ -181,12 +181,13 @@ $(document).ready(function () {
     });
     $(document).on("click", "button#spHavaleTamamla", function (e) {
         var hss = $('#havaleSatisSoz').is(":checked");
+        var bankaVal = $("#banka option:selected").val();
         $.ajax({
             type: "post",
             url: SITE_URL + "/Genel/ajaxCall",
             cache: false,
             dataType: "json",
-            data: {"hss": hss, "tip": "havaleSiparis"},
+            data: {"hss": hss, "bankaVal": bankaVal, "tip": "havaleSiparis"},
             success: function (cevap) {
                 if (cevap.hata) {
                     reset();
@@ -194,7 +195,7 @@ $(document).ready(function () {
                     return false;
                 } else {
                     if (cevap.result == 1) {
-                        window.location.href = SITE_URL + '/Order/Onay';
+                        window.location.href = SITE_URL + '/Order/Access';
                     }
                 }
             }
@@ -215,10 +216,19 @@ $(document).ready(function () {
                     return false;
                 } else {
                     if (cevap.result == 1) {
-                        window.location.href = SITE_URL + '/Order/Onay';
+                        window.location.href = SITE_URL + '/Order/Access';
                     }
                 }
             }
         });
+    });
+    $(document).on("click", "button#gotoHomeCard", function (e) {
+        window.location.href = SITE_URL;
+    });
+    $(document).on("click", "button#gotoHomePhone", function (e) {
+        window.location.href = SITE_URL;
+    });
+    $(document).on("click", "button#gotoHomeHavale", function (e) {
+        window.location.href = SITE_URL;
     });
 });

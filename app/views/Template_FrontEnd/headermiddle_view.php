@@ -25,9 +25,9 @@
                         <?php } ?>
                         <li>
                             <div class="input-group spSearch">
-                                <input type="text" class="form-control" placeholder="<?php echo $data["SiparisTakip"]; ?>" style="padding:3px 10px; height:28px;">
+                                <input type="text" id="siparisTakip" class="form-control" placeholder="<?php echo $data["SiparisTakip"]; ?>" style="padding:3px 10px; height:28px;">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" data-toggle="modal" data-target="#spDetayModal" type="button" style="padding:3px 10px;"><i class="fa fa-search"></i></button>
+                                        <button class="btn btn-default" data-toggle="modal" id="siparisArama" data-target="#spDetayModal" type="button" style="padding:3px 10px;"><i class="fa fa-search"></i></button>
                                     </span>
                             </div>
                         </li>
