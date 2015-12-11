@@ -359,7 +359,7 @@ class Order extends Controller {
     }
 
     function Card() {
-        if (Session::get("SipID") > 0) {
+        if (Session::get("Odeme") > 0) {
             $form = $this->load->otherClasses('Form');
             //model bağlantısı
             $Panel_Model = $this->load->model("Panel_Model");
@@ -501,7 +501,7 @@ class Order extends Controller {
     }
 
     function Access() {
-        if (Session::get("SipID") > 0) {
+        if (Session::get("SipKodu") > 0) {
             $form = $this->load->otherClasses('Form');
             //model bağlantısı
             $Panel_Model = $this->load->model("Panel_Model");
@@ -509,6 +509,10 @@ class Order extends Controller {
             $languagedeger = $formlanguage->multilanguage();
             //daha önceki siparişle ilgili bilgileri temizliyorum
             unset($_SESSION['SipID']);
+            unset($_SESSION['SipIl']);
+            unset($_SESSION['SipIlID']);
+            unset($_SESSION['SipIlce']);
+            unset($_SESSION['SipIlceID']);
             unset($_SESSION['SipAdres']);
             unset($_SESSION['SipIlceFiyat']);
             unset($_SESSION['SipTarih']);
@@ -516,6 +520,7 @@ class Order extends Controller {
             unset($_SESSION['SipGun']);
             unset($_SESSION['EkUrunID']);
             unset($_SESSION['SipGeciciUrunID']);
+            unset($_SESSION['Odeme']);
 
             // Banka hesap bilgileri
             $bankaListe = $Panel_Model->bankaFrontListele();
@@ -551,6 +556,10 @@ class Order extends Controller {
             $this->load->view("Template_FrontEnd/siparisonay", $languagedeger, $onaylist);
             $this->load->view("Template_FrontEnd/footertop", $languagedeger);
             $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
+            //son olan sessionlarıda kaldırıyorum
+            unset($_SESSION['SipTechOnay']);
+            unset($_SESSION['SipKodu']);
+            unset($_SESSION['SipTTutar']);
         } else {
             header("Location:" . SITE_URL);
         }

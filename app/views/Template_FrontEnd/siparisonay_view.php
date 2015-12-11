@@ -168,7 +168,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -176,7 +175,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         // Banka formu
-
         $(".bankainfo").find("tr").css("display", "none");
 
         $("#banka").on("change", function () {

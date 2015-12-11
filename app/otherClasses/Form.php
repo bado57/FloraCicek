@@ -1190,6 +1190,40 @@ class Form {
         }
     }
 
+    //smtp ile mail gönderme işlemi
+    function sSiparisMailGonder($email, $isim, $sipKod) {
+        require "Plugins/PHPMailer/PHPMailerAutoload.php";
+        $mail = new PHPMailer;
+
+        //$mail->SMTPDebug = 2;                               // Enable verbose debug output
+
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->SMTPAuth = true;         // Enable SMTP authentication
+
+        $mail->Host = 'ns1.turkiyefloracicek.com';  // Specify main and backup SMTP servers
+        $mail->Username = 'noreply@turkiyefloracicek.com';                 // SMTP username
+        $mail->Password = '478965Flora';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to(ssl ise port 465)
+
+        $mail->setFrom('noreply@turkiyefloracicek.com', 'Sipariş Sonucu');
+        $mail->addAddress($email, $isim);     // Add a recipient
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(true);                                  // Set email format to HTML
+
+        $mail->Subject = 'Türkiye Flora Çiçek - Sipariş';
+        $mail->Body = 'Merhaba ' . $isim . '!<br/> Siparişiniz tamamlanmıştır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile sitemizdeki siparis arama kısmından'
+                . 'takip edebilirsiniz. İyi günler dileriz.<br/><br/>'
+                . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
+                . '<br/><br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>';
+
+        if (!$mail->send()) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
     //smtp backup önderme işlemi
     function backupDatabase($file) {
         require "Plugins/PHPMailer/PHPMailerAutoload.php";

@@ -148,6 +148,10 @@ $(document).ready(function () {
                 } else {
                     if (cevap.result == 1) {
                         window.location.href = SITE_URL + '/Order/Card';
+                    } else {
+                        reset();
+                        alertify.alert(cevap.hata);
+                        return false;
                     }
                 }
             }
