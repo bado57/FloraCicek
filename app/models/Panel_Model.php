@@ -79,7 +79,7 @@ class Panel_Model extends Model {
 
     //ürün kampanya detay listeleme
     public function urunkampanyalistele($array = array(), $tarih) {
-        $sql = "SELECT kampanya_ID,kampanya_indirimyuzde FROM flora_kampanya WHERE kampanya_ID IN ($array) AND kampanya_aktiflik=1 AND kampanya_baslamatarih<" . $tarih . "<kampanya_bitistarihi";
+        $sql = 'SELECT kampanya_ID,kampanya_indirimyuzde FROM flora_kampanya WHERE kampanya_ID IN ("' . $array . '") AND kampanya_aktiflik=1 AND kampanya_baslamatarih<' . $tarih . '<kampanya_bitistarihi';
         return $this->db->select($sql);
     }
 
@@ -512,15 +512,22 @@ class Panel_Model extends Model {
         return ($this->db->delete("flora_kategori", "kategori_ID=$gelenid"));
     }
 
+    //admin kampanya kategori listeleme
+    public function urunKampKategorilistele($array = array()) {
+        $sql = 'SELECT kategori_ID,kategori_Adi,kategori_Yazi,kategori_Aktiflik,kategori_Sira,kategori_UstID FROM flora_kategori WHERE kategori_Aktiflik=1 AND kategori_UstID !=0 AND kategori_ID NOT IN ("' . $array . '") ORDER BY kategori_Sira ASC';
+        error_log($sql);
+        return $this->db->select($sql);
+    }
+
     //home kategori listeleme
-    public function urunKategorilistele($array = array()) {
-        $sql = "SELECT kategori_ID,kategori_Adi,kategori_Yazi,kategori_Aktiflik,kategori_Sira,kategori_UstID FROM flora_kategori WHERE kategori_Aktiflik=1 AND kategori_UstID !=0 AND kategori_ID NOT IN ($array) ORDER BY kategori_Sira ASC";
+    public function urunKategorilistele() {
+        $sql = "SELECT kategori_ID,kategori_Adi,kategori_Yazi,kategori_Aktiflik,kategori_Sira,kategori_UstID FROM flora_kategori WHERE kategori_Aktiflik=1 AND kategori_UstID !=0 ORDER BY kategori_Sira ASC";
         return $this->db->select($sql);
     }
 
     //kampanya kategori listeleme
     public function kampKategori($array = array()) {
-        $sql = "SELECT kategori_ID,kategori_Adi,kategori_Yazi,kategori_Aktiflik,kategori_Sira,kategori_UstID FROM flora_kategori WHERE kategori_Aktiflik=1 AND kategori_UstID !=0 AND kategori_ID IN ($array) ORDER BY kategori_Sira ASC";
+        $sql = 'SELECT kategori_ID,kategori_Adi,kategori_Yazi,kategori_Aktiflik,kategori_Sira,kategori_UstID FROM flora_kategori WHERE kategori_Aktiflik=1 AND kategori_UstID !=0 AND kategori_ID IN ("' . $array . '") ORDER BY kategori_Sira ASC';
         return $this->db->select($sql);
     }
 
@@ -881,7 +888,7 @@ class Panel_Model extends Model {
         $sql = "SELECT kullanici_id,kullanici_adSoyad,kullanici_eposta,kullanici_kurumadi,kullanici_vergid,kullanici_vergino,kullanici_kurumtel,kullanici_tel,kullanici_adres,kullanici_tarih FROM  flora_kullanici WHERE kullanici_id=$id";
         return $this->db->select($sql);
     }
-    
+
     public function siparisFrontDetaylistele($kod) {
         $sql = "SELECT * from flora_siparis WHERE siparis_No=$kod";
         return $this->db->select($sql);

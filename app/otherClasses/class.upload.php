@@ -2060,9 +2060,9 @@ class upload {
         $this->translation['no_mime'] = 'MIME type okunamadı. Tekrar Deneyiniz.';
         $this->translation['incorrect_file'] = 'Doğru Olmayan Dosya Tipi. Tekrar Deneyiniz.';
         $this->translation['image_too_wide'] = 'Çok geniş görüntü. Max 2000x2000 boyutlarında olmalıdır.';
-        $this->translation['image_too_narrow'] = 'Çok dar görüntü. Min 300x300 boyutlarında olmalıdır.';
+        $this->translation['image_too_narrow'] = 'Çok dar görüntü. Min 100x100 boyutlarında olmalıdır.';
         $this->translation['image_too_high'] = 'Resim Çok Büyük. Max 2000x2000 boyutlarında olmalıdır.';
-        $this->translation['image_too_short'] = 'Resim Çok Küçük. Min 300x300 boyutlarında olmalıdır.';
+        $this->translation['image_too_short'] = 'Resim Çok Küçük. Min 100x100 boyutlarında olmalıdır.';
         $this->translation['ratio_too_high'] = 'Image ratio too high (image too wide).';
         $this->translation['ratio_too_low'] = 'Image ratio too low (image too high).';
         $this->translation['too_many_pixels'] = 'Image has too many pixels.';
