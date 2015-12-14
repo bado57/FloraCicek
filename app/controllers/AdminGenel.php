@@ -1476,8 +1476,8 @@ class AdminGenel extends Controller {
                                                     if ($image->uploaded) {
                                                         // sadece resim formatları yüklensin
                                                         $image->allowed = array('image/*');
-                                                        $image->image_min_height = 200;
-                                                        $image->image_min_width = 200;
+                                                        $image->image_min_height = 100;
+                                                        $image->image_min_width = 100;
                                                         $image->image_max_height = 2000;
                                                         $image->image_max_width = 2000;
                                                         $image->file_new_name_body = time();
@@ -1739,8 +1739,8 @@ class AdminGenel extends Controller {
                                                 if ($image->uploaded) {
                                                     // sadece resim formatları yüklensin
                                                     $image->allowed = array('image/*');
-                                                    $image->image_min_height = 200;
-                                                    $image->image_min_width = 200;
+                                                    $image->image_min_height = 100;
+                                                    $image->image_min_width = 100;
                                                     $image->image_max_height = 2000;
                                                     $image->image_max_width = 2000;
                                                     $image->file_new_name_body = time();
