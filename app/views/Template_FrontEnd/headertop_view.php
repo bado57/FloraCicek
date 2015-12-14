@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="kayseri çiçek siparişi, çiçek gönderme hizmetleri, kayseri çiçek hizmeti" />
+        <meta name="keywords" content="kayseri çiçek, kayseri çiçek siparişi, kaliteli çiçek siparişi, çiçek gönderme hizmeti" />
     <title>Türkiye Flora Çiçek</title>
     <link rel="shortcut icon" href="<?php echo SITE_IMAGES ?>/favicon.png">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -53,7 +55,6 @@
 
                         ga('create', 'UA-67056943-1', 'auto');
                         ga('send', 'pageview');
-
                     </script>
                     <script>
                         var SITE_URL = "http://localhost/floracicek";
@@ -71,6 +72,7 @@
                     </script>
                     </head>
                     <body>
+                    <!-- Order Details -->
                     <div class="modal fade" id="spDetayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -312,7 +314,7 @@
                             <nav class="navbar navbar-header navbar-collapse-mobile">
                                 <div class="container-fluid">
                                     <div class="navbar-header">
-                                        <a class="navbar-brand padding-right" style="max-width:60% !important;" href="<?php echo SITE_URL ?>"><img src="<?php echo SITE_VITRIN . '/' . $model[8]["logo"]; ?>" style="max-width:100% !important;" alt="" /></a>
+                                        <a class="navbar-brand padding-right" style="max-width:60% !important;" href="<?php echo SITE_URL ?>"><img src="<?php echo SITE_VITRIN . '/' . $model[8]["logo"]; ?>" style="max-width:100% !important;" alt="Türkiye Flora Çiçek Logo" /></a>
                                         <button id="mCollapse" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarMobile" style="margin-top:20px;">
                                             <span class="icon-bar"></span>
                                             <span class="icon-bar"></span>

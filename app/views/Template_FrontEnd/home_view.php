@@ -25,7 +25,7 @@
                                         <a href="<?php echo $vitrinModel['Url']; ?>" class="btn btn-default get"><?php echo $vitrinModel['BtnYazi']; ?></a>
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
-                                        <img vitrinImage src="<?php echo SITE_VITRIN ?>/<?php echo $vitrinModel['Path']; ?>" class="girl img-responsive" alt="" />
+                                        <img vitrinImage src="<?php echo SITE_VITRIN ?>/<?php echo $vitrinModel['Path']; ?>" class="girl img-responsive" alt="<?php echo $vitrinModel['Baslik']; ?>" />
                                     </div>
                                 </div>
                             <?php } ?>
@@ -176,7 +176,7 @@
                         <h2><?php echo $data["EkUrun"]; ?></h2>
                     </div>
                     <a href="ek-urunler">
-                        <img class="img-responsive" src="<?php echo SITE_IMAGES ?>/ek-urun.jpg" />
+                        <img class="img-responsive" src="<?php echo SITE_IMAGES ?>/ek-urun.jpg" alt="Türkiye Flora Çiçek Ek Ürünler Image" />
                     </a>
                 </div>
                 <div class="col-sm-3 col-xs-6" style="margin-bottom: 30px;">
@@ -184,7 +184,7 @@
                         <h2>DOĞUM GÜNÜ</h2>
                     </div>
                     <a href="#">
-                        <img class="img-responsive" src="<?php echo SITE_IMAGES ?>/dogum-gunu.jpg" />
+                        <img class="img-responsive" src="<?php echo SITE_IMAGES ?>/dogum-gunu.jpg" alt="Türkiye Flora Çiçek Doğum Günü Image" />
                     </a>
                 </div>
                 <div class="col-sm-3 col-xs-6" style="margin-bottom: 30px;">
@@ -192,7 +192,7 @@
                         <h2>YILDÖNÜMÜ</h2>
                     </div>
                     <a href="#">
-                        <img class="img-responsive" src="<?php echo SITE_IMAGES ?>/yildonumu.jpg" />
+                        <img class="img-responsive" src="<?php echo SITE_IMAGES ?>/yildonumu.jpg" alt="Türkiye Flora Çiçek Yıldönümü Image" />
                     </a>
                 </div>
             </div>

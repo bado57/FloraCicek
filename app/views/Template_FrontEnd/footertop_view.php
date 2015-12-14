@@ -6,14 +6,14 @@
             <div class="row">
                 <div class="col-sm-2">
                     <div class="companyinfo text-center">
-                        <img class="" src="<?php echo SITE_IMAGES ?>/footer-logo.png" alt="" />
+                        <img class="" src="<?php echo SITE_IMAGES ?>/footer-logo.png" alt="Türkiye Flora Çiçek Logo" />
                     </div>
                 </div>
                 <div class="col-sm-7">
                     <div class="col-sm-3">
                         <div class="video-gallery text-center">
                             <div class="iframe-img">
-                                <img src="<?php echo SITE_IMAGES ?>/ssl-secure-logo.png" alt="" />
+                                <img src="<?php echo SITE_IMAGES ?>/ssl-secure-logo.png" alt="Türkiye Flora Çiçek SSL Secure Logo" />
                             </div>
                             <p>256 Bit</p>
                             <h2>SSL Secure</h2>
@@ -22,7 +22,7 @@
                     <div class="col-sm-3">
                         <div class="video-gallery text-center">
                             <div class="iframe-img">
-                                <img src="<?php echo SITE_IMAGES ?>/master-card.png" alt="" />
+                                <img src="<?php echo SITE_IMAGES ?>/master-card.png" alt="Türkiye Flora Çiçek Master Card Logo" />
                             </div>
                             <p>Master</p>
                             <h2>Card</h2>
@@ -32,7 +32,7 @@
                     <div class="col-sm-3">
                         <div class="video-gallery text-center">
                             <div class="iframe-img">
-                                <img src="<?php echo SITE_IMAGES ?>/visa-card.png" alt="" />
+                                <img src="<?php echo SITE_IMAGES ?>/visa-card.png" alt="Türkiye Flora Çiçek Visa Card Logo" />
                             </div>
                             <p>Visa</p>
                             <h2>Card</h2>
@@ -42,7 +42,7 @@
                     <div class="col-sm-3">
                         <div class="video-gallery text-center">
                             <div class="iframe-img">
-                                <img src="<?php echo SITE_IMAGES ?>/guvenli-alisveris.png" alt="" />
+                                <img src="<?php echo SITE_IMAGES ?>/guvenli-alisveris.png" alt="Türkiye Flora Çiçek Güvenli Alışveriş Image" />
                             </div>
                             <p>Güvenli</p>
                             <h2>Alışveriş</h2>
@@ -55,7 +55,7 @@
                     <div class="col-sm-3">
                         <div class="address">
                             <a href="<?php echo SITE_URL ?>/Home/kurumsal">
-                                <img src="<?php echo SITE_IMAGES ?>/map.png" alt="" />
+                                <img src="<?php echo SITE_IMAGES ?>/map.png" alt="Türkiye Flora Çiçek Kurumsal Üyelik Image" />
                             </a>
                         </div>
                     </div>

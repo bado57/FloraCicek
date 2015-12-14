@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12" style="margin-top:20px;  padding-bottom:30px;">
-                <div class="defaultDiv" style="max-width:210px; margin: -9px 20px 0 0;"> <a href="<?php echo SITE_URL; ?>"><img class="img-responsive" src="<?php echo SITE_VITRIN . "/" . $model[0][0]['Logo']; ?>" alt="" /></a></div>
+                <div class="defaultDiv" style="max-width:210px; margin: -9px 20px 0 0;"> <a href="<?php echo SITE_URL; ?>"><img class="img-responsive" src="<?php echo SITE_VITRIN . "/" . $model[0][0]['Logo']; ?>" alt="Turkiye Flora Çiçek Logo" /></a></div>
                 <div class="wizard"><div class="step">1</div> <span><?php echo $data["EkUrun"]; ?></span></div>
                 <?php if (Session::get("KID") > 0) { ?>
                     <div class="wizard"><div class="step">2</div> <span><?php echo $data["TesBilgi"]; ?></span></div>

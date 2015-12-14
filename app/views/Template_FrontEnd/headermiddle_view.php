@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="logo pull-left" style="text-align:center;">
-                    <a href="<?php echo SITE_URL; ?>"><img src="<?php echo SITE_VITRIN . '/' . $model[8]["logo"]; ?>" alt="" /></a>
+                    <a href="<?php echo SITE_URL; ?>"><img src="<?php echo SITE_VITRIN . '/' . $model[8]["logo"]; ?>" alt="Türkiye Flora Çiçek Logo" /></a>
                 </div>
             </div>
             <?php if (Session::get("KRol") == 2 || Session::get("KRol") == 1) { ?>
@@ -17,7 +17,7 @@
                 <div class="shop-menu pull-right">
                     <ul class="nav navbar-nav">
                         <?php if (Session::get("KID") > 0) { ?>
-                            <li><a><i class="fa fa-user"></i><?php echo $data["Hosgeldiniz"]; ?> <?php echo Session::get("KAdSoyad"); ?></a></li>
+                            <li><a><i class="fa fa-user"></i> <?php echo Session::get("KAdSoyad"); ?></a></li>
                             <li><a id="cikisYap"><i class="fa fa-sign-out"></i>Çıkış Yap</a></li>
                         <?php } else { ?>
                             <li><a href="<?php echo SITE_URL ?>/Home/login"><i class="fa fa-sign-in"></i> <?php echo $data["GirisYap"]; ?></a></li>

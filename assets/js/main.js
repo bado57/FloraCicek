@@ -72,8 +72,23 @@
 	        zIndex: 2147483647 // Z-Index for the overlay
 		});
 	});
-
+        
 	});
+        
+        $(window).load(function (){ 
+            $('img').each(function (){
+            var w = $(this).width();
+            var h = $(this).height();
+            $(this).attr("width", w+"px").attr("height", h+"px");
+        });
+        
+        $('#slider-carousel').on('slide.bs.carousel', function () {
+            var img = $(this).find('.girl');
+            img.css("width", "480px");
+            img.css("height", "370px");
+        });
+            
+        });
 
 
 
