@@ -1057,7 +1057,8 @@ class Genel extends Controller {
                     if ($gndadsoyad != '') {
                         if ($gndmail != '') {
                             if (!filter_var($gndmail, FILTER_VALIDATE_EMAIL) === false) {
-                                $emailValidate = $form->mailControl1($gndmail);
+                                //$emailValidate = $form->mailControl1($gndmail);
+                                $emailValidate = 1;
                                 if ($emailValidate == 1) {
                                     if ($gndtel != '') {
                                         if ($alcadsoyad != '') {
@@ -1070,69 +1071,91 @@ class Genel extends Controller {
                                                                     if ($tcno != '') {
                                                                         if ($ftradres != '') {
                                                                             if ($onaylama == "true") {
-                                                                                if ($form->submit()) {
-                                                                                    $data = array(
-                                                                                        'siparis_aliciadsoyad' => $alcadsoyad,
-                                                                                        'siparis_alicitel' => $alctel,
-                                                                                        'siparis_aliciadres' => $alcadres,
-                                                                                        'siparis_aliciadrestarif' => $alcadresdetay,
-                                                                                        'siparis_gndid' => $gndndnID,
-                                                                                        'siparis_gndtext' => $gndndnTxt,
-                                                                                        'siparis_yerid' => $alcgityerid,
-                                                                                        'siparis_yertext' => $alcgityertext,
-                                                                                        'siparis_kartisim' => $kartisim,
-                                                                                        'siparis_kartmesaj' => $kartmesaj,
-                                                                                        'siparis_isimgorunme' => 0,
-                                                                                        'siparis_gonderenID' => $kisiID,
-                                                                                        'siparis_gonderenkur' => Session::get("KRol"),
-                                                                                        'siparis_gonderenAdSoyad' => $gndadsoyad,
-                                                                                        'siparis_gonderenTel' => $gndtel,
-                                                                                        'siparis_gondereneposta' => $gndmail,
-                                                                                        'siparis_gonderennotu' => $siparisnotu,
-                                                                                        'siparis_gonderensms' => 0,
-                                                                                        'siparis_gonderenepostaalma' => 0,
-                                                                                        'siparis_gonderensmseposta' => 0,
-                                                                                        'siparis_faturaunvan' => $ftrunvan,
-                                                                                        'siparis_faturatc' => $tcno,
-                                                                                        'siparis_faturaadres' => $ftradres,
-                                                                                        'siparis_faturavergidaire' => $vd,
-                                                                                        'siparis_vergino' => $vn,
-                                                                                        'siparis_sehir' => $ilText,
-                                                                                        'siparis_sehirID' => $ilID,
-                                                                                        'siparis_ilce' => $ilceText,
-                                                                                        'siparis_ilceID' => $ilceID,
-                                                                                        'siparis_saat' => $saat,
-                                                                                        'siparis_gun' => $gun,
-                                                                                        'siparis_tarih' => $tarih,
-                                                                                        'siparis_kargofirmaid' => 0,
-                                                                                        'siparis_kargotakipno' => '',
-                                                                                        'siparis_kargotarih' => '',
-                                                                                        'siparis_toplamtutar' => 0,
-                                                                                        'siparis_adminnotu' => '',
-                                                                                        'siparis_durum' => 0
-                                                                                    );
+                                                                                //ürün kodu oluşturulmakta
+                                                                                $benzersizSayi = $form->benzersiz_Sayi(6);
+                                                                                $benzersizListe = $Panel_Model->siparisBenzersizKontrol($benzersizSayi);
+                                                                                foreach ($benzersizListe as $benzersizListee) {
+                                                                                    $benzersiz['ID'] = $benzersizListee['siparis_ID'];
                                                                                 }
-                                                                                $result = $Panel_Model->sipTeslimat($data);
-                                                                                if ($result) {
-                                                                                    if (count($ekurunID) > 0) {
-                                                                                        unset($_SESSION['EkUrunID']);
-                                                                                        Session::set("EkUrunID", $ekuruniddizi);
-                                                                                        //geçici-sipariş id si
-                                                                                        unset($_SESSION['SipGeciciUrunID']);
-                                                                                        Session::set("SipGeciciUrunID", $result);
-                                                                                    } else {
-                                                                                        unset($_SESSION['EkUrunID']);
+                                                                                if ($benzersiz['ID'] > 0) {
+                                                                                    $sonuc["hata"] = "Siparis Kodu Oluşturulamadı Tekrar Deneyiniz.";
+                                                                                } else {
+                                                                                    if ($form->submit()) {
+                                                                                        $data = array(
+                                                                                            'siparis_No' => $benzersizSayi,
+                                                                                            'siparis_aliciadsoyad' => $alcadsoyad,
+                                                                                            'siparis_alicitel' => $alctel,
+                                                                                            'siparis_aliciadres' => $alcadres,
+                                                                                            'siparis_aliciadrestarif' => $alcadresdetay,
+                                                                                            'siparis_gndid' => $gndndnID,
+                                                                                            'siparis_gndtext' => $gndndnTxt,
+                                                                                            'siparis_yerid' => $alcgityerid,
+                                                                                            'siparis_yertext' => $alcgityertext,
+                                                                                            'siparis_kartisim' => $kartisim,
+                                                                                            'siparis_kartmesaj' => $kartmesaj,
+                                                                                            'siparis_isimgorunme' => 0,
+                                                                                            'siparis_gonderenID' => $kisiID,
+                                                                                            'siparis_gonderenkur' => Session::get("KRol"),
+                                                                                            'siparis_gonderenAdSoyad' => $gndadsoyad,
+                                                                                            'siparis_gonderenTel' => $gndtel,
+                                                                                            'siparis_gondereneposta' => $gndmail,
+                                                                                            'siparis_gonderennotu' => $siparisnotu,
+                                                                                            'siparis_gonderensms' => 0,
+                                                                                            'siparis_gonderenepostaalma' => 0,
+                                                                                            'siparis_gonderensmseposta' => 0,
+                                                                                            'siparis_faturaunvan' => $ftrunvan,
+                                                                                            'siparis_faturatc' => $tcno,
+                                                                                            'siparis_faturaadres' => $ftradres,
+                                                                                            'siparis_faturavergidaire' => $vd,
+                                                                                            'siparis_vergino' => $vn,
+                                                                                            'siparis_sehir' => $ilText,
+                                                                                            'siparis_sehirID' => $ilID,
+                                                                                            'siparis_ilce' => $ilceText,
+                                                                                            'siparis_ilceID' => $ilceID,
+                                                                                            'siparis_saat' => $saat,
+                                                                                            'siparis_gun' => $gun,
+                                                                                            'siparis_tarih' => $tarih,
+                                                                                            'siparis_kargofirmaid' => 0,
+                                                                                            'siparis_kargotakipno' => '',
+                                                                                            'siparis_kargotarih' => '',
+                                                                                            'siparis_toplamtutar' => 0,
+                                                                                            'siparis_adminnotu' => '',
+                                                                                            'siparis_durum' => 0
+                                                                                        );
                                                                                     }
-                                                                                    if (Session::get("KID") > 0) {
-                                                                                        Session::set("Odeme", 1);
-                                                                                        $sonuc["result"] = 1;
+                                                                                    $result = $Panel_Model->sipTeslimat($data);
+                                                                                    if ($result) {
+                                                                                        if (count($ekurunID) > 0) {
+                                                                                            unset($_SESSION['EkUrunID']);
+                                                                                            Session::set("EkUrunID", $ekuruniddizi);
+                                                                                            //geçici-sipariş id si
+                                                                                            unset($_SESSION['SipGeciciUrunID']);
+                                                                                            Session::set("SipGeciciUrunID", $result);
+                                                                                        } else {
+                                                                                            unset($_SESSION['EkUrunID']);
+                                                                                        }
+                                                                                        if (Session::get("KID") > 0) {
+                                                                                            Session::set("Odeme", 1);
+                                                                                            unset($_SESSION['SipKodu']);
+                                                                                            Session::set("SipKodu", $benzersizSayi);
+                                                                                            //mesafeli satış sözleşmesi için
+                                                                                            Session::set("AliciAdSoyad", $gndadsoyad);
+                                                                                            Session::set("AliciPhone", $gndtel);
+                                                                                            Session::set("AliciMail", $gndmail);
+                                                                                            $sonuc["result"] = 1;
+                                                                                        } else {
+                                                                                            Session::set("Odeme", 1);
+                                                                                            unset($_SESSION['SipKodu']);
+                                                                                            Session::set("SipKodu", $benzersizSayi);
+                                                                                            //mesafeli satış sözleşmesi için
+                                                                                            Session::set("AliciAdSoyad", $gndadsoyad);
+                                                                                            Session::set("AliciPhone", $gndtel);
+                                                                                            Session::set("AliciMail", $gndmail);
+                                                                                            $sonuc["result"] = 1;
+                                                                                        }
                                                                                     } else {
-                                                                                        Session::set("Odeme", 1);
-                                                                                        $sonuc["result"] = 0;
                                                                                         $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz";
                                                                                     }
-                                                                                } else {
-                                                                                    $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz";
                                                                                 }
                                                                             } else {
                                                                                 $sonuc["hata"] = "Lütfen Bilgileriniz Onaylayınız!";
@@ -1153,74 +1176,96 @@ class Genel extends Controller {
                                                             $sonuc["hata"] = "Lütfen Vergi Ünvanını Giriniz!";
                                                         }
                                                     } else {
-                                                        if ($onaylama == "true") {
-                                                            if ($form->submit()) {
-                                                                $data = array(
-                                                                    'siparis_aliciadsoyad' => $alcadsoyad,
-                                                                    'siparis_alicitel' => $alctel,
-                                                                    'siparis_aliciadres' => $alcadres,
-                                                                    'siparis_aliciadrestarif' => $alcadresdetay,
-                                                                    'siparis_gndid' => $gndndnID,
-                                                                    'siparis_gndtext' => $gndndnTxt,
-                                                                    'siparis_yerid' => $alcgityerid,
-                                                                    'siparis_yertext' => $alcgityertext,
-                                                                    'siparis_kartisim' => $kartisim,
-                                                                    'siparis_kartmesaj' => $kartmesaj,
-                                                                    'siparis_isimgorunme' => 0,
-                                                                    'siparis_gonderenID' => $kisiID,
-                                                                    'siparis_gonderenkur' => Session::get("KRol"),
-                                                                    'siparis_gonderenAdSoyad' => $gndadsoyad,
-                                                                    'siparis_gonderenTel' => $gndtel,
-                                                                    'siparis_gondereneposta' => $gndmail,
-                                                                    'siparis_gonderennotu' => $siparisnotu,
-                                                                    'siparis_gonderensms' => 0,
-                                                                    'siparis_gonderenepostaalma' => 0,
-                                                                    'siparis_gonderensmseposta' => 0,
-                                                                    'siparis_faturaunvan' => '',
-                                                                    'siparis_faturatc' => '',
-                                                                    'siparis_faturaadres' => '',
-                                                                    'siparis_faturavergidaire' => '',
-                                                                    'siparis_vergino' => '',
-                                                                    'siparis_sehir' => $ilText,
-                                                                    'siparis_sehirID' => $ilID,
-                                                                    'siparis_ilce' => $ilceText,
-                                                                    'siparis_ilceID' => $ilceID,
-                                                                    'siparis_saat' => $saat,
-                                                                    'siparis_gun' => $gun,
-                                                                    'siparis_tarih' => $tarih,
-                                                                    'siparis_kargofirmaid' => 0,
-                                                                    'siparis_kargotakipno' => '',
-                                                                    'siparis_kargotarih' => '',
-                                                                    'siparis_toplamtutar' => 0,
-                                                                    'siparis_adminnotu' => '',
-                                                                    'siparis_durum' => 0
-                                                                );
-                                                            }
-
-                                                            $result = $Panel_Model->sipTeslimat($data);
-                                                            if ($result) {
-                                                                if (count($ekurunID) > 0) {
-                                                                    unset($_SESSION['EkUrunID']);
-                                                                    Session::set("EkUrunID", $ekuruniddizi);
-                                                                    //geçici-sipariş id si
-                                                                    unset($_SESSION['SipGeciciUrunID']);
-                                                                    Session::set("SipGeciciUrunID", $result);
-                                                                } else {
-                                                                    unset($_SESSION['EkUrunID']);
+                                                        //ürün kodu oluşturulmakta
+                                                        $benzersizSayi = $form->benzersiz_Sayi(6);
+                                                        $benzersizListe = $Panel_Model->siparisBenzersizKontrol($benzersizSayi);
+                                                        foreach ($benzersizListe as $benzersizListee) {
+                                                            $benzersiz['ID'] = $benzersizListee['siparis_ID'];
+                                                        }
+                                                        if ($benzersiz['ID'] > 0) {
+                                                            $sonuc["hata"] = "Siparis Kodu Oluşturulamadı Tekrar Deneyiniz.";
+                                                        } else {
+                                                            if ($onaylama == "true") {
+                                                                if ($form->submit()) {
+                                                                    $data = array(
+                                                                        'siparis_No' => $benzersizSayi,
+                                                                        'siparis_aliciadsoyad' => $alcadsoyad,
+                                                                        'siparis_alicitel' => $alctel,
+                                                                        'siparis_aliciadres' => $alcadres,
+                                                                        'siparis_aliciadrestarif' => $alcadresdetay,
+                                                                        'siparis_gndid' => $gndndnID,
+                                                                        'siparis_gndtext' => $gndndnTxt,
+                                                                        'siparis_yerid' => $alcgityerid,
+                                                                        'siparis_yertext' => $alcgityertext,
+                                                                        'siparis_kartisim' => $kartisim,
+                                                                        'siparis_kartmesaj' => $kartmesaj,
+                                                                        'siparis_isimgorunme' => 0,
+                                                                        'siparis_gonderenID' => $kisiID,
+                                                                        'siparis_gonderenkur' => Session::get("KRol"),
+                                                                        'siparis_gonderenAdSoyad' => $gndadsoyad,
+                                                                        'siparis_gonderenTel' => $gndtel,
+                                                                        'siparis_gondereneposta' => $gndmail,
+                                                                        'siparis_gonderennotu' => $siparisnotu,
+                                                                        'siparis_gonderensms' => 0,
+                                                                        'siparis_gonderenepostaalma' => 0,
+                                                                        'siparis_gonderensmseposta' => 0,
+                                                                        'siparis_faturaunvan' => '',
+                                                                        'siparis_faturatc' => '',
+                                                                        'siparis_faturaadres' => '',
+                                                                        'siparis_faturavergidaire' => '',
+                                                                        'siparis_vergino' => '',
+                                                                        'siparis_sehir' => $ilText,
+                                                                        'siparis_sehirID' => $ilID,
+                                                                        'siparis_ilce' => $ilceText,
+                                                                        'siparis_ilceID' => $ilceID,
+                                                                        'siparis_saat' => $saat,
+                                                                        'siparis_gun' => $gun,
+                                                                        'siparis_tarih' => $tarih,
+                                                                        'siparis_kargofirmaid' => 0,
+                                                                        'siparis_kargotakipno' => '',
+                                                                        'siparis_kargotarih' => '',
+                                                                        'siparis_toplamtutar' => 0,
+                                                                        'siparis_adminnotu' => '',
+                                                                        'siparis_durum' => 0
+                                                                    );
                                                                 }
-                                                                if (Session::get("KID") > 0) {
-                                                                    Session::set("Odeme", 1);
-                                                                    $sonuc["result"] = 1;
+
+                                                                $result = $Panel_Model->sipTeslimat($data);
+                                                                if ($result) {
+                                                                    if (count($ekurunID) > 0) {
+                                                                        unset($_SESSION['EkUrunID']);
+                                                                        Session::set("EkUrunID", $ekuruniddizi);
+                                                                        //geçici-sipariş id si
+                                                                        unset($_SESSION['SipGeciciUrunID']);
+                                                                        Session::set("SipGeciciUrunID", $result);
+                                                                    } else {
+                                                                        unset($_SESSION['EkUrunID']);
+                                                                    }
+                                                                    if (Session::get("KID") > 0) {
+                                                                        Session::set("Odeme", 1);
+                                                                        unset($_SESSION['SipKodu']);
+                                                                        Session::set("SipKodu", $benzersizSayi);
+                                                                        //mesafeli satış sözleşmesi için
+                                                                        Session::set("AliciAdSoyad", $gndadsoyad);
+                                                                        Session::set("AliciPhone", $gndtel);
+                                                                        Session::set("AliciMail", $gndmail);
+                                                                        $sonuc["result"] = 1;
+                                                                    } else {
+                                                                        Session::set("Odeme", 1);
+                                                                        unset($_SESSION['SipKodu']);
+                                                                        Session::set("SipKodu", $benzersizSayi);
+                                                                        //mesafeli satış sözleşmesi için
+                                                                        Session::set("AliciAdSoyad", $gndadsoyad);
+                                                                        Session::set("AliciPhone", $gndtel);
+                                                                        Session::set("AliciMail", $gndmail);
+                                                                        $sonuc["result"] = 1;
+                                                                    }
                                                                 } else {
-                                                                    Session::set("Odeme", 1);
-                                                                    $sonuc["result"] = 0;
                                                                     $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz";
                                                                 }
                                                             } else {
-                                                                $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz";
+                                                                $sonuc["hata"] = "Lütfen Bilgileriniz Onaylayınız!";
                                                             }
-                                                        } else {
-                                                            $sonuc["hata"] = "Lütfen Bilgileriniz Onaylayınız!";
                                                         }
                                                     }
                                                 } else {
@@ -1353,114 +1398,98 @@ class Genel extends Controller {
                                                 $uek++;
                                             }
                                         }
-                                        //ürün kodu oluşturulmakta
-                                        $benzersizSayi = $form->benzersiz_Sayi(6);
-                                        $benzersizListe = $Panel_Model->siparisBenzersizKontrol($benzersizSayi);
-                                        foreach ($benzersizListe as $benzersizListee) {
-                                            $benzersiz['ID'] = $benzersizListee['siparis_ID'];
-                                        }
-                                        if ($benzersiz['ID'] > 0) {
-                                            $sonuc["hata"] = "Siparis Kodu Oluşturulamadı Tekrar Deneyiniz.";
-                                        } else {
-                                            $sipID = Session::get("SipGeciciUrunID");
-                                            $siparisliste = $Panel_Model->geciciSiparis($sipID);
-                                            if (count($siparisliste) > 0) {
-                                                $data = array(
-                                                    'siparis_No' => $benzersizSayi,
-                                                    'siparis_aliciadsoyad' => $siparisliste[0]["siparis_aliciadsoyad"],
-                                                    'siparis_alicitel' => $siparisliste[0]["siparis_alicitel"],
-                                                    'siparis_aliciadres' => $siparisliste[0]["siparis_aliciadres"],
-                                                    'siparis_aliciadrestarif' => $siparisliste[0]["siparis_aliciadrestarif"],
-                                                    'siparis_gndid' => $siparisliste[0]["siparis_gndid"],
-                                                    'siparis_gndtext' => $siparisliste[0]["siparis_gndtext"],
-                                                    'siparis_yerid' => $siparisliste[0]["siparis_yerid"],
-                                                    'siparis_yertext' => $siparisliste[0]["siparis_yertext"],
-                                                    'siparis_kartisim' => $siparisliste[0]["siparis_kartisim"],
-                                                    'siparis_kartmesaj' => $siparisliste[0]["siparis_kartmesaj"],
-                                                    'siparis_isimgorunme' => $siparisliste[0]["siparis_isimgorunme"],
-                                                    'siparis_gonderenID' => $siparisliste[0]["siparis_gonderenID"],
-                                                    'siparis_gonderenkur' => $siparisliste[0]["siparis_gonderenkur"],
-                                                    'siparis_gonderenAdSoyad' => $siparisliste[0]["siparis_gonderenAdSoyad"],
-                                                    'siparis_gonderenTel' => $siparisliste[0]["siparis_gonderenTel"],
-                                                    'siparis_gondereneposta' => $siparisliste[0]["siparis_gondereneposta"],
-                                                    'siparis_gonderennotu' => $siparisliste[0]["siparis_gonderennotu"],
-                                                    'siparis_gonderensms' => $siparisliste[0]["siparis_gonderensms"],
-                                                    'siparis_gonderenepostaalma' => $siparisliste[0]["siparis_gonderenepostaalma"],
-                                                    'siparis_gonderensmseposta' => $siparisliste[0]["siparis_gonderensmseposta"],
-                                                    'siparis_faturaunvan' => $siparisliste[0]["siparis_faturaunvan"],
-                                                    'siparis_faturatc' => $siparisliste[0]["siparis_faturatc"],
-                                                    'siparis_faturaadres' => $siparisliste[0]["siparis_faturaadres"],
-                                                    'siparis_faturavergidaire' => $siparisliste[0]["siparis_faturavergidaire"],
-                                                    'siparis_vergino' => $siparisliste[0]["siparis_vergino"],
-                                                    'siparis_sehir' => $siparisliste[0]["siparis_sehir"],
-                                                    'siparis_sehirID' => $siparisliste[0]["siparis_sehirID"],
-                                                    'siparis_ilce' => $siparisliste[0]["siparis_ilce"],
-                                                    'siparis_ilceID' => $siparisliste[0]["siparis_ilceID"],
-                                                    'siparis_saat' => $siparisliste[0]["siparis_saat"],
-                                                    'siparis_gun' => $siparisliste[0]["siparis_gun"],
-                                                    'siparis_tarih' => $siparisliste[0]["siparis_tarih"],
-                                                    'siparis_kargofirmaid' => $siparisliste[0]["siparis_kargofirmaid"],
-                                                    'siparis_kargotakipno' => $siparisliste[0]["siparis_kargotakipno"],
-                                                    'siparis_kargotarih' => $siparisliste[0]["siparis_kargotarih"],
-                                                    'siparis_toplamtutar' => $urunToplamFiyat,
-                                                    'siparis_odemetip' => 0, //kart ile ödeme
-                                                    'siparis_bankaID' => 0, //banka ID
-                                                    'siparis_adminnotu' => $siparisliste[0]["siparis_adminnotu"],
-                                                    'siparis_durum' => $siparisliste[0]["siparis_durum"]
-                                                );
+                                        $sipID = Session::get("SipGeciciUrunID");
+                                        $siparisliste = $Panel_Model->geciciSiparis($sipID);
+                                        if (count($siparisliste) > 0) {
+                                            $data = array(
+                                                'siparis_No' => $siparisliste[0]["siparis_No"],
+                                                'siparis_aliciadsoyad' => $siparisliste[0]["siparis_aliciadsoyad"],
+                                                'siparis_alicitel' => $siparisliste[0]["siparis_alicitel"],
+                                                'siparis_aliciadres' => $siparisliste[0]["siparis_aliciadres"],
+                                                'siparis_aliciadrestarif' => $siparisliste[0]["siparis_aliciadrestarif"],
+                                                'siparis_gndid' => $siparisliste[0]["siparis_gndid"],
+                                                'siparis_gndtext' => $siparisliste[0]["siparis_gndtext"],
+                                                'siparis_yerid' => $siparisliste[0]["siparis_yerid"],
+                                                'siparis_yertext' => $siparisliste[0]["siparis_yertext"],
+                                                'siparis_kartisim' => $siparisliste[0]["siparis_kartisim"],
+                                                'siparis_kartmesaj' => $siparisliste[0]["siparis_kartmesaj"],
+                                                'siparis_isimgorunme' => $siparisliste[0]["siparis_isimgorunme"],
+                                                'siparis_gonderenID' => $siparisliste[0]["siparis_gonderenID"],
+                                                'siparis_gonderenkur' => $siparisliste[0]["siparis_gonderenkur"],
+                                                'siparis_gonderenAdSoyad' => $siparisliste[0]["siparis_gonderenAdSoyad"],
+                                                'siparis_gonderenTel' => $siparisliste[0]["siparis_gonderenTel"],
+                                                'siparis_gondereneposta' => $siparisliste[0]["siparis_gondereneposta"],
+                                                'siparis_gonderennotu' => $siparisliste[0]["siparis_gonderennotu"],
+                                                'siparis_gonderensms' => $siparisliste[0]["siparis_gonderensms"],
+                                                'siparis_gonderenepostaalma' => $siparisliste[0]["siparis_gonderenepostaalma"],
+                                                'siparis_gonderensmseposta' => $siparisliste[0]["siparis_gonderensmseposta"],
+                                                'siparis_faturaunvan' => $siparisliste[0]["siparis_faturaunvan"],
+                                                'siparis_faturatc' => $siparisliste[0]["siparis_faturatc"],
+                                                'siparis_faturaadres' => $siparisliste[0]["siparis_faturaadres"],
+                                                'siparis_faturavergidaire' => $siparisliste[0]["siparis_faturavergidaire"],
+                                                'siparis_vergino' => $siparisliste[0]["siparis_vergino"],
+                                                'siparis_sehir' => $siparisliste[0]["siparis_sehir"],
+                                                'siparis_sehirID' => $siparisliste[0]["siparis_sehirID"],
+                                                'siparis_ilce' => $siparisliste[0]["siparis_ilce"],
+                                                'siparis_ilceID' => $siparisliste[0]["siparis_ilceID"],
+                                                'siparis_saat' => $siparisliste[0]["siparis_saat"],
+                                                'siparis_gun' => $siparisliste[0]["siparis_gun"],
+                                                'siparis_tarih' => $siparisliste[0]["siparis_tarih"],
+                                                'siparis_kargofirmaid' => $siparisliste[0]["siparis_kargofirmaid"],
+                                                'siparis_kargotakipno' => $siparisliste[0]["siparis_kargotakipno"],
+                                                'siparis_kargotarih' => $siparisliste[0]["siparis_kargotarih"],
+                                                'siparis_toplamtutar' => $urunToplamFiyat,
+                                                'siparis_odemetip' => 0, //kart ile ödeme
+                                                'siparis_bankaID' => 0, //banka ID
+                                                'siparis_adminnotu' => $siparisliste[0]["siparis_adminnotu"],
+                                                'siparis_durum' => $siparisliste[0]["siparis_durum"]
+                                            );
 
-                                                $result = $Panel_Model->sipRealInsert($data);
-                                                if ($result) {
-                                                    //ana ürünü ekliyorum
-                                                    if (count($siparislist[0]) > 0) {
-                                                        $dataAnaUrun = array(
-                                                            'siparisurun_siparisID' => $result,
-                                                            'siparisurun_urunID' => $siparislist[0][0]['urunID'],
-                                                            'siparisurun_ad' => $siparislist[0][0]['urunAd'],
-                                                            'siparisurun_kod' => $siparislist[0][0]['urunKod'],
-                                                            'siparisurun_miktar' => 1,
-                                                            'siparisurun_tutar' => $siparislist[0][0]['urunFiyat'],
-                                                            'siparisurun_tip' => 0,
-                                                            'siparisurun_resim' => $siparislist[0][0]['urunResim']
-                                                        );
-                                                        $resultAnaUrun = $Panel_Model->sipAnaUrunInsert($dataAnaUrun);
-                                                        if ($resultAnaUrun) {
-                                                            //ek ürün varsa ekliyorum
-                                                            $ekurunlerCount = count($siparislist[1]);
-                                                            if ($ekurunlerCount > 0) {
-                                                                for ($ekk = 0; $ekk < $ekurunlerCount; $ekk++) {
-                                                                    $ekurundata[$ekk] = array(
-                                                                        'siparisurun_siparisID' => $result,
-                                                                        'siparisurun_urunID' => $siparislist[1][$ekk]['EkID'],
-                                                                        'siparisurun_ad' => $siparislist[1][$ekk]['EkAdi'],
-                                                                        'siparisurun_kod' => $siparislist[1][$ekk]['EkKod'],
-                                                                        'siparisurun_miktar' => 1,
-                                                                        'siparisurun_tutar' => $siparislist[1][$ekk]['EkFiyat'],
-                                                                        'siparisurun_tip' => 1,
-                                                                        'siparisurun_resim' => $siparislist[1][$ekk]['EkResim']
-                                                                    );
-                                                                }
-                                                                $resultEkUrun = $Panel_Model->sipEkUrunInsert($ekurundata);
-                                                                //siparisin kart ile olduğunu gösterir
-                                                                Session::set("SipTechOnay", 1);
-                                                                Session::set("SipKodu", $benzersizSayi);
-                                                                Session::set("SipTTutar", $urunToplamFiyat);
-                                                                //mail gönderiliyor
-                                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
-                                                                $sonuc["result"] = 1;
-                                                            } else {
-                                                                //siparisin kart ile olduğunu gösterir
-                                                                Session::set("SipTechOnay", 1);
-                                                                Session::set("SipKodu", $benzersizSayi);
-                                                                Session::set("SipTTutar", $urunToplamFiyat);
-                                                                //mail gönderiliyor
-                                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
-                                                                $sonuc["result"] = 1;
+                                            $result = $Panel_Model->sipRealInsert($data);
+                                            if ($result) {
+                                                //ana ürünü ekliyorum
+                                                if (count($siparislist[0]) > 0) {
+                                                    $dataAnaUrun = array(
+                                                        'siparisurun_siparisID' => $result,
+                                                        'siparisurun_urunID' => $siparislist[0][0]['urunID'],
+                                                        'siparisurun_ad' => $siparislist[0][0]['urunAd'],
+                                                        'siparisurun_kod' => $siparislist[0][0]['urunKod'],
+                                                        'siparisurun_miktar' => 1,
+                                                        'siparisurun_tutar' => $siparislist[0][0]['urunFiyat'],
+                                                        'siparisurun_tip' => 0,
+                                                        'siparisurun_resim' => $siparislist[0][0]['urunResim']
+                                                    );
+                                                    $resultAnaUrun = $Panel_Model->sipAnaUrunInsert($dataAnaUrun);
+                                                    if ($resultAnaUrun) {
+                                                        //ek ürün varsa ekliyorum
+                                                        $ekurunlerCount = count($siparislist[1]);
+                                                        if ($ekurunlerCount > 0) {
+                                                            for ($ekk = 0; $ekk < $ekurunlerCount; $ekk++) {
+                                                                $ekurundata[$ekk] = array(
+                                                                    'siparisurun_siparisID' => $result,
+                                                                    'siparisurun_urunID' => $siparislist[1][$ekk]['EkID'],
+                                                                    'siparisurun_ad' => $siparislist[1][$ekk]['EkAdi'],
+                                                                    'siparisurun_kod' => $siparislist[1][$ekk]['EkKod'],
+                                                                    'siparisurun_miktar' => 1,
+                                                                    'siparisurun_tutar' => $siparislist[1][$ekk]['EkFiyat'],
+                                                                    'siparisurun_tip' => 1,
+                                                                    'siparisurun_resim' => $siparislist[1][$ekk]['EkResim']
+                                                                );
                                                             }
+                                                            $resultEkUrun = $Panel_Model->sipEkUrunInsert($ekurundata);
+                                                            //siparisin kart ile olduğunu gösterir
+                                                            Session::set("SipTechOnay", 1);
+                                                            Session::set("SipTTutar", $urunToplamFiyat);
+                                                            //mail gönderiliyor
+                                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
+                                                            $sonuc["result"] = 1;
                                                         } else {
-                                                            //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
-                                                            $deletesiparis = $Panel_Model->siparisDelete($result);
-                                                            $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
+                                                            //siparisin kart ile olduğunu gösterir
+                                                            Session::set("SipTechOnay", 1);
+                                                            Session::set("SipTTutar", $urunToplamFiyat);
+                                                            //mail gönderiliyor
+                                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
+                                                            $sonuc["result"] = 1;
                                                         }
                                                     } else {
                                                         //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
@@ -1468,11 +1497,15 @@ class Genel extends Controller {
                                                         $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                                                     }
                                                 } else {
+                                                    //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
+                                                    $deletesiparis = $Panel_Model->siparisDelete($result);
                                                     $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                                                 }
                                             } else {
                                                 $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                                             }
+                                        } else {
+                                            $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                                         }
                                     } else {
                                         $sonuc["hata"] = "Lütfen Mesafeli Satış Sözleşmesini Okuyup, Onaylayınız.";
@@ -1587,115 +1620,98 @@ class Genel extends Controller {
                                     $uek++;
                                 }
                             }
-                            //ürün kodu oluşturulmakta
-                            $benzersizSayi = $form->benzersiz_Sayi(6);
-                            $benzersizListe = $Panel_Model->siparisBenzersizKontrol($benzersizSayi);
-                            foreach ($benzersizListe as $benzersizListee) {
-                                $benzersiz['ID'] = $benzersizListee['siparis_ID'];
-                            }
-                            if ($benzersiz['ID'] > 0) {
-                                $sonuc["hata"] = "Siparis Kodu Oluşturulamadı Tekrar Deneyiniz.";
-                            } else {
-                                $sipID = Session::get("SipGeciciUrunID");
+                            $sipID = Session::get("SipGeciciUrunID");
+                            $siparisliste = $Panel_Model->geciciSiparis($sipID);
+                            if (count($siparisliste) > 0) {
+                                $data = array(
+                                    'siparis_No' => $siparisliste[0]["siparis_No"],
+                                    'siparis_aliciadsoyad' => $siparisliste[0]["siparis_aliciadsoyad"],
+                                    'siparis_alicitel' => $siparisliste[0]["siparis_alicitel"],
+                                    'siparis_aliciadres' => $siparisliste[0]["siparis_aliciadres"],
+                                    'siparis_aliciadrestarif' => $siparisliste[0]["siparis_aliciadrestarif"],
+                                    'siparis_gndid' => $siparisliste[0]["siparis_gndid"],
+                                    'siparis_gndtext' => $siparisliste[0]["siparis_gndtext"],
+                                    'siparis_yerid' => $siparisliste[0]["siparis_yerid"],
+                                    'siparis_yertext' => $siparisliste[0]["siparis_yertext"],
+                                    'siparis_kartisim' => $siparisliste[0]["siparis_kartisim"],
+                                    'siparis_kartmesaj' => $siparisliste[0]["siparis_kartmesaj"],
+                                    'siparis_isimgorunme' => $siparisliste[0]["siparis_isimgorunme"],
+                                    'siparis_gonderenID' => $siparisliste[0]["siparis_gonderenID"],
+                                    'siparis_gonderenkur' => $siparisliste[0]["siparis_gonderenkur"],
+                                    'siparis_gonderenAdSoyad' => $siparisliste[0]["siparis_gonderenAdSoyad"],
+                                    'siparis_gonderenTel' => $siparisliste[0]["siparis_gonderenTel"],
+                                    'siparis_gondereneposta' => $siparisliste[0]["siparis_gondereneposta"],
+                                    'siparis_gonderennotu' => $siparisliste[0]["siparis_gonderennotu"],
+                                    'siparis_gonderensms' => $siparisliste[0]["siparis_gonderensms"],
+                                    'siparis_gonderenepostaalma' => $siparisliste[0]["siparis_gonderenepostaalma"],
+                                    'siparis_gonderensmseposta' => $siparisliste[0]["siparis_gonderensmseposta"],
+                                    'siparis_faturaunvan' => $siparisliste[0]["siparis_faturaunvan"],
+                                    'siparis_faturatc' => $siparisliste[0]["siparis_faturatc"],
+                                    'siparis_faturaadres' => $siparisliste[0]["siparis_faturaadres"],
+                                    'siparis_faturavergidaire' => $siparisliste[0]["siparis_faturavergidaire"],
+                                    'siparis_vergino' => $siparisliste[0]["siparis_vergino"],
+                                    'siparis_sehir' => $siparisliste[0]["siparis_sehir"],
+                                    'siparis_sehirID' => $siparisliste[0]["siparis_sehirID"],
+                                    'siparis_ilce' => $siparisliste[0]["siparis_ilce"],
+                                    'siparis_ilceID' => $siparisliste[0]["siparis_ilceID"],
+                                    'siparis_saat' => $siparisliste[0]["siparis_saat"],
+                                    'siparis_gun' => $siparisliste[0]["siparis_gun"],
+                                    'siparis_tarih' => $siparisliste[0]["siparis_tarih"],
+                                    'siparis_kargofirmaid' => $siparisliste[0]["siparis_kargofirmaid"],
+                                    'siparis_kargotakipno' => $siparisliste[0]["siparis_kargotakipno"],
+                                    'siparis_kargotarih' => $siparisliste[0]["siparis_kargotarih"],
+                                    'siparis_toplamtutar' => $urunToplamFiyat,
+                                    'siparis_odemetip' => 1, //havale ile ödeme
+                                    'siparis_bankaID' => $bankaVal, //banka ID
+                                    'siparis_adminnotu' => $siparisliste[0]["siparis_adminnotu"],
+                                    'siparis_durum' => $siparisliste[0]["siparis_durum"]
+                                );
 
-                                $siparisliste = $Panel_Model->geciciSiparis($sipID);
-                                if (count($siparisliste) > 0) {
-                                    $data = array(
-                                        'siparis_No' => $benzersizSayi,
-                                        'siparis_aliciadsoyad' => $siparisliste[0]["siparis_aliciadsoyad"],
-                                        'siparis_alicitel' => $siparisliste[0]["siparis_alicitel"],
-                                        'siparis_aliciadres' => $siparisliste[0]["siparis_aliciadres"],
-                                        'siparis_aliciadrestarif' => $siparisliste[0]["siparis_aliciadrestarif"],
-                                        'siparis_gndid' => $siparisliste[0]["siparis_gndid"],
-                                        'siparis_gndtext' => $siparisliste[0]["siparis_gndtext"],
-                                        'siparis_yerid' => $siparisliste[0]["siparis_yerid"],
-                                        'siparis_yertext' => $siparisliste[0]["siparis_yertext"],
-                                        'siparis_kartisim' => $siparisliste[0]["siparis_kartisim"],
-                                        'siparis_kartmesaj' => $siparisliste[0]["siparis_kartmesaj"],
-                                        'siparis_isimgorunme' => $siparisliste[0]["siparis_isimgorunme"],
-                                        'siparis_gonderenID' => $siparisliste[0]["siparis_gonderenID"],
-                                        'siparis_gonderenkur' => $siparisliste[0]["siparis_gonderenkur"],
-                                        'siparis_gonderenAdSoyad' => $siparisliste[0]["siparis_gonderenAdSoyad"],
-                                        'siparis_gonderenTel' => $siparisliste[0]["siparis_gonderenTel"],
-                                        'siparis_gondereneposta' => $siparisliste[0]["siparis_gondereneposta"],
-                                        'siparis_gonderennotu' => $siparisliste[0]["siparis_gonderennotu"],
-                                        'siparis_gonderensms' => $siparisliste[0]["siparis_gonderensms"],
-                                        'siparis_gonderenepostaalma' => $siparisliste[0]["siparis_gonderenepostaalma"],
-                                        'siparis_gonderensmseposta' => $siparisliste[0]["siparis_gonderensmseposta"],
-                                        'siparis_faturaunvan' => $siparisliste[0]["siparis_faturaunvan"],
-                                        'siparis_faturatc' => $siparisliste[0]["siparis_faturatc"],
-                                        'siparis_faturaadres' => $siparisliste[0]["siparis_faturaadres"],
-                                        'siparis_faturavergidaire' => $siparisliste[0]["siparis_faturavergidaire"],
-                                        'siparis_vergino' => $siparisliste[0]["siparis_vergino"],
-                                        'siparis_sehir' => $siparisliste[0]["siparis_sehir"],
-                                        'siparis_sehirID' => $siparisliste[0]["siparis_sehirID"],
-                                        'siparis_ilce' => $siparisliste[0]["siparis_ilce"],
-                                        'siparis_ilceID' => $siparisliste[0]["siparis_ilceID"],
-                                        'siparis_saat' => $siparisliste[0]["siparis_saat"],
-                                        'siparis_gun' => $siparisliste[0]["siparis_gun"],
-                                        'siparis_tarih' => $siparisliste[0]["siparis_tarih"],
-                                        'siparis_kargofirmaid' => $siparisliste[0]["siparis_kargofirmaid"],
-                                        'siparis_kargotakipno' => $siparisliste[0]["siparis_kargotakipno"],
-                                        'siparis_kargotarih' => $siparisliste[0]["siparis_kargotarih"],
-                                        'siparis_toplamtutar' => $urunToplamFiyat,
-                                        'siparis_odemetip' => 1, //havale ile ödeme
-                                        'siparis_bankaID' => $bankaVal, //banka ID
-                                        'siparis_adminnotu' => $siparisliste[0]["siparis_adminnotu"],
-                                        'siparis_durum' => $siparisliste[0]["siparis_durum"]
-                                    );
-
-                                    $result = $Panel_Model->sipRealInsert($data);
-                                    if ($result) {
-                                        //ana ürünü ekliyorum
-                                        if (count($siparislist[0]) > 0) {
-                                            $dataAnaUrun = array(
-                                                'siparisurun_siparisID' => $result,
-                                                'siparisurun_urunID' => $siparislist[0][0]['urunID'],
-                                                'siparisurun_ad' => $siparislist[0][0]['urunAd'],
-                                                'siparisurun_kod' => $siparislist[0][0]['urunKod'],
-                                                'siparisurun_miktar' => 1,
-                                                'siparisurun_tutar' => $siparislist[0][0]['urunFiyat'],
-                                                'siparisurun_tip' => 0,
-                                                'siparisurun_resim' => $siparislist[0][0]['urunResim']
-                                            );
-                                            $resultAnaUrun = $Panel_Model->sipAnaUrunInsert($dataAnaUrun);
-                                            if ($resultAnaUrun) {
-                                                //ek ürün varsa ekliyorum
-                                                $ekurunlerCount = count($siparislist[1]);
-                                                if ($ekurunlerCount > 0) {
-                                                    for ($ekk = 0; $ekk < $ekurunlerCount; $ekk++) {
-                                                        $ekurundata[$ekk] = array(
-                                                            'siparisurun_siparisID' => $result,
-                                                            'siparisurun_urunID' => $siparislist[1][$ekk]['EkID'],
-                                                            'siparisurun_ad' => $siparislist[1][$ekk]['EkAdi'],
-                                                            'siparisurun_kod' => $siparislist[1][$ekk]['EkKod'],
-                                                            'siparisurun_miktar' => 1,
-                                                            'siparisurun_tutar' => $siparislist[1][$ekk]['EkFiyat'],
-                                                            'siparisurun_tip' => 1,
-                                                            'siparisurun_resim' => $siparislist[1][$ekk]['EkResim']
-                                                        );
-                                                    }
-                                                    $resultEkUrun = $Panel_Model->sipEkUrunInsert($ekurundata);
-                                                    //siparisin havale ile olduğunu gösterir
-                                                    Session::set("SipTechOnay", 2);
-                                                    Session::set("SipKodu", $benzersizSayi);
-                                                    Session::set("SipTTutar", $urunToplamFiyat);
-                                                    //sipariş hatırlatma maili
-                                                    $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
-                                                    $sonuc["result"] = 1;
-                                                } else {
-                                                    //siparisin havale ile olduğunu gösterir
-                                                    Session::set("SipTechOnay", 2);
-                                                    Session::set("SipKodu", $benzersizSayi);
-                                                    Session::set("SipTTutar", $urunToplamFiyat);
-                                                    //sipariş hatırlatma maili
-                                                    $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
-                                                    $sonuc["result"] = 1;
+                                $result = $Panel_Model->sipRealInsert($data);
+                                if ($result) {
+                                    //ana ürünü ekliyorum
+                                    if (count($siparislist[0]) > 0) {
+                                        $dataAnaUrun = array(
+                                            'siparisurun_siparisID' => $result,
+                                            'siparisurun_urunID' => $siparislist[0][0]['urunID'],
+                                            'siparisurun_ad' => $siparislist[0][0]['urunAd'],
+                                            'siparisurun_kod' => $siparislist[0][0]['urunKod'],
+                                            'siparisurun_miktar' => 1,
+                                            'siparisurun_tutar' => $siparislist[0][0]['urunFiyat'],
+                                            'siparisurun_tip' => 0,
+                                            'siparisurun_resim' => $siparislist[0][0]['urunResim']
+                                        );
+                                        $resultAnaUrun = $Panel_Model->sipAnaUrunInsert($dataAnaUrun);
+                                        if ($resultAnaUrun) {
+                                            //ek ürün varsa ekliyorum
+                                            $ekurunlerCount = count($siparislist[1]);
+                                            if ($ekurunlerCount > 0) {
+                                                for ($ekk = 0; $ekk < $ekurunlerCount; $ekk++) {
+                                                    $ekurundata[$ekk] = array(
+                                                        'siparisurun_siparisID' => $result,
+                                                        'siparisurun_urunID' => $siparislist[1][$ekk]['EkID'],
+                                                        'siparisurun_ad' => $siparislist[1][$ekk]['EkAdi'],
+                                                        'siparisurun_kod' => $siparislist[1][$ekk]['EkKod'],
+                                                        'siparisurun_miktar' => 1,
+                                                        'siparisurun_tutar' => $siparislist[1][$ekk]['EkFiyat'],
+                                                        'siparisurun_tip' => 1,
+                                                        'siparisurun_resim' => $siparislist[1][$ekk]['EkResim']
+                                                    );
                                                 }
+                                                $resultEkUrun = $Panel_Model->sipEkUrunInsert($ekurundata);
+                                                //siparisin havale ile olduğunu gösterir
+                                                Session::set("SipTechOnay", 2);
+                                                Session::set("SipTTutar", $urunToplamFiyat);
+                                                //sipariş hatırlatma maili
+                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
+                                                $sonuc["result"] = 1;
                                             } else {
-                                                //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
-                                                $deletesiparis = $Panel_Model->siparisDelete($result);
-                                                $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
+                                                //siparisin havale ile olduğunu gösterir
+                                                Session::set("SipTechOnay", 2);
+                                                Session::set("SipTTutar", $urunToplamFiyat);
+                                                //sipariş hatırlatma maili
+                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
+                                                $sonuc["result"] = 1;
                                             }
                                         } else {
                                             //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
@@ -1703,11 +1719,15 @@ class Genel extends Controller {
                                             $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                                         }
                                     } else {
+                                        //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
+                                        $deletesiparis = $Panel_Model->siparisDelete($result);
                                         $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                                     }
                                 } else {
                                     $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                                 }
+                            } else {
+                                $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                             }
                         } else {
                             $sonuc["hata"] = "Lütfen Mesafeli Satış Sözleşmesini Okuyup, Onaylayınız.";
@@ -1809,114 +1829,98 @@ class Genel extends Controller {
                                 $uek++;
                             }
                         }
-                        //ürün kodu oluşturulmakta
-                        $benzersizSayi = $form->benzersiz_Sayi(6);
-                        $benzersizListe = $Panel_Model->siparisBenzersizKontrol($benzersizSayi);
-                        foreach ($benzersizListe as $benzersizListee) {
-                            $benzersiz['ID'] = $benzersizListee['siparis_ID'];
-                        }
-                        if ($benzersiz['ID'] > 0) {
-                            $sonuc["hata"] = "Siparis Kodu Oluşturulamadı Tekrar Deneyiniz.";
-                        } else {
-                            $sipID = Session::get("SipGeciciUrunID");
-                            $siparisliste = $Panel_Model->geciciSiparis($sipID);
-                            if (count($siparisliste) > 0) {
-                                $data = array(
-                                    'siparis_No' => $benzersizSayi,
-                                    'siparis_aliciadsoyad' => $siparisliste[0]["siparis_aliciadsoyad"],
-                                    'siparis_alicitel' => $siparisliste[0]["siparis_alicitel"],
-                                    'siparis_aliciadres' => $siparisliste[0]["siparis_aliciadres"],
-                                    'siparis_aliciadrestarif' => $siparisliste[0]["siparis_aliciadrestarif"],
-                                    'siparis_gndid' => $siparisliste[0]["siparis_gndid"],
-                                    'siparis_gndtext' => $siparisliste[0]["siparis_gndtext"],
-                                    'siparis_yerid' => $siparisliste[0]["siparis_yerid"],
-                                    'siparis_yertext' => $siparisliste[0]["siparis_yertext"],
-                                    'siparis_kartisim' => $siparisliste[0]["siparis_kartisim"],
-                                    'siparis_kartmesaj' => $siparisliste[0]["siparis_kartmesaj"],
-                                    'siparis_isimgorunme' => $siparisliste[0]["siparis_isimgorunme"],
-                                    'siparis_gonderenID' => $siparisliste[0]["siparis_gonderenID"],
-                                    'siparis_gonderenkur' => $siparisliste[0]["siparis_gonderenkur"],
-                                    'siparis_gonderenAdSoyad' => $siparisliste[0]["siparis_gonderenAdSoyad"],
-                                    'siparis_gonderenTel' => $siparisliste[0]["siparis_gonderenTel"],
-                                    'siparis_gondereneposta' => $siparisliste[0]["siparis_gondereneposta"],
-                                    'siparis_gonderennotu' => $siparisliste[0]["siparis_gonderennotu"],
-                                    'siparis_gonderensms' => $siparisliste[0]["siparis_gonderensms"],
-                                    'siparis_gonderenepostaalma' => $siparisliste[0]["siparis_gonderenepostaalma"],
-                                    'siparis_gonderensmseposta' => $siparisliste[0]["siparis_gonderensmseposta"],
-                                    'siparis_faturaunvan' => $siparisliste[0]["siparis_faturaunvan"],
-                                    'siparis_faturatc' => $siparisliste[0]["siparis_faturatc"],
-                                    'siparis_faturaadres' => $siparisliste[0]["siparis_faturaadres"],
-                                    'siparis_faturavergidaire' => $siparisliste[0]["siparis_faturavergidaire"],
-                                    'siparis_vergino' => $siparisliste[0]["siparis_vergino"],
-                                    'siparis_sehir' => $siparisliste[0]["siparis_sehir"],
-                                    'siparis_sehirID' => $siparisliste[0]["siparis_sehirID"],
-                                    'siparis_ilce' => $siparisliste[0]["siparis_ilce"],
-                                    'siparis_ilceID' => $siparisliste[0]["siparis_ilceID"],
-                                    'siparis_saat' => $siparisliste[0]["siparis_saat"],
-                                    'siparis_gun' => $siparisliste[0]["siparis_gun"],
-                                    'siparis_tarih' => $siparisliste[0]["siparis_tarih"],
-                                    'siparis_kargofirmaid' => $siparisliste[0]["siparis_kargofirmaid"],
-                                    'siparis_kargotakipno' => $siparisliste[0]["siparis_kargotakipno"],
-                                    'siparis_kargotarih' => $siparisliste[0]["siparis_kargotarih"],
-                                    'siparis_toplamtutar' => $urunToplamFiyat,
-                                    'siparis_odemetip' => 2, //telefon ile ödeme
-                                    'siparis_bankaID' => 0, //banka ID
-                                    'siparis_adminnotu' => $siparisliste[0]["siparis_adminnotu"],
-                                    'siparis_durum' => $siparisliste[0]["siparis_durum"]
-                                );
+                        $sipID = Session::get("SipGeciciUrunID");
+                        $siparisliste = $Panel_Model->geciciSiparis($sipID);
+                        if (count($siparisliste) > 0) {
+                            $data = array(
+                                'siparis_No' => $siparisliste[0]["siparis_No"],
+                                'siparis_aliciadsoyad' => $siparisliste[0]["siparis_aliciadsoyad"],
+                                'siparis_alicitel' => $siparisliste[0]["siparis_alicitel"],
+                                'siparis_aliciadres' => $siparisliste[0]["siparis_aliciadres"],
+                                'siparis_aliciadrestarif' => $siparisliste[0]["siparis_aliciadrestarif"],
+                                'siparis_gndid' => $siparisliste[0]["siparis_gndid"],
+                                'siparis_gndtext' => $siparisliste[0]["siparis_gndtext"],
+                                'siparis_yerid' => $siparisliste[0]["siparis_yerid"],
+                                'siparis_yertext' => $siparisliste[0]["siparis_yertext"],
+                                'siparis_kartisim' => $siparisliste[0]["siparis_kartisim"],
+                                'siparis_kartmesaj' => $siparisliste[0]["siparis_kartmesaj"],
+                                'siparis_isimgorunme' => $siparisliste[0]["siparis_isimgorunme"],
+                                'siparis_gonderenID' => $siparisliste[0]["siparis_gonderenID"],
+                                'siparis_gonderenkur' => $siparisliste[0]["siparis_gonderenkur"],
+                                'siparis_gonderenAdSoyad' => $siparisliste[0]["siparis_gonderenAdSoyad"],
+                                'siparis_gonderenTel' => $siparisliste[0]["siparis_gonderenTel"],
+                                'siparis_gondereneposta' => $siparisliste[0]["siparis_gondereneposta"],
+                                'siparis_gonderennotu' => $siparisliste[0]["siparis_gonderennotu"],
+                                'siparis_gonderensms' => $siparisliste[0]["siparis_gonderensms"],
+                                'siparis_gonderenepostaalma' => $siparisliste[0]["siparis_gonderenepostaalma"],
+                                'siparis_gonderensmseposta' => $siparisliste[0]["siparis_gonderensmseposta"],
+                                'siparis_faturaunvan' => $siparisliste[0]["siparis_faturaunvan"],
+                                'siparis_faturatc' => $siparisliste[0]["siparis_faturatc"],
+                                'siparis_faturaadres' => $siparisliste[0]["siparis_faturaadres"],
+                                'siparis_faturavergidaire' => $siparisliste[0]["siparis_faturavergidaire"],
+                                'siparis_vergino' => $siparisliste[0]["siparis_vergino"],
+                                'siparis_sehir' => $siparisliste[0]["siparis_sehir"],
+                                'siparis_sehirID' => $siparisliste[0]["siparis_sehirID"],
+                                'siparis_ilce' => $siparisliste[0]["siparis_ilce"],
+                                'siparis_ilceID' => $siparisliste[0]["siparis_ilceID"],
+                                'siparis_saat' => $siparisliste[0]["siparis_saat"],
+                                'siparis_gun' => $siparisliste[0]["siparis_gun"],
+                                'siparis_tarih' => $siparisliste[0]["siparis_tarih"],
+                                'siparis_kargofirmaid' => $siparisliste[0]["siparis_kargofirmaid"],
+                                'siparis_kargotakipno' => $siparisliste[0]["siparis_kargotakipno"],
+                                'siparis_kargotarih' => $siparisliste[0]["siparis_kargotarih"],
+                                'siparis_toplamtutar' => $urunToplamFiyat,
+                                'siparis_odemetip' => 2, //telefon ile ödeme
+                                'siparis_bankaID' => 0, //banka ID
+                                'siparis_adminnotu' => $siparisliste[0]["siparis_adminnotu"],
+                                'siparis_durum' => $siparisliste[0]["siparis_durum"]
+                            );
 
-                                $result = $Panel_Model->sipRealInsert($data);
-                                if ($result) {
-                                    //ana ürünü ekliyorum
-                                    if (count($siparislist[0]) > 0) {
-                                        $dataAnaUrun = array(
-                                            'siparisurun_siparisID' => $result,
-                                            'siparisurun_urunID' => $siparislist[0][0]['urunID'],
-                                            'siparisurun_ad' => $siparislist[0][0]['urunAd'],
-                                            'siparisurun_kod' => $siparislist[0][0]['urunKod'],
-                                            'siparisurun_miktar' => 1,
-                                            'siparisurun_tutar' => $siparislist[0][0]['urunFiyat'],
-                                            'siparisurun_tip' => 0,
-                                            'siparisurun_resim' => $siparislist[0][0]['urunResim']
-                                        );
-                                        $resultAnaUrun = $Panel_Model->sipAnaUrunInsert($dataAnaUrun);
-                                        if ($resultAnaUrun) {
-                                            //ek ürün varsa ekliyorum
-                                            $ekurunlerCount = count($siparislist[1]);
-                                            if ($ekurunlerCount > 0) {
-                                                for ($ekk = 0; $ekk < $ekurunlerCount; $ekk++) {
-                                                    $ekurundata[$ekk] = array(
-                                                        'siparisurun_siparisID' => $result,
-                                                        'siparisurun_urunID' => $siparislist[1][$ekk]['EkID'],
-                                                        'siparisurun_ad' => $siparislist[1][$ekk]['EkAdi'],
-                                                        'siparisurun_kod' => $siparislist[1][$ekk]['EkKod'],
-                                                        'siparisurun_miktar' => 1,
-                                                        'siparisurun_tutar' => $siparislist[1][$ekk]['EkFiyat'],
-                                                        'siparisurun_tip' => 1,
-                                                        'siparisurun_resim' => $siparislist[1][$ekk]['EkResim']
-                                                    );
-                                                }
-                                                $resultEkUrun = $Panel_Model->sipEkUrunInsert($ekurundata);
-                                                //siparisin telefonla olduğunu gösterir
-                                                Session::set("SipTechOnay", 3);
-                                                Session::set("SipKodu", $benzersizSayi);
-                                                Session::set("SipTTutar", $urunToplamFiyat);
-                                                //sipariş hatırlatma maili
-                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
-                                                $sonuc["result"] = 1;
-                                            } else {
-                                                //siparisin telefonla olduğunu gösterir
-                                                Session::set("SipTechOnay", 3);
-                                                Session::set("SipKodu", $benzersizSayi);
-                                                Session::set("SipTTutar", $urunToplamFiyat);
-                                                //sipariş hatırlatma maili
-                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
-                                                $sonuc["result"] = 1;
+                            $result = $Panel_Model->sipRealInsert($data);
+                            if ($result) {
+                                //ana ürünü ekliyorum
+                                if (count($siparislist[0]) > 0) {
+                                    $dataAnaUrun = array(
+                                        'siparisurun_siparisID' => $result,
+                                        'siparisurun_urunID' => $siparislist[0][0]['urunID'],
+                                        'siparisurun_ad' => $siparislist[0][0]['urunAd'],
+                                        'siparisurun_kod' => $siparislist[0][0]['urunKod'],
+                                        'siparisurun_miktar' => 1,
+                                        'siparisurun_tutar' => $siparislist[0][0]['urunFiyat'],
+                                        'siparisurun_tip' => 0,
+                                        'siparisurun_resim' => $siparislist[0][0]['urunResim']
+                                    );
+                                    $resultAnaUrun = $Panel_Model->sipAnaUrunInsert($dataAnaUrun);
+                                    if ($resultAnaUrun) {
+                                        //ek ürün varsa ekliyorum
+                                        $ekurunlerCount = count($siparislist[1]);
+                                        if ($ekurunlerCount > 0) {
+                                            for ($ekk = 0; $ekk < $ekurunlerCount; $ekk++) {
+                                                $ekurundata[$ekk] = array(
+                                                    'siparisurun_siparisID' => $result,
+                                                    'siparisurun_urunID' => $siparislist[1][$ekk]['EkID'],
+                                                    'siparisurun_ad' => $siparislist[1][$ekk]['EkAdi'],
+                                                    'siparisurun_kod' => $siparislist[1][$ekk]['EkKod'],
+                                                    'siparisurun_miktar' => 1,
+                                                    'siparisurun_tutar' => $siparislist[1][$ekk]['EkFiyat'],
+                                                    'siparisurun_tip' => 1,
+                                                    'siparisurun_resim' => $siparislist[1][$ekk]['EkResim']
+                                                );
                                             }
+                                            $resultEkUrun = $Panel_Model->sipEkUrunInsert($ekurundata);
+                                            //siparisin telefonla olduğunu gösterir
+                                            Session::set("SipTechOnay", 3);
+                                            Session::set("SipTTutar", $urunToplamFiyat);
+                                            //sipariş hatırlatma maili
+                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
+                                            $sonuc["result"] = 1;
                                         } else {
-                                            //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
-                                            $deletesiparis = $Panel_Model->siparisDelete($result);
-                                            $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
+                                            //siparisin telefonla olduğunu gösterir
+                                            Session::set("SipTechOnay", 3);
+                                            Session::set("SipTTutar", $urunToplamFiyat);
+                                            //sipariş hatırlatma maili
+                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
+                                            $sonuc["result"] = 1;
                                         }
                                     } else {
                                         //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
@@ -1924,11 +1928,15 @@ class Genel extends Controller {
                                         $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                                     }
                                 } else {
+                                    //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
+                                    $deletesiparis = $Panel_Model->siparisDelete($result);
                                     $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                                 }
                             } else {
                                 $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                             }
+                        } else {
+                            $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
                         }
                     } else {
                         $sonuc["hata"] = "Lütfen Mesafeli Satış Sözleşmesini Okuyup, Onaylayınız.";

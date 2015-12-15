@@ -116,8 +116,6 @@ class AdminVitrin extends Controller {
                                             $image->image_ratio_crop = false;
                                             $image->image_x = $width;
                                             $image->image_y = $height;
-                                            $image->image_watermark = 'images/watermark.png';
-                                            $image->image_watermark_position = 'B';
 
                                             $image->Process("vitrin");
                                             if ($image->processed) {

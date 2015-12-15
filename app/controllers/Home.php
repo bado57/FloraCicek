@@ -298,11 +298,6 @@ class Home extends Controller {
             $formlanguage = $this->load->multilanguage("tr");
             $languagedeger = $formlanguage->multilanguage();
 
-            $uyelikListe = $Panel_Model->uyelikSozlistele();
-            foreach ($uyelikListe as $uyelikListee) {
-                $uyelikSoz[0] = $uyelikListee['sbt_uyeliksoz'];
-            }
-
             //Footer Dinamik Bilgiler
             //kategorileri listeleme
             $fotkategoriListe = $Panel_Model->footerkategorilistele();
@@ -352,6 +347,7 @@ class Home extends Controller {
                 $iceriklist['instag'] = $icerikListe['sbt_instag'];
                 $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
                 $iceriklist['logo'] = $icerikListe['sbt_logo'];
+                $uyelikSoz[0] = $icerikListe['sbt_uyeliksoz'];
             }
             $homedizi[8] = $iceriklist;
 
@@ -374,11 +370,6 @@ class Home extends Controller {
             $formlanguage = $this->load->multilanguage("tr");
             $languagedeger = $formlanguage->multilanguage();
 
-            $uyelikListe = $Panel_Model->uyelikSozlistele();
-            foreach ($uyelikListe as $uyelikListee) {
-                $uyelikSoz[0] = $uyelikListee['sbt_uyeliksoz'];
-            }
-
             //Footer Dinamik Bilgiler
             //kategorileri listeleme
             $fotkategoriListe = $Panel_Model->footerkategorilistele();
@@ -428,6 +419,7 @@ class Home extends Controller {
                 $iceriklist['instag'] = $icerikListe['sbt_instag'];
                 $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
                 $iceriklist['logo'] = $icerikListe['sbt_logo'];
+                $uyelikSoz[0] = $icerikListe['sbt_uyeliksoz'];
             }
             $homedizi[8] = $iceriklist; //etiket listesi
 

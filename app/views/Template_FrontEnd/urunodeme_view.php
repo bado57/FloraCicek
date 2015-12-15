@@ -90,7 +90,7 @@
                                                 <p><span data-toggle="tooltip" data-placement="right" title="Kredi kartınızın arka yüzünde bulunan imza şeridinin üstündeki numaranın son üç rakamıdır.">CVV (Nedir?)</span></p>
                                                 <input id="cvv" type="text" data-inputmask='"mask": "999"' data-mask placeholder="CVV" maxlength="3" />
                                                 <!-- <label class="checkbox-inline col-sm-12" style="margin-top:10px;"><input id="3dsecure" type="checkbox" name="3dsecure"><?php echo $data["3DSecure"]; ?></label> -->
-                                                <span><input id="kartSatisSoz" type="checkbox" name="kartSatisSoz" style="margin-top:3px;"> <a role="button" data-toggle="modal" data-target="#satisSozlesmesi" style="color:#FE980F;"> Mesafeli satış sözleşmesini ve Teslimat Şartlarını</a> okudum, kabul ediyorum.</span>
+                                                <span><input id="kartSatisSoz" type="checkbox" name="kartSatisSoz" style="margin-top:3px;"> <a role="button" data-toggle="modal" data-target="#satisSozlesmesi" style="color:#FE980F;"> Mesafeli satış sözleşmesini ve</a><a role="button" data-toggle="modal" data-target="#onBilgilendirmeFormu" style="color:#FE980F;"> Ön Bilgilendirme Formunu</a> okudum, kabul ediyorum.</span>
                                                 <button class="btn btn-primary" id="spKartTamamla"><i class="fa fa-angle-right"></i> <?php echo $data["SiparisTamam"]; ?></button>
 
                                             </div>
@@ -175,7 +175,7 @@
                                                 </tbody>
                                             </table>
                                             <p>
-                                                <span><input id="havaleSatisSoz" type="checkbox" name="havaleSatisSoz"> <a role="button" data-toggle="modal" data-target="#satisSozlesmesi" style="color:#FE980F;"> Mesafeli satış sözleşmesini ve Teslimat Şartlarını</a> okudum, kabul ediyorum.</span>
+                                                <span><input id="havaleSatisSoz" type="checkbox" name="havaleSatisSoz"> <a role="button" data-toggle="modal" data-target="#satisSozlesmesi" style="color:#FE980F;"> Mesafeli satış sözleşmesini ve</a><a role="button" data-toggle="modal" data-target="#onBilgilendirmeFormu" style="color:#FE980F;"> Ön Bilgilendirme Formunu</a> okudum, kabul ediyorum.</span>
                                             </p>
                                             <button class="btn btn-primary" id="spHavaleTamamla"><i class="fa fa-angle-right"></i> Siparişi Tamamla</button>
                                         </div>
@@ -194,7 +194,7 @@
                                                 <p>Siparişinizin işleme konulabilmesi için "Siparişi Tamamla" butonuna tıkladıktan sonra kredi kartı bilgilerinizi ve sipariş numaranızı aşağıda yazılı olan telefon numarasını arayarak <b>turkiyefloracicek.com</b>'a ulaştırmanız gerekmektedir.</p>
                                                 <h2><i class="fa fa-phone-square"></i> 0352 232 23 32</h2>
                                                 <p>
-                                                    <span><input id="telSatisSoz" type="checkbox" name="telSatisSoz" style="margin-top:3px;"> <a role="button" data-toggle="modal" data-target="#satisSozlesmesi" style="color:#FE980F;"> Mesafeli satış sözleşmesini ve Teslimat Şartlarını</a> okudum, kabul ediyorum.</span>
+                                                    <span><input id="telSatisSoz" type="checkbox" name="telSatisSoz" style="margin-top:3px;"> <a role="button" data-toggle="modal" data-target="#satisSozlesmesi" style="color:#FE980F;"> Mesafeli satış sözleşmesini ve</a><a role="button" data-toggle="modal" data-target="#onBilgilendirmeFormu" style="color:#FE980F;"> Ön Bilgilendirme Formunu</a> okudum, kabul ediyorum.</span>
                                                 </p>
                                                 <button class="btn btn-primary" id="spTelefonTamamla"><i class="fa fa-angle-right"></i> Siparişi Tamamla</button>
                                             </div>
@@ -251,6 +251,23 @@
             </div>
             <div class="modal-body">
                 <?php echo $model[2][0]["Mesafe"]; ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $data["Kapat"]; ?></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="onBilgilendirmeFormu" tabindex="-1" role="dialog" aria-labelledby="onBilgilendirmeFormuLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="uyelikSozlesmesiLabel"><?php echo $data["OnBilgiForm"]; ?></h4>
+            </div>
+            <div class="modal-body">
+                <?php echo $model[2][1]["OnBilgi"]; ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $data["Kapat"]; ?></button>

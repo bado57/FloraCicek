@@ -48,7 +48,6 @@ $(document).ready(function () {
             }
         });
     });
-
     $("#sehirSec").on('change', function () {
         $("#ilceSec option:not(:first)").remove();
         var ilid = $(this).val();
@@ -67,7 +66,11 @@ $(document).ready(function () {
                     } else {
                         var length = cevap.result.length;
                         for (var ilce = 0; ilce < length; ilce++) {
-                            $("#ilceSec").append("<option value='" + cevap.result[ilce].ID + "'>" + cevap.result[ilce].Ad + " " + "(+" + cevap.result[ilce].EkUcret + " TL)" + "</option>");
+                            if (cevap.result[ilce].EkUcret != 0) {
+                                $("#ilceSec").append("<option value='" + cevap.result[ilce].ID + "'>" + cevap.result[ilce].Ad + " " + "(+" + cevap.result[ilce].EkUcret + " TL)" + "</option>");
+                            } else {
+                                $("#ilceSec").append("<option value='" + cevap.result[ilce].ID + "'>" + cevap.result[ilce].Ad + " " + "</option>");
+                            }
                         }
                     }
                 }
@@ -76,92 +79,6 @@ $(document).ready(function () {
             alert("Lütfen bir il seçiniz..");
         }
     });
-    /*
-     $("#ilceSec").on('change', function () {
-     $("#semtSec option:not(:first)").remove();
-     var ilceid = $(this).val();
-     if (ilceid != 0) {
-     $.ajax({
-     type: "post",
-     url: SITE_URL + "/Genel/ajaxCall",
-     cache: false,
-     dataType: "json",
-     data: {"ilceid": ilceid, "tip": "urunSemt"},
-     success: function (cevap) {
-     if (cevap.hata) {
-     reset();
-     alertify.alert(cevap.hata);
-     return false;
-     } else {
-     var length = cevap.result.length;
-     for (var semt = 0; semt < length; semt++) {
-     $("#semtSec").append("<option value='" + cevap.result[semt].ID + "'>" + cevap.result[semt].Ad + "</option>");
-     }
-     }
-     }
-     });
-     } else {
-     alert("Lütfen bir ilçe seçiniz..");
-     }
-     });
-     
-     $("#semtSec").on('change', function () {
-     $("#mahalleSec option:not(:first)").remove();
-     var semtid = $(this).val();
-     if (semtid != 0) {
-     $.ajax({
-     type: "post",
-     url: SITE_URL + "/Genel/ajaxCall",
-     cache: false,
-     dataType: "json",
-     data: {"semtid": semtid, "tip": "urunMahalle"},
-     success: function (cevap) {
-     if (cevap.hata) {
-     reset();
-     alertify.alert(cevap.hata);
-     return false;
-     } else {
-     var length = cevap.result.length;
-     for (var mah = 0; mah < length; mah++) {
-     $("#mahalleSec").append("<option value='" + cevap.result[mah].ID + "'>" + cevap.result[mah].Ad + "</option>");
-     }
-     }
-     }
-     });
-     } else {
-     alert("Lütfen bir Semt seçiniz..");
-     }
-     });
-     
-     $("#mahalleSec").on('change', function () {
-     $("#postaKoduSec").text("");
-     $("#postaKoduSec").val("");
-     var mahid = $(this).val();
-     if (mahid != 0) {
-     $.ajax({
-     type: "post",
-     url: SITE_URL + "/Genel/ajaxCall",
-     cache: false,
-     dataType: "json",
-     data: {"mahid": mahid, "tip": "urunPKodu"},
-     success: function (cevap) {
-     if (cevap.hata) {
-     reset();
-     alertify.alert(cevap.hata);
-     return false;
-     } else {
-     $("#postaKoduSec").text(cevap.result.Kod);
-     $("#postaKoduSec").val(cevap.result.ID);
-     $("#postaKodu").val(cevap.result.Kod);
-     $("#postaKoduDiv").show(500);
-     }
-     }
-     });
-     } else {
-     alert("Lütfen bir Mahalle seçiniz..");
-     }
-     });
-     */
     $("#furunsiparis").validate({
         rules: {
             sehirSec: {
@@ -184,7 +101,6 @@ $(document).ready(function () {
             }
         }
     });
-
     jQuery.validator.addMethod('selectcheck', function (value) {
         return (value != '0');
     }, "Bu Alan Gereklidir.");

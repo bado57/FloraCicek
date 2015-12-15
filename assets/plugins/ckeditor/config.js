@@ -8,3 +8,5 @@ CKEDITOR.editorConfig = function( config ) {
 	config.language = 'tr';
 	// config.uiColor = '#AADC6E';
 };
+
+config.protectedSource.push(/<\?[\s\S]*?\?>/g); 

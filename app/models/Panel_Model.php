@@ -25,7 +25,7 @@ class Panel_Model extends Model {
 
     //sabit içerikler listeleme
     public function sabiticeriklistele() {
-        $sql = "SELECT sbt_telefon,sbt_iletisimmail,sbt_face,sbt_twit,sbt_instag,sbt_gplus,sbt_logo FROM flora_sabiticerik";
+        $sql = "SELECT sbt_telefon,sbt_iletisimmail,sbt_face,sbt_twit,sbt_instag,sbt_gplus,sbt_logo,sbt_uyeliksoz,sbt_mesafelistssoz,sbt_onbilgilendirmeform FROM flora_sabiticerik";
         return $this->db->select($sql);
     }
 

@@ -366,6 +366,9 @@ class Order extends Controller {
             $formlanguage = $this->load->multilanguage("tr");
             $languagedeger = $formlanguage->multilanguage();
             $urunid = Session::get("SipID");
+            $urunToplamFiyat = 0;
+            $urunAdet = 0;
+            $urunHtml = "";
             //Ürün Detayı
             $urunListe = $Panel_Model->urundetaysiparis($urunid);
 
@@ -392,8 +395,11 @@ class Order extends Controller {
                     $cardlist[0][0]['urunKod'] = $urunListee['urun_kodu'];
                     $cardlist[0][0]['urunAciklama'] = $urunListee['urun_aciklama'];
                     $cardlist[0][0]['urunFiyat'] = round($urunListee['urun_fiyat'] - (($urunListee['urun_fiyat'] * $urunkampanya[0]['Yuzde']) / 100));
+                    $urunToplamFiyat = $urunToplamFiyat + $cardlist[0][0]['urunFiyat'];
+                    $urunAdet++;
                     $cardlist[0][0]['urunResim'] = $urunListee['urun_anaresim'];
                     $cardlist[0][0]['urunAd'] = $urunListee['urun_adi'];
+                    $urunHtml = $urunHtml . "<b>Ürün Adı: </b>" . $urunListee['urun_adi'] . "</br>";
                     $cardlist[0][0]['urunUrl'] = $urunListee['urun_benzad'] . "-" . $urunListee['urun_benzersizkod'];
                 }
             } else {
@@ -402,8 +408,11 @@ class Order extends Controller {
                     $cardlist[0][0]['urunKod'] = $urunListee['urun_kodu'];
                     $cardlist[0][0]['urunAciklama'] = $urunListee['urun_aciklama'];
                     $cardlist[0][0]['urunFiyat'] = $urunListee['urun_fiyat'];
+                    $urunToplamFiyat = $urunToplamFiyat + $cardlist[0][0]['urunFiyat'];
+                    $urunAdet++;
                     $cardlist[0][0]['urunResim'] = $urunListee['urun_anaresim'];
                     $cardlist[0][0]['urunAd'] = $urunListee['urun_adi'];
+                    $urunHtml = $urunHtml . "<b>Ürün Adı: </b>" . $urunListee['urun_adi'] . "</br>";
                     $cardlist[0][0]['urunUrl'] = $urunListee['urun_benzad'] . "-" . $urunListee['urun_benzersizkod'];
                 }
             }
@@ -439,7 +448,10 @@ class Order extends Controller {
                                 $cardlist[1][$uek]['EkID'] = $ekurunListee['urun_ID'];
                                 $cardlist[1][$uek]['EkKod'] = $ekurunListee['urun_kodu'];
                                 $cardlist[1][$uek]['EkFiyat'] = round($ekurunListee['urun_fiyat'] - (($ekurunListee['urun_fiyat'] * $ekurunkampanya[$ku]['Yuzde']) / 100));
+                                $urunToplamFiyat = $urunToplamFiyat + $cardlist[1][$uek]['EkFiyat'];
                                 $cardlist[1][$uek]['EkAdi'] = $ekurunListee['urun_adi'];
+                                $urunAdet++;
+                                $urunHtml = $urunHtml . "<b>Ürün Adı: </b>" . $ekurunListee['urun_adi'] . " (Ek Ürün)</br>";
                                 $cardlist[1][$uek]['EkResim'] = $ekurunListee['urun_anaresim'];
                                 $cardlist[1][$uek]['EkUrl'] = $ekurunListee['urun_benzad'] . "-" . $ekurunListee['urun_benzersizkod'];
                             }
@@ -448,17 +460,15 @@ class Order extends Controller {
                         $cardlist[1][$uek]['EkID'] = $ekurunListee['urun_ID'];
                         $cardlist[1][$uek]['EkKod'] = $ekurunListee['urun_kodu'];
                         $cardlist[1][$uek]['EkFiyat'] = $ekurunListee['urun_fiyat'];
+                        $urunToplamFiyat = $urunToplamFiyat + $cardlist[1][$uek]['EkFiyat'];
                         $cardlist[1][$uek]['EkAdi'] = $ekurunListee['urun_adi'];
+                        $urunAdet++;
+                        $urunHtml = $urunHtml . "<b>Ürün Adı: </b>" . $ekurunListee['urun_adi'] . " (Ek Ürün)</br>";
                         $cardlist[1][$uek]['EkResim'] = $ekurunListee['urun_anaresim'];
                         $cardlist[1][$uek]['EkUrl'] = $ekurunListee['urun_benzad'] . "-" . $ekurunListee['urun_benzersizkod'];
                     }
                     $uek++;
                 }
-            }
-
-            $mesafeListe = $Panel_Model->mesafeliSozlistele();
-            foreach ($mesafeListe as $mesafeListee) {
-                $cardlist[2][0]["Mesafe"] = $mesafeListee['sbt_mesafelistssoz'];
             }
 
             //sabit içerikleri listeleme
@@ -471,7 +481,30 @@ class Order extends Controller {
                 $iceriklist['instag'] = $icerikListe['sbt_instag'];
                 $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
                 $iceriklist['logo'] = $icerikListe['sbt_logo'];
+                $cardlist[2][0]["Mesafe"] = $icerikListe['sbt_mesafelistssoz'];
+                $cardlist[2][1]["OnBilgi"] = $icerikListe['sbt_onbilgilendirmeform'];
             }
+            //mesafeli sözleşmede değişmesi gereken alanlar
+            date_default_timezone_set('Europe/Istanbul');
+            //mesafeli satış sözleşmesi bilgiler değişimi
+            $cardlist[2][0]["Mesafe"] = str_replace("[username]", Session::get("AliciAdSoyad"), $cardlist[2][0]["Mesafe"]);
+            $cardlist[2][0]["Mesafe"] = str_replace("[userphone]", Session::get("AliciPhone"), $cardlist[2][0]["Mesafe"]);
+            $cardlist[2][0]["Mesafe"] = str_replace("[usermail]", Session::get("AliciMail"), $cardlist[2][0]["Mesafe"]);
+            $cardlist[2][0]["Mesafe"] = str_replace("[orderarrivedate]", Session::get("SipTarih"), $cardlist[2][0]["Mesafe"]);
+            $cardlist[2][0]["Mesafe"] = str_replace("[orderextraprice]", $urunToplamFiyat . ' TL', $cardlist[2][0]["Mesafe"]);
+            $cardlist[2][0]["Mesafe"] = str_replace("[now]", date('d.m.Y H:i:s'), $cardlist[2][0]["Mesafe"]);
+            $cardlist[2][0]["Mesafe"] = str_replace("[orderproductlist]", $urunHtml, $cardlist[2][0]["Mesafe"]);
+            //Ön bilgilendirme formu bilgiler değişimi
+            $cardlist[2][1]["OnBilgi"] = str_replace("[orderno]", Session::get("SipKodu"), $cardlist[2][1]["OnBilgi"]);
+            $cardlist[2][1]["OnBilgi"] = str_replace("[orderquantity]", $urunAdet . " Adet", $cardlist[2][1]["OnBilgi"]);
+            $cardlist[2][1]["OnBilgi"] = str_replace("[ordertotal]", $urunToplamFiyat, $cardlist[2][1]["OnBilgi"]);
+            $cardlist[2][1]["OnBilgi"] = str_replace("[orderproductlist]", $urunHtml, $cardlist[2][1]["OnBilgi"]);
+            $cardlist[2][1]["OnBilgi"] = str_replace("[orderpaymenttype]", "Tanımsız", $cardlist[2][1]["OnBilgi"]);
+            $cardlist[2][1]["OnBilgi"] = str_replace("[orderextraprice]", $urunToplamFiyat, $cardlist[2][1]["OnBilgi"]);
+            $cardlist[2][1]["OnBilgi"] = str_replace("[username]", Session::get("AliciAdSoyad"), $cardlist[2][1]["OnBilgi"]);
+            $cardlist[2][1]["OnBilgi"] = str_replace("[userphone]", Session::get("AliciPhone"), $cardlist[2][1]["OnBilgi"]);
+            $cardlist[2][1]["OnBilgi"] = str_replace("[usermail]", Session::get("AliciMail"), $cardlist[2][1]["OnBilgi"]);
+
             $homedizi[8] = $iceriklist;
             $cardlist[3][0]["Logo"] = $iceriklist['logo'];
             $cardlist[3][1]["Tel"] = $iceriklist['telefon'];
@@ -521,7 +554,9 @@ class Order extends Controller {
             unset($_SESSION['EkUrunID']);
             unset($_SESSION['SipGeciciUrunID']);
             unset($_SESSION['Odeme']);
-
+            unset($_SESSION['AliciAdSoyad']);
+            unset($_SESSION['AliciPhone']);
+            unset($_SESSION['AliciMail']);
             // Banka hesap bilgileri
             $bankaListe = $Panel_Model->bankaFrontListele();
             $b = 0;

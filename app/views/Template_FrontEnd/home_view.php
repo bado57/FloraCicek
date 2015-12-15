@@ -183,7 +183,7 @@
                     <div class="left-sidebar">
                         <h2>DOĞUM GÜNÜ</h2>
                     </div>
-                    <a href="#">
+                    <a href="dogum-gunu">
                         <img class="img-responsive" src="<?php echo SITE_IMAGES ?>/dogum-gunu.jpg" alt="Türkiye Flora Çiçek Doğum Günü Image" />
                     </a>
                 </div>
@@ -191,7 +191,7 @@
                     <div class="left-sidebar">
                         <h2>YILDÖNÜMÜ</h2>
                     </div>
-                    <a href="#">
+                    <a href="sevgiliye-yildonumu">
                         <img class="img-responsive" src="<?php echo SITE_IMAGES ?>/yildonumu.jpg" alt="Türkiye Flora Çiçek Yıldönümü Image" />
                     </a>
                 </div>
