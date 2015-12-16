@@ -599,6 +599,25 @@ class Order extends Controller {
             header("Location:" . SITE_URL);
         }
     }
+    
+    function DirectPayment (){
+        // Özel ödeme sayfası
+        $form = $this->load->otherClasses('Form');
+        //model bağlantısı
+        $Panel_Model = $this->load->model("Panel_Model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();
+        
+        
+        
+        $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
+        $this->load->view("Template_FrontEnd/ozelodeme", $languagedeger);
+        $this->load->view("Template_FrontEnd/footertop", $languagedeger);
+        $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
+        
+    }
 
 }
 
