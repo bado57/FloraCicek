@@ -24,7 +24,7 @@
                             <li><a href="<?php echo SITE_URL ?>/Home/bireysel"><i class="fa fa-user"></i> <?php echo $data["UyeOl"]; ?></a></li>
                         <?php } ?>
                         <li>
-                            <button class="btn btn-default" data-toggle="modal" id="siparisArama" data-target="#spDetayModal" type="button" style="padding:3px 10px;"><i class="fa fa-truck"></i> Sipariş Takibi</button>
+                            <button class="btn btn-default" data-toggle="modal" id="sipTakibi" data-target="#spDetayModal" type="button" style="padding:3px 10px;"><i class="fa fa-truck"></i> Sipariş Takibi</button>
                             <!--<div class="input-group spSearch">
                                 <input type="text" id="siparisTakip" class="form-control" placeholder="<?php echo $data["SiparisTakip"]; ?>" style="padding:3px 10px; height:28px;">
                                     <span class="input-group-btn">

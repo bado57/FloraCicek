@@ -66,19 +66,22 @@
     <div class="footer-widget">
         <div class="container">
             <div class="row">
-                <?php for ($ustkat = 0; $ustkat < count($model[6]); $ustkat++) { ?>
-                    <div class="col-sm-2 col-xs-12">
-                        <div class="single-widget">
-                            <h2><?php echo $model[6][$ustkat]['Adi']; ?></h2>
-                            <ul class="nav nav-pills nav-stacked">
-                                <?php for ($altkat = 0; $altkat < count($model[7][$ustkat]); $altkat++) { ?>
-                                    <?php if ($model[7][$ustkat][$altkat]['ID'] > 0) { ?>
-                                        <li><a href="<?php echo $model[7][$ustkat][$altkat]['Url']; ?>"><?php echo $model[7][$ustkat][$altkat]['Adi']; ?></a></li>
+                <?php $footCount = count($model[6]); ?>
+                <?php if ($footCount > 0) { ?>
+                    <?php for ($ustkat = 0; $ustkat < $footCount; $ustkat++) { ?>
+                        <div class="col-sm-2 col-xs-12">
+                            <div class="single-widget">
+                                <h2><?php echo $model[6][$ustkat]['Adi']; ?></h2>
+                                <ul class="nav nav-pills nav-stacked">
+                                    <?php for ($altkat = 0; $altkat < count($model[7][$ustkat]); $altkat++) { ?>
+                                        <?php if ($model[7][$ustkat][$altkat]['ID'] > 0) { ?>
+                                            <li><a href="<?php echo $model[7][$ustkat][$altkat]['Url']; ?>"><?php echo $model[7][$ustkat][$altkat]['Adi']; ?></a></li>
+                                        <?php } ?>
                                     <?php } ?>
-                                <?php } ?>
-                            </ul>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 <?php } ?>
                 <div class="col-sm-2 col-xs-12">
                     <div class="single-widget">

@@ -23,7 +23,6 @@ class Genel extends Controller {
             $tip = $form->values['tip'];
 
             Switch ($tip) {
-
                 case "urunTab":
                     $form->post("tab", true);
                     $form->post("katID", true);
@@ -1717,81 +1716,164 @@ class Genel extends Controller {
                     break;
                 case "siparisDuzenlemeDegerler":
                     $form->post("sipKod", true);
+                    $form->post("sipMail", true);
                     $sipKod = $form->values['sipKod'];
-                    if ($sipKod != "") {
-                        $siparis = array();
-
-                        $sip = $Panel_Model->siparisFrontDetaylistele($sipKod);
-                        foreach ($sip as $sipp) {
-                            $siplist['ID'] = $sipp['siparis_ID'];
-                            $siplist['No'] = $sipp['siparis_No'];
-                            $explode = explode(" ", $sipp['siparis_girilmetarih']);
-                            $explodeTarih = explode("-", $explode[0]);
-                            $siplist["Tarih"] = $explodeTarih[2] . '/' . $explodeTarih[1] . '/' . $explodeTarih[0];
-                            $siplist['TTutar'] = $sipp['siparis_toplamtutar'];
-                            $siplist['OdeTip'] = $sipp['siparis_odemetip'];
-                            //Gönderen İşlemleri
-                            $siplist['GAd'] = $sipp['siparis_gonderenAdSoyad'];
-                            $siplist['GTel'] = $sipp['siparis_gonderenTel'];
-                            $siplist['GMail'] = $sipp['siparis_gondereneposta'];
-                            $siplist['GUDurum'] = $sipp['siparis_gonderenkur'];
-                            //fatura
-                            $siplist['FUnvan'] = $sipp['siparis_faturaunvan'];
-                            $siplist['FTcNo'] = $sipp['siparis_faturatc'];
-                            $siplist['FVDaire'] = $sipp['siparis_faturavergidaire'];
-                            $siplist['FVNo'] = $sipp['siparis_vergino'];
-                            $siplist['FAdres'] = $sipp['siparis_faturaadres'];
-                            //teslimat
-                            $siplist['AAd'] = $sipp['siparis_aliciadsoyad'];
-                            $siplist['ATel'] = $sipp['siparis_alicitel'];
-                            $siplist['SGonTar'] = $sipp['siparis_tarih'] . ' - ' . $sipp['siparis_gun'];
-                            $siplist['SGitYer'] = $sipp['siparis_yertext'];
-                            $siplist['SGonSaat'] = $sipp['siparis_saat'];
-                            $siplist['SGAdres'] = $sipp['siparis_aliciadres'];
-                            $siplist['SGAdresTrf'] = $sipp['siparis_aliciadrestarif'];
-                            $siplist['SNot'] = $sipp['siparis_gonderennotu'];
-                            $siplist['SKartMsj'] = $sipp['siparis_kartmesaj'];
-                            $siplist['SKartIsim'] = $sipp['siparis_kartisim'];
-                            $siplist['SIsimGstr'] = $sipp['siparis_isimgorunme'];
-                            $siplist['SGndNdn'] = $sipp['siparis_gndtext'];
-                            $siplist['SAdminNot'] = $sipp['siparis_adminnotu'];
-                            if ($sipp['siparis_durum'] == 0) {
-                                $siplist['SDurum'] = "Siparişiniz Beklemede";
-                            } else if ($sipp['siparis_durum'] == 1) {
-                                $siplist['SDurum'] = "Siparişiniz Hazırlanıyor";
-                            } else if ($sipp['siparis_durum'] == 2) {
-                                $siplist['SDurum'] = "Siparişiniz Gönderildi";
+                    $sipMail = $form->values['sipMail'];
+                    if (Session::get("KID") > 0) {
+                        $sipMail = Session::get("KEposta");
+                        if ($sipKod != "") {
+                            $siparis = array();
+                            $sip = $Panel_Model->siparisFrontDetaylistele($sipKod, $sipMail);
+                            foreach ($sip as $sipp) {
+                                $siplist['ID'] = $sipp['siparis_ID'];
+                                $siplist['No'] = $sipp['siparis_No'];
+                                $explode = explode(" ", $sipp['siparis_girilmetarih']);
+                                $explodeTarih = explode("-", $explode[0]);
+                                $siplist["Tarih"] = $explodeTarih[2] . '/' . $explodeTarih[1] . '/' . $explodeTarih[0];
+                                $siplist['TTutar'] = $sipp['siparis_toplamtutar'];
+                                $siplist['OdeTip'] = $sipp['siparis_odemetip'];
+                                //Gönderen İşlemleri
+                                $siplist['GAd'] = $sipp['siparis_gonderenAdSoyad'];
+                                $siplist['GTel'] = $sipp['siparis_gonderenTel'];
+                                $siplist['GMail'] = $sipp['siparis_gondereneposta'];
+                                $siplist['GUDurum'] = $sipp['siparis_gonderenkur'];
+                                //fatura
+                                $siplist['FUnvan'] = $sipp['siparis_faturaunvan'];
+                                $siplist['FTcNo'] = $sipp['siparis_faturatc'];
+                                $siplist['FVDaire'] = $sipp['siparis_faturavergidaire'];
+                                $siplist['FVNo'] = $sipp['siparis_vergino'];
+                                $siplist['FAdres'] = $sipp['siparis_faturaadres'];
+                                //teslimat
+                                $siplist['AAd'] = $sipp['siparis_aliciadsoyad'];
+                                $siplist['ATel'] = $sipp['siparis_alicitel'];
+                                $siplist['SGonTar'] = $sipp['siparis_tarih'] . ' - ' . $sipp['siparis_gun'];
+                                $siplist['SGitYer'] = $sipp['siparis_yertext'];
+                                $siplist['SGonSaat'] = $sipp['siparis_saat'];
+                                $siplist['SGAdres'] = $sipp['siparis_aliciadres'];
+                                $siplist['SGAdresTrf'] = $sipp['siparis_aliciadrestarif'];
+                                $siplist['SNot'] = $sipp['siparis_gonderennotu'];
+                                $siplist['SKartMsj'] = $sipp['siparis_kartmesaj'];
+                                $siplist['SKartIsim'] = $sipp['siparis_kartisim'];
+                                $siplist['SIsimGstr'] = $sipp['siparis_isimgorunme'];
+                                $siplist['SGndNdn'] = $sipp['siparis_gndtext'];
+                                $siplist['SAdminNot'] = $sipp['siparis_adminnotu'];
+                                if ($sipp['siparis_durum'] == 0) {
+                                    $siplist['SDurum'] = "Siparişiniz Beklemede";
+                                } else if ($sipp['siparis_durum'] == 1) {
+                                    $siplist['SDurum'] = "Siparişiniz Hazırlanıyor";
+                                } else if ($sipp['siparis_durum'] == 2) {
+                                    $siplist['SDurum'] = "Siparişiniz Gönderildi";
+                                }
                             }
-                        }
 
-                        $urun = $Panel_Model->siparisUrunDetaylistele($siplist['ID']);
-                        $u = 0;
-                        $tutar = 0;
-                        foreach ($urun as $urunn) {
-                            $urunlist[$u]['SID'] = $urunn['siparisurun_ID'];
-                            $urunlist[$u]['SSID'] = $urunn['siparisurun_siparisID'];
-                            $urunlist[$u]['SUID'] = $urunn['siparisurun_urunID'];
-                            $urunlist[$u]['SUAd'] = $urunn['siparisurun_ad'];
-                            $urunlist[$u]['SUKod'] = $urunn['siparisurun_kod'];
-                            $urunlist[$u]['SUMiktar'] = $urunn['siparisurun_miktar'];
-                            $urunlist[$u]['SUTip'] = $urunn['siparisurun_tip'];
-                            $urunlist[$u]['SUResim'] = $urunn['siparisurun_resim'];
-                            $urunlist[$u]['SUTtar'] = $urunn['siparisurun_tutar'];
-                            $urunlist[$u]['SUTplmTutar'] = $urunn['siparisurun_tutar'] * $urunn['siparisurun_miktar'];
-                            $tutar = $tutar + $urunlist[$u]['SUTplmTutar'];
-                            $urunlist[$u]['Toplam'] = $tutar;
-                            $u++;
-                        }
-                        $siparis[0] = $siplist;
-                        $siparis[1] = $urunlist;
-                        if (count($siplist) > 0) {
-                            $sonuc["result"] = $siparis;
+                            $urun = $Panel_Model->siparisUrunDetaylistele($siplist['ID']);
+                            $u = 0;
+                            $tutar = 0;
+                            foreach ($urun as $urunn) {
+                                $urunlist[$u]['SID'] = $urunn['siparisurun_ID'];
+                                $urunlist[$u]['SSID'] = $urunn['siparisurun_siparisID'];
+                                $urunlist[$u]['SUID'] = $urunn['siparisurun_urunID'];
+                                $urunlist[$u]['SUAd'] = $urunn['siparisurun_ad'];
+                                $urunlist[$u]['SUKod'] = $urunn['siparisurun_kod'];
+                                $urunlist[$u]['SUMiktar'] = $urunn['siparisurun_miktar'];
+                                $urunlist[$u]['SUTip'] = $urunn['siparisurun_tip'];
+                                $urunlist[$u]['SUResim'] = $urunn['siparisurun_resim'];
+                                $urunlist[$u]['SUTtar'] = $urunn['siparisurun_tutar'];
+                                $urunlist[$u]['SUTplmTutar'] = $urunn['siparisurun_tutar'] * $urunn['siparisurun_miktar'];
+                                $tutar = $tutar + $urunlist[$u]['SUTplmTutar'];
+                                $urunlist[$u]['Toplam'] = $tutar;
+                                $u++;
+                            }
+                            $siparis[0] = $siplist;
+                            $siparis[1] = $urunlist;
+                            if (count($siplist) > 0) {
+                                $sonuc["result"] = $siparis;
+                            } else {
+                                $sonuc["hata"] = "Bu Koda Ait Sipariş Bulunamadı.";
+                            }
                         } else {
-                            $sonuc["hata"] = "Bu Koda Ait Sipariş Bulunamadı.";
+                            $sonuc["hata"] = "Lütfen Kodu Unutmayınız.";
                         }
                     } else {
-                        $sonuc["hata"] = "Lütfen Kodu Unutmayınız.";
+                        if ($sipMail != "") {
+                            if ($sipKod != "") {
+                                $siparis = array();
+                                $sip = $Panel_Model->siparisFrontDetaylistele($sipKod, $sipMail);
+                                foreach ($sip as $sipp) {
+                                    $siplist['ID'] = $sipp['siparis_ID'];
+                                    $siplist['No'] = $sipp['siparis_No'];
+                                    $explode = explode(" ", $sipp['siparis_girilmetarih']);
+                                    $explodeTarih = explode("-", $explode[0]);
+                                    $siplist["Tarih"] = $explodeTarih[2] . '/' . $explodeTarih[1] . '/' . $explodeTarih[0];
+                                    $siplist['TTutar'] = $sipp['siparis_toplamtutar'];
+                                    $siplist['OdeTip'] = $sipp['siparis_odemetip'];
+                                    //Gönderen İşlemleri
+                                    $siplist['GAd'] = $sipp['siparis_gonderenAdSoyad'];
+                                    $siplist['GTel'] = $sipp['siparis_gonderenTel'];
+                                    $siplist['GMail'] = $sipp['siparis_gondereneposta'];
+                                    $siplist['GUDurum'] = $sipp['siparis_gonderenkur'];
+                                    //fatura
+                                    $siplist['FUnvan'] = $sipp['siparis_faturaunvan'];
+                                    $siplist['FTcNo'] = $sipp['siparis_faturatc'];
+                                    $siplist['FVDaire'] = $sipp['siparis_faturavergidaire'];
+                                    $siplist['FVNo'] = $sipp['siparis_vergino'];
+                                    $siplist['FAdres'] = $sipp['siparis_faturaadres'];
+                                    //teslimat
+                                    $siplist['AAd'] = $sipp['siparis_aliciadsoyad'];
+                                    $siplist['ATel'] = $sipp['siparis_alicitel'];
+                                    $siplist['SGonTar'] = $sipp['siparis_tarih'] . ' - ' . $sipp['siparis_gun'];
+                                    $siplist['SGitYer'] = $sipp['siparis_yertext'];
+                                    $siplist['SGonSaat'] = $sipp['siparis_saat'];
+                                    $siplist['SGAdres'] = $sipp['siparis_aliciadres'];
+                                    $siplist['SGAdresTrf'] = $sipp['siparis_aliciadrestarif'];
+                                    $siplist['SNot'] = $sipp['siparis_gonderennotu'];
+                                    $siplist['SKartMsj'] = $sipp['siparis_kartmesaj'];
+                                    $siplist['SKartIsim'] = $sipp['siparis_kartisim'];
+                                    $siplist['SIsimGstr'] = $sipp['siparis_isimgorunme'];
+                                    $siplist['SGndNdn'] = $sipp['siparis_gndtext'];
+                                    $siplist['SAdminNot'] = $sipp['siparis_adminnotu'];
+                                    if ($sipp['siparis_durum'] == 0) {
+                                        $siplist['SDurum'] = "Siparişiniz Beklemede";
+                                    } else if ($sipp['siparis_durum'] == 1) {
+                                        $siplist['SDurum'] = "Siparişiniz Hazırlanıyor";
+                                    } else if ($sipp['siparis_durum'] == 2) {
+                                        $siplist['SDurum'] = "Siparişiniz Gönderildi";
+                                    }
+                                }
+
+                                $urun = $Panel_Model->siparisUrunDetaylistele($siplist['ID']);
+                                $u = 0;
+                                $tutar = 0;
+                                foreach ($urun as $urunn) {
+                                    $urunlist[$u]['SID'] = $urunn['siparisurun_ID'];
+                                    $urunlist[$u]['SSID'] = $urunn['siparisurun_siparisID'];
+                                    $urunlist[$u]['SUID'] = $urunn['siparisurun_urunID'];
+                                    $urunlist[$u]['SUAd'] = $urunn['siparisurun_ad'];
+                                    $urunlist[$u]['SUKod'] = $urunn['siparisurun_kod'];
+                                    $urunlist[$u]['SUMiktar'] = $urunn['siparisurun_miktar'];
+                                    $urunlist[$u]['SUTip'] = $urunn['siparisurun_tip'];
+                                    $urunlist[$u]['SUResim'] = $urunn['siparisurun_resim'];
+                                    $urunlist[$u]['SUTtar'] = $urunn['siparisurun_tutar'];
+                                    $urunlist[$u]['SUTplmTutar'] = $urunn['siparisurun_tutar'] * $urunn['siparisurun_miktar'];
+                                    $tutar = $tutar + $urunlist[$u]['SUTplmTutar'];
+                                    $urunlist[$u]['Toplam'] = $tutar;
+                                    $u++;
+                                }
+                                $siparis[0] = $siplist;
+                                $siparis[1] = $urunlist;
+                                if (count($siplist) > 0) {
+                                    $sonuc["result"] = $siparis;
+                                } else {
+                                    $sonuc["hata"] = "Bu Koda Ait Sipariş Bulunamadı.";
+                                }
+                            } else {
+                                $sonuc["hata"] = "Lütfen Kodu Unutmayınız.";
+                            }
+                        } else {
+                            $sonuc["hata"] = "Lütfen Email Adresini Giriniz.";
+                        }
                     }
+
                     break;
                 case "cikisYap":
                     unset($_SESSION['KID']);

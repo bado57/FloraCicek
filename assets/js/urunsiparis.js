@@ -85,6 +85,51 @@ $(document).ready(function () {
             }
         }
     });
+    $("#urunozelkartodeme").validate({
+        rules: {
+            pan: {
+                required: true
+            },
+            Ecom_Payment_Card_ExpDate_Month: {
+                selectcheck: true
+            },
+            Ecom_Payment_Card_ExpDate_Year: {
+                selectcheck: true
+            },
+            cv2: {
+                required: true
+            },
+            cardType: {
+                selectcheck: true
+            },
+            kartSatisSoz: {
+                required: true
+            },
+            amount: {
+                required: true
+            }
+        },
+        messages: {
+            pan: {
+                required: "Lütfen kart numaranızı giriniz"
+            },
+            Ecom_Payment_Card_ExpDate_Month: {
+                required: "Lütfen kartınızın yıl bilgisini giriniz"
+            },
+            Ecom_Payment_Card_ExpDate_Year: {
+                required: "Lütfen kartınızın ay bilgisini giriniz"
+            },
+            cv2: {
+                required: "Lütfen cvv numaranızı giriniz"
+            },
+            cardType: {
+                required: "Lütfen kart tipini seçiniz"
+            },
+            amount: {
+                required: "Lütfen ödeme tutarını giriniz."
+            }
+        }
+    });
     jQuery.validator.addMethod('selectcheck', function (value) {
         return (value != '0');
     }, "Kullanıcı Türü Seçimi gereklidir.");
@@ -245,6 +290,9 @@ $(document).ready(function () {
             }
         });
     });
+    $(document).on("click", "button#uyeOl", function (e) {
+        window.location.href = SITE_URL + "Home/login";
+    });
     $(document).on("click", "button#gotoHomeCard", function (e) {
         window.location.href = SITE_URL;
     });
@@ -254,7 +302,9 @@ $(document).ready(function () {
     $(document).on("click", "button#gotoHomeHavale", function (e) {
         window.location.href = SITE_URL;
     });
-
+    $(document).on("click", "button#gotoHomeOzelOdeme", function (e) {
+        window.location.href = SITE_URL;
+    });
     var bankhatamesaj = $("#bankhatamesaj").val();
     if (bankhatamesaj != undefined) {
         if (bankhatamesaj != "") {

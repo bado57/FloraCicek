@@ -95,14 +95,21 @@ $(document).ready(function () {
             }
         });
     });
+    $(document).on("click", "#sipTakibi", function (e) {
+        $("#siparisTakipNo").val("");
+        $("#spSorguMail").val("");
+        $("#sipSorgulama").show();
+        $("#sipaccordion").hide();
+    });
     $(document).on("click", "#siparisArama", function (e) {
-        var sipKod = $("#siparisTakip").val();
+        var sipKod = $("#siparisTakipNo").val();
+        var sipMail = $("#spSorguMail").val();
         $.ajax({
             type: "post",
             url: SITE_URL + "/Genel/ajaxCall",
             cache: false,
             dataType: "json",
-            data: {"sipKod": sipKod, "tip": "siparisDuzenlemeDegerler"},
+            data: {"sipMail": sipMail, "sipKod": sipKod, "tip": "siparisDuzenlemeDegerler"},
             success: function (cevap) {
                 if (cevap.hata) {
                     reset();
@@ -110,6 +117,8 @@ $(document).ready(function () {
                     return false;
                 } else {
                     if (cevap.result) {
+                        $("#sipSorgulama").hide();
+                        $("#sipaccordion").show();
                         $("#urunSip").empty();
                         $("#siparisbilgileri").show();
                         $("#urunbilgileri").show();

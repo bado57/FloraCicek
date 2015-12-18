@@ -39,6 +39,7 @@ class tr {
             "UyeGiris" => "Üye Girişi",
             "TesBilgi" => "Teslimat Bilgileri",
             "OdeBilgi" => "Ödeme Bilgileri",
+            "OdeOnay" => "Ödeme Onay",
             "SipOnay" => "Sipariş Onayı",
             "Ilerle" => "İlerle",
             "SifreUnut" => "Şifremi unuttum!",

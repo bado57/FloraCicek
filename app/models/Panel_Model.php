@@ -890,8 +890,8 @@ class Panel_Model extends Model {
         return $this->db->select($sql);
     }
 
-    public function siparisFrontDetaylistele($kod) {
-        $sql = "SELECT * from flora_siparis WHERE siparis_No=$kod";
+    public function siparisFrontDetaylistele($kod, $email) {
+        $sql = "SELECT * from flora_siparis WHERE siparis_No=$kod AND siparis_gondereneposta='$email'";
         return $this->db->select($sql);
     }
 

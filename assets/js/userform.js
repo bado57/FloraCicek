@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     $(document).on("click", "button#btnGiris", function (e) {
         var email = $("#girisemail").val();
         var sifre = $("#girissifre").val();

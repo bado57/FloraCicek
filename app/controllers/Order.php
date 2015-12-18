@@ -990,21 +990,150 @@ class Order extends Controller {
     }
 
     function DirectPayment() {
-        // Özel ödeme sayfası
-        $form = $this->load->otherClasses('Form');
-        //model bağlantısı
-        $Panel_Model = $this->load->model("Panel_Model");
-        $formlanguage = $this->load->multilanguage("tr");
-        $languagedeger = $formlanguage->multilanguage();
+        if ($_POST["HASHPARAMS"] != "") {
+            $hashparams = $_POST["HASHPARAMS"];
+            $hashparamsval = $_POST["HASHPARAMSVAL"];
+            $hashparam = $_POST["HASH"];
+            $storekey = "123456";
+            $paramsval = "";
+            $index1 = 0;
+            $index2 = 0;
 
+            while ($index1 < strlen($hashparams)) {
+                $index2 = strpos($hashparams, ":", $index1);
+                $vl = $_POST[substr($hashparams, $index1, $index2 - $index1)];
+                if ($vl == null)
+                    $vl = "";
+                $paramsval = $paramsval . $vl;
+                $index1 = $index2 + 1;
+            }
+            $storekey = "123456";
+            $hashval = $paramsval . $storekey;
+            $hash = base64_encode(pack('H*', sha1($hashval)));
 
+            if ($paramsval != $hashparamsval || $hashparam != $hash) {
+                unset($_SESSION["BankErrMsg"]);
+                Session:set("BankErrMsg", "3D Islemi basarisiz");
+                header("Location:" . SITE_URL . "/Order/DirectPayment");
+            }
+            if ($_POST["mdStatus"] != "") {
+                $mdStatus = $_POST["mdStatus"];
+                if ($mdStatus == 1 || $mdStatus == 2 || $mdStatus == 3 || $mdStatus == 4) {
+                    //3D Islemi basarili
+                    if ($_POST["Response"]) {
+                        $mdStatus = $_POST["mdStatus"];
+                        $ErrMsg = $_POST["ErrMsg"];
+                        $response = $_POST["Response"];
+                        $form = $this->load->otherClasses('Form');
+                        //model bağlantısı
+                        $Panel_Model = $this->load->model("Panel_Model");
+                        if ($response == "Approved") {
+                            Session::set("OzelOdeme", 1);
+                            header("Location:" . SITE_URL . "/Order/DirectAccess");
+                        } else {
+                            //Başarısız
+                            //echo "Ödeme Islemi Basarisiz. Hata = " . $ErrMsg;
+                            unset($_SESSION["BankErrMsg"]);
+                            $_SESSION["BankErrMsg"] = " Ödeme Islemi Basarisiz. Hata =" . $ErrMsg;
+                            header("Location:" . SITE_URL . "/Order/DirectPayment");
+                        }
+                    }
+                } else {
+                    unset($_SESSION["BankErrMsg"]);
+                    $_SESSION["BankErrMsg"] = "3D Islemi basarisiz";
+                    header("Location:" . SITE_URL . "/Order/DirectPayment");
+                }
+            } else {
+                unset($_SESSION["BankErrMsg"]);
+                $_SESSION["BankErrMsg"] = "Kart Bilgileri Hatalıdır.";
+                header("Location:" . SITE_URL . "/Order/DirectPayment");
+            }
+        } else {
+            $form = $this->load->otherClasses('Form');
+            //model bağlantısı
+            $Panel_Model = $this->load->model("Panel_Model");
+            $formlanguage = $this->load->multilanguage("tr");
+            $languagedeger = $formlanguage->multilanguage();
 
-        $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
-        $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
-        $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
-        $this->load->view("Template_FrontEnd/ozelodeme", $languagedeger);
-        $this->load->view("Template_FrontEnd/footertop", $languagedeger);
-        $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
+            //sabit içerikleri listeleme
+            $icerikListe = $Panel_Model->sabiticeriklistele();
+            foreach ($icerikListe as $icerikListe) {
+                $iceriklist['telefon'] = $icerikListe['sbt_telefon'];
+                $iceriklist['mail'] = $icerikListe['sbt_iletisimmail'];
+                $iceriklist['face'] = $icerikListe['sbt_face'];
+                $iceriklist['twit'] = $icerikListe['sbt_twit'];
+                $iceriklist['instag'] = $icerikListe['sbt_instag'];
+                $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+                $iceriklist['logo'] = $icerikListe['sbt_logo'];
+            }
+            $homedizi[8] = $iceriklist;
+            $paymentlist[3][0]["Logo"] = $iceriklist['logo'];
+            $paymentlist[3][1]["Tel"] = $iceriklist['telefon'];
+
+            //banka post hesap bilgileri
+            $paymentlist[5][0]['ClientID'] = "600200000";
+            $paymentlist[5][0]['TTutar'] = "";
+            $paymentlist[5][0]['SipNumber'] = "";
+            $paymentlist[5][0]['okUrl'] = "https://www.turkiyefloracicek.com/Order/DirectPayment";
+            $paymentlist[5][0]['failUrl'] = "https://www.turkiyefloracicek.com/Order/DirectPayment";
+            $paymentlist[5][0]['Rnd'] = microtime();
+            $paymentlist[5][0]['Taksit'] = "";
+            $paymentlist[5][0]['IslemTip'] = "Auth";
+            $paymentlist[5][0]['IsyeriAnahtar'] = "123456";
+            $hashstr = $paymentlist[5][0]['ClientID'] . $paymentlist[5][0]['SipNumber'] . $paymentlist[5][0]['TTutar'] . $paymentlist[5][0]['okUrl']
+                    . $paymentlist[5][0]['failUrl'] . $paymentlist[5][0]['IslemTip'] . $paymentlist[5][0]['Taksit'] . $paymentlist[5][0]['Rnd']
+                    . $paymentlist[5][0]['IsyeriAnahtar'];
+            $paymentlist[5][0]['Hash'] = base64_encode(pack('H*', sha1($hashstr)));
+            //banka dönen error değeri varmı
+            if (Session::get("BankErrMsg") != "") {
+                $paymentlist[5][0]['BankErrMsj'] = Session::get("BankErrMsg");
+                unset($_SESSION["BankErrMsg"]);
+            }
+            $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/ozelodeme", $languagedeger, $paymentlist);
+            $this->load->view("Template_FrontEnd/footertop", $languagedeger);
+            $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
+        }
+    }
+
+    function DirectAccess() {
+        if (Session::get("OzelOdeme") > 0) {
+            //model bağlantısı
+            $Panel_Model = $this->load->model("Panel_Model");
+            $formlanguage = $this->load->multilanguage("tr");
+            $languagedeger = $formlanguage->multilanguage();
+            //daha önceki siparişle ilgili bilgileri temizliyorum
+
+            unset($_SESSION["BankErrMsg"]);
+
+            //sabit içerikleri listeleme
+            $icerikListe = $Panel_Model->sabiticeriklistele();
+            foreach ($icerikListe as $icerikListe) {
+                $iceriklist['telefon'] = $icerikListe['sbt_telefon'];
+                $iceriklist['mail'] = $icerikListe['sbt_iletisimmail'];
+                $iceriklist['face'] = $icerikListe['sbt_face'];
+                $iceriklist['twit'] = $icerikListe['sbt_twit'];
+                $iceriklist['instag'] = $icerikListe['sbt_instag'];
+                $iceriklist['gplus'] = $icerikListe['sbt_gplus'];
+                $iceriklist['logo'] = $icerikListe['sbt_logo'];
+            }
+            $homedizi[8] = $iceriklist;
+            $onaylist[1][0]['Logo'] = $iceriklist['logo'];
+            $onaylist[1][0]['Tel'] = $iceriklist['telefon'];
+
+            $this->load->view("Template_FrontEnd/headertop", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headermiddle", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/headerbottom", $languagedeger, $homedizi);
+            $this->load->view("Template_FrontEnd/ozelodemeonay", $languagedeger, $onaylist);
+            $this->load->view("Template_FrontEnd/footertop", $languagedeger);
+            $this->load->view("Template_FrontEnd/footerbottom", $languagedeger);
+            //son olan sessionlarıda kaldırıyorum
+            unset($_SESSION['OzelOdeme']);
+        } else {
+            header("Location:" . SITE_URL);
+        }
     }
 
 }

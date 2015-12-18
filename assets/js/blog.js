@@ -14,7 +14,6 @@ $(document).ready(function () {
 
         $("#ulsayfalar a").removeClass("active");
         $(this).addClass("active");
-
         for (i = (goster - sayfalimit); i <= goster - 1; i++) {
             $("ul#fullblog>li:eq(" + i + ")").fadeIn(300);
         }
