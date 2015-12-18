@@ -50,6 +50,7 @@ class Panel_Model extends Model {
     //home etiket listeleme
     public function etiketlistele() {
         $sql = "SELECT etiket_id,etiket_adi,etiket_benzad FROM flora_etiket WHERE etiket_aktiflik=1 ORDER BY etiket_sira ASC ";
+        error_log($sql);
         return $this->db->select($sql);
     }
 

@@ -1057,8 +1057,7 @@ class Genel extends Controller {
                     if ($gndadsoyad != '') {
                         if ($gndmail != '') {
                             if (!filter_var($gndmail, FILTER_VALIDATE_EMAIL) === false) {
-                                //$emailValidate = $form->mailControl1($gndmail);
-                                $emailValidate = 1;
+                                $emailValidate = $form->mailControl1($gndmail);
                                 if ($emailValidate == 1) {
                                     if ($gndtel != '') {
                                         if ($alcadsoyad != '') {
@@ -1293,237 +1292,6 @@ class Genel extends Controller {
                         $sonuc["hata"] = "Lütfen Gönderici Ad Soyadını Giriniz!";
                     }
                     break;
-                case "kartSiparis":
-                    $form->post("mss", true);
-                    $mss = $form->values['mss'];
-                    $form->post("kartNo", true);
-                    $form->post("kartSonAyVal", true);
-                    $form->post("kartSonYilVal", true);
-                    $form->post("cvv", true);
-                    $kartNo = $form->values['kartNo'];
-                    $kartSonAyVal = $form->values['kartSonAyVal'];
-                    $kartSonYilVal = $form->values['kartSonYilVal'];
-                    $cvv = $form->values['cvv'];
-                    if ($kartNo != "") {
-                        if ($kartSonAyVal != 0) {
-                            if ($kartSonYilVal != 0) {
-                                if ($cvv != "") {
-                                    if ($mss == "true") {
-                                        $urunid = Session::get("SipID");
-                                        //ürünlerin toplam fiyatı için
-                                        $urunToplamFiyat = 0;
-                                        //Ürün Detayı
-                                        $urunListe = $Panel_Model->urundetaysiparis($urunid);
-
-                                        //kampanyalı ürünlerin listesi
-                                        foreach ($urunListe as $urunListee) {
-                                            if ($urunListee['urun_kmpnyaid'] != 0) {//kampanyalı ürünler
-                                                $kampanyaId = $urunListee['urun_kmpnyaid'];
-                                            }
-                                        }
-
-                                        //kampanyalı ürünler için 
-                                        if (count($kampanyaId) > 0) {
-                                            $kampanya = $Panel_Model->urunkampanya($kampanyaId, date("Y/m/d"));
-                                            foreach ($kampanya as $kampanyaa) {
-                                                $urunkampanya[0]['ID'] = $kampanyaa['kampanya_ID'];
-                                                $urunkampanya[0]['Yuzde'] = $kampanyaa['kampanya_indirimyuzde'];
-                                            }
-                                        }
-                                        if (count($urunkampanya) > 0) {
-                                            foreach ($urunListe as $urunListee) {
-                                                $siparislist[0][0]['KID'] = $urunkampanya[0]['ID'];
-                                                $siparislist[0][0]['urunID'] = $urunListee['urun_ID'];
-                                                $siparislist[0][0]['urunKod'] = $urunListee['urun_kodu'];
-                                                $siparislist[0][0]['urunFiyat'] = round($urunListee['urun_fiyat'] - (($urunListee['urun_fiyat'] * $urunkampanya[0]['Yuzde']) / 100));
-                                                $urunToplamFiyat = $urunToplamFiyat + $siparislist[0][0]['urunFiyat'];
-                                                $siparislist[0][0]['urunAd'] = $urunListee['urun_adi'];
-                                                $siparislist[0][0]['urunResim'] = $urunListee['urun_anaresim'];
-                                            }
-                                        } else {
-                                            foreach ($urunListe as $urunListee) {
-                                                $siparislist[0][0]['urunID'] = $urunListee['urun_ID'];
-                                                $siparislist[0][0]['urunKod'] = $urunListee['urun_kodu'];
-                                                $siparislist[0][0]['urunFiyat'] = $urunListee['urun_fiyat'];
-                                                $urunToplamFiyat = $urunToplamFiyat + $siparislist[0][0]['urunFiyat'];
-                                                $siparislist[0][0]['urunAd'] = $urunListee['urun_adi'];
-                                                $siparislist[0][0]['urunResim'] = $urunListee['urun_anaresim'];
-                                            }
-                                        }
-
-                                        //Ek Ürünler varsa Onun Dizisi
-                                        $ekUrunDizi = Session::get("EkUrunID");
-                                        if (count($ekUrunDizi) > 0) {
-                                            //ek ürünleri listeleme
-                                            $ekurunListe = $Panel_Model->ekurunbazilistele($ekUrunDizi);
-                                            //kampanyalı ürünlerin listesi
-                                            foreach ($ekurunListe as $ekurunListee) {
-                                                if ($ekurunListee['urun_kmpnyaid'] != 0) {//kampanyalı ürünler
-                                                    $ekkampanyaId[] = $ekurunListee['urun_kmpnyaid'];
-                                                }
-                                            }
-                                            //kampanyalı ürünler için 
-                                            if (count($ekkampanyaId) > 0) {
-                                                $kampanyadizi = implode(',', $ekkampanyaId);
-                                                $ekkampanyalar = $Panel_Model->urunkampanyalistele($kampanyadizi, date("Y/m/d"));
-                                                $kmpny = 0;
-                                                foreach ($ekkampanyalar as $ekkampanyalarr) {
-                                                    $ekurunkampanya[$kmpny]['ID'] = $ekkampanyalarr['kampanya_ID'];
-                                                    $ekurunkampanya[$kmpny]['Yuzde'] = $ekkampanyalarr['kampanya_indirimyuzde'];
-                                                    $kmpny++;
-                                                }
-                                            }
-
-                                            $uek = 0;
-                                            foreach ($ekurunListe as $ekurunListee) {
-                                                if ($ekurunListee['urun_kmpnyaid'] != 0) {//kampanyalı ürünler
-                                                    for ($ku = 0; $ku < count($ekurunkampanya); $ku++) {
-                                                        if ($ekurunkampanya[$ku]['ID'] == $ekurunListee['urun_kmpnyaid']) {
-                                                            $siparislist[1][$uek]['EkID'] = $ekurunListee['urun_ID'];
-                                                            $siparislist[1][$uek]['EkKod'] = $ekurunListee['urun_kodu'];
-                                                            $siparislist[1][$uek]['EkFiyat'] = round($ekurunListee['urun_fiyat'] - (($ekurunListee['urun_fiyat'] * $ekurunkampanya[$ku]['Yuzde']) / 100));
-                                                            $urunToplamFiyat = $urunToplamFiyat + $siparislist[1][$uek]['EkFiyat'];
-                                                            $siparislist[1][$uek]['EkAdi'] = $ekurunListee['urun_adi'];
-                                                            $siparislist[1][$uek]['EkResim'] = $ekurunListee['urun_anaresim'];
-                                                        }
-                                                    }
-                                                } else {
-                                                    $siparislist[1][$uek]['EkID'] = $ekurunListee['urun_ID'];
-                                                    $siparislist[1][$uek]['EkKod'] = $ekurunListee['urun_kodu'];
-                                                    $siparislist[1][$uek]['EkFiyat'] = $ekurunListee['urun_fiyat'];
-                                                    $urunToplamFiyat = $urunToplamFiyat + $siparislist[1][$uek]['EkFiyat'];
-                                                    $siparislist[1][$uek]['EkAdi'] = $ekurunListee['urun_adi'];
-                                                    $siparislist[1][$uek]['EkResim'] = $ekurunListee['urun_anaresim'];
-                                                }
-                                                $uek++;
-                                            }
-                                        }
-                                        $sipID = Session::get("SipGeciciUrunID");
-                                        $siparisliste = $Panel_Model->geciciSiparis($sipID);
-                                        if (count($siparisliste) > 0) {
-                                            $data = array(
-                                                'siparis_No' => $siparisliste[0]["siparis_No"],
-                                                'siparis_aliciadsoyad' => $siparisliste[0]["siparis_aliciadsoyad"],
-                                                'siparis_alicitel' => $siparisliste[0]["siparis_alicitel"],
-                                                'siparis_aliciadres' => $siparisliste[0]["siparis_aliciadres"],
-                                                'siparis_aliciadrestarif' => $siparisliste[0]["siparis_aliciadrestarif"],
-                                                'siparis_gndid' => $siparisliste[0]["siparis_gndid"],
-                                                'siparis_gndtext' => $siparisliste[0]["siparis_gndtext"],
-                                                'siparis_yerid' => $siparisliste[0]["siparis_yerid"],
-                                                'siparis_yertext' => $siparisliste[0]["siparis_yertext"],
-                                                'siparis_kartisim' => $siparisliste[0]["siparis_kartisim"],
-                                                'siparis_kartmesaj' => $siparisliste[0]["siparis_kartmesaj"],
-                                                'siparis_isimgorunme' => $siparisliste[0]["siparis_isimgorunme"],
-                                                'siparis_gonderenID' => $siparisliste[0]["siparis_gonderenID"],
-                                                'siparis_gonderenkur' => $siparisliste[0]["siparis_gonderenkur"],
-                                                'siparis_gonderenAdSoyad' => $siparisliste[0]["siparis_gonderenAdSoyad"],
-                                                'siparis_gonderenTel' => $siparisliste[0]["siparis_gonderenTel"],
-                                                'siparis_gondereneposta' => $siparisliste[0]["siparis_gondereneposta"],
-                                                'siparis_gonderennotu' => $siparisliste[0]["siparis_gonderennotu"],
-                                                'siparis_gonderensms' => $siparisliste[0]["siparis_gonderensms"],
-                                                'siparis_gonderenepostaalma' => $siparisliste[0]["siparis_gonderenepostaalma"],
-                                                'siparis_gonderensmseposta' => $siparisliste[0]["siparis_gonderensmseposta"],
-                                                'siparis_faturaunvan' => $siparisliste[0]["siparis_faturaunvan"],
-                                                'siparis_faturatc' => $siparisliste[0]["siparis_faturatc"],
-                                                'siparis_faturaadres' => $siparisliste[0]["siparis_faturaadres"],
-                                                'siparis_faturavergidaire' => $siparisliste[0]["siparis_faturavergidaire"],
-                                                'siparis_vergino' => $siparisliste[0]["siparis_vergino"],
-                                                'siparis_sehir' => $siparisliste[0]["siparis_sehir"],
-                                                'siparis_sehirID' => $siparisliste[0]["siparis_sehirID"],
-                                                'siparis_ilce' => $siparisliste[0]["siparis_ilce"],
-                                                'siparis_ilceID' => $siparisliste[0]["siparis_ilceID"],
-                                                'siparis_saat' => $siparisliste[0]["siparis_saat"],
-                                                'siparis_gun' => $siparisliste[0]["siparis_gun"],
-                                                'siparis_tarih' => $siparisliste[0]["siparis_tarih"],
-                                                'siparis_kargofirmaid' => $siparisliste[0]["siparis_kargofirmaid"],
-                                                'siparis_kargotakipno' => $siparisliste[0]["siparis_kargotakipno"],
-                                                'siparis_kargotarih' => $siparisliste[0]["siparis_kargotarih"],
-                                                'siparis_toplamtutar' => $urunToplamFiyat,
-                                                'siparis_odemetip' => 0, //kart ile ödeme
-                                                'siparis_bankaID' => 0, //banka ID
-                                                'siparis_adminnotu' => $siparisliste[0]["siparis_adminnotu"],
-                                                'siparis_durum' => $siparisliste[0]["siparis_durum"]
-                                            );
-
-                                            $result = $Panel_Model->sipRealInsert($data);
-                                            if ($result) {
-                                                //ana ürünü ekliyorum
-                                                if (count($siparislist[0]) > 0) {
-                                                    $dataAnaUrun = array(
-                                                        'siparisurun_siparisID' => $result,
-                                                        'siparisurun_urunID' => $siparislist[0][0]['urunID'],
-                                                        'siparisurun_ad' => $siparislist[0][0]['urunAd'],
-                                                        'siparisurun_kod' => $siparislist[0][0]['urunKod'],
-                                                        'siparisurun_miktar' => 1,
-                                                        'siparisurun_tutar' => $siparislist[0][0]['urunFiyat'],
-                                                        'siparisurun_tip' => 0,
-                                                        'siparisurun_resim' => $siparislist[0][0]['urunResim']
-                                                    );
-                                                    $resultAnaUrun = $Panel_Model->sipAnaUrunInsert($dataAnaUrun);
-                                                    if ($resultAnaUrun) {
-                                                        //ek ürün varsa ekliyorum
-                                                        $ekurunlerCount = count($siparislist[1]);
-                                                        if ($ekurunlerCount > 0) {
-                                                            for ($ekk = 0; $ekk < $ekurunlerCount; $ekk++) {
-                                                                $ekurundata[$ekk] = array(
-                                                                    'siparisurun_siparisID' => $result,
-                                                                    'siparisurun_urunID' => $siparislist[1][$ekk]['EkID'],
-                                                                    'siparisurun_ad' => $siparislist[1][$ekk]['EkAdi'],
-                                                                    'siparisurun_kod' => $siparislist[1][$ekk]['EkKod'],
-                                                                    'siparisurun_miktar' => 1,
-                                                                    'siparisurun_tutar' => $siparislist[1][$ekk]['EkFiyat'],
-                                                                    'siparisurun_tip' => 1,
-                                                                    'siparisurun_resim' => $siparislist[1][$ekk]['EkResim']
-                                                                );
-                                                            }
-                                                            $resultEkUrun = $Panel_Model->sipEkUrunInsert($ekurundata);
-                                                            //siparisin kart ile olduğunu gösterir
-                                                            Session::set("SipTechOnay", 1);
-                                                            Session::set("SipTTutar", $urunToplamFiyat);
-                                                            //mail gönderiliyor
-                                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
-                                                            $sonuc["result"] = 1;
-                                                        } else {
-                                                            //siparisin kart ile olduğunu gösterir
-                                                            Session::set("SipTechOnay", 1);
-                                                            Session::set("SipTTutar", $urunToplamFiyat);
-                                                            //mail gönderiliyor
-                                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
-                                                            $sonuc["result"] = 1;
-                                                        }
-                                                    } else {
-                                                        //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
-                                                        $deletesiparis = $Panel_Model->siparisDelete($result);
-                                                        $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
-                                                    }
-                                                } else {
-                                                    //eklenilen son siparişi siliyorum çünkü ürün durumunda bi hata meydana geldi
-                                                    $deletesiparis = $Panel_Model->siparisDelete($result);
-                                                    $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
-                                                }
-                                            } else {
-                                                $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
-                                            }
-                                        } else {
-                                            $sonuc["hata"] = "Bir Hata Oluştu Lütfen Tekrar Deneyiniz.";
-                                        }
-                                    } else {
-                                        $sonuc["hata"] = "Lütfen Mesafeli Satış Sözleşmesini Okuyup, Onaylayınız.";
-                                    }
-                                } else {
-                                    $sonuc["hata"] = "Lütfen CVV yi giriniz.";
-                                }
-                            } else {
-                                $sonuc["hata"] = "Lütfen Kartınızın Yıl Bilgisini Seçiniz.";
-                            }
-                        } else {
-                            $sonuc["hata"] = "Lütfen Kartınızın Ay Bilgisini Seçiniz.";
-                        }
-                    } else {
-                        $sonuc["hata"] = "Lütfen Kart Numarasını Giriniz.";
-                    }
-
-                    break;
                 case "havaleSiparis":
                     $form->post("hss", true);
                     $form->post("bankaVal", true);
@@ -1534,6 +1302,7 @@ class Genel extends Controller {
                             $urunid = Session::get("SipID");
                             //ürünlerin toplam fiyatı için
                             $urunToplamFiyat = 0;
+                            $urunAdet = 0;
                             //Ürün Detayı
                             $urunListe = $Panel_Model->urundetaysiparis($urunid);
 
@@ -1559,6 +1328,7 @@ class Genel extends Controller {
                                     $siparislist[0][0]['urunKod'] = $urunListee['urun_kodu'];
                                     $siparislist[0][0]['urunFiyat'] = round($urunListee['urun_fiyat'] - (($urunListee['urun_fiyat'] * $urunkampanya[0]['Yuzde']) / 100));
                                     $urunToplamFiyat = $urunToplamFiyat + $siparislist[0][0]['urunFiyat'];
+                                    $urunAdet++;
                                     $siparislist[0][0]['urunAd'] = $urunListee['urun_adi'];
                                     $siparislist[0][0]['urunResim'] = $urunListee['urun_anaresim'];
                                 }
@@ -1568,6 +1338,7 @@ class Genel extends Controller {
                                     $siparislist[0][0]['urunKod'] = $urunListee['urun_kodu'];
                                     $siparislist[0][0]['urunFiyat'] = $urunListee['urun_fiyat'];
                                     $urunToplamFiyat = $urunToplamFiyat + $siparislist[0][0]['urunFiyat'];
+                                    $urunAdet++;
                                     $siparislist[0][0]['urunAd'] = $urunListee['urun_adi'];
                                     $siparislist[0][0]['urunResim'] = $urunListee['urun_anaresim'];
                                 }
@@ -1605,6 +1376,7 @@ class Genel extends Controller {
                                                 $siparislist[1][$uek]['EkKod'] = $ekurunListee['urun_kodu'];
                                                 $siparislist[1][$uek]['EkFiyat'] = round($ekurunListee['urun_fiyat'] - (($ekurunListee['urun_fiyat'] * $ekurunkampanya[$ku]['Yuzde']) / 100));
                                                 $urunToplamFiyat = $urunToplamFiyat + $siparislist[1][$uek]['EkFiyat'];
+                                                $urunAdet++;
                                                 $siparislist[1][$uek]['EkAdi'] = $ekurunListee['urun_adi'];
                                                 $siparislist[1][$uek]['EkResim'] = $ekurunListee['urun_anaresim'];
                                             }
@@ -1614,6 +1386,7 @@ class Genel extends Controller {
                                         $siparislist[1][$uek]['EkKod'] = $ekurunListee['urun_kodu'];
                                         $siparislist[1][$uek]['EkFiyat'] = $ekurunListee['urun_fiyat'];
                                         $urunToplamFiyat = $urunToplamFiyat + $siparislist[1][$uek]['EkFiyat'];
+                                        $urunAdet++;
                                         $siparislist[1][$uek]['EkAdi'] = $ekurunListee['urun_adi'];
                                         $siparislist[1][$uek]['EkResim'] = $ekurunListee['urun_anaresim'];
                                     }

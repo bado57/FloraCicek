@@ -21,7 +21,6 @@
                     <link href="<?php echo SITE_PLUGINS; ?>/select2/select2.min.css" rel="stylesheet" />
                     <link href="<?php echo SITE_CSS; ?>/alertify.css" type="text/css" rel="stylesheet" />
                     <link href="<?php echo SITE_CSS ?>/main.css" rel="stylesheet" />
-
                     <script src="<?php echo SITE_JS ?>/jquery.js"></script>
                     <script src="<?php echo SITE_JS ?>/urun_tab.js"></script>
                     <script src="<?php echo SITE_JS ?>/jquery-ui.js" type="text/javascript"></script>
@@ -33,7 +32,6 @@
                     <script src="<?php echo SITE_JS ?>/jquery.scrollUp.min.js"></script>
                     <script src="<?php echo SITE_JS ?>/jquery.prettyPhoto.js"></script>
                     <script src="<?php echo SITE_JS ?>/main.js"></script>
-
                     <script src="<?php echo SITE_JS ?>/alertify.js" type="text/javascript"></script>
                     <script src="<?php echo SITE_PLUGINS; ?>/select2/select2.full.min.js"></script>
                     <script src="<?php echo SITE_PLUGINS; ?>/input-mask/jquery.inputmask.js"></script>
@@ -72,7 +70,7 @@
                     </script>
                     </head>
                     <body>
-                    <!-- Order Details -->
+                        <!-- Order Details -->
                     <div class="modal fade" id="spDetayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">

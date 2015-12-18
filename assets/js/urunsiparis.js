@@ -43,6 +43,51 @@ $(document).ready(function () {
             }
         }
     });
+    $("#urunkartodeme").validate({
+        rules: {
+            pan: {
+                required: true
+            },
+            Ecom_Payment_Card_ExpDate_Month: {
+                selectcheck: true
+            },
+            Ecom_Payment_Card_ExpDate_Year: {
+                selectcheck: true
+            },
+            cv2: {
+                required: true
+            },
+            cardType: {
+                selectcheck: true
+            },
+            kartSatisSoz: {
+                required: true
+            }
+        },
+        messages: {
+            pan: {
+                required: "Lütfen kart numaranızı giriniz"
+            },
+            Ecom_Payment_Card_ExpDate_Month: {
+                required: "Lütfen kartınızın yıl bilgisini giriniz"
+            },
+            Ecom_Payment_Card_ExpDate_Year: {
+                required: "Lütfen kartınızın ay bilgisini giriniz"
+            },
+            cv2: {
+                required: "Lütfen cvv numaranızı giriniz"
+            },
+            cardType: {
+                required: "Lütfen kart tipini seçiniz"
+            },
+            kartSatisSoz: {
+                required: "Lütfen satış sözleşmesini okuyup, onaylayınız."
+            }
+        }
+    });
+    jQuery.validator.addMethod('selectcheck', function (value) {
+        return (value != '0');
+    }, "Kullanıcı Türü Seçimi gereklidir.");
     $(document).on("click", "button#ekurunIlerle", function (e) {
         var length = $("ul.ekurunler li").length;
         var ekurunID = new Array();
@@ -157,32 +202,6 @@ $(document).ready(function () {
             }
         });
     });
-    $(document).on("click", "button#spKartTamamla", function (e) {
-        var kartNo = $("#kartno").val();
-        var kartSonAyVal = $("#kartAy option:selected").val();
-        var kartSonYilVal = $("#kartYil option:selected").val();
-        var cvv = $("#cvv").val();
-        var mss = $('#kartSatisSoz').is(":checked");
-        $.ajax({
-            type: "post",
-            url: SITE_URL + "/Genel/ajaxCall",
-            cache: false,
-            dataType: "json",
-            data: {"mss": mss, "kartNo": kartNo, "kartSonAyVal": kartSonAyVal, "kartSonYilVal": kartSonYilVal,
-                "cvv": cvv, "tip": "kartSiparis"},
-            success: function (cevap) {
-                if (cevap.hata) {
-                    reset();
-                    alertify.alert(cevap.hata);
-                    return false;
-                } else {
-                    if (cevap.result == 1) {
-                        window.location.href = SITE_URL + '/Order/Access';
-                    }
-                }
-            }
-        });
-    });
     $(document).on("click", "button#spHavaleTamamla", function (e) {
         var hss = $('#havaleSatisSoz').is(":checked");
         var bankaVal = $("#banka option:selected").val();
@@ -235,4 +254,13 @@ $(document).ready(function () {
     $(document).on("click", "button#gotoHomeHavale", function (e) {
         window.location.href = SITE_URL;
     });
+
+    var bankhatamesaj = $("#bankhatamesaj").val();
+    if (bankhatamesaj != undefined) {
+        if (bankhatamesaj != "") {
+            reset();
+            alertify.alert(bankhatamesaj);
+            return false;
+        }
+    }
 });

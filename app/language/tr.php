@@ -27,6 +27,7 @@ class tr {
             "Yil" => "Yıl",
             "SiparisTamam" => "Sipariş Tamamla",
             "3DSecure" => "3D Secure kullanmak istiyorum.",
+            "Seciniz" => "Seçiniz",
             "IlSec" => "İl Seçiniz",
             "IlceSec" => "İlçe Seçiniz",
             "SemtSec" => "Semt Seçiniz",
@@ -92,6 +93,7 @@ class tr {
             "Blog" => "Blog",
             "SonYayinlar" => "Son Yayınlar",
             "CokSatan" => "Çok Satanlar",
+            "CardType" => "Kart Tipi",
         );
         return $trdil;
     }
