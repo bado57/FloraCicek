@@ -1476,14 +1476,14 @@ class Genel extends Controller {
                                                 Session::set("SipTechOnay", 2);
                                                 Session::set("SipTTutar", $urunToplamFiyat);
                                                 //sipariş hatırlatma maili
-                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
+                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
                                                 $sonuc["result"] = 1;
                                             } else {
                                                 //siparisin havale ile olduğunu gösterir
                                                 Session::set("SipTechOnay", 2);
                                                 Session::set("SipTTutar", $urunToplamFiyat);
                                                 //sipariş hatırlatma maili
-                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
+                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
                                                 $sonuc["result"] = 1;
                                             }
                                         } else {
@@ -1685,14 +1685,14 @@ class Genel extends Controller {
                                             Session::set("SipTechOnay", 3);
                                             Session::set("SipTTutar", $urunToplamFiyat);
                                             //sipariş hatırlatma maili
-                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
+                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
                                             $sonuc["result"] = 1;
                                         } else {
                                             //siparisin telefonla olduğunu gösterir
                                             Session::set("SipTechOnay", 3);
                                             Session::set("SipTTutar", $urunToplamFiyat);
                                             //sipariş hatırlatma maili
-                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $benzersizSayi);
+                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
                                             $sonuc["result"] = 1;
                                         }
                                     } else {
