@@ -87,6 +87,12 @@
             img.css("width", "480px");
             img.css("height", "370px");
         });
+        
+        $('a[href="#telefon"]').on('show.bs.tab', function (e) {
+            var cimg = $('#call-center-img')
+            cimg.css("width", "400px");
+            cimg.css("height", "200px");
+          });
             
         });
 

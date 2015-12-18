@@ -6,7 +6,7 @@
         <meta name="description" content="kayseri çiçek siparişi, çiçek gönderme hizmetleri, kayseri çiçek hizmeti" />
         <meta name="keywords" content="kayseri çiçek, kayseri çiçek siparişi, kaliteli çiçek siparişi, çiçek gönderme hizmeti" />
     <title>Türkiye Flora Çiçek</title>
-    <link rel="shortcut icon" href="<?php echo SITE_IMAGES ?>/favicon.png">
+    <link rel="shortcut icon" href="<?php echo SITE_IMAGES ?>/favicon.png"/>
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
             <link href='https://fonts.googleapis.com/css?family=Oswald:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
                 <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -76,10 +76,28 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-shopping-cart"></i> Sipariş Bilgileri</h4>
+                                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-truck"></i> Sipariş Takibi</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-xs-12">
+                                        <!-- Üye Değilse -->
+                                          <div class="form-group">
+                                            <label for="spSorguMail">Email Adresiniz</label>
+                                            <input type="email" class="form-control" id="spSorguMail" placeholder="Email Adresiniz">
+                                          </div>
+                                        <!-- End Üye Değilse -->
+                                          <div class="form-group">
+                                            <label for="siparisTakipNo">Sipariş Takip Numaranız</label>
+                                            <input type="text" class="form-control" id="siparisTakipNo" placeholder="Sipariş Takip No">
+                                          </div>
+                                        <div class="form-group text-center">
+                                            <button class="btn btn-primary" id="siparisArama" type="button" style="padding:6px 12px;"><i class="fa fa-search"></i> Sorgula</button>
+                                         </div>
+                                    </div>
+                                    </div>
+                                    
+                                    <div style="display:none;" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                         <!-- Sipariş Durumu -->
                                         <div class="panel panel-default">
                                             <div class="panel-heading" role="tab" id="spHeadingDurum">
@@ -381,7 +399,7 @@
                         </div>
                         <!-- End Mobil Menü -->
                         <!-- Browser Menü -->                          
-                        <div class="header_top hidden-xs hidden-sm">
+                        <div class="header_top hidden-xs">
                             <!--header_top-->
                             <div class="container">
                                 <div class="row">

@@ -1,12 +1,11 @@
 <script src="<?php echo SITE_JS ?>/jquery.zoom.js"></script>
 <script src="<?php echo SITE_JS ?>/jquery.validate.js"></script>
 <script src="<?php echo SITE_JS ?>/urun_detay.js"></script>
-<section>
-    <br />
+
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 padding-right">
-                <div class="product-details">
+            <div class="col-sm-12">
+                <div class="product-details" style="position:relative; display:inline-block;">
                     <!--product-details-->
                     <div class="col-sm-4 col-xs-6">
                         <div class="imgThumb view-product" id="urun-zoom">
@@ -83,7 +82,7 @@
             </div>
         </div>
     </div>
-</section>
+
 <section id="advertisement">
     <div class="container">
         <div class="row">

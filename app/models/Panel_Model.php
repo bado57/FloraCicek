@@ -206,7 +206,7 @@ class Panel_Model extends Model {
 
     //ürün ilçeler listeleme
     public function urunIlceListele($ilid) {
-        $sql = "SELECT ilce_id,ilce_adi,ilce_ekucret FROM flora_ilce WHERE ilce_aktiflik=1 AND ilce_sehirid= $ilid";
+        $sql = "SELECT ilce_id,ilce_adi,ilce_ekucret FROM flora_ilce WHERE ilce_aktiflik=1 AND ilce_sehirid= $ilid ORDER BY `ilce_id` DESC";
         return $this->db->select($sql);
     }
 

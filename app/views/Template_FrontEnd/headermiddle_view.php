@@ -24,12 +24,13 @@
                             <li><a href="<?php echo SITE_URL ?>/Home/bireysel"><i class="fa fa-user"></i> <?php echo $data["UyeOl"]; ?></a></li>
                         <?php } ?>
                         <li>
-                            <div class="input-group spSearch">
+                            <button class="btn btn-default" data-toggle="modal" id="siparisArama" data-target="#spDetayModal" type="button" style="padding:3px 10px;"><i class="fa fa-truck"></i> Sipariş Takibi</button>
+                            <!--<div class="input-group spSearch">
                                 <input type="text" id="siparisTakip" class="form-control" placeholder="<?php echo $data["SiparisTakip"]; ?>" style="padding:3px 10px; height:28px;">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" data-toggle="modal" id="siparisArama" data-target="#spDetayModal" type="button" style="padding:3px 10px;"><i class="fa fa-search"></i></button>
                                     </span>
-                            </div>
+                            </div>-->
                         </li>
                         <li class="hidden-lg hidden-md">
                             <div class="navbar-header pull-right" style="margin-bottom:-20px; padding-left:10px;">

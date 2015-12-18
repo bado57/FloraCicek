@@ -221,7 +221,7 @@
                                                                                                                     </div>
                                                                                                                 </div>
                                                                                                                 <div class="col-sm-6 hidden-xs">
-                                                                                                                    <img src="<?php echo SITE_IMAGES ?>/call-center-2.png" alt="Türkiye Flora Çiçek Call Center" style="margin-top:-15px;" />
+                                                                                                                    <img id="call-center-img" src="<?php echo SITE_IMAGES ?>/call-center-2.png" alt="Türkiye Flora Çiçek Call Center" style="margin-top:-15px;" />
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             </div>
