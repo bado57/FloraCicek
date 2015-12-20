@@ -363,7 +363,7 @@ class Order extends Controller {
             $hashparams = $_POST["HASHPARAMS"];
             $hashparamsval = $_POST["HASHPARAMSVAL"];
             $hashparam = $_POST["HASH"];
-            $storekey = "123456";
+            $storekey = "478965Fapi";
             $paramsval = "";
             $index1 = 0;
             $index2 = 0;
@@ -376,7 +376,6 @@ class Order extends Controller {
                 $paramsval = $paramsval . $vl;
                 $index1 = $index2 + 1;
             }
-            $storekey = "123456";
             $hashval = $paramsval . $storekey;
             $hash = base64_encode(pack('H*', sha1($hashval)));
 
@@ -400,6 +399,8 @@ class Order extends Controller {
                             $urunid = Session::get("SipID");
                             //ürünlerin toplam fiyatı için
                             $urunToplamFiyat = 0;
+                            //ilçe fiyatını ekliyorum
+                            $urunToplamFiyat = $urunToplamFiyat + Session::get("SipIlceFiyat");
                             //Ürün Detayı
                             $urunListe = $Panel_Model->urundetaysiparis($urunid);
 
@@ -891,7 +892,7 @@ class Order extends Controller {
                 }
 
                 //banka post hesap bilgileri
-                $cardlist[5][0]['ClientID'] = "600200000";
+                $cardlist[5][0]['ClientID'] = "600942236";
                 $cardlist[5][0]['TTutar'] = $urunToplamFiyat;
                 $cardlist[5][0]['SipNumber'] = Session::get("SipKodu");
                 $cardlist[5][0]['okUrl'] = "https://www.turkiyefloracicek.com/Order/Card";
@@ -899,7 +900,7 @@ class Order extends Controller {
                 $cardlist[5][0]['Rnd'] = microtime();
                 $cardlist[5][0]['Taksit'] = "";
                 $cardlist[5][0]['IslemTip'] = "Auth";
-                $cardlist[5][0]['IsyeriAnahtar'] = "123456";
+                $cardlist[5][0]['IsyeriAnahtar'] = "478965Fapi";
                 $hashstr = $cardlist[5][0]['ClientID'] . $cardlist[5][0]['SipNumber'] . $cardlist[5][0]['TTutar'] . $cardlist[5][0]['okUrl']
                         . $cardlist[5][0]['failUrl'] . $cardlist[5][0]['IslemTip'] . $cardlist[5][0]['Taksit'] . $cardlist[5][0]['Rnd']
                         . $cardlist[5][0]['IsyeriAnahtar'];
@@ -994,7 +995,7 @@ class Order extends Controller {
             $hashparams = $_POST["HASHPARAMS"];
             $hashparamsval = $_POST["HASHPARAMSVAL"];
             $hashparam = $_POST["HASH"];
-            $storekey = "123456";
+            $storekey = "478965Fapi";
             $paramsval = "";
             $index1 = 0;
             $index2 = 0;
@@ -1007,7 +1008,6 @@ class Order extends Controller {
                 $paramsval = $paramsval . $vl;
                 $index1 = $index2 + 1;
             }
-            $storekey = "123456";
             $hashval = $paramsval . $storekey;
             $hash = base64_encode(pack('H*', sha1($hashval)));
 
@@ -1071,7 +1071,7 @@ class Order extends Controller {
             $paymentlist[3][1]["Tel"] = $iceriklist['telefon'];
 
             //banka post hesap bilgileri
-            $paymentlist[5][0]['ClientID'] = "600200000";
+            $paymentlist[5][0]['ClientID'] = "600942236";
             $paymentlist[5][0]['TTutar'] = "";
             $paymentlist[5][0]['SipNumber'] = "";
             $paymentlist[5][0]['okUrl'] = "https://www.turkiyefloracicek.com/Order/DirectPayment";
@@ -1079,7 +1079,7 @@ class Order extends Controller {
             $paymentlist[5][0]['Rnd'] = microtime();
             $paymentlist[5][0]['Taksit'] = "";
             $paymentlist[5][0]['IslemTip'] = "Auth";
-            $paymentlist[5][0]['IsyeriAnahtar'] = "123456";
+            $paymentlist[5][0]['IsyeriAnahtar'] = "478965Fapi";
             $hashstr = $paymentlist[5][0]['ClientID'] . $paymentlist[5][0]['SipNumber'] . $paymentlist[5][0]['TTutar'] . $paymentlist[5][0]['okUrl']
                     . $paymentlist[5][0]['failUrl'] . $paymentlist[5][0]['IslemTip'] . $paymentlist[5][0]['Taksit'] . $paymentlist[5][0]['Rnd']
                     . $paymentlist[5][0]['IsyeriAnahtar'];

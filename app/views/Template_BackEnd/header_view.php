@@ -84,36 +84,6 @@
                                                             <div class="navbar-custom-menu">
                                                                 <ul class="nav navbar-nav">
                                                                     <!-- Notifications: style can be found in dropdown.less -->
-                                                                    <li class="dropdown notifications-menu">
-                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                                            <i class="fa fa-bell-o"></i>
-                                                                            <span class="label label-warning">10</span>
-                                                                        </a>
-                                                                        <ul class="dropdown-menu">
-                                                                            <li class="header">10 Bildirim</li>
-                                                                            <li>
-                                                                                <!-- Bildirimler -->
-                                                                                <ul class="menu">
-                                                                                    <li>
-                                                                                        <a href="#">
-                                                                                            <i class="fa fa-shopping-cart text-green"></i> 25 Yeni Sipariş
-                                                                                        </a>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <a href="#">
-                                                                                            <i class="fa fa-user text-aqua"></i> 5 Yeni Bireysel Üye
-                                                                                        </a>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <a href="#">
-                                                                                            <i class="fa fa-briefcase text-yellow"></i> 3 Yeni Kurumsal Üye
-                                                                                        </a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </li>
-                                                                            <li class="footer"><a href="#">Tümünü Gör</a></li>
-                                                                        </ul>
-                                                                    </li>
                                                                     <!-- Tasks: style can be found in dropdown.less -->
                                                                     <li class="dropdown user user-menu">
                                                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

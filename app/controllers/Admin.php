@@ -57,6 +57,19 @@ class Admin extends Controller {
         }
         $panelİslem[2] = $urunCount;
 
+        $toplamTutar = 0;
+        $urunSiparisListe = $Panel_Model->adminPanelUrunSiparis();
+        foreach ($urunSiparisListe as $urunSiparisListee) {
+            $toplamTutar = $toplamTutar + $urunSiparisListee['siparis_toplamtutar'];
+        }
+        $panelİslem[3] = $toplamTutar;
+
+        $urunKampyListe = $Panel_Model->adminPanelKampany();
+        foreach ($urunKampyListe as $urunKampyListee) {
+            $kmpnyCount = $urunKampyListee['total'];
+        }
+        $panelİslem[6] = $kmpnyCount;
+
         $uyeSonliste = $Panel_Model->adminPanelUyeSon();
         $c = 0;
         foreach ($uyeSonliste as $uyeSonlistee) {

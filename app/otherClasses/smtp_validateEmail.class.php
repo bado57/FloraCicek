@@ -43,7 +43,7 @@ class SMTP_validateEmail {
  /**
   * username of sender
   */
- var $from_user = 'noreply@turkiyefloracicek.com';
+ var $from_user = 'denetim@turkiyefloracicek.com';
  /**
   * Host Name of sender
   */

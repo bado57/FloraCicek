@@ -416,6 +416,18 @@ class Panel_Model extends Model {
         return $this->db->select($sql);
     }
 
+    //panel ürün siparis
+    public function adminPanelUrunSiparis() {
+        $sql = "SELECT siparis_toplamtutar FROM flora_siparis";
+        return $this->db->select($sql);
+    }
+
+    //panel kampanya
+    public function adminPanelKampany() {
+        $sql = "SELECT count(*) as total FROM flora_kampanya WHERE kampanya_aktiflik=1";
+        return $this->db->select($sql);
+    }
+
     //panel üye son
     public function adminPanelUyeSon() {
         $sql = "SELECT kullanici_id,kullanici_adSoyad,kullanici_eposta,kullanici_rol FROM flora_kullanici WHERE kullanici_rol !=1 ORDER BY kullanici_id DESC";

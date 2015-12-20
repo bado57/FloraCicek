@@ -1056,7 +1056,8 @@ class Genel extends Controller {
                     if ($gndadsoyad != '') {
                         if ($gndmail != '') {
                             if (!filter_var($gndmail, FILTER_VALIDATE_EMAIL) === false) {
-                                $emailValidate = $form->mailControl1($gndmail);
+                                $emailValidate = 1;
+                                //$emailValidate = $form->mailControl1($gndmail);
                                 if ($emailValidate == 1) {
                                     if ($gndtel != '') {
                                         if ($alcadsoyad != '') {
@@ -1078,6 +1079,11 @@ class Genel extends Controller {
                                                                                 if ($benzersiz['ID'] > 0) {
                                                                                     $sonuc["hata"] = "Siparis Kodu Oluşturulamadı Tekrar Deneyiniz.";
                                                                                 } else {
+                                                                                    if ($kartisim != "") {
+                                                                                        $siparisIsimGorunme = 1;
+                                                                                    } else {
+                                                                                        $siparisIsimGorunme = 0;
+                                                                                    }
                                                                                     if ($form->submit()) {
                                                                                         $data = array(
                                                                                             'siparis_No' => $benzersizSayi,
@@ -1091,7 +1097,7 @@ class Genel extends Controller {
                                                                                             'siparis_yertext' => $alcgityertext,
                                                                                             'siparis_kartisim' => $kartisim,
                                                                                             'siparis_kartmesaj' => $kartmesaj,
-                                                                                            'siparis_isimgorunme' => 0,
+                                                                                            'siparis_isimgorunme' => $siparisIsimGorunme,
                                                                                             'siparis_gonderenID' => $kisiID,
                                                                                             'siparis_gonderenkur' => Session::get("KRol"),
                                                                                             'siparis_gonderenAdSoyad' => $gndadsoyad,
@@ -1301,6 +1307,8 @@ class Genel extends Controller {
                             $urunid = Session::get("SipID");
                             //ürünlerin toplam fiyatı için
                             $urunToplamFiyat = 0;
+                            //ilçe fiyatını ekliyorum
+                            $urunToplamFiyat = $urunToplamFiyat + Session::get("SipIlceFiyat");
                             $urunAdet = 0;
                             //Ürün Detayı
                             $urunListe = $Panel_Model->urundetaysiparis($urunid);
@@ -1515,6 +1523,8 @@ class Genel extends Controller {
                         $urunid = Session::get("SipID");
                         //ürünlerin toplam fiyatı için
                         $urunToplamFiyat = 0;
+                        //ilçe fiyatını ekliyorum
+                        $urunToplamFiyat = $urunToplamFiyat + Session::get("SipIlceFiyat");
                         //Ürün Detayı
                         $urunListe = $Panel_Model->urundetaysiparis($urunid);
 
@@ -1874,6 +1884,36 @@ class Genel extends Controller {
                         }
                     }
 
+                    break;
+                case "hashkey":
+                    $form->post("oid", true);
+                    $form->post("amount", true);
+                    $oid = $form->values['oid'];
+                    $amount = $form->values['amount'];
+                    if ($amount != "") {
+                        $hash = array();
+                        if ($oid == "") {
+                            //ürün kodu oluşturulmakta
+                            $oid = $form->benzersiz_Sayi(10);
+                        }
+                        //banka post hesap bilgileri
+                        $clientId = "600942236";
+                        $okUrl = "https://www.turkiyefloracicek.com/Order/DirectPayment";
+                        $failUrl = "https://www.turkiyefloracicek.com/Order/DirectPayment";
+                        $rnd = microtime();
+                        $taksit = "";
+                        $islemtipi = "Auth";
+                        $storekey = "478965Fapi";
+                        $hashstr = $clientId . $oid . $amount . $okUrl . $failUrl . $islemtipi . $taksit . $rnd . $storekey;
+                        $hashkey = base64_encode(pack('H*', sha1($hashstr)));
+                        $hash[0] = $amount;
+                        $hash[1] = $oid;
+                        $hash[2] = $rnd;
+                        $hash[3] = $hashkey;
+                        $sonuc["result"] = $hash;
+                    } else {
+                        $sonuc["hata"] = "Lütfen Ödeme Tutarınızı Giriniz.";
+                    }
                     break;
                 case "cikisYap":
                     unset($_SESSION['KID']);

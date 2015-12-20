@@ -90,134 +90,137 @@
                                                         <option value="1">Visa</option>
                                                         <option value="2">MasterCard</option>
                                                     </select>
-                                                    <input id="oid" name="oid" type="text" placeholder="Varsa Sipariş Numarası" />
-                                                    <input id="amount" name="amount" type="text" placeholder="Ödenecek Tutar (TL)" />
+                                                    <input id="sipNumber" name="sipNumber" type="text" placeholder="Varsa Sipariş Numarası" />
+                                                    <input id="SipTutar" name="SipTutar" type="text" placeholder="Ödenecek Tutar (TL)" />
                                                     <textarea id="aciklama" name="desc1" rows="3" placeholder="Açıklama"></textarea>
+                                                    <label class="checkbox-inline" style="margin-top:10px;"><input id="ozelOdemeCheck" type="checkbox" name="ozelOdemeCheck">Yazdıklarımı onaylıyorum</label>
                                                     <input type="hidden" name="clientid" value="<?php echo $model[5][0]['ClientID']; ?>">
-                                                        <input type="hidden" name="okUrl" value="<?php echo $model[5][0]['okUrl']; ?>">
-                                                            <input type="hidden" name="failUrl" value="<?php echo $model[5][0]['failUrl']; ?>">
-                                                                <input type="hidden" name="rnd" value="<?php echo $model[5][0]['Rnd']; ?>" >
-                                                                    <input type="hidden" name="hash" value="<?php echo $model[5][0]['Hash']; ?>" >
-                                                                        <input type="hidden" name="islemtipi" value="<?php echo $model[5][0]['IslemTip']; ?>" >
-                                                                            <input type="hidden" name="taksit" value="<?php echo $model[5][0]['Taksit']; ?>" >
-                                                                                <input type="hidden" name="storetype" value="3d_pay" >	
-                                                                                    <input type="hidden" name="lang" value="tr">
-                                                                                        <input type="hidden" name="currency" value="949">
-                                                                                            <input type="hidden" name="firmaadi" value="Türkiye Flora Çiçek">
-                                                                                                <input type="hidden" id="bankhatamesaj" name="bankhatamesaj" value="<?php echo $model[5][0]['BankErrMsj']; ?>">
-                                                                                                    <button class="btn btn-primary" id="spKartTamamla"><i class="fa fa-angle-right"></i> Ödeme Yap</button>
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </form>
-                                                                                                    <div class="col-sm-6 hidden-xs">
-                                                                                                        <div class="creditCard">
-                                                                                                            <div class="cardNo">
+                                                        <input type="hidden" name="amount" value="">
+                                                            <input type="hidden" name="oid" value="">	
+                                                                <input type="hidden" name="okUrl" value="<?php echo $model[5][0]['okUrl']; ?>">
+                                                                    <input type="hidden" name="failUrl" value="<?php echo $model[5][0]['failUrl']; ?>">
+                                                                        <input type="hidden" name="rnd" value="<?php echo $model[5][0]['Rnd']; ?>" >
+                                                                            <input type="hidden" name="hash" value="<?php echo $model[5][0]['Hash']; ?>" >
+                                                                                <input type="hidden" name="islemtipi" value="<?php echo $model[5][0]['IslemTip']; ?>" >
+                                                                                    <input type="hidden" name="taksit" value="<?php echo $model[5][0]['Taksit']; ?>" >
+                                                                                        <input type="hidden" name="storetype" value="3d_pay" >	
+                                                                                            <input type="hidden" name="lang" value="tr">
+                                                                                                <input type="hidden" name="currency" value="949">
+                                                                                                    <input type="hidden" name="firmaadi" value="Türkiye Flora Çiçek">
+                                                                                                        <input type="hidden" id="bankhatamesaj" name="bankhatamesaj" value="<?php echo $model[5][0]['BankErrMsj']; ?>">
+                                                                                                            <button class="btn btn-primary" id="spKartTamamla" style="display: none;"><i class="fa fa-angle-right"></i> Ödeme Yap</button>
                                                                                                             </div>
-                                                                                                            <div class="cardDate">
-                                                                                                                <span class="kartAy"></span>
-                                                                                                                <span class="kartYil"></span>
                                                                                                             </div>
-                                                                                                        </div>
-                                                                                                        <div class="creditCardBack" style="display:none;">
-                                                                                                            <div class="cvv">
-
                                                                                                             </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </div>
-                                                                                                    </section>
-
-                                                                                                    <!-- Modal -->
-                                                                                                    <div class="modal fade" id="satisSozlesmesi" tabindex="-1" role="dialog" aria-labelledby="uyelikSozlesmesiLabel">
-                                                                                                        <div class="modal-dialog" role="document">
-                                                                                                            <div class="modal-content">
-                                                                                                                <div class="modal-header">
-                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                                                                    <h4 class="modal-title" id="uyelikSozlesmesiLabel"><?php echo $data["MesafeliSatis"]; ?></h4>
+                                                                                                            </form>
+                                                                                                            <div class="col-sm-6 hidden-xs">
+                                                                                                                <div class="creditCard">
+                                                                                                                    <div class="cardNo">
+                                                                                                                    </div>
+                                                                                                                    <div class="cardDate">
+                                                                                                                        <span class="kartAy"></span>
+                                                                                                                        <span class="kartYil"></span>
+                                                                                                                    </div>
                                                                                                                 </div>
-                                                                                                                <div class="modal-body">
-                                                                                                                    <?php echo $model[2][0]["Mesafe"]; ?>
-                                                                                                                </div>
-                                                                                                                <div class="modal-footer">
-                                                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $data["Kapat"]; ?></button>
+                                                                                                                <div class="creditCardBack" style="display:none;">
+                                                                                                                    <div class="cvv">
+
+                                                                                                                    </div>
                                                                                                                 </div>
                                                                                                             </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <!-- Modal -->
-                                                                                                    <div class="modal fade" id="onBilgilendirmeFormu" tabindex="-1" role="dialog" aria-labelledby="onBilgilendirmeFormuLabel">
-                                                                                                        <div class="modal-dialog" role="document">
-                                                                                                            <div class="modal-content">
-                                                                                                                <div class="modal-header">
-                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                                                                    <h4 class="modal-title" id="uyelikSozlesmesiLabel"><?php echo $data["OnBilgiForm"]; ?></h4>
-                                                                                                                </div>
-                                                                                                                <div class="modal-body">
-                                                                                                                    <?php echo $model[2][1]["OnBilgi"]; ?>
-                                                                                                                </div>
-                                                                                                                <div class="modal-footer">
-                                                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $data["Kapat"]; ?></button>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </div>
+                                                                                                            </section>
+
+                                                                                                            <!-- Modal -->
+                                                                                                            <div class="modal fade" id="satisSozlesmesi" tabindex="-1" role="dialog" aria-labelledby="uyelikSozlesmesiLabel">
+                                                                                                                <div class="modal-dialog" role="document">
+                                                                                                                    <div class="modal-content">
+                                                                                                                        <div class="modal-header">
+                                                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                                                                            <h4 class="modal-title" id="uyelikSozlesmesiLabel"><?php echo $data["MesafeliSatis"]; ?></h4>
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-body">
+                                                                                                                            <?php echo $model[2][0]["Mesafe"]; ?>
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-footer">
+                                                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $data["Kapat"]; ?></button>
+                                                                                                                        </div>
+                                                                                                                    </div>
                                                                                                                 </div>
                                                                                                             </div>
-                                                                                                        </div>
-                                                                                                    </div>
+                                                                                                            <!-- Modal -->
+                                                                                                            <div class="modal fade" id="onBilgilendirmeFormu" tabindex="-1" role="dialog" aria-labelledby="onBilgilendirmeFormuLabel">
+                                                                                                                <div class="modal-dialog" role="document">
+                                                                                                                    <div class="modal-content">
+                                                                                                                        <div class="modal-header">
+                                                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                                                                            <h4 class="modal-title" id="uyelikSozlesmesiLabel"><?php echo $data["OnBilgiForm"]; ?></h4>
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-body">
+                                                                                                                            <?php echo $model[2][1]["OnBilgi"]; ?>
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-footer">
+                                                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $data["Kapat"]; ?></button>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
 
-                                                                                                    <script type="text/javascript">
-                                                                                                        $(document).ready(function () {
+                                                                                                            <script type="text/javascript">
+                                                                                                                $(document).ready(function () {
 
-                                                                                                            $('[data-toggle="tooltip"]').tooltip();
+                                                                                                                    $('[data-toggle="tooltip"]').tooltip();
 
-                                                                                                            // Kredi kartı formu
+                                                                                                                    // Kredi kartı formu
 
-                                                                                                            $("#kartno").keyup(function () {
-                                                                                                                var kno = $(this).val();
-                                                                                                                var knl = kno.length;
-                                                                                                                var cn = "";
-                                                                                                                if (knl < 17) {
-                                                                                                                    for (var i = 0; i < knl; i++) {
-                                                                                                                        cn = cn + kno[i];
-                                                                                                                        if ((i + 1) % 4 == 0) {
-                                                                                                                            cn = cn + "&nbsp;&nbsp;";
+                                                                                                                    $("#kartno").keyup(function () {
+                                                                                                                        var kno = $(this).val();
+                                                                                                                        var knl = kno.length;
+                                                                                                                        var cn = "";
+                                                                                                                        if (knl < 17) {
+                                                                                                                            for (var i = 0; i < knl; i++) {
+                                                                                                                                cn = cn + kno[i];
+                                                                                                                                if ((i + 1) % 4 == 0) {
+                                                                                                                                    cn = cn + "&nbsp;&nbsp;";
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                            $(".cardNo").html(cn);
                                                                                                                         }
-                                                                                                                    }
-                                                                                                                    $(".cardNo").html(cn);
-                                                                                                                }
 
-                                                                                                            });
+                                                                                                                    });
 
-                                                                                                            $("#kartAy").change(function () {
-                                                                                                                var kay = $(this).val();
-                                                                                                                $(".kartAy").html(kay + " / ");
-                                                                                                            });
+                                                                                                                    $("#kartAy").change(function () {
+                                                                                                                        var kay = $(this).val();
+                                                                                                                        $(".kartAy").html(kay + " / ");
+                                                                                                                    });
 
-                                                                                                            $("#kartYil").change(function () {
-                                                                                                                var kyil = $(this).val();
-                                                                                                                $(".kartYil").html(kyil);
-                                                                                                            });
+                                                                                                                    $("#kartYil").change(function () {
+                                                                                                                        var kyil = $(this).val();
+                                                                                                                        $(".kartYil").html(kyil);
+                                                                                                                    });
 
-                                                                                                            $("#cvv").focus(function () {
-                                                                                                                $(".creditCard").css("display", "none");
-                                                                                                                $(".creditCardBack").fadeIn("slow");
-                                                                                                            });
+                                                                                                                    $("#cvv").focus(function () {
+                                                                                                                        $(".creditCard").css("display", "none");
+                                                                                                                        $(".creditCardBack").fadeIn("slow");
+                                                                                                                    });
 
-                                                                                                            $("#cvv").focusout(function () {
-                                                                                                                $(".creditCardBack").css("display", "none");
-                                                                                                                $(".creditCard").fadeIn("slow");
-                                                                                                            });
+                                                                                                                    $("#cvv").focusout(function () {
+                                                                                                                        $(".creditCardBack").css("display", "none");
+                                                                                                                        $(".creditCard").fadeIn("slow");
+                                                                                                                    });
 
-                                                                                                            $("#cvv").keyup(function () {
-                                                                                                                var cvv = $(this).val();
-                                                                                                                $(".cvv").html(cvv);
-                                                                                                            });
-                                                                                                        });
-                                                                                                    </script>
+                                                                                                                    $("#cvv").keyup(function () {
+                                                                                                                        var cvv = $(this).val();
+                                                                                                                        $(".cvv").html(cvv);
+                                                                                                                    });
+                                                                                                                });
+                                                                                                            </script>
 
 

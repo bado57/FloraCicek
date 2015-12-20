@@ -313,4 +313,35 @@ $(document).ready(function () {
             return false;
         }
     }
+    $("#ozelOdemeCheck").click(function () {
+        if ($(this).is(':checked')) {
+            var oid = $("#sipNumber").val();
+            var amount = $("#SipTutar").val();
+            $.ajax({
+                type: "post",
+                url: SITE_URL + "/Genel/ajaxCall",
+                cache: false,
+                dataType: "json",
+                data: {"oid": oid, "amount": amount, "tip": "hashkey"},
+                success: function (cevap) {
+                    if (cevap.hata) {
+                        reset();
+                        alertify.alert(cevap.hata);
+                        $('input:checkbox[name=ozelOdemeCheck]').attr('checked', false);
+                        return false;
+                    } else {
+                        if (cevap.result) {
+                            $("input[name=oid]").val(cevap.result[1]);
+                            $("input[name=amount]").val(cevap.result[0]);
+                            $("input[name=rnd]").val(cevap.result[2]);
+                            $("input[name=hash]").val(cevap.result[3]);
+                            $("#spKartTamamla").show();
+                        }
+                    }
+                }
+            });
+        } else {
+            $("#spKartTamamla").hide();
+        }
+    });
 });

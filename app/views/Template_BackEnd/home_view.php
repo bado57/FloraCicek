@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
-                <a href="#">
+                <a href="<?php echo SITE_URL; ?>/Admin/Siparis">
                     <div class="small-box bg-red">
                         <div class="inner">
                             <h3><?php echo $model[2]; ?></h3>
@@ -30,10 +30,10 @@
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
-                <a href="#">
+                <a href="<?php echo SITE_URL; ?>/Admin/Siparis">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>265<sup style="font-size: 20px">TL</sup></h3>
+                            <h3><?php echo $model[3]; ?><sup style="font-size: 20px">TL</sup></h3>
                             <p>Aylık Satış</p>
                         </div>
                         <div class="icon">
@@ -45,10 +45,10 @@
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
-                <a href="#">
+                <a href="<?php echo SITE_URL; ?>/Admin/Kampanya">
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>3</h3>
+                            <h3><?php echo $model[6]; ?></h3>
                             <p>Aktif Kampanya</p>
                         </div>
                         <div class="icon">
@@ -80,7 +80,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title"><i class="fa fa-shopping-cart"></i> Son Siparişler <small class="ml10 text-red"><i class="fa fa-square"></i> Beklemede</small> <small class="ml10 text-yellow"><i class="fa fa-square"></i> Hazırlanıyor</small> <small class="ml10 text-green"><i class="fa fa-square"></i> Gönderildi</small></h3>
-                        <a href="#" class="btn btn-sm btn-success pull-right"><i class="fa fa-angle-right"></i> Tümünü Gör</a>
+                        <a href="<?php echo SITE_URL; ?>/Admin/Siparis" class="btn btn-sm btn-success pull-right"><i class="fa fa-angle-right"></i> Tümünü Gör</a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="sonsiparisler" class="table table-bordered table-hover">
@@ -140,7 +140,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title"><i class="fa fa-user"></i> Son Üyeler <small class="ml10 text-aqua"><i class="fa fa-square"></i> Kurumsal</small> <small class="ml10"><i class="fa fa-square"></i> Bireysel</small></h3>
-                        <a href="#" class="btn btn-sm btn-success pull-right"><i class="fa fa-angle-right"></i> Tümünü Gör</a>
+                        <a href="<?php echo SITE_URL; ?>/Admin/Bireyseluye" class="btn btn-sm btn-success pull-right"><i class="fa fa-angle-right"></i> Tümünü Gör</a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="sonuyeler" class="table table-responsive table-bordered table-hover table-condensed">
