@@ -581,6 +581,7 @@ class Form {
 
         $mail->setFrom('siparis@turkiyefloracicek.com', 'Sipariş Sonucu');
         $mail->addAddress($email, $isim);     // Add a recipient
+        $mail->addAddress("info@turkiyefloracicek.com", "Yeni Sipariş-" . $isim);     // Add a recipient
         $mail->CharSet = 'UTF-8';
         $mail->isHTML(true);                                  // Set email format to HTML
 
