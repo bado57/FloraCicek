@@ -305,15 +305,7 @@ $(document).ready(function () {
     $(document).on("click", "button#gotoHomeOzelOdeme", function (e) {
         window.location.href = SITE_URL;
     });
-    var bankhatamesaj = $("#bankhatamesaj").val();
-    if (bankhatamesaj != undefined) {
-        if (bankhatamesaj != "") {
-            reset();
-            alertify.alert(bankhatamesaj);
-            return false;
-        }
-    }
-    $("#ozelOdemeCheck").click(function () {
+    $("#ozelOdemeCheck").change(function () {
         if ($(this).is(':checked')) {
             var oid = $("#sipNumber").val();
             var amount = $("#SipTutar").val();
@@ -331,7 +323,6 @@ $(document).ready(function () {
                         return false;
                     } else {
                         if (cevap.result) {
-                            console.log(cevap.result);
                             $("input[name=oid]").val(cevap.result[1]);
                             $("input[name=amount]").val(cevap.result[0]);
                             $("input[name=rnd]").val(cevap.result[2]);
@@ -345,4 +336,12 @@ $(document).ready(function () {
             $("#spKartTamamla").hide();
         }
     });
+    var bankhatamesaj = $("#bankhatamesaj").val();
+    if (bankhatamesaj != undefined) {
+        if (bankhatamesaj != "") {
+            reset();
+            alertify.alert(bankhatamesaj);
+            return false;
+        }
+    }
 });
