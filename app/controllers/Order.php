@@ -572,6 +572,7 @@ class Order extends Controller {
                                                 Session::set("SipTTutar", $urunToplamFiyat);
                                                 //mail gönderiliyor
                                                 $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
+                                                $sonuc["result"] = 1;
                                                 if ($resultMail) {
                                                     header("Location:" . SITE_URL . "/Order/Access");
                                                 } else {
@@ -583,6 +584,7 @@ class Order extends Controller {
                                                 Session::set("SipTTutar", $urunToplamFiyat);
                                                 //mail gönderiliyor
                                                 $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
+                                                $sonuc["result"] = 1;
                                                 if ($resultMail) {
                                                     header("Location:" . SITE_URL . "/Order/Access");
                                                 } else {
@@ -680,16 +682,8 @@ class Order extends Controller {
                                                     Session::set("SipTechOnay", 1);
                                                     Session::set("SipTTutar", $urunToplamFiyat);
                                                     //mail gönderiliyor
-                                                    $mailBodyKullanici = 'Merhaba ' . $isim . '!<br/> Siparişiniz tamamlanmıştır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile sitemizdeki siparis arama kısmından '
-                                                            . 'takip edebilirsiniz. İyi günler dileriz.<br/><br/>'
-                                                            . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                                                            . '<br/><br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>';
-                                                    $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"], $mailBodyKullanici);
-                                                    $mailBodyAdmin = 'Yeni Bir siparişiniz vardır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile takip edebilirsiniz. '
-                                                            . 'İyi günler dileriz.<br/><br/>'
-                                                            . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                                                            . '<br/><br/><a href="https://www.turkiyefloracicek.com/Admin/Panel">Türkiye Flora Çiçek</a>';
-                                                    $resultMaill = $form->sSiparisMailGonder("info@turkiyefloracicek.com", "Yeni Sipariş-Gönderen" . $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"], $mailBodyAdmin);
+                                                    $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
+                                                    $sonuc["result"] = 1;
                                                     if ($resultMail) {
                                                         header("Location:" . SITE_URL . "/Order/Access");
                                                     } else {
@@ -701,6 +695,7 @@ class Order extends Controller {
                                                     Session::set("SipTTutar", $urunToplamFiyat);
                                                     //mail gönderiliyor
                                                     $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
+                                                    $sonuc["result"] = 1;
                                                     if ($resultMail) {
                                                         header("Location:" . SITE_URL . "/Order/Access");
                                                     } else {

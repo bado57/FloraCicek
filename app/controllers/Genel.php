@@ -1488,32 +1488,14 @@ class Genel extends Controller {
                                                 Session::set("SipTechOnay", 2);
                                                 Session::set("SipTTutar", $urunToplamFiyat);
                                                 //mail gönderiliyor
-                                                $mailBodyKullanici = 'Merhaba ' . $isim . '!<br/> Siparişiniz tamamlanmıştır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile sitemizdeki siparis arama kısmından '
-                                                        . 'takip edebilirsiniz. İyi günler dileriz.<br/><br/>'
-                                                        . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                                                        . '<br/><br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>';
-                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"], $mailBodyKullanici);
-                                                $mailBodyAdmin = 'Yeni Bir siparişiniz vardır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile takip edebilirsiniz. '
-                                                        . 'İyi günler dileriz.<br/><br/>'
-                                                        . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                                                        . '<br/><br/><a href="https://www.turkiyefloracicek.com/Admin/Panel">Türkiye Flora Çiçek</a>';
-                                                $resultMaill = $form->sSiparisMailGonder("info@turkiyefloracicek.com", "Yeni Sipariş-Gönderen" . $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"], $mailBodyAdmin);
+                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
                                                 $sonuc["result"] = 1;
                                             } else {
                                                 //siparisin havale ile olduğunu gösterir
                                                 Session::set("SipTechOnay", 2);
                                                 Session::set("SipTTutar", $urunToplamFiyat);
                                                 //mail gönderiliyor
-                                                $mailBodyKullanici = 'Merhaba ' . $isim . '!<br/> Siparişiniz tamamlanmıştır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile sitemizdeki siparis arama kısmından '
-                                                        . 'takip edebilirsiniz. İyi günler dileriz.<br/><br/>'
-                                                        . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                                                        . '<br/><br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>';
-                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"], $mailBodyKullanici);
-                                                $mailBodyAdmin = 'Yeni Bir siparişiniz vardır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile takip edebilirsiniz. '
-                                                        . 'İyi günler dileriz.<br/><br/>'
-                                                        . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                                                        . '<br/><br/><a href="https://www.turkiyefloracicek.com/Admin/Panel">Türkiye Flora Çiçek</a>';
-                                                $resultMaill = $form->sSiparisMailGonder("info@turkiyefloracicek.com", "Yeni Sipariş-Gönderen" . $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"], $mailBodyAdmin);
+                                                $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
                                                 $sonuc["result"] = 1;
                                             }
                                         } else {
@@ -1717,32 +1699,13 @@ class Genel extends Controller {
                                             Session::set("SipTechOnay", 3);
                                             Session::set("SipTTutar", $urunToplamFiyat);
                                             //mail gönderiliyor
-                                            $mailBodyKullanici = 'Merhaba ' . $isim . '!<br/> Siparişiniz tamamlanmıştır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile sitemizdeki siparis arama kısmından '
-                                                    . 'takip edebilirsiniz. İyi günler dileriz.<br/><br/>'
-                                                    . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                                                    . '<br/><br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>';
-                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"], $mailBodyKullanici);
-                                            $mailBodyAdmin = 'Yeni Bir siparişiniz vardır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile takip edebilirsiniz. '
-                                                    . 'İyi günler dileriz.<br/><br/>'
-                                                    . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                                                    . '<br/><br/><a href="https://www.turkiyefloracicek.com/Admin/Panel">Türkiye Flora Çiçek</a>';
-                                            $resultMaill = $form->sSiparisMailGonder("info@turkiyefloracicek.com", "Yeni Sipariş-Gönderen" . $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"], $mailBodyAdmin);
+                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
                                             $sonuc["result"] = 1;
                                         } else {
                                             //siparisin telefonla olduğunu gösterir
                                             Session::set("SipTechOnay", 3);
                                             Session::set("SipTTutar", $urunToplamFiyat);
-                                            //mail gönderiliyor
-                                            $mailBodyKullanici = 'Merhaba ' . $isim . '!<br/> Siparişiniz tamamlanmıştır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile sitemizdeki siparis arama kısmından '
-                                                    . 'takip edebilirsiniz. İyi günler dileriz.<br/><br/>'
-                                                    . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                                                    . '<br/><br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>';
-                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"], $mailBodyKullanici);
-                                            $mailBodyAdmin = 'Yeni Bir siparişiniz vardır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile takip edebilirsiniz. '
-                                                    . 'İyi günler dileriz.<br/><br/>'
-                                                    . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                                                    . '<br/><br/><a href="https://www.turkiyefloracicek.com/Admin/Panel">Türkiye Flora Çiçek</a>';
-                                            $resultMaill = $form->sSiparisMailGonder("info@turkiyefloracicek.com", "Yeni Sipariş-Gönderen" . $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"], $mailBodyAdmin);
+                                            $resultMail = $form->sSiparisMailGonder($siparisliste[0]["siparis_gondereneposta"], $siparisliste[0]["siparis_gonderenAdSoyad"], $siparisliste[0]["siparis_No"]);
                                             $sonuc["result"] = 1;
                                         }
                                     } else {

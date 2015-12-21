@@ -564,7 +564,7 @@ class Form {
     }
 
     //smtp ile mail gönderme işlemi
-    function sSiparisMailGonder($email, $isim, $sipKod, $mailBody) {
+    function sSiparisMailGonder($email, $isim, $siparisNo) {
         require "Plugins/PHPMailer/PHPMailerAutoload.php";
         $mail = new PHPMailer;
 
@@ -578,19 +578,39 @@ class Form {
         $mail->Password = '478965Siparis';                           // SMTP password
         $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 587;                                    // TCP port to connect to(ssl ise port 465)
-
+        // keeps the current $mail settings and creates new object
+        $mail2 = clone $mail;
         $mail->setFrom('siparis@turkiyefloracicek.com', 'Sipariş Sonucu');
         $mail->addAddress($email, $isim);     // Add a recipient
         $mail->CharSet = 'UTF-8';
         $mail->isHTML(true);                                  // Set email format to HTML
 
         $mail->Subject = 'Türkiye Flora Çiçek - Sipariş';
-        $mail->Body = $mailBody;
-
-        if (!$mail->send()) {
+        $mailBodyKullanici = 'Merhaba ' . $isim . '!<br/> Siparişiniz tamamlanmıştır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile sitemizdeki siparis arama kısmından '
+                . 'takip edebilirsiniz. İyi günler dileriz.<br/><br/>'
+                . 'Sipariş Kodunuz=' . $siparisNo . ' Geri dönmek için aşağıdaki linke tıklayınız.'
+                . '<br/><br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>';
+        $mail->Body = $mailBodyKullanici;
+        if (!$mail->Send()) {
             return 0;
         } else {
-            return 1;
+            // now send to user.
+            $mail2->setFrom('siparis@turkiyefloracicek.com', 'Sipariş Sonucu');
+            $mail2->AddAddress("info@turkiyefloracicek.com", $isim);
+            $mail2->CharSet = 'UTF-8';
+            $mail2->isHTML(true);
+            $mail2->Subject = 'Türkiye Flora Çiçek - Yeni Sipariş';
+            $mailBodyAdmin = 'Yeni Bir siparişiniz vardır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile takip edebilirsiniz. '
+                    . 'İyi günler dileriz.<br/><br/>'
+                    . 'Sipariş Kodu=' . $siparisNo . ' Geri dönmek için aşağıdaki linke tıklayınız.'
+                    . '<br/><br/><a href="https://www.turkiyefloracicek.com/Admin/Panel">Türkiye Flora Çiçek</a>';
+            $mail2->Body = $mailBodyAdmin;
+
+            if (!$mail2->Send()) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
