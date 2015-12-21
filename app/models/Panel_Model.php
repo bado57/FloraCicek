@@ -806,12 +806,12 @@ class Panel_Model extends Model {
     }
 
     public function siparisListele() {
-        $sql = "SELECT siparis_ID,siparis_No,siparis_gonderenAdSoyad,siparis_gonderenkur,siparis_girilmetarih,siparis_durum FROM flora_siparis ORDER BY siparis_ID ASC";
+        $sql = "SELECT siparis_ID,siparis_No,siparis_gonderenAdSoyad,siparis_gonderenkur,siparis_girilmetarih,siparis_durum FROM flora_siparis ORDER BY siparis_ID DESC";
         return $this->db->select($sql);
     }
 
     public function siparisBekleyenListele() {
-        $sql = "SELECT siparis_ID,siparis_No,siparis_gonderenAdSoyad,siparis_gonderenkur,siparis_girilmetarih,siparis_durum FROM flora_siparis WHERE siparis_durum=0 ORDER BY siparis_ID ASC";
+        $sql = "SELECT siparis_ID,siparis_No,siparis_gonderenAdSoyad,siparis_gonderenkur,siparis_girilmetarih,siparis_durum FROM flora_siparis WHERE siparis_durum=0 ORDER BY siparis_ID DESC";
         return $this->db->select($sql);
     }
 

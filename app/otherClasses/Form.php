@@ -564,7 +564,7 @@ class Form {
     }
 
     //smtp ile mail gönderme işlemi
-    function sSiparisMailGonder($email, $isim, $sipKod) {
+    function sSiparisMailGonder($email, $isim, $sipKod, $mailBody) {
         require "Plugins/PHPMailer/PHPMailerAutoload.php";
         $mail = new PHPMailer;
 
@@ -581,15 +581,11 @@ class Form {
 
         $mail->setFrom('siparis@turkiyefloracicek.com', 'Sipariş Sonucu');
         $mail->addAddress($email, $isim);     // Add a recipient
-        $mail->addAddress("info@turkiyefloracicek.com", "Yeni Sipariş-" . $isim);     // Add a recipient
         $mail->CharSet = 'UTF-8';
         $mail->isHTML(true);                                  // Set email format to HTML
 
         $mail->Subject = 'Türkiye Flora Çiçek - Sipariş';
-        $mail->Body = 'Merhaba ' . $isim . '!<br/> Siparişiniz tamamlanmıştır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile sitemizdeki siparis arama kısmından '
-                . 'takip edebilirsiniz. İyi günler dileriz.<br/><br/>'
-                . 'Sipariş Kodunuz=' . $sipKod . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                . '<br/><br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>';
+        $mail->Body = $mailBody;
 
         if (!$mail->send()) {
             return 0;
@@ -614,7 +610,7 @@ class Form {
         $mail->Port = 587;                                    // TCP port to connect to(ssl ise port 465)
         date_default_timezone_set('Europe/Istanbul');
         $mail->setFrom('noreply@turkiyefloracicek.com', 'Flora Database Yedek');
-        $mail->addAddress('selmanist@gmail.com', 'Flora Sql/' . date('d.m.Y H:i:s'));     // Add a recipient
+        $mail->addAddress('info@turkiyefloracicek.com', 'Flora Sql/' . date('d.m.Y H:i:s'));     // Add a recipient
         $mail->addAttachment($file);
         $mail->CharSet = 'UTF-8';
         $mail->isHTML(true);                                  // Set email format to HTML

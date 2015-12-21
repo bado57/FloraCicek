@@ -309,6 +309,7 @@ $(document).ready(function () {
         if ($(this).is(':checked')) {
             var oid = $("#sipNumber").val();
             var amount = $("#SipTutar").val();
+            alert($("input[name=pan]").val());
             $.ajax({
                 type: "post",
                 url: SITE_URL + "/Genel/ajaxCall",
