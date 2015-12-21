@@ -1903,7 +1903,7 @@ class Genel extends Controller {
                         $rnd = microtime();
                         $taksit = "";
                         $islemtipi = "Auth";
-                        $storekey = "478965Fapi";
+                        $storekey = "478965Flora";
                         $hashstr = $clientId . $oid . $amount . $okUrl . $failUrl . $islemtipi . $taksit . $rnd . $storekey;
                         $hashkey = base64_encode(pack('H*', sha1($hashstr)));
                         $hash[0] = $amount;

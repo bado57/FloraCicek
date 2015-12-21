@@ -331,6 +331,7 @@ $(document).ready(function () {
                         return false;
                     } else {
                         if (cevap.result) {
+                            console.log(cevap.result);
                             $("input[name=oid]").val(cevap.result[1]);
                             $("input[name=amount]").val(cevap.result[0]);
                             $("input[name=rnd]").val(cevap.result[2]);

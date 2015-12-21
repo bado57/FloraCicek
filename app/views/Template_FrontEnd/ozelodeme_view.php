@@ -36,7 +36,7 @@
                                     <div class="col-sm-12 login-form">
                                         <h2><?php echo $data["KartBilgi"]; ?></h2>
                                     </div>
-                                    <form method="post" action="https://entegrasyon.asseco-see.com.tr/fim/est3Dgate" id="urunozelkartodeme">
+                                    <form method="post" action="https://www.fbwebpos.com/fim/est3Dgate" id="urunozelkartodeme">
                                         <div class="col-sm-6 col-xs-12 xsMarginBottom">
                                             <div class="login-form">
                                                 <div class="form">
@@ -107,12 +107,12 @@
                                                                                             <input type="hidden" name="lang" value="tr">
                                                                                                 <input type="hidden" name="currency" value="949">
                                                                                                     <input type="hidden" name="firmaadi" value="Türkiye Flora Çiçek">
+                                                                                                        <button class="btn btn-primary" id="spKartTamamla" style="display: none;"><i class="fa fa-angle-right"></i> Ödeme Yap</button>
+                                                                                                        </div>
+                                                                                                        </div>
+                                                                                                        </div>
+                                                                                                        </form>
                                                                                                         <input type="hidden" id="bankhatamesaj" name="bankhatamesaj" value="<?php echo $model[5][0]['BankErrMsj']; ?>">
-                                                                                                            <button class="btn btn-primary" id="spKartTamamla" style="display: none;"><i class="fa fa-angle-right"></i> Ödeme Yap</button>
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </form>
                                                                                                             <div class="col-sm-6 hidden-xs">
                                                                                                                 <div class="creditCard">
                                                                                                                     <div class="cardNo">

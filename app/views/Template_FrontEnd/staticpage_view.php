@@ -61,7 +61,6 @@
                         <?php if ($model[9][0]["Resim"] != '') { ?>
                             <img class="img-responsive" src="<?php echo SITE_SAYFA ?>/<?php echo $model[9][0]["Resim"]; ?>" alt="Türkiye Flora Çiçek-"<?php echo $model[9][0]["Adi"]; ?> />
                         <?php } ?>
-                        <h3><?php echo $model[9][0]["Adi"]; ?></h3>
                         <?php echo $model[9][0]["Yazi"]; ?>
                     </div>
                 </div>

@@ -363,7 +363,7 @@ class Order extends Controller {
             $hashparams = $_POST["HASHPARAMS"];
             $hashparamsval = $_POST["HASHPARAMSVAL"];
             $hashparam = $_POST["HASH"];
-            $storekey = "478965Fapi";
+            $storekey = "478965Flora";
             $paramsval = "";
             $index1 = 0;
             $index2 = 0;
@@ -376,6 +376,7 @@ class Order extends Controller {
                 $paramsval = $paramsval . $vl;
                 $index1 = $index2 + 1;
             }
+            $storekey = "478965Flora";
             $hashval = $paramsval . $storekey;
             $hash = base64_encode(pack('H*', sha1($hashval)));
 
@@ -900,7 +901,7 @@ class Order extends Controller {
                 $cardlist[5][0]['Rnd'] = microtime();
                 $cardlist[5][0]['Taksit'] = "";
                 $cardlist[5][0]['IslemTip'] = "Auth";
-                $cardlist[5][0]['IsyeriAnahtar'] = "478965Fapi";
+                $cardlist[5][0]['IsyeriAnahtar'] = "478965Flora";
                 $hashstr = $cardlist[5][0]['ClientID'] . $cardlist[5][0]['SipNumber'] . $cardlist[5][0]['TTutar'] . $cardlist[5][0]['okUrl']
                         . $cardlist[5][0]['failUrl'] . $cardlist[5][0]['IslemTip'] . $cardlist[5][0]['Taksit'] . $cardlist[5][0]['Rnd']
                         . $cardlist[5][0]['IsyeriAnahtar'];
@@ -995,7 +996,7 @@ class Order extends Controller {
             $hashparams = $_POST["HASHPARAMS"];
             $hashparamsval = $_POST["HASHPARAMSVAL"];
             $hashparam = $_POST["HASH"];
-            $storekey = "478965Fapi";
+            $storekey = "478965Flora";
             $paramsval = "";
             $index1 = 0;
             $index2 = 0;
@@ -1008,6 +1009,7 @@ class Order extends Controller {
                 $paramsval = $paramsval . $vl;
                 $index1 = $index2 + 1;
             }
+            $storekey = "478965Flora";
             $hashval = $paramsval . $storekey;
             $hash = base64_encode(pack('H*', sha1($hashval)));
 
@@ -1079,7 +1081,7 @@ class Order extends Controller {
             $paymentlist[5][0]['Rnd'] = microtime();
             $paymentlist[5][0]['Taksit'] = "";
             $paymentlist[5][0]['IslemTip'] = "Auth";
-            $paymentlist[5][0]['IsyeriAnahtar'] = "478965Fapi";
+            $paymentlist[5][0]['IsyeriAnahtar'] = "478965Flora";
             $hashstr = $paymentlist[5][0]['ClientID'] . $paymentlist[5][0]['SipNumber'] . $paymentlist[5][0]['TTutar'] . $paymentlist[5][0]['okUrl']
                     . $paymentlist[5][0]['failUrl'] . $paymentlist[5][0]['IslemTip'] . $paymentlist[5][0]['Taksit'] . $paymentlist[5][0]['Rnd']
                     . $paymentlist[5][0]['IsyeriAnahtar'];

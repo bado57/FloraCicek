@@ -393,7 +393,11 @@ class PagerLoad extends Controller {
                 $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
                 $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
-                $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fc++;
             }
         }
@@ -550,14 +554,22 @@ class PagerLoad extends Controller {
                 $fotkategorilistUst[$fb]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistUst[$fb]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistUst[$fb]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
-                $fotkategorilistUst[$fb]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fb++;
             } else {
                 $fotkategorilistAlt[$fc]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
                 $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
-                $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fc++;
             }
         }
@@ -736,14 +748,22 @@ class PagerLoad extends Controller {
                 $fotkategorilistUst[$fb]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistUst[$fb]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistUst[$fb]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
-                $fotkategorilistUst[$fb]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fb++;
             } else {
                 $fotkategorilistAlt[$fc]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
                 $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
-                $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fc++;
             }
         }
@@ -913,14 +933,22 @@ class PagerLoad extends Controller {
                 $fotkategorilistUst[$fb]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistUst[$fb]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistUst[$fb]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
-                $fotkategorilistUst[$fb]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fb++;
             } else {
                 $fotkategorilistAlt[$fc]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
                 $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
-                $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fc++;
             }
         }
@@ -1099,14 +1127,22 @@ class PagerLoad extends Controller {
                 $fotkategorilistUst[$fb]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistUst[$fb]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistUst[$fb]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
-                $fotkategorilistUst[$fb]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fb++;
             } else {
                 $fotkategorilistAlt[$fc]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
                 $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
-                $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fc++;
             }
         }
@@ -1232,14 +1268,22 @@ class PagerLoad extends Controller {
                 $fotkategorilistUst[$fb]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistUst[$fb]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistUst[$fb]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
-                $fotkategorilistUst[$fb]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fb++;
             } else {
                 $fotkategorilistAlt[$fc]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
                 $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
-                $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fc++;
             }
         }
@@ -1352,14 +1396,22 @@ class PagerLoad extends Controller {
             if ($fotkategoriListee['sayfa_UstID'] == 0) {//Footer Üst Kategori Olanlar
                 $fotkategorilistUst[$fb]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistUst[$fb]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
-                $fotkategorilistUst[$fb]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fotkategorilistUst[$fb]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
                 $fb++;
             } else {
                 $fotkategorilistAlt[$fc]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
-                $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
                 $fc++;
             }
@@ -1543,14 +1595,22 @@ class PagerLoad extends Controller {
                 $fotkategorilistUst[$fb]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistUst[$fb]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistUst[$fb]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
-                $fotkategorilistUst[$fb]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fb++;
             } else {
                 $fotkategorilistAlt[$fc]['ID'] = $fotkategoriListee['sabitsayfaid'];
                 $fotkategorilistAlt[$fc]['Adi'] = $fotkategoriListee['sbtsayfa_Adi'];
                 $fotkategorilistAlt[$fc]['Sira'] = $fotkategoriListee['sbtsayfa_Sira'];
                 $fotkategorilistAlt[$fc]['UstID'] = $fotkategoriListee['sayfa_UstID'];
-                $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                if ($fotkategoriListee['sbtsayfa_bnzrszAd'] != "ozel-odeme") {
+                    $fotkategorilistAlt[$fc]['Url'] = "sayfa-" . $fotkategoriListee['sbtsayfa_bnzrszAd'];
+                } else {
+                    $fotkategorilistAlt[$fc]['Url'] = "Order/DirectPayment";
+                }
                 $fc++;
             }
         }
