@@ -344,7 +344,6 @@ class Panel_Model extends Model {
     //geçicci Sipariş Bilgileri Getirme
     public function geciciSiparis($id) {
         $sql = "SELECT * FROM flora_gecicisiparis WHERE siparis_ID=$id";
-        error_log($sql);
         return $this->db->select($sql);
     }
 
