@@ -1137,6 +1137,8 @@ class Genel extends Controller {
                                                                                             Session::set("SipGeciciUrunID", $result);
                                                                                         } else {
                                                                                             unset($_SESSION['EkUrunID']);
+                                                                                            unset($_SESSION['SipGeciciUrunID']);
+                                                                                            Session::set("SipGeciciUrunID", $result);
                                                                                         }
                                                                                         if (Session::get("KID") > 0) {
                                                                                             Session::set("Odeme", 1);
@@ -1249,6 +1251,8 @@ class Genel extends Controller {
                                                                         Session::set("SipGeciciUrunID", $result);
                                                                     } else {
                                                                         unset($_SESSION['EkUrunID']);
+                                                                        unset($_SESSION['SipGeciciUrunID']);
+                                                                        Session::set("SipGeciciUrunID", $result);
                                                                     }
                                                                     if (Session::get("KID") > 0) {
                                                                         Session::set("Odeme", 1);

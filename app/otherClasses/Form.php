@@ -586,10 +586,10 @@ class Form {
         $mail->isHTML(true);                                  // Set email format to HTML
 
         $mail->Subject = 'Türkiye Flora Çiçek - Sipariş';
-        $mailBodyKullanici = 'Merhaba ' . $isim . '!<br/> Siparişiniz tamamlanmıştır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile sitemizdeki siparis arama kısmından '
-                . 'takip edebilirsiniz. İyi günler dileriz.<br/><br/>'
-                . 'Sipariş Kodunuz=' . $siparisNo . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                . '<br/><br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>';
+        $mailBodyKullanici = 'Merhaba ' . $isim . '!<br/> Siparişiniz alınmıştır. Aşağıda verilen sipariş kodu ile <a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a> adresinden siparişinizin son durumu hakkında bilgi alabilirsiniz.'
+                . '<br/><br/>Sipariş Kodunuz : ' . $siparisNo . ' Geri dönmek için aşağıdaki linke tıklayınız.'
+                . '<br/><br/>Bir sonraki çiçek gönderiminizde tekrar görüşmek dileğiyle.'
+                . '<br/><a href="https://www.turkiyefloracicek.com">Türkiye Flora Çiçek</a>';
         $mail->Body = $mailBodyKullanici;
         if (!$mail->Send()) {
             return 0;
@@ -600,10 +600,8 @@ class Form {
             $mail2->CharSet = 'UTF-8';
             $mail2->isHTML(true);
             $mail2->Subject = 'Türkiye Flora Çiçek - Yeni Sipariş';
-            $mailBodyAdmin = 'Yeni Bir siparişiniz vardır.Siparişiniz ile ilgili durumları aşağıdaki sipariş kodunuz ile takip edebilirsiniz. '
-                    . 'İyi günler dileriz.<br/><br/>'
-                    . 'Sipariş Kodu=' . $siparisNo . ' Geri dönmek için aşağıdaki linke tıklayınız.'
-                    . '<br/><br/><a href="https://www.turkiyefloracicek.com/Admin/Panel">Türkiye Flora Çiçek</a>';
+            $mailBodyAdmin = 'Yeni bir sipariş aldınız. <br/>Detayları görmek için aşağıdaki linke tıklayınız. '
+                    . '<a href="https://www.turkiyefloracicek.com/Admin/BekleyenSiparis">Türkiye Flora Çiçek Yönetim Paneli</a>';
             $mail2->Body = $mailBodyAdmin;
 
             if (!$mail2->Send()) {

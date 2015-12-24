@@ -1040,7 +1040,7 @@ class Order extends Controller {
                             //Başarısız
                             //echo "Ödeme Islemi Basarisiz. Hata = " . $ErrMsg;
                             unset($_SESSION["BankErrMsg"]);
-                            $_SESSION["BankErrMsg"] = " Ödeme Islemi Basarisiz. Hata =" . $ErrMsg;
+                            $_SESSION["BankErrMsg"] = "Ödeme Islemi Basarisiz. Hata =" . $ErrMsg;
                             header("Location:" . SITE_URL . "/Order/DirectPayment");
                         }
                     }
