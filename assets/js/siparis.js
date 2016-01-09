@@ -106,9 +106,9 @@ $(document).ready(function () {
                         }
 
                         $(".spPrintFooter").text(cevap.result[0].GAd + " " + cevap.result[0].Tarih + " " + cevap.result[0].No + " no'lu sipariş detayları.");
-                        $(".spTotalFooter").text("Tpolam Tutar : " + cevap.result[0].TTutar + " TL");
+                        $(".spTotalFooter").text("Toplam Tutar : " + cevap.result[0].TTutar + " TL");
                         ///// ----- Bilgiler
-                        $("#tslmtgndndn").text(cevap.result[0].SGndNdn);
+                        $(".tslmtgndndn").text(cevap.result[0].SGndNdn);
                         $("#siparisustbaslik").text(cevap.result[0].No);
                         $("input[name=duzenleme]").val(1);
                         $("input[name=duzenlemeID]").val(ID);

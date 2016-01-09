@@ -86,8 +86,8 @@ $(document).ready(function () {
                     alertify.alert(cevap.hata);
                     return false;
                 } else {
-                    $("#h2ebulten").hide();
-                    $("#divebulten").hide();
+                    //$("#h2ebulten").hide();
+                    //$("#divebulten").hide();
                     reset();
                     alertify.alert(cevap.result);
                     return false;
@@ -198,6 +198,35 @@ $(document).ready(function () {
                         ///// ----- Bilgiler
                         $("#tslmtgndndn").text(cevap.result[0].SGndNdn);
                     }
+                }
+            }
+        });
+    });
+    $(document).on("click", "#iletisimsubmit", function (e) {
+        var adsoyad = $("#iletisimname").val();
+        var email = $("#iletisimemail").val();
+        var konu = $("#iletisimsubject").val();
+        var mesaj = $("#iletisimmessage").val();
+        $.ajax({
+            type: "post",
+            url: SITE_URL + "/Genel/ajaxCall",
+            cache: false,
+            dataType: "json",
+            data: {"adsoyad": adsoyad, "email": email, "konu": konu,
+                "mesaj": mesaj, "tip": "iletisim"},
+            success: function (cevap) {
+                if (cevap.hata) {
+                    reset();
+                    alertify.alert(cevap.hata);
+                    return false;
+                } else {
+                    $("#iletisimname").val("");
+                    $("#iletisimemail").val("");
+                    $("#iletisimsubject").val("");
+                    $("#iletisimmessage").val("");
+                    reset();
+                    alertify.alert(cevap.result);
+                    return false;
                 }
             }
         });

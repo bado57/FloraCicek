@@ -193,7 +193,6 @@ class AdminGenel extends Controller {
                     }
 
                     break;
-
                 case "kategoriDuzenle":
                     $form->post("ustKatVal", true);
                     $form->post("altKatSira", true);
@@ -819,7 +818,6 @@ class AdminGenel extends Controller {
                         }
                     }
                     break;
-
                 case "kategoriSil":
                     $form->post("ustID", true);
                     $form->post("ID", true);
@@ -865,7 +863,6 @@ class AdminGenel extends Controller {
                         }
                     }
                     break;
-
                 case "urunEkle":
                     require "app/otherClasses/class.upload.php";
 
@@ -1250,7 +1247,6 @@ class AdminGenel extends Controller {
                         }
                     }
                     break;
-
                 case "urunSil":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -1261,7 +1257,6 @@ class AdminGenel extends Controller {
                         $sonuc["cevap"] = "Başarıyla silinmiştir.";
                     }
                     break;
-
                 case "urunDuzenlemeDegerler":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -1297,7 +1292,6 @@ class AdminGenel extends Controller {
 
                     $sonuc["result"] = $newresult;
                     break;
-
                 case "urunDuzenle":
                     require "app/otherClasses/class.upload.php";
 
@@ -1867,7 +1861,6 @@ class AdminGenel extends Controller {
                         }
                     }
                     break;
-
                 case "etiketSil":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -1880,7 +1873,6 @@ class AdminGenel extends Controller {
                         }
                     }
                     break;
-
                 case "etiketEkle":
                     $form->post("durum", true);
                     $form->post("sira", true);
@@ -1971,7 +1963,6 @@ class AdminGenel extends Controller {
                     }
 
                     break;
-
                 case "etiketDuzenle":
                     $form->post("durum", true);
                     $form->post("sira", true);

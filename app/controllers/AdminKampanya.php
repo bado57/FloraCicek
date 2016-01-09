@@ -43,7 +43,6 @@ class AdminKampanya extends Controller {
                         }
                     }
                     break;
-
                 case "kampanyaDuzenlemeDegerler":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -85,7 +84,6 @@ class AdminKampanya extends Controller {
 
                     $sonuc["result"] = $kampanyaList;
                     break;
-
                 case "kampanyaEkle":
                     $form->post("baslamaTarh", true);
                     $form->post("btsTarih", true);
@@ -158,7 +156,6 @@ class AdminKampanya extends Controller {
                     }
 
                     break;
-
                 case "kampanyaDuzenle":
                     $form->post("ID", true);
                     $form->post("baslamaTarh", true);
@@ -260,6 +257,24 @@ class AdminKampanya extends Controller {
                         $sonuc["hata"] = "Lütfen Kampanya Başlığını Giriniz.";
                     }
 
+                    break;
+                case "iletisim":
+                    $form->post("ID", true);
+                    $ID = $form->values['ID'];
+                    $iletisimListe = $Panel_Model->iletisimDetay($ID);
+                    foreach ($iletisimListe as $iletisimListee) {
+                        $iletList[0]['ID'] = $iletisimListee['iletisim_ID'];
+                        $iletList[0]['AdSoyad'] = $iletisimListee['iletisim_AdSoyad'];
+                        $iletList[0]['Email'] = $iletisimListee['iletisim_email'];
+                        $explodeBaslama = explode(" ", $iletisimListee['iletisim_tarih']);
+                        $explodeBasTarih = explode("-", $explodeBaslama[0]);
+                        $iletList[0]["BsTarih"] = $explodeBasTarih[2] . '/' . $explodeBasTarih[1] . '/' . $explodeBasTarih[0] . "--" . $explodeBaslama[1];
+                        $iletList[0]['Konu'] = $iletisimListee['iletisim_konu'];
+                        $iletList[0]['Mesaj'] = $iletisimListee['iletisim_mesaj'];
+                        $iletList[0]['Uye'] = $iletisimListee['iletisim_Uye'];
+                    }
+
+                    $sonuc["result"] = $iletList;
                     break;
                 default :
                     header("Location:" . SITE_URL);

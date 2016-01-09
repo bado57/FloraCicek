@@ -933,6 +933,44 @@ class Admin extends Controller {
         $this->load->view("Template_BackEnd/footer", $languagedeger);
     }
 
+    function Iletisim() {
+        //model bağlantısı
+        $Panel_Model = $this->load->model("Panel_Model");
+        $formlanguage = $this->load->multilanguage("tr");
+        $languagedeger = $formlanguage->multilanguage();
+        $siparisCount = array();
+        $siparisCountListe = $Panel_Model->siparisCountListele();
+        $bekleyensiparis = 0;
+        foreach ($siparisCountListe as $siparisCountListee) {
+            if ($siparisCountListee['siparis_durum'] == 0) {
+                $bekleyensiparis = $bekleyensiparis + 1;
+            }
+        }
+        $siparisCount[0] = $bekleyensiparis;
+        $siparisCount[1] = count($siparisCountListe);
+
+        $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
+        $siparisCount[2] = count($kampanyaCountListe);
+
+
+        $iletisimListe = $Panel_Model->iletisimListele();
+        $i = 0;
+        foreach ($iletisimListe as $iletisimListee) {
+            $iletisimlist[$i]['ID'] = $iletisimListee['iletisim_ID'];
+            $iletisimlist[$i]['Ad'] = $iletisimListee['iletisim_AdSoyad'];
+            $iletisimlist[$i]['Konu'] = $iletisimListee['iletisim_konu'];
+            $explodeBaslama = explode(" ", $iletisimListee['iletisim_tarih']);
+            $explodeBasTarih = explode("-", $explodeBaslama[0]);
+            $iletisimlist[$i]['Tarih'] = $explodeBasTarih[2] . '/' . $explodeBasTarih[1] . '/' . $explodeBasTarih[0];
+            $i++;
+        }
+
+        $this->load->view("Template_BackEnd/header", $languagedeger);
+        $this->load->view("Template_BackEnd/left", $languagedeger, $siparisCount);
+        $this->load->view("Template_BackEnd/contact", $languagedeger, $iletisimlist);
+        $this->load->view("Template_BackEnd/footer", $languagedeger);
+    }
+
 }
 
 ?>

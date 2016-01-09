@@ -575,7 +575,7 @@ class Genel extends Controller {
                                     }
                                     $resultMail = $Panel_Model->mailHavuzInsert($data);
                                     if ($resultMail) {
-                                        Session::set("EBulten", $resultMail);
+                                        //Session::set("EBulten", $resultMail);
                                         $sonuc["result"] = "Tebrikler e-bültene kayıt oldunuz";
                                     } else {
                                         $sonuc["hata"] = "Bir hata oluştu tekrar deneyiniz";
@@ -590,7 +590,7 @@ class Genel extends Controller {
                                     }
                                     $resultMail = $Panel_Model->mailHavuzInsert($data);
                                     if ($resultMail) {
-                                        Session::set("EBulten", $resultMail);
+                                        //Session::set("EBulten", $resultMail);
                                         $sonuc["result"] = "Tebrikler e-bültene kayıt oldunuz";
                                     } else {
                                         $sonuc["hata"] = "Bir hata oluştu tekrar deneyiniz";
@@ -604,6 +604,106 @@ class Genel extends Controller {
                         }
                     } else {
                         $sonuc["hata"] = "Lütfen geçerli bir email adresi giriniz.";
+                    }
+                    break;
+                case "iletisim":
+                    $form->post("adsoyad", true);
+                    $form->post("email", true);
+                    $form->post("konu", true);
+                    $form->post("mesaj", true);
+                    $adsoyad = $form->values['adsoyad'];
+                    $email = $form->values['email'];
+                    $konu = $form->values['konu'];
+                    $mesaj = $form->values['mesaj'];
+
+                    if (Session::get("KID") > 0) {
+                        if ($konu != "") {
+                            if ($mesaj != "") {
+                                if ($form->submit()) {
+                                    $data = array(
+                                        'iletisim_AdSoyad' => Session::get("KAdSoyad"),
+                                        'iletisim_email' => Session::get("KEposta"),
+                                        'iletisim_konu' => $konu,
+                                        'iletisim_mesaj' => $mesaj,
+                                        'iletisim_Uye' => 1
+                                    );
+                                }
+                                $resultIletisim = $Panel_Model->iletisimMailInsert($data);
+                                if ($resultIletisim) {
+                                    $sonuc["result"] = "Mesajınızı için teşekkür ederiz. İyi günler.";
+                                } else {
+                                    $sonuc["hata"] = "Bir hata oluştu tekrar deneyiniz";
+                                }
+                            } else {
+                                $sonuc["hata"] = "Lütfen mesajınızı giriniz";
+                            }
+                        } else {
+                            $sonuc["hata"] = "Lütfen konu kısmını doldurunuz";
+                        }
+                    } else {
+                        if ($adsoyad != "") {
+                            if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                                $emailValidate = $form->mailControl1($email);
+                                if ($emailValidate == 1) {
+                                    $mailliste = $Panel_Model->iletisimEmailDbKontrol($email);
+                                    if (count($mailliste) > 0) {
+                                        if ($konu != "") {
+                                            if ($mesaj != "") {
+                                                if ($form->submit()) {
+                                                    $data = array(
+                                                        'iletisim_AdSoyad' => $adsoyad,
+                                                        'iletisim_email' => $email,
+                                                        'iletisim_konu' => $konu,
+                                                        'iletisim_mesaj' => $mesaj,
+                                                        'iletisim_Uye' => 1
+                                                    );
+                                                }
+                                                $resultIletisim = $Panel_Model->iletisimMailInsert($data);
+                                                if ($resultIletisim) {
+                                                    $sonuc["result"] = "Mesajınızı için teşekkür ederiz. İyi günler.";
+                                                } else {
+                                                    $sonuc["hata"] = "Bir hata oluştu tekrar deneyiniz";
+                                                }
+                                            } else {
+                                                $sonuc["hata"] = "Lütfen mesajınızı giriniz";
+                                            }
+                                        } else {
+                                            $sonuc["hata"] = "Lütfen konu kısmını doldurunuz";
+                                        }
+                                    } else {
+                                        if ($konu != "") {
+                                            if ($mesaj != "") {
+                                                if ($form->submit()) {
+                                                    $data = array(
+                                                        'iletisim_AdSoyad' => $adsoyad,
+                                                        'iletisim_email' => $email,
+                                                        'iletisim_konu' => $konu,
+                                                        'iletisim_mesaj' => $mesaj,
+                                                        'iletisim_Uye' => 0
+                                                    );
+                                                }
+                                                $resultIletisim = $Panel_Model->iletisimMailInsert($data);
+                                                if ($resultIletisim) {
+                                                    $sonuc["result"] = "Mesajınızı için teşekkür ederiz. İyi günler.";
+                                                } else {
+                                                    $sonuc["hata"] = "Bir hata oluştu tekrar deneyiniz";
+                                                }
+                                            } else {
+                                                $sonuc["hata"] = "Lütfen mesajınızı giriniz";
+                                            }
+                                        } else {
+                                            $sonuc["hata"] = "Lütfen konu kısmını doldurunuz";
+                                        }
+                                    }
+                                } else {
+                                    $sonuc["hata"] = "Mailiniz kullanımda değildir. Lütfen başka bir mail deneyiniz.";
+                                }
+                            } else {
+                                $sonuc["hata"] = "Lütfen geçerli bir email adresi giriniz.";
+                            }
+                        } else {
+                            $sonuc["hata"] = "Lütfen isminizi giriniz.";
+                        }
                     }
                     break;
                 case "urunDetay":
@@ -1056,8 +1156,8 @@ class Genel extends Controller {
                     if ($gndadsoyad != '') {
                         if ($gndmail != '') {
                             if (!filter_var($gndmail, FILTER_VALIDATE_EMAIL) === false) {
-                                $emailValidate = 1;
-                                //$emailValidate = $form->mailControl1($gndmail);
+                                //$emailValidate = 1;
+                                $emailValidate = $form->mailControl1($gndmail);
                                 if ($emailValidate == 1) {
                                     if ($gndtel != '') {
                                         if ($alcadsoyad != '') {
@@ -1807,7 +1907,7 @@ class Genel extends Controller {
                             if (count($siplist) > 0) {
                                 $sonuc["result"] = $siparis;
                             } else {
-                                $sonuc["hata"] = "Bu Koda Ait Sipariş Bulunamadı.";
+                                $sonuc["hata"] = "Sipariş Bulunamadı";
                             }
                         } else {
                             $sonuc["hata"] = "Lütfen Kodu Unutmayınız.";

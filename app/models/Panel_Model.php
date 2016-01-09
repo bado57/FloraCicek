@@ -50,7 +50,6 @@ class Panel_Model extends Model {
     //home etiket listeleme
     public function etiketlistele() {
         $sql = "SELECT etiket_id,etiket_adi,etiket_benzad FROM flora_etiket WHERE etiket_aktiflik=1 ORDER BY etiket_sira ASC ";
-        error_log($sql);
         return $this->db->select($sql);
     }
 
@@ -286,6 +285,28 @@ class Panel_Model extends Model {
         return ($this->db->insert("flora_mailhavuz", $data));
     }
 
+    //iletişimden gönderilen mesajları kaydetme
+    public function iletisimMailInsert($data) {
+        return ($this->db->insert("flora_iletisim", $data));
+    }
+
+    //iletisim mail db kontrol
+    public function iletisimEmailDbKontrol($email) {
+        $sql = "SELECT kullanici_id FROM flora_kullanici WHERE kullanici_eposta='$email'";
+        return $this->db->select($sql);
+    }
+
+    public function iletisimListele() {
+        $sql = "SELECT iletisim_ID,iletisim_AdSoyad,iletisim_konu,iletisim_tarih FROM  flora_iletisim ORDER BY iletisim_ID DESC";
+        return $this->db->select($sql);
+    }
+
+    //mesajlar detaylı gösterme
+    public function iletisimDetay($id) {
+        $sql = "SELECT iletisim_ID,iletisim_AdSoyad,iletisim_email,iletisim_konu,iletisim_mesaj,iletisim_tarih,iletisim_Uye FROM flora_iletisim WHERE iletisim_ID=$id";
+        return $this->db->select($sql);
+    }
+
     //kurumsal üyeleri kaydetme
     public function kurUye($data) {
         return ($this->db->insert("flora_kullanici", $data));
@@ -418,7 +439,7 @@ class Panel_Model extends Model {
 
     //panel ürün siparis
     public function adminPanelUrunSiparis() {
-        $sql = "SELECT siparis_toplamtutar FROM flora_siparis";
+        $sql = "SELECT siparis_toplamtutar FROM flora_siparis WHERE siparis_durum=2";
         return $this->db->select($sql);
     }
 
@@ -436,7 +457,7 @@ class Panel_Model extends Model {
 
     //panel ürün son
     public function adminPanelUrunSon() {
-        $sql = "SELECT siparis_ID,siparis_sehir,siparis_ilce,siparis_toplamtutar,siparis_girilmetarih,siparis_durum FROM flora_siparis ORDER BY siparis_girilmetarih DESC";
+        $sql = "SELECT siparis_ID,siparis_sehir,siparis_ilce,siparis_toplamtutar,siparis_girilmetarih,siparis_durum FROM flora_siparis ORDER BY siparis_ID DESC";
         return $this->db->select($sql);
     }
 
@@ -528,7 +549,6 @@ class Panel_Model extends Model {
     //admin kampanya kategori listeleme
     public function urunKampKategorilistele($array = array()) {
         $sql = 'SELECT kategori_ID,kategori_Adi,kategori_Yazi,kategori_Aktiflik,kategori_Sira,kategori_UstID FROM flora_kategori WHERE kategori_Aktiflik=1 AND kategori_UstID !=0 AND kategori_ID NOT IN ("' . $array . '") ORDER BY kategori_Sira ASC';
-        error_log($sql);
         return $this->db->select($sql);
     }
 

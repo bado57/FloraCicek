@@ -17,15 +17,4 @@ $(document).ready(function () {
             }
         });
     });
-    /*
-    UyeSonTable = $('#sonuyeler').dataTable({
-        "paging": true,
-        "ordering": true,
-        "info": true
-    });
-    SonSiparisler = $("#sonsiparisler").DataTable({
-        "paging": true,
-        "ordering": true,
-        "info": true
-    });*/
 });
