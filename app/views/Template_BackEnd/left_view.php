@@ -81,7 +81,7 @@
                 </ul>
             </li>
             <li>
-                <a href="<?php echo SITE_URL; ?>/Admin/Iletisim"><i class="fa fa-envelope-square"></i> <span>İletişim İşlemleri</span> <small class="label pull-right bg-green"><?php echo $model[2]; ?></small></a>
+                <a href="<?php echo SITE_URL; ?>/Admin/Iletisim"><i class="fa fa-envelope-square"></i> <span>İletişim İşlemleri</span> <small class="label pull-right bg-green"><?php echo $model[3]; ?></small></a>
             </li>
             <li>
                 <a href="<?php echo SITE_URL; ?>" target="_blank">

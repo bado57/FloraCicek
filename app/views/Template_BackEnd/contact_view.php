@@ -98,7 +98,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php for ($iletisim = 0; $iletisim < count($model[0]); $iletisim++) { ?>
+                                                <?php for ($iletisim = 0; $iletisim < count($model); $iletisim++) { ?>
                                                     <tr id="<?php echo $model[$iletisim]['ID']; ?>">
                                                         <td><b><?php echo $model[$iletisim]['Ad']; ?></b></td>
                                                         <td><?php echo $model[$iletisim]['Konu']; ?></td>

@@ -34,6 +34,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $uyeliste = $Panel_Model->adminPanelUyeCount();
         $a = 0;
@@ -134,6 +137,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $kategoriListe = $Panel_Model->adminKategorilistele();
         $b = 0;
@@ -200,6 +206,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $kategoriListe = $Panel_Model->urunKategorilistele();
         $b = 0;
@@ -271,6 +280,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $etiketListe = $Panel_Model->paneletiketlistele();
         $b = 0;
@@ -308,6 +320,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $vitrinListe = $Panel_Model->panelvitrinlistele();
         $v = 0;
@@ -345,6 +360,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $icerikListe = $Panel_Model->panelsabiticerikliste();
         $i = 0;
@@ -397,6 +415,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $blogListe = $Panel_Model->panelblogliste();
         $b = 0;
@@ -436,6 +457,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $sayfaListe = $Panel_Model->adminSayfalistele();
         $b = 0;
@@ -500,11 +524,13 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $kampanyaListe = $Panel_Model->adminkampanyalistele();
         $k = 0;
         foreach ($kampanyaListe as $kampanyaListee) {
-            error_log("irdi");
             $kampanyalist[$k]['ID'] = $kampanyaListee['kampanya_ID'];
             $kampanyalist[$k]['Baslik'] = $kampanyaListee['kampanya_baslik'];
             $kampanyalist[$k]['Aktif'] = $kampanyaListee['kampanya_aktiflik'];
@@ -583,6 +609,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger, $siparisCount);
@@ -628,6 +657,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger, $siparisCount);
@@ -653,6 +685,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
 
         $bankaListe = $Panel_Model->bankaListele();
@@ -692,6 +727,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $kargoListe = $Panel_Model->kargoListele();
         $k = 0;
@@ -729,6 +767,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
 
         $yerListe = $Panel_Model->yerListele();
@@ -765,6 +806,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $nedenListe = $Panel_Model->nedenListele();
         $n = 0;
@@ -801,6 +845,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         //il listele
         $ilListe = $Panel_Model->adminIllistele();
@@ -865,6 +912,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $kuyeListe = $Panel_Model->kurumsalUyeListele();
         $ku = 0;
@@ -900,7 +950,10 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
-
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
+        
         $buyeListe = $Panel_Model->bireyselUyeListele();
         $bu = 0;
         foreach ($buyeListe as $buyeListee) {
@@ -925,7 +978,9 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
-
+        
+        $iletisimCountListe = $Panel_Model->iletisimCountListele();
+        $siparisCount[3] = count($iletisimCountListe);
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger);
@@ -951,8 +1006,7 @@ class Admin extends Controller {
 
         $kampanyaCountListe = $Panel_Model->kampanyaCountListele();
         $siparisCount[2] = count($kampanyaCountListe);
-
-
+        
         $iletisimListe = $Panel_Model->iletisimListele();
         $i = 0;
         foreach ($iletisimListe as $iletisimListee) {
@@ -964,6 +1018,8 @@ class Admin extends Controller {
             $iletisimlist[$i]['Tarih'] = $explodeBasTarih[2] . '/' . $explodeBasTarih[1] . '/' . $explodeBasTarih[0];
             $i++;
         }
+
+        $siparisCount[3] = $i;
 
         $this->load->view("Template_BackEnd/header", $languagedeger);
         $this->load->view("Template_BackEnd/left", $languagedeger, $siparisCount);

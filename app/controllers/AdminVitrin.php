@@ -33,7 +33,6 @@ class AdminVitrin extends Controller {
                         $sonuc["cevap"] = "Başarıyla silinmiştir.";
                     }
                     break;
-
                 case "vitrinDuzenlemeDegerler":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -54,7 +53,6 @@ class AdminVitrin extends Controller {
 
                     $sonuc["result"] = $vitrinlist;
                     break;
-
                 case "vitrinEkle":
                     require "app/otherClasses/class.upload.php";
 
@@ -183,7 +181,6 @@ class AdminVitrin extends Controller {
                     }
 
                     break;
-
                 case "vitrinDuzenle":
                     require "app/otherClasses/class.upload.php";
 
@@ -370,7 +367,6 @@ class AdminVitrin extends Controller {
                     }
 
                     break;
-
                 case "sabitIcerikEkle":
 
                     $telefon = $_POST['telefon'];
@@ -532,7 +528,6 @@ class AdminVitrin extends Controller {
                     }
 
                     break;
-
                 case "blogSil":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -542,7 +537,6 @@ class AdminVitrin extends Controller {
                         $sonuc["cevap"] = "Başarıyla silinmiştir.";
                     }
                     break;
-
                 case "blogEkle":
                     require "app/otherClasses/class.upload.php";
 
@@ -625,7 +619,6 @@ class AdminVitrin extends Controller {
                     }
 
                     break;
-
                 case "blogDuzenlemeDegerler":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -642,7 +635,6 @@ class AdminVitrin extends Controller {
 
                     $sonuc["result"] = $bloglist;
                     break;
-
                 case "blogDuzenle":
                     require "app/otherClasses/class.upload.php";
 
@@ -816,7 +808,6 @@ class AdminVitrin extends Controller {
                     }
 
                     break;
-
                 case "sayfaDuzenlemeDegerler":
                     $form->post("ID", true);
                     $ID = $form->values['ID'];
@@ -831,7 +822,6 @@ class AdminVitrin extends Controller {
 
                     $sonuc["result"] = $sayfalist;
                     break;
-
                 case "sayfaSil":
                     $form->post("ustID", true);
                     $form->post("ID", true);
@@ -868,7 +858,6 @@ class AdminVitrin extends Controller {
                         }
                     }
                     break;
-
                 case "sayfaEkle":
                     require "app/otherClasses/class.upload.php";
 
@@ -1083,7 +1072,6 @@ class AdminVitrin extends Controller {
                     }
 
                     break;
-
                 case "sayfaDuzenle":
                     require "app/otherClasses/class.upload.php";
 
@@ -1129,6 +1117,7 @@ class AdminVitrin extends Controller {
                                             if ($cke == "") {
                                                 $sonuc["hata"] = "Lütfen Sayfa Yazısını Giriniz.";
                                             } else {
+                                                $sayfatr = $form->turkce_kucult_tr($sayfaAdi);
                                                 if ($newImage == 0) {//yeni resim eklenmemiş
                                                     if ($degisecekID > 0) {//değişecek vardır
                                                         if ($normalUstID == $ustSayfa) {
@@ -1205,7 +1194,6 @@ class AdminVitrin extends Controller {
                                                     if ($realName == "") {
                                                         $sonuc["hata"] = "Lütfen Resim Seçiniz";
                                                     } else {
-                                                        error_log("burda");
                                                         $image = new Upload($_FILES['file']);
                                                         //oranlama
                                                         $width = $image->image_src_x;
@@ -1420,7 +1408,6 @@ class AdminVitrin extends Controller {
                                                         if ($realName == "") {
                                                             $sonuc["hata"] = "Lütfen Resim Seçiniz";
                                                         } else {
-                                                            error_log("burda");
                                                             $image = new Upload($_FILES['file']);
                                                             //oranlama
                                                             $width = $image->image_src_x;

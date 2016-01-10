@@ -296,6 +296,11 @@ class Panel_Model extends Model {
         return $this->db->select($sql);
     }
 
+    public function iletisimCountListele() {
+        $sql = "SELECT iletisim_ID FROM flora_iletisim";
+        return $this->db->select($sql);
+    }
+
     public function iletisimListele() {
         $sql = "SELECT iletisim_ID,iletisim_AdSoyad,iletisim_konu,iletisim_tarih FROM  flora_iletisim ORDER BY iletisim_ID DESC";
         return $this->db->select($sql);
