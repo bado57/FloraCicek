@@ -331,7 +331,6 @@
                                                 </font>
                                             </div>
                                             </td>
-                                            
                                             <td valign="top" style="padding-left: 0.2cm; width: 33%;">
                                             <div style="padding: 0.2cm; border:1px solid #e6e6e6; height: 100%;"> 
                                                 <font style="font-size: 10pt; font-weight: bold; color: #D20F0F;">Teslimat Bilgileri</font> <br/>
@@ -370,8 +369,8 @@
                                             <tr>
                                                 <td valign="top">
                                                     <font style="font-size: 10pt; font-weight: bold; color: #D20F0F;">Ürün Bilgileri</font> <br/>
-                                                    <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; padding-bottom: 0.2cm;"></div>
-                                                </td>
+                                            <div style="border-bottom: 1px solid #e6e6e6; height: 0.2cm; padding-bottom: 0.2cm;"></div>
+                                            </td>
                                             </tr>
                                             <tr>
                                                 <td valign="top" id="urunSipPrint"></td>
