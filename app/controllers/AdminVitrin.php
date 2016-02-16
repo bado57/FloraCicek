@@ -664,7 +664,6 @@ class AdminVitrin extends Controller {
                                         if ($form->submit()) {
                                             $dataB = array(
                                                 'blog_baslik' => $baslik,
-                                                'blog_benzersizbaslik' => $blogtr,
                                                 'blog_yazi' => $yazi,
                                                 'blog_aktiflik' => $aktiflik
                                             );
